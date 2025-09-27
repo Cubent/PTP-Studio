@@ -45,7 +45,6 @@ const RootLayout = async ({ children, params }: RootLayoutProperties) => {
   const dictionary = await getDictionary(locale);
   const headersList = await headers();
   const pathname = headersList.get('x-pathname') || headersList.get('x-invoke-path') || '';
-  const isPricingPage = pathname.includes('/pricing') || pathname.includes('/profile') || pathname.includes('/onboarding');
   const isDashboardPage = pathname.includes('/dashboard');
 
   return (
@@ -95,7 +94,7 @@ const RootLayout = async ({ children, params }: RootLayoutProperties) => {
             <DesignSystemProvider>
               <PerformanceOptimizer />
               <PageWrapper>
-                <ConditionalHeaderFooter dictionary={dictionary} isPricingPage={isPricingPage}>
+                <ConditionalHeaderFooter dictionary={dictionary}>
                   {children}
                 </ConditionalHeaderFooter>
               </PageWrapper>
