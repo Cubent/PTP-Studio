@@ -12,10 +12,9 @@ import Image from 'next/image';
 
 type HeaderProps = {
   dictionary: Dictionary;
-  isPricingPage?: boolean;
 };
 
-export const Header = ({ dictionary, isPricingPage = false }: HeaderProps) => {
+export const Header = ({ dictionary }: HeaderProps) => {
   const { user, isLoaded } = useUser();
   const { signOut } = useClerk();
   const router = useRouter();
@@ -37,7 +36,7 @@ export const Header = ({ dictionary, isPricingPage = false }: HeaderProps) => {
   const searchRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
-  const isPricing = isPricingPage || pathname.includes('/pricing') || pathname.includes('/dashboard') || pathname.includes('/profile') || pathname.includes('/onboarding');
+  const isDashboard = pathname.includes('/dashboard') || pathname.includes('/profile') || pathname.includes('/onboarding');
 
   // Search functionality
   useEffect(() => {

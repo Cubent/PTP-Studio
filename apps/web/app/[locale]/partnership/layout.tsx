@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Partnership Program | Travira',
-  description: 'Join Travira\'s partnership program and earn rewards by sharing flight deals with your audience. Simple, transparent, and beneficial for both you and your followers.',
+  title: 'Partnership Program | Velgance',
+  description: 'Partner with Velgance modeling agency to discover new talent and collaborate on exciting projects. Connect with brands, photographers, and industry professionals.',
 };
 
 export default function PartnershipLayout({

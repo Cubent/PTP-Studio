@@ -70,10 +70,10 @@ const Home = ({ params }: HomeProps) => {
         <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-white/95 via-white/70 via-white/50 via-white/30 via-white/15 via-white/5 to-transparent backdrop-blur-sm"></div>
       </div>
 
-      {/* Airline Partners Section */}
+      {/* Portfolio Gallery Section */}
       <div className="pt-2 pb-1 bg-[#25201f] overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Scrolling Airline Logos */}
+          {/* Scrolling Portfolio Images */}
           <div className="relative overflow-hidden">
             <div className="flex space-x-8 sm:space-x-16 items-center animate-scroll">
               {[
@@ -90,11 +90,11 @@ const Home = ({ params }: HomeProps) => {
                 { name: 'Velgance 4', logo: 'https://i.postimg.cc/Y2N5D7vs/Velgance-6.png' },
                 { name: 'Velgance 5', logo: 'https://i.postimg.cc/5yJZ97Rg/Velgance-7.png' },
                 { name: 'Velgance 6', logo: 'https://i.postimg.cc/X7VTTPF7/Velgance-8.png' }
-              ]).map((airline, i) => (
+              ]).map((image, i) => (
                 <div key={`duplicate-${i}`} className="flex-shrink-0 flex items-center justify-center h-28 w-56 overflow-hidden">
                   <img
-                    src={airline.logo}
-                    alt={airline.name}
+                    src={image.logo}
+                    alt={image.name}
                     className="h-20 w-auto object-cover object-center opacity-90 hover:opacity-100 transition-opacity"
                   />
                 </div>

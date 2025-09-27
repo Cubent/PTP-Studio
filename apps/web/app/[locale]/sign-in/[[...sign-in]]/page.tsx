@@ -24,14 +24,7 @@ const SignInPage = () => {
       
       {/* Logo */}
       <Link href="/" className="absolute top-6 left-6 z-20 flex items-center gap-3 hover:opacity-80 transition-opacity">
-        <Image 
-          src="/Travira-light.svg" 
-          alt="Travira" 
-          width={50} 
-          height={50}
-          className="h-12 w-12"
-        />
-        <span className="text-2xl font-bold" style={{ color: '#d5e27b' }}>Travira</span>
+        <span className="text-3xl font-bold italic" style={{ color: '#d5e27b', fontFamily: 'serif' }}>Velgance</span>
       </Link>
 
       <div className="w-full max-w-md sm:max-w-md relative z-10 mt-20 sm:mt-0">

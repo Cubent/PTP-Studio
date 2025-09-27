@@ -2,21 +2,20 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://travira.org/sitemap.xml
+Sitemap: https://velgance.com/sitemap.xml
 
 # Disallow sensitive areas
 Disallow: /api/
 Disallow: /_next/
 Disallow: /admin/
-Disallow: /dashboard/
 Disallow: /login/
 Disallow: /sign-up/
 Disallow: /sign-in/
 
 # Allow important pages
 Allow: /
-Allow: /pricing
-Allow: /blog
+Allow: /models
+Allow: /magazine
 Allow: /contact
 Allow: /legal/
 
