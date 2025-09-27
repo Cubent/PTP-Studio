@@ -26,10 +26,10 @@ export const env = createEnv({
 
     // SendGrid Configuration
     SENDGRID_API_KEY: z.string().min(1, 'SendGrid API key is required').optional(),
-    SENDGRID_FROM_EMAIL: z.string().email('Valid SendGrid from email is required').default('deals@travira.org').optional(),
+    SENDGRID_FROM_EMAIL: z.string().email('Valid SendGrid from email is required').default('info@velgance.com').optional(),
 
     // Stripe Configuration (additional to payments package)
-    STRIPE_TRAVIRA_PRICE_ID: z.string().min(1, 'Stripe price ID for Travira subscription is required').optional(),
+    STRIPE_VELGANCE_PRICE_ID: z.string().min(1, 'Stripe price ID for Velgance services is required').optional(),
 
     // Cron Job Security
     CRON_SECRET_TOKEN: z.string().min(32, 'Cron secret token must be at least 32 characters').optional(),
