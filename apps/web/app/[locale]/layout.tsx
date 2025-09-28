@@ -22,7 +22,29 @@ import { headers } from 'next/headers';
 
 export const metadata: Metadata = {
   title: 'Velgance - Trasformiamo il talento in opportunità',
-  description: 'Academy Model Management - Connettiamo talenti unici con le migliori opportunità del settore della moda.',
+  description: 'Velgance Model Management - Connettiamo talenti unici con le migliori opportunità del settore della moda.',
+  openGraph: {
+    title: 'Velgance - Trasformiamo il talento in opportunità',
+    description: 'Velgance Model Management - Connettiamo talenti unici con le migliori opportunità del settore della moda.',
+    url: 'https://velgance.com',
+    siteName: 'Velgance',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Velgance - Modeling Agency',
+      },
+    ],
+    locale: 'it_IT',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Velgance - Trasformiamo il talento in opportunità',
+    description: 'Velgance Model Management - Connettiamo talenti unici con le migliori opportunità del settore della moda.',
+    images: ['/og-image.png'],
+  },
   icons: {
     icon: [
       { url: '/favicon.png', type: 'image/png' },
