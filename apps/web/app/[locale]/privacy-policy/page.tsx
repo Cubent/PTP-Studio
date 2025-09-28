@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | Travira',
-  description: 'Privacy policy for Travira\'s flight deal notification service. Learn how we protect your personal information.',
+  title: 'Privacy Policy | Velgance',
+  description: 'Privacy policy for Velgance modeling agency. Learn how we protect your personal information.',
 };
 
 export default function PrivacyPolicyPage() {
@@ -33,7 +33,7 @@ export default function PrivacyPolicyPage() {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">2. How We Use Your Information</h2>
             <ul className="list-disc pl-6 text-gray-700 space-y-2">
-              <li>Provide personalized flight deal notifications</li>
+              <li>Provide modeling opportunities and talent management services</li>
               <li>Process payments and manage subscriptions</li>
               <li>Improve our AI algorithms and service quality</li>
               <li>Send important service updates and communications</li>
@@ -112,7 +112,7 @@ export default function PrivacyPolicyPage() {
             <p className="text-gray-700 mb-4">
               If you have any questions about this Privacy Policy, please contact us at:
               <br />
-              Email: support@travira.org
+              Email: info@velgance.com
             </p>
           </section>
         </div>

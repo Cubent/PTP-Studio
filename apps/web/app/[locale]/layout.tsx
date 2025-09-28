@@ -45,7 +45,7 @@ const RootLayout = async ({ children, params }: RootLayoutProperties) => {
   const dictionary = await getDictionary(locale);
   const headersList = await headers();
   const pathname = headersList.get('x-pathname') || headersList.get('x-invoke-path') || '';
-  const isDashboardPage = pathname.includes('/dashboard');
+  // No special page handling needed
 
   return (
     <>

@@ -36,7 +36,7 @@ export const Header = ({ dictionary }: HeaderProps) => {
   const searchRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
-  const isDashboard = pathname.includes('/dashboard') || pathname.includes('/profile') || pathname.includes('/onboarding');
+  const isProfilePage = pathname.includes('/profile');
 
   // Search functionality
   useEffect(() => {
@@ -276,12 +276,12 @@ export const Header = ({ dictionary }: HeaderProps) => {
             {/* User Profile - Only show when authenticated */}
             {user && (
               <div className="flex items-center gap-2">
-                {/* Active Deals Button - only show when logged in */}
+                {/* Portfolio Button - only show when logged in */}
                 <Link
-                  href="/dashboard"
+                  href="/models"
                   className="bg-[#d5e27b] text-[#045530] px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#c4d16a] transition-colors"
                 >
-                  Active Deals
+                  Portfolio
                 </Link>
                 <div 
                   className="relative" 
@@ -320,12 +320,12 @@ export const Header = ({ dictionary }: HeaderProps) => {
                         <p className="text-xs text-gray-600">{user.primaryEmailAddress?.emailAddress}</p>
                       </div>
                       <Link
-                        href="/dashboard"
+                        href="/models"
                         className="flex items-center gap-3 px-4 py-2 text-sm text-[#045530] hover:bg-[#d5e27b] hover:text-[#045530] transition-colors"
                         onClick={() => setIsUserMenuOpen(false)}
                       >
                         <LayoutDashboard className="w-4 h-4" />
-                        Dashboard
+                        Portfolio
                       </Link>
                       <Link
                         href="/profile"
@@ -484,12 +484,12 @@ export const Header = ({ dictionary }: HeaderProps) => {
                       </div>
                     ) : user ? (
                       <Link
-                        href="/dashboard"
+                        href="/models"
                         className="flex items-center px-6 py-6 text-2xl text-black hover:bg-gray-100/50 rounded-xl transition-all duration-200"
                         onClick={() => setIsMobileMenuOpen(false)}
                         style={{ fontFamily: 'Raleway, sans-serif' }}
                       >
-                        Dashboard
+                        Portfolio
                       </Link>
                     ) : (
                       <>

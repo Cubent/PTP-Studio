@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Terms and Conditions | Travira',
-  description: 'Terms and conditions for using Travira\'s flight deal notification service.',
+  title: 'Terms and Conditions | Velgance',
+  description: 'Terms and conditions for using Velgance modeling agency services.',
 };
 
 export default function TermsAndConditionsPage() {
@@ -16,14 +16,14 @@ export default function TermsAndConditionsPage() {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">1. Acceptance of Terms</h2>
             <p className="text-gray-700 mb-4">
-              By accessing and using Travira's services, you accept and agree to be bound by the terms and provision of this agreement.
+              By accessing and using Velgance modeling agency services, you accept and agree to be bound by the terms and provision of this agreement.
             </p>
           </section>
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">2. Service Description</h2>
             <p className="text-gray-700 mb-4">
-              Travira is a flight deal notification service that uses AI to find and alert users about discounted flight prices. We do not book flights directly but provide information and links to third-party booking platforms.
+              Velgance is a modeling agency that connects talented models with brands, photographers, and companies. We facilitate collaborations and provide talent management services for fashion, commercial, and entertainment industries.
             </p>
           </section>
 
@@ -50,17 +50,17 @@ export default function TermsAndConditionsPage() {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">5. Disclaimers</h2>
             <ul className="list-disc pl-6 text-gray-700 space-y-2">
-              <li>Flight prices are subject to change and availability</li>
-              <li>We do not guarantee the accuracy of third-party pricing</li>
-              <li>Booking is done directly with airlines or travel agencies</li>
-              <li>We are not responsible for booking issues or travel disruptions</li>
+              <li>Model availability is subject to scheduling and booking confirmations</li>
+              <li>We do not guarantee specific bookings or collaborations</li>
+              <li>Final agreements are made directly between clients and models</li>
+              <li>We are not responsible for disputes between clients and models</li>
             </ul>
           </section>
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">6. Limitation of Liability</h2>
             <p className="text-gray-700 mb-4">
-              Travira shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses.
+              Velgance shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses.
             </p>
           </section>
 
@@ -83,7 +83,7 @@ export default function TermsAndConditionsPage() {
             <p className="text-gray-700 mb-4">
               For questions about these Terms and Conditions, please contact us at:
               <br />
-              Email: support@travira.org
+              Email: info@velgance.com
             </p>
           </section>
         </div>
