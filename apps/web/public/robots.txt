@@ -4,13 +4,19 @@ Allow: /
 # Sitemaps
 Sitemap: https://velgance.com/sitemap.xml
 
-# Disallow sensitive areas
-Disallow: /api/
+# Disallow sensitive areas only
 Disallow: /_next/
 Disallow: /admin/
-Disallow: /login/
-Disallow: /sign-up/
-Disallow: /sign-in/
+
+# Allow API endpoints (needed for site functionality)
+Allow: /api/models
+Allow: /api/contact
+
+# Disallow sensitive API endpoints
+Disallow: /api/admin/
+Disallow: /api/debug/
+Disallow: /api/webhooks/
+Disallow: /api/clerk-webhook/
 
 # Allow important pages
 Allow: /
@@ -18,6 +24,8 @@ Allow: /models
 Allow: /magazine
 Allow: /contact
 Allow: /legal/
+Allow: /sign-in
+Allow: /sign-up
 
 # Crawl delay (optional)
 Crawl-delay: 1
