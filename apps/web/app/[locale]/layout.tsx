@@ -98,7 +98,6 @@ const RootLayout = async ({ children, params }: RootLayoutProperties) => {
               "name": "Velgance Founder"
             },
             "foundingDate": "1998",
-            "industry": "Entertainment & Fashion",
             "address": {
               "@type": "PostalAddress",
               "addressCountry": "IT",

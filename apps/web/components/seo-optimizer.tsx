@@ -10,26 +10,26 @@ type SEOOptimizerProps = {
 };
 
 export const generateSEOMetadata = ({
-  title = 'Cubent – Lightning-Fast AI Code Assistant',
-  description = 'Cubent is your AI-native coding assistant, purpose-built for developers. From full-code generation to codebase-aware autocomplete and terminal-ready actions.',
-  keywords = ['AI code assistant', 'code generation', 'autocomplete', 'developer tools', 'artificial intelligence', 'programming assistant', 'VS Code extension'],
-  canonicalUrl = 'https://cubent.dev',
-  ogImage = 'https://cubent.dev/og-image.png',
+  title = 'Velgance - Trasformiamo il talento in opportunità',
+  description = 'Velgance Model Management - Connettiamo talenti unici con le migliori opportunità del settore della moda.',
+  keywords = ['agenzia modelli', 'modelle', 'casting', 'sfilate', 'shooting fotografici', 'video commerciali', 'eventi', 'hostess', 'steward', 'influencer marketing', 'fashion week', 'milano'],
+  canonicalUrl = 'https://velgance.com',
+  ogImage = 'https://velgance.com/og-image.png',
   structuredData
 }: SEOOptimizerProps = {}): Metadata => {
   const baseMetadata: Metadata = {
     title,
     description,
     keywords: keywords.join(', '),
-    authors: [{ name: 'Cubent Team' }],
-    creator: 'Cubent',
-    publisher: 'Cubent',
+    authors: [{ name: 'Velgance Team' }],
+    creator: 'Velgance Agency',
+    publisher: 'Velgance Agency',
     formatDetection: {
       email: false,
       address: false,
       telephone: false,
     },
-    metadataBase: new URL('https://cubent.dev'),
+    metadataBase: new URL('https://velgance.com'),
     alternates: {
       canonical: canonicalUrl,
     },
@@ -37,7 +37,7 @@ export const generateSEOMetadata = ({
       title,
       description,
       url: canonicalUrl,
-      siteName: 'Cubent',
+      siteName: 'Velgance',
       images: [
         {
           url: ogImage,
@@ -46,14 +46,14 @@ export const generateSEOMetadata = ({
           alt: title,
         },
       ],
-      locale: 'en_US',
+      locale: 'it_IT',
       type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      creator: '@cubent',
+      creator: '@velgance_agency',
       images: [ogImage],
     },
     robots: {
@@ -85,33 +85,43 @@ export const generateStructuredData = (type: 'Organization' | 'WebSite' | 'Artic
     case 'Organization':
       return {
         ...baseStructuredData,
-        name: 'Cubent',
-        description: 'Lightning-Fast AI Code Assistant for developers',
-        url: 'https://cubent.dev',
-        logo: 'https://cubent.dev/favicon.svg',
+        name: 'Velgance Agency',
+        description: 'Dal 1998 trasformiamo il talento in opportunità. Agenzia di modelli professionisti per sfilate, shooting, video commerciali e eventi aziendali.',
+        url: 'https://velgance.com',
+        logo: 'https://velgance.com/favicon.svg',
         sameAs: [
-          'https://twitter.com/cubent',
-          'https://github.com/cubent',
+          'https://instagram.com/velgance_agency',
+          'https://facebook.com/velgance',
         ],
         contactPoint: {
           '@type': 'ContactPoint',
           contactType: 'customer service',
-          url: 'https://cubent.dev/contact',
+          url: 'https://velgance.com/contact',
+          email: 'info@velgance.com',
         },
-        foundingDate: '2024',
-        industry: 'Software Development Tools',
-        keywords: 'AI code assistant, code generation, autocomplete, developer tools',
+        founder: {
+          '@type': 'Person',
+          name: 'Velgance Founder',
+        },
+        foundingDate: '1998',
+        address: {
+          '@type': 'PostalAddress',
+          addressCountry: 'IT',
+          addressLocality: 'Milano',
+          streetAddress: 'Via della Moda, 123',
+        },
+        keywords: 'agenzia modelli, modelle, casting, sfilate, shooting fotografici, video commerciali, eventi, hostess, steward, influencer marketing, fashion week, milano',
         ...data,
       };
 
     case 'WebSite':
       return {
         ...baseStructuredData,
-        name: 'Cubent',
-        url: 'https://cubent.dev',
+        name: 'Velgance',
+        url: 'https://velgance.com',
         potentialAction: {
           '@type': 'SearchAction',
-          target: 'https://cubent.dev/search?q={search_term_string}',
+          target: 'https://velgance.com/search?q={search_term_string}',
           'query-input': 'required name=search_term_string',
         },
         ...data,
