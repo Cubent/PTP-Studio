@@ -80,6 +80,7 @@ if (process.env.NODE_ENV === 'production') {
       destination: '/legal/privacy',
       statusCode: 301,
     },
+    // Additional redirects can be added here if needed
   ];
 
   nextConfig.redirects = redirects;
