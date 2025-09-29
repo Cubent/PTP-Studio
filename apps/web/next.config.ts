@@ -81,6 +81,7 @@ if (process.env.NODE_ENV === 'production') {
       statusCode: 301,
     },
     // Additional redirects can be added here if needed
+    // Additional redirects can be added here if needed
   ];
 
   nextConfig.redirects = redirects;
