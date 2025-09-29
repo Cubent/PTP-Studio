@@ -16,6 +16,7 @@ export const config = {
   // matcher tells Next.js which routes to run the middleware on. This runs the
   // middleware on all routes except for static assets and Posthog ingest
   // Include API routes that need authentication
+  // Include API routes that need authentication
   matcher: [
     // Match all routes except those starting with a dot or within _next directory
     '/((?!.*\\..*|_next).*)',
