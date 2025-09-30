@@ -12,12 +12,10 @@ type HomeProps = {
 
 const HeroImageCarousel = () => {
   const images = [
-    'https://i.postimg.cc/N0xr7rpp/Velgance.png', // Original image
-    'https://i.postimg.cc/2SmHgGhk/Full-Body-Picture-8.png',
-    'https://i.postimg.cc/BvZp1Bjg/11.png',
-    'https://i.postimg.cc/g2WNGWd1/12.png',
-    'https://i.postimg.cc/6Q10Qt5Y/8.png',
-    'https://i.postimg.cc/cJDm7tYN/9.png'
+    'https://static.wixstatic.com/media/4da6c5_f9910d1e1eb84abf92e2c9938de1c1a0~mv2.png', // Original image
+    'https://static.wixstatic.com/media/4da6c5_595f9fb8bf464e639674981630e7d6db~mv2.png',
+    'https://static.wixstatic.com/media/4da6c5_35ae9d97680f4cea96a079760af6b535~mv2.png',
+    'https://static.wixstatic.com/media/4da6c5_1abd4da8c2a341b9b280a8f4b4c30ba8~mv2.png',
   ];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -77,19 +75,19 @@ const Home = ({ params }: HomeProps) => {
           <div className="relative overflow-hidden">
             <div className="flex space-x-8 sm:space-x-16 items-center animate-scroll">
               {[
-                { name: 'Velgance 1', logo: 'https://i.postimg.cc/Wz7xdmRv/Velgance-10.png' },
-                { name: 'Velgance 2', logo: 'https://i.postimg.cc/XJdRbSQX/Velgance-11.png' },
-                { name: 'Velgance 3', logo: 'https://i.postimg.cc/fTB6Zvj7/Velgance-5.png' },
-                { name: 'Velgance 4', logo: 'https://i.postimg.cc/Y2N5D7vs/Velgance-6.png' },
-                { name: 'Velgance 5', logo: 'https://i.postimg.cc/5yJZ97Rg/Velgance-7.png' },
-                { name: 'Velgance 6', logo: 'https://i.postimg.cc/X7VTTPF7/Velgance-8.png' }
+                { name: 'Velgance 1', logo: 'https://static.wixstatic.com/media/4da6c5_3862699386e044e8a5f80a881765406b~mv2.png' },
+                { name: 'Velgance 2', logo: 'https://static.wixstatic.com/media/4da6c5_39ca991612d64e078fbc83dfa86f1725~mv2.png' },
+                { name: 'Velgance 3', logo: 'https://static.wixstatic.com/media/4da6c5_0a33b7201aa5418bae1509de73074c5b~mv2.png' },
+                { name: 'Velgance 4', logo: 'https://static.wixstatic.com/media/4da6c5_55e12c9f082f4c089ccf49b80b1b454b~mv2.png' },
+                { name: 'Velgance 5', logo: 'https://static.wixstatic.com/media/4da6c5_967d3853b8bd42169ade557feabf861c~mv2.png' },
+                { name: 'Velgance 6', logo: 'https://static.wixstatic.com/media/4da6c5_2ee558a7a0a2428cad0f640a86f7b47e~mv2.png' }
               ].concat([
-                { name: 'Velgance 1', logo: 'https://i.postimg.cc/Wz7xdmRv/Velgance-10.png' },
-                { name: 'Velgance 2', logo: 'https://i.postimg.cc/XJdRbSQX/Velgance-11.png' },
-                { name: 'Velgance 3', logo: 'https://i.postimg.cc/fTB6Zvj7/Velgance-5.png' },
-                { name: 'Velgance 4', logo: 'https://i.postimg.cc/Y2N5D7vs/Velgance-6.png' },
-                { name: 'Velgance 5', logo: 'https://i.postimg.cc/5yJZ97Rg/Velgance-7.png' },
-                { name: 'Velgance 6', logo: 'https://i.postimg.cc/X7VTTPF7/Velgance-8.png' }
+                { name: 'Velgance 1', logo: 'https://static.wixstatic.com/media/4da6c5_3862699386e044e8a5f80a881765406b~mv2.png' },
+                { name: 'Velgance 2', logo: 'https://static.wixstatic.com/media/4da6c5_39ca991612d64e078fbc83dfa86f1725~mv2.png' },
+                { name: 'Velgance 3', logo: 'https://static.wixstatic.com/media/4da6c5_0a33b7201aa5418bae1509de73074c5b~mv2.png' },
+                { name: 'Velgance 4', logo: 'https://static.wixstatic.com/media/4da6c5_55e12c9f082f4c089ccf49b80b1b454b~mv2.png' },
+                { name: 'Velgance 5', logo: 'https://static.wixstatic.com/media/4da6c5_967d3853b8bd42169ade557feabf861c~mv2.png' },
+                { name: 'Velgance 6', logo: 'https://static.wixstatic.com/media/4da6c5_2ee558a7a0a2428cad0f640a86f7b47e~mv2.png' }
               ]).map((image, i) => (
                 <div key={`duplicate-${i}`} className="flex-shrink-0 flex items-center justify-center h-28 w-56 overflow-hidden">
                   <img
@@ -130,7 +128,7 @@ const Home = ({ params }: HomeProps) => {
               <div className="group cursor-pointer flex-shrink-0 w-64 sm:w-64">
                 <div className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
                   <img 
-                    src="https://i.postimg.cc/KjZ157PL/1.png" 
+                    src="https://static.wixstatic.com/media/4da6c5_b9accaf0b3cd4b0d96e6d65d5fb1d2a9~mv2.png" 
                     alt="Magazine 1" 
                     className="w-full h-96 object-cover group-hover:scale-105 transition-transform duration-300"
                   />
@@ -160,7 +158,7 @@ const Home = ({ params }: HomeProps) => {
               <div className="group cursor-pointer flex-shrink-0 w-64 sm:w-64">
                 <div className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
                   <img 
-                    src="https://i.postimg.cc/wM074t2Q/3.png" 
+                    src="https://static.wixstatic.com/media/4da6c5_f5ec7d33e8c141b1a88196ffb720aaf6~mv2.png" 
                     alt="Magazine 3" 
                     className="w-full h-96 object-cover group-hover:scale-105 transition-transform duration-300"
                   />
@@ -175,7 +173,7 @@ const Home = ({ params }: HomeProps) => {
               <div className="group cursor-pointer flex-shrink-0 w-64 sm:w-64">
                 <div className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
                   <img 
-                    src="https://i.postimg.cc/hvSX08LZ/4.png" 
+                    src="https://static.wixstatic.com/media/4da6c5_f85f676ca8d34cf391e79bbb60d9b83b~mv2.png" 
                     alt="Magazine 4" 
                     className="w-full h-96 object-cover group-hover:scale-105 transition-transform duration-300"
                   />
@@ -190,7 +188,7 @@ const Home = ({ params }: HomeProps) => {
               <div className="group cursor-pointer flex-shrink-0 w-64 sm:w-64">
                 <div className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
                   <img 
-                    src="https://i.postimg.cc/8c17bdRn/5.png" 
+                    src="https://static.wixstatic.com/media/4da6c5_7153cc635edb443785807d168550e2e5~mv2.png" 
                     alt="Magazine 5" 
                     className="w-full h-96 object-cover group-hover:scale-105 transition-transform duration-300"
                   />
@@ -218,7 +216,7 @@ const Home = ({ params }: HomeProps) => {
           <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-0 border border-gray-200">
             
             {/* Card 1 - Modelli in Evidenza (Mobile First) */}
-            <div className="bg-white border-r border-b border-gray-200 p-6 sm:p-10 hover:bg-gray-50 transition-colors duration-300 relative overflow-hidden" style={{ backgroundImage: 'url(https://i.postimg.cc/jdQY0jgT/Full-Body-Picture-14.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+            <div className="bg-white border-r border-b border-gray-200 p-6 sm:p-10 hover:bg-gray-50 transition-colors duration-300 relative overflow-hidden" style={{ backgroundImage: 'url(https://static.wixstatic.com/media/4da6c5_d225d60b413948a1ae1359f084eb06f4~mv2.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
               <div className="absolute inset-0 bg-black/40"></div>
               <div className="relative z-10">
                 <h3 className="text-xs font-bold text-white mb-4 tracking-widest uppercase">Modelli in Evidenza</h3>
@@ -250,7 +248,7 @@ const Home = ({ params }: HomeProps) => {
             </div>
 
             {/* Card 3 - La Nostra Portata EU (Mobile Third) */}
-            <div className="bg-white border-r border-b border-gray-200 p-6 sm:p-10 hover:bg-gray-50 transition-colors duration-300 relative overflow-hidden" style={{ backgroundImage: 'url(https://i.postimg.cc/J7HRgMCX/Full-Body-Picture-15.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+            <div className="bg-white border-r border-b border-gray-200 p-6 sm:p-10 hover:bg-gray-50 transition-colors duration-300 relative overflow-hidden" style={{ backgroundImage: 'url(https://static.wixstatic.com/media/4da6c5_10f012687f7a4a24ab7fce989e16b820~mv2.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
               <div className="absolute inset-0 bg-black/40"></div>
               <div className="relative z-10">
                 <h3 className="text-xs font-bold text-white mb-4 tracking-widest uppercase">La Nostra Portata</h3>
@@ -303,7 +301,7 @@ const Home = ({ params }: HomeProps) => {
             <Link href="/male-models" className="group cursor-pointer">
               <div className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <img 
-                  src="https://i.postimg.cc/5yJNtfhT/image.png" 
+                  src="https://static.wixstatic.com/media/4da6c5_e15fb5c603a94d298fa2a6d16f0a503e~mv2.png" 
                   alt="Uomini" 
                   className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-300"
                 />
@@ -318,7 +316,7 @@ const Home = ({ params }: HomeProps) => {
             <Link href="/female-models" className="group cursor-pointer">
               <div className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <img 
-                  src="https://i.postimg.cc/7LbCvY4N/image.png" 
+                  src="https://static.wixstatic.com/media/4da6c5_eb0d8957ca4140da80d1c51ed53b7d1c~mv2.png" 
                   alt="Donne" 
                   className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-300"
                 />
@@ -367,7 +365,7 @@ const Home = ({ params }: HomeProps) => {
               <div className="order-1 lg:order-2">
                 <div className="relative overflow-hidden rounded-lg max-w-md mx-auto">
                   <img 
-                    src="https://i.postimg.cc/qBG3W769/Velgance-2.png" 
+                    src="https://static.wixstatic.com/media/4da6c5_b0dada0912bb4026a98097253dda726b~mv2.png" 
                     alt="Influencer" 
                     className="w-full h-80 object-cover"
                   />
@@ -387,7 +385,7 @@ const Home = ({ params }: HomeProps) => {
               <div className="order-1">
                 <div className="relative overflow-hidden rounded-lg max-w-md mx-auto">
                   <img 
-                    src="https://i.postimg.cc/QCSK76rX/Velgance-3.png" 
+                    src="https://static.wixstatic.com/media/4da6c5_4fd2c6ba24414877b29ae25b2725f96e~mv2.png" 
                     alt="Hostess/Steward" 
                     className="w-full h-80 object-cover"
                   />

@@ -15,7 +15,7 @@ export default function Tendenze2025Page() {
       <div 
         className="py-24 bg-cover bg-center bg-no-repeat"
         style={{ 
-          backgroundImage: 'url(https://i.postimg.cc/kXWHnjK1/Full-Body-Picture-4.png)'
+          backgroundImage: 'url(https://static.wixstatic.com/media/4da6c5_b0021b2be93045aab30cfecad1c59d94~mv2.png)'
         }}
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">

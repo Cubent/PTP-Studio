@@ -156,7 +156,7 @@ export const Header = ({ dictionary }: HeaderProps) => {
                     >
                       <div className="relative overflow-hidden rounded-lg aspect-[4/3] mb-3" style={{ minHeight: '200px' }}>
                         <img 
-                          src="https://i.postimg.cc/kXskQ6Z7/Full-Body-Picture-3.png"
+                          src="https://static.wixstatic.com/media/4da6c5_36a1f433840c4d4097756971e9198e5a~mv2.png"
                           alt="Talento Femminile"
                           className="w-full h-full object-cover"
                           style={{ minHeight: '200px' }}
@@ -183,7 +183,7 @@ export const Header = ({ dictionary }: HeaderProps) => {
                     >
                       <div className="relative overflow-hidden rounded-lg aspect-[4/3] mb-3" style={{ minHeight: '200px' }}>
                         <img 
-                          src="https://i.postimg.cc/fLq97LMk/Full-Body-Picture-2.png"
+                          src="https://static.wixstatic.com/media/4da6c5_63ff0dc055b0479c9c85dbc2af0b9a3d~mv2.png"
                           alt="Talento Maschile"
                           className="w-full h-full object-cover"
                           style={{ minHeight: '200px' }}

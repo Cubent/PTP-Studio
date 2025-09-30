@@ -17,7 +17,7 @@ export default function MagazinePage() {
       date: "15 Gennaio 2025",
       featured: true,
       size: "large",
-      image: "https://i.postimg.cc/kXWHnjK1/Full-Body-Picture-4.png"
+      image: "https://static.wixstatic.com/media/4da6c5_b0021b2be93045aab30cfecad1c59d94~mv2.png"
     },
     {
       id: 2,
@@ -27,7 +27,7 @@ export default function MagazinePage() {
       date: "12 Gennaio 2025",
       featured: false,
       size: "medium",
-      image: "https://i.postimg.cc/RCHsRPsS/Full-Body-Picture-5.png"
+      image: "https://static.wixstatic.com/media/4da6c5_ae4587d8c26540449360765ceb09ffc7~mv2.png"
     },
     {
       id: 3,
@@ -37,7 +37,7 @@ export default function MagazinePage() {
       date: "10 Gennaio 2025",
       featured: false,
       size: "small",
-      image: "https://i.postimg.cc/kgzRfyhC/Full-Body-Picture-6.png"
+      image: "https://static.wixstatic.com/media/4da6c5_fd1341ccd94b448b8b36a3d114179b79~mv2.png"
     },
     {
       id: 4,
@@ -77,7 +77,7 @@ export default function MagazinePage() {
       <div 
         className="py-16 bg-cover bg-center bg-no-repeat"
         style={{ 
-          backgroundImage: 'url(https://i.postimg.cc/TY74yq8X/wmremove-transformed-1.png)'
+          backgroundImage: 'url(https://static.wixstatic.com/media/4da6c5_ba0da4f8723046ce8e7d846616101f35~mv2.png)'
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

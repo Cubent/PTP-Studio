@@ -30,7 +30,7 @@ export default function ModelsPage() {
                 <div 
                   className="w-full h-full bg-cover bg-center bg-no-repeat"
                   style={{ 
-                    backgroundImage: 'url(https://i.postimg.cc/kXskQ6Z7/Full-Body-Picture-3.png)',
+                    backgroundImage: 'url(https://static.wixstatic.com/media/4da6c5_36a1f433840c4d4097756971e9198e5a~mv2.png)',
                     minHeight: '250px'
                   }}
                 ></div>
@@ -63,7 +63,7 @@ export default function ModelsPage() {
                 <div 
                   className="w-full h-full bg-cover bg-center bg-no-repeat"
                   style={{ 
-                    backgroundImage: 'url(https://i.postimg.cc/fLq97LMk/Full-Body-Picture-2.png)',
+                    backgroundImage: 'url(https://static.wixstatic.com/media/4da6c5_63ff0dc055b0479c9c85dbc2af0b9a3d~mv2.png)',
                     minHeight: '250px'
                   }}
                 ></div>

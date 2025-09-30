@@ -77,7 +77,7 @@ export default function MaleModelsPage() {
       <div 
         className="py-16 bg-cover bg-center bg-no-repeat"
         style={{ 
-          backgroundImage: 'url(https://i.postimg.cc/fLq97LMk/Full-Body-Picture-2.png)'
+          backgroundImage: 'url(https://static.wixstatic.com/media/4da6c5_63ff0dc055b0479c9c85dbc2af0b9a3d~mv2.png)'
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

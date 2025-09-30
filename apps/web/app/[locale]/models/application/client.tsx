@@ -318,7 +318,7 @@ export default function ModelApplicationClient() {
                   <div className="text-center">
                     <h4 className="text-xs font-medium text-gray-700 mb-1">✅ Corretta</h4>
                     <img 
-                      src="https://i.postimg.cc/Wz3S7w50/Full-Body-Picture.png" 
+                      src="https://static.wixstatic.com/media/4da6c5_eeaa8f7161514610900d0dfff553ddf6~mv2.png" 
                       alt="Esempio foto corretta"
                       className="w-full max-w-[150px] sm:max-w-[300px] aspect-square mx-auto object-cover rounded-lg border border-gray-200"
                     />
@@ -329,12 +329,12 @@ export default function ModelApplicationClient() {
                   <div className="text-center">
                     <h4 className="text-xs font-medium text-gray-700 mb-1">📸 Esempio</h4>
                     <img 
-                      src="https://i.postimg.cc/vBFZfGvs/Full-Body-Picture-1.png" 
+                      src="https://static.wixstatic.com/media/4da6c5_3c4523a147bd4606bd1ff5815caef769~mv2.png" 
                       alt="Esempio foto"
                       className="w-full max-w-[150px] sm:max-w-[300px] aspect-square mx-auto object-top rounded-lg border border-gray-200"
                     />
                     <p className="text-xs text-gray-600 mt-1">
-                      Esempio
+                      Foto del corpo completo - Background Possibilmente Chiaro 
                     </p>
                   </div>
                 </div>

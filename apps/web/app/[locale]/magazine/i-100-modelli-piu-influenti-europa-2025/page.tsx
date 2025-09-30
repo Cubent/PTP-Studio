@@ -104,7 +104,7 @@ export default function Top100ModelsEurope2025() {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: 'url(https://i.postimg.cc/XY552cs9/Full-Body-Picture-7.png)'
+            backgroundImage: 'url(https://static.wixstatic.com/media/4da6c5_3d393762954d4a62bed4d8c0085fbd1c~mv2.png)'
           }}
         ></div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
