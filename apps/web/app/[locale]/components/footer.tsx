@@ -125,18 +125,13 @@ export const Footer = () => {
             </button>
             <ul className={`space-y-2 transition-all duration-200 ${openSections.legal ? 'block' : 'hidden lg:block'}`}>
               <li>
-                <Link href="/privacy" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="/privacy-policy" className="text-gray-300 hover:text-white transition-colors">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="/terms-and-conditions" className="text-gray-300 hover:text-white transition-colors">
                   Termini e Condizioni
-                </Link>
-              </li>
-              <li>
-                <Link href="/cookies" className="text-gray-300 hover:text-white transition-colors">
-                  Cookie Policy
                 </Link>
               </li>
             </ul>
@@ -147,7 +142,7 @@ export const Footer = () => {
             <h3 className="text-white font-semibold mb-4">Seguici</h3>
             <div className="flex space-x-4 mb-4">
               <a 
-                href="https://linkedin.com/company/velgance" 
+                href="https://www.linkedin.com/company/velgance-agency" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-300 hover:text-white transition-colors"
@@ -157,7 +152,7 @@ export const Footer = () => {
                 </svg>
               </a>
               <a 
-                href="https://instagram.com/velgance" 
+                href="https://www.instagram.com/velgancemodels/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-300 hover:text-white transition-colors"
@@ -167,7 +162,7 @@ export const Footer = () => {
                 </svg>
               </a>
               <a 
-                href="https://facebook.com/velgance" 
+                href="https://www.facebook.com/profile.php?id=61581528446408" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-300 hover:text-white transition-colors"

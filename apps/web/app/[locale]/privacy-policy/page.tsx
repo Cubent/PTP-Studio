@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | Velgance',
-  description: 'Privacy policy for Velgance modeling agency. Learn how we protect your personal information.',
+  title: 'Privacy Policy | Velgance Agency',
+  description: 'Informativa sulla privacy di Velgance Agency: come raccogliamo, utilizziamo e proteggiamo i tuoi dati personali.',
 };
 
 export default function PrivacyPolicyPage() {
@@ -17,27 +17,27 @@ export default function PrivacyPolicyPage() {
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">1. Information We Collect</h2>
             <h3 className="text-lg font-semibold text-gray-800 mb-2">Personal Information</h3>
             <ul className="list-disc pl-6 text-gray-700 space-y-2 mb-4">
-              <li>Name and email address (for account creation)</li>
-              <li>Travel preferences (home airports, destinations)</li>
-              <li>Payment information (processed securely through Stripe)</li>
+              <li>Nome, cognome e indirizzo email (per comunicazioni e candidature)</li>
+              <li>Profilo e immagini fornite per candidature o portfolio</li>
+              <li>Informazioni di contatto per richieste commerciali</li>
             </ul>
             
             <h3 className="text-lg font-semibold text-gray-800 mb-2">Usage Information</h3>
             <ul className="list-disc pl-6 text-gray-700 space-y-2">
-              <li>Website usage analytics</li>
-              <li>Email engagement metrics</li>
-              <li>Service interaction data</li>
+              <li>Analytics di utilizzo del sito</li>
+              <li>Metriche di interazione con le email</li>
+              <li>Dati di interazione con i servizi</li>
             </ul>
           </section>
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">2. How We Use Your Information</h2>
             <ul className="list-disc pl-6 text-gray-700 space-y-2">
-              <li>Provide modeling opportunities and talent management services</li>
-              <li>Process payments and manage subscriptions</li>
-              <li>Improve our AI algorithms and service quality</li>
-              <li>Send important service updates and communications</li>
-              <li>Provide customer support</li>
+              <li>Offrire opportunità professionali e servizi di talent management</li>
+              <li>Gestire candidature, richieste di booking e comunicazioni</li>
+              <li>Migliorare i nostri servizi e la qualità del sito</li>
+              <li>Inviare comunicazioni importanti relative ai servizi</li>
+              <li>Fornire assistenza ai clienti</li>
             </ul>
           </section>
 
@@ -48,7 +48,7 @@ export default function PrivacyPolicyPage() {
             </p>
             <ul className="list-disc pl-6 text-gray-700 space-y-2">
               <li>With your explicit consent</li>
-              <li>To trusted service providers (Stripe for payments, Clerk for authentication)</li>
+              <li>Ai nostri fornitori di servizi (ad es. sistemi di pagamento, strumenti di autenticazione)</li>
               <li>When required by law or to protect our rights</li>
               <li>In connection with a business transfer or acquisition</li>
             </ul>
