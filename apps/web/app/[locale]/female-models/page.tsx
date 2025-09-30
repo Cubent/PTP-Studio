@@ -3,12 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import type { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: 'Modelle | Velgance Agency',
-  description: 'Scopri le nostre modelle: portfolio aggiornato, profili, immagini e informazioni per casting e booking.',
-};
 // Define Model type locally
 interface Model {
   id: string;
