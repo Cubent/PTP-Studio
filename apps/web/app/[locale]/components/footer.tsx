@@ -94,16 +94,6 @@ export const Footer = () => {
                   Chi Siamo
                 </Link>
               </li>
-              <li>
-                <Link href="/careers" className="text-gray-300 hover:text-white transition-colors">
-                  Carriere
-                </Link>
-              </li>
-              <li>
-                <Link href="/press" className="text-gray-300 hover:text-white transition-colors">
-                  Stampa
-                </Link>
-              </li>
             </ul>
           </div>
 
@@ -193,7 +183,7 @@ export const Footer = () => {
             </div>
             
             <div className="text-xs text-gray-400">
-              Copyright © 2009–2025, Velgance Agency. All Rights Reserved.
+              Copyright © 1998–2025, Velgance Agency. All Rights Reserved.
             </div>
           </div>
         </div>
