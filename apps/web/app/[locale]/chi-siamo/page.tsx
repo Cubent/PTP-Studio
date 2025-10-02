@@ -9,7 +9,7 @@ export default function ChiSiamoPage() {
       <div className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl leading-relaxed text-black" style={{ fontFamily: 'Inter, sans-serif', fontWeight: 100 }}>
-            <span className="bg-yellow-200 px-2 py-1 rounded">Dal 1998</span> trasformiamo il talento in opportunità. Siamo un'agenzia di modelli professionisti specializzata in sfilate, shooting, video commerciali e eventi aziendali, che connette volti unici con i più grandi brand internazionali.
+            <span style={{ backgroundColor: '#fef08a', padding: '0.25rem 0.5rem', borderRadius: '0.25rem' }}>Dal 1998</span> trasformiamo il talento in opportunità. Siamo un'agenzia di modelli professionisti specializzata in sfilate, shooting, video commerciali e eventi aziendali, che connette volti unici con i più grandi brand internazionali.
           </h2>
         </div>
       </div>
@@ -112,7 +112,7 @@ export default function ChiSiamoPage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 items-center">
             <div className="lg:col-span-2">
               <p className="text-2xl sm:text-3xl lg:text-4xl leading-relaxed text-black" style={{ fontFamily: 'Inter, sans-serif', fontWeight: 100 }}>
-                Il nostro team è composto da professionisti appassionati con anni di <span className="bg-yellow-200 px-2 py-1 rounded">esperienza nel settore della moda, dello spettacolo e degli eventi.</span> Ogni membro porta competenze uniche e una dedizione condivisa 
+                Il nostro team è composto da professionisti appassionati con anni di <span style={{ backgroundColor: '#fef08a', padding: '0.25rem 0.5rem', borderRadius: '0.25rem' }}>esperienza nel settore della moda, dello spettacolo e degli eventi.</span> Ogni membro porta competenze uniche e una dedizione condivisa 
                 verso l'eccellenza e il successo dei nostri talenti.
               </p>
             </div>
