@@ -212,10 +212,10 @@ export const Header = ({ dictionary }: HeaderProps) => {
               Magazine
             </Link>
             <Link 
-              href="/portfolio" 
+              href="/chi-siamo" 
               className="text-sm text-black hover:text-gray-600 transition-colors whitespace-nowrap"
             >
-              Portfolio
+              Chi Siamo
             </Link>
             <Link 
               href="/contact" 
@@ -477,12 +477,12 @@ export const Header = ({ dictionary }: HeaderProps) => {
                     <div className="h-px bg-gray-300 my-2 w-48"></div>
                     
                     <Link
-                      href="/portfolio"
+                      href="/chi-siamo"
                       className="flex items-center px-6 py-6 text-2xl text-black hover:bg-gray-100/50 rounded-xl transition-all duration-200"
                       onClick={() => setIsMobileMenuOpen(false)}
                       style={{ fontFamily: 'Raleway, sans-serif' }}
                     >
-                      Portfolio
+                      Chi Siamo
                     </Link>
                     
                     <div className="h-px bg-gray-300 my-4 w-48"></div>

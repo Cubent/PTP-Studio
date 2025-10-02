@@ -19,7 +19,7 @@ export const Footer = () => {
         <div className="mb-12">
           {/* Title */}
           <div className="flex flex-col justify-center mb-12">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-white mb-6 italic" style={{ fontFamily: 'serif' }}>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl leading-relaxed text-white" style={{ fontFamily: 'Inter, sans-serif', fontWeight: 100 }}>
               Connettendo talento e opportunità
             </h2>
           </div>
@@ -60,8 +60,8 @@ export const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/portfolio" className="text-gray-300 hover:text-white transition-colors">
-                  Portfolio
+                <Link href="/chi-siamo" className="text-gray-300 hover:text-white transition-colors">
+                  Chi Siamo
                 </Link>
               </li>
               <li>
