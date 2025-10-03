@@ -1,5 +1,4 @@
 import { env } from '@/env';
-import { authMiddleware } from '@repo/auth/middleware';
 import { internationalizationMiddleware } from '@repo/internationalization/middleware';
 import {
   noseconeMiddleware,
@@ -31,7 +30,7 @@ const securityHeaders = env.FLAGS_SECRET
   ? noseconeMiddleware(noseconeOptionsWithToolbar)
   : noseconeMiddleware(noseconeOptions);
 
-const middleware = authMiddleware(async (_auth, request) => {
+const middleware: NextMiddleware = async (request: NextRequest) => {
   // Skip i18n middleware for API routes
   if (!request.nextUrl.pathname.startsWith('/api/')) {
     const i18nResponse = internationalizationMiddleware(
@@ -66,6 +65,6 @@ const middleware = authMiddleware(async (_auth, request) => {
   //   const message = parseError(error);
   //   return NextResponse.json({ error: message }, { status: 403 });
   // }
-}) as unknown as NextMiddleware;
+};
 
 export default middleware;
