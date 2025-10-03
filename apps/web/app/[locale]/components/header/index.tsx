@@ -4,7 +4,6 @@ import { Button } from '@repo/design-system/components/ui/button';
 import { ChevronDown, User, LayoutDashboard, LogOut, Search, Menu } from 'lucide-react';
 import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
-import { useUser, useClerk } from '@clerk/nextjs';
 import { usePathname, useRouter } from 'next/navigation';
 
 import type { Dictionary } from '@repo/internationalization';
@@ -15,15 +14,7 @@ type HeaderProps = {
 };
 
 export const Header = ({ dictionary }: HeaderProps) => {
-  const { user, isLoaded } = useUser();
-  const { signOut } = useClerk();
   const router = useRouter();
-  
-  // Debug authentication state
-  if (typeof window !== 'undefined') {
-    console.log('[HEADER] Auth state:', { isLoaded, hasUser: !!user, user: user?.id });
-    console.log('[HEADER] Should show Entra:', !isLoaded || !user);
-  }
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isModelliDropdownOpen, setIsModelliDropdownOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -282,86 +273,6 @@ export const Header = ({ dictionary }: HeaderProps) => {
 
           {/* Right side - Desktop and Mobile */}
           <div className="flex items-center gap-2">
-            {/* User Profile - Only show when authenticated */}
-            {user && (
-              <div className="flex items-center gap-2">
-                {/* Portfolio Button - only show when logged in */}
-                <Link
-                  href="/models"
-                  className="bg-[#d5e27b] text-[#045530] px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#c4d16a] transition-colors"
-                >
-                  Portfolio
-                </Link>
-                <div 
-                  className="relative" 
-                  ref={userMenuRef}
-                  onMouseEnter={() => setIsUserMenuOpen(true)}
-                  onMouseLeave={(e) => {
-                    // Only close if mouse is moving far away from the entire dropdown area
-                    const rect = userMenuRef.current?.getBoundingClientRect();
-                    if (rect) {
-                      const { left, right, top, bottom } = rect;
-                      const { clientX, clientY } = e;
-                      
-                      // Add some buffer zone - only close if mouse is significantly outside
-                      const buffer = 20;
-                      if (clientX < left - buffer || clientX > right + buffer || 
-                          clientY < top - buffer || clientY > bottom + buffer) {
-                        setIsUserMenuOpen(false);
-                      }
-                    }
-                  }}
-                >
-                  <button
-                    className="flex items-center p-0.5 rounded-full transition-colors border-2 border-[#fff0d2] bg-[#fff0d2] hover:bg-[#fff0d2]/80"
-                  >
-                    <img
-                      src={user.imageUrl}
-                      alt={user.fullName || 'User'}
-                      className="w-8 h-8 rounded-full"
-                    />
-                  </button>
-
-                  {isUserMenuOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg border border-gray-200 py-1 z-50 shadow-lg animate-in fade-in-0 zoom-in-95 duration-200">
-                      <div className="px-4 py-2 border-b border-gray-100">
-                        <p className="text-sm font-medium text-[#045530]">{user.fullName || user.firstName}</p>
-                        <p className="text-xs text-gray-600">{user.primaryEmailAddress?.emailAddress}</p>
-                      </div>
-                      <Link
-                        href="/models"
-                        className="flex items-center gap-3 px-4 py-2 text-sm text-[#045530] hover:bg-[#d5e27b] hover:text-[#045530] transition-colors"
-                        onClick={() => setIsUserMenuOpen(false)}
-                      >
-                        <LayoutDashboard className="w-4 h-4" />
-                        Portfolio
-                      </Link>
-                      <Link
-                        href="/profile"
-                        className="flex items-center gap-3 px-4 py-2 text-sm text-[#045530] hover:bg-[#d5e27b] hover:text-[#045530] transition-colors"
-                        onClick={() => setIsUserMenuOpen(false)}
-                      >
-                        <User className="w-4 h-4" />
-                        Profile & Settings
-                      </Link>
-                      <div className="border-t border-gray-100 mt-1">
-                        <button
-                          onClick={() => {
-                            setIsUserMenuOpen(false);
-                            // Directly sign out using Clerk
-                            signOut({ redirectUrl: '/' });
-                          }}
-                          className="flex items-center gap-3 w-full text-left px-4 py-2 text-sm text-[#045530] hover:bg-[#d5e27b] hover:text-[#045530] transition-colors"
-                        >
-                          <LogOut className="w-4 h-4" />
-                          Sign Out
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
 
             {/* Desktop Search Bar - Right side */}
             <div className="hidden sm:block mr-6">
@@ -487,42 +398,14 @@ export const Header = ({ dictionary }: HeaderProps) => {
                     
                     <div className="h-px bg-gray-300 my-4 w-48"></div>
                     
-                    {!isLoaded ? (
-                      <div className="px-6 py-6">
-                        <div className="h-8 w-24 animate-pulse bg-gray-200 rounded"></div>
-                      </div>
-                    ) : user ? (
-                      <Link
-                        href="/models"
-                        className="flex items-center px-6 py-6 text-2xl text-black hover:bg-gray-100/50 rounded-xl transition-all duration-200"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        style={{ fontFamily: 'Raleway, sans-serif' }}
-                      >
-                        Portfolio
-                      </Link>
-                    ) : (
-                      <>
-                        <Link
-                          href="/sign-in"
-                          className="flex items-center px-6 py-6 text-2xl text-black hover:bg-gray-100/50 rounded-xl transition-all duration-200"
-                          onClick={() => setIsMobileMenuOpen(false)}
-                          style={{ fontFamily: 'Raleway, sans-serif' }}
-                        >
-                          Entra
-                        </Link>
-                        
-                        <div className="h-px bg-gray-300 my-2 w-48"></div>
-                        
-                        <Link
-                          href="/contact"
-                          className="flex items-center px-6 py-6 text-2xl text-black hover:bg-gray-100/50 rounded-xl transition-all duration-200"
-                          onClick={() => setIsMobileMenuOpen(false)}
-                          style={{ fontFamily: 'Raleway, sans-serif' }}
-                        >
-                          Contattaci
-                        </Link>
-                      </>
-                    )}
+                    <Link
+                      href="/contact"
+                      className="flex items-center px-6 py-6 text-2xl text-black hover:bg-gray-100/50 rounded-xl transition-all duration-200"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      style={{ fontFamily: 'Raleway, sans-serif' }}
+                    >
+                      Contattaci
+                    </Link>
                   </div>
                 </div>
               )}
