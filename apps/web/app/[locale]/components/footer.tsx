@@ -90,7 +90,7 @@ export const Footer = () => {
             </button>
             <ul className={`space-y-2 transition-all duration-200 ${openSections.company ? 'block' : 'hidden lg:block'}`}>
               <li>
-                <Link href="/about" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="/chi-siamo" className="text-gray-300 hover:text-white transition-colors">
                   Chi Siamo
                 </Link>
               </li>
