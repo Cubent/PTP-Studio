@@ -146,6 +146,7 @@ export default function ModelApplicationClient() {
 
       if (response.ok) {
         const result = await response.json();
+        console.log('API Response:', result); // Debug log
         if (result.success) {
           router.push('/models/application/success');
         } else {

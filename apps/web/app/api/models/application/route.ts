@@ -72,7 +72,12 @@ export async function POST(request: NextRequest) {
         }
       });
     } catch (dbError) {
-      console.error('Database error:', dbError);
+      console.error('Database error details:', {
+        error: dbError,
+        message: dbError.message,
+        code: dbError.code,
+        data: { firstName, lastName, email, location, height }
+      });
       return NextResponse.json({ 
         error: 'Errore nel salvataggio della candidatura. Riprova.'
       }, { status: 500 });
