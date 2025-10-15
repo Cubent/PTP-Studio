@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
     }
 
     if (!firstName || !lastName || !email || !location || !height) {
-      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+      return NextResponse.json({ error: 'Si è verificato un errore. Contattaci a info@velgance.com' }, { status: 400 });
     }
 
     // Upload multiple images to Cloudinary
@@ -41,37 +41,44 @@ export async function POST(request: NextRequest) {
     
     if (portfolioFiles.length > 0) {
       try {
-        console.log(`Uploading ${portfolioFiles.length} images to Cloudinary...`);
         const uploadResults = await uploadMultipleImagesToCloudinary(
           portfolioFiles,
           `velgance/portfolios/${firstName.toLowerCase()}-${lastName.toLowerCase()}`
         );
-        
         portfolioUrls = uploadResults.map(result => result.secure_url);
-        console.log(`Successfully uploaded ${portfolioUrls.length} images to Cloudinary`);
       } catch (uploadError) {
         console.error('Error uploading images to Cloudinary:', uploadError);
-        return NextResponse.json({ error: 'Failed to upload portfolio images' }, { status: 500 });
+        return NextResponse.json({ 
+          error: 'Si è verificato un errore. Contattaci a info@velgance.com'
+        }, { status: 500 });
       }
     }
 
-    // Create database entry (file upload already handled above)
-    const application = await prisma.model.create({
-      data: {
-        firstName,
-        lastName,
-        email,
-        igProfileLink: instagram || null,
-        image: portfolioUrls.length > 0 ? portfolioUrls[0] : 'https://via.placeholder.com/400x600?text=No+Image',
-        height: height || null,
-        weight: weight || null,
-        location: location || null,
-        gender: gender || 'female',
-        isActive: false, // Applications start as inactive until approved
-      }
-    });
+    // Create database entry
+    let application;
+    try {
+      application = await prisma.model.create({
+        data: {
+          firstName,
+          lastName,
+          email,
+          igProfileLink: instagram || null,
+          image: portfolioUrls.length > 0 ? portfolioUrls[0] : 'https://via.placeholder.com/400x600?text=No+Image',
+          height: height || null,
+          weight: weight || null,
+          location: location || null,
+          gender: gender || 'female',
+          isActive: false, // Applications start as inactive until approved
+        }
+      });
+    } catch (dbError) {
+      console.error('Database error:', dbError);
+      return NextResponse.json({ 
+        error: 'Si è verificato un errore. Contattaci a info@velgance.com'
+      }, { status: 500 });
+    }
 
-    // Send email notifications
+    // Send email notifications (non-blocking)
     const emailData = {
       firstName,
       lastName,
@@ -89,8 +96,10 @@ export async function POST(request: NextRequest) {
       portfolioFiles: portfolioFiles,
     };
 
-    // Send notification to admin only
-    await sendModelApplicationAdminEmail(emailData);
+    // Send notification to admin (don't block on email failure)
+    sendModelApplicationAdminEmail(emailData).catch(emailError => {
+      console.error('Email notification failed:', emailError);
+    });
 
     return NextResponse.json({ 
       success: true, 
@@ -101,7 +110,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Error submitting application:', error);
     return NextResponse.json(
-      { error: 'Failed to submit application' },
+      { error: 'Si è verificato un errore. Contattaci a info@velgance.com' },
       { status: 500 }
     );
   }

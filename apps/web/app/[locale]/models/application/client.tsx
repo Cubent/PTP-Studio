@@ -62,15 +62,17 @@ export default function ModelApplicationClient() {
   const validateCurrentStep = () => {
     switch (currentStep) {
       case 1:
-        return formData.firstName.trim() !== '' && formData.lastName.trim() !== '';
+        return formData.firstName && formData.firstName.trim() !== '' && 
+               formData.lastName && formData.lastName.trim() !== '';
       case 2:
-        return formData.email.trim() !== '' && formData.location.trim() !== '';
+        return formData.email && formData.email.trim() !== '' && 
+               formData.location && formData.location.trim() !== '';
       case 3:
-        return formData.height.trim() !== '';
+        return formData.height && formData.height.trim() !== '';
       case 4:
         return true; // Instagram is optional
       case 5:
-        return formData.portfolio.length > 0;
+        return formData.portfolio && Array.isArray(formData.portfolio) && formData.portfolio.length > 0;
       case 6:
         return true; // All fields are optional
       default:
@@ -104,29 +106,60 @@ export default function ModelApplicationClient() {
     
     try {
       const formDataToSend = new FormData();
-      Object.entries(formData).forEach(([key, value]) => {
-        if (key === 'portfolio' && Array.isArray(value)) {
-          // Handle multiple files
-          value.forEach((file, index) => {
+      
+      // Safari-compatible form data handling
+      if (formData.firstName) formDataToSend.append('firstName', formData.firstName);
+      if (formData.lastName) formDataToSend.append('lastName', formData.lastName);
+      if (formData.email) formDataToSend.append('email', formData.email);
+      if (formData.phone) formDataToSend.append('phone', formData.phone);
+      if (formData.location) formDataToSend.append('location', formData.location);
+      if (formData.height) formDataToSend.append('height', formData.height);
+      if (formData.weight) formDataToSend.append('weight', formData.weight);
+      if (formData.gender) formDataToSend.append('gender', formData.gender);
+      if (formData.instagram) formDataToSend.append('instagram', formData.instagram);
+      if (formData.experience) formDataToSend.append('experience', formData.experience);
+      if (formData.availability) formDataToSend.append('availability', formData.availability);
+      if (formData.additionalInfo) formDataToSend.append('additionalInfo', formData.additionalInfo);
+      
+      // Handle portfolio files - Safari compatible
+      if (formData.portfolio && Array.isArray(formData.portfolio)) {
+        formData.portfolio.forEach((file, index) => {
+          if (file instanceof File) {
             formDataToSend.append(`portfolio_${index}`, file);
-          });
-        } else if (value !== null && value !== '' && !Array.isArray(value)) {
-          formDataToSend.append(key, value);
-        }
-      });
+          }
+        });
+      }
 
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+      
       const response = await fetch('/api/models/application', {
         method: 'POST',
         body: formDataToSend,
+        signal: controller.signal,
+        headers: {
+          'Accept': 'application/json',
+        },
       });
+      
+      clearTimeout(timeoutId);
 
       if (response.ok) {
-        router.push('/models/application/success');
+        const result = await response.json();
+        if (result.success) {
+          router.push('/models/application/success');
+        } else {
+          console.error('Application submission failed:', result.error);
+          alert(result.error || 'Si è verificato un errore. Contattaci a info@velgance.com');
+        }
       } else {
-        console.error('Failed to submit application');
+        const errorData = await response.json();
+        console.error('Failed to submit application:', errorData);
+        alert(errorData.error || 'Si è verificato un errore. Contattaci a info@velgance.com');
       }
     } catch (error) {
       console.error('Error submitting application:', error);
+      alert('Si è verificato un errore. Contattaci a info@velgance.com');
     } finally {
       setIsSubmitting(false);
     }
