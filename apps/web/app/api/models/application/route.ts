@@ -78,6 +78,14 @@ export async function POST(request: NextRequest) {
         code: (dbError as any)?.code || 'unknown',
         data: { firstName, lastName, email, location, height }
       });
+      
+      // Check if it's a duplicate email error
+      if ((dbError as any)?.code === 'P2002' && (dbError as any)?.meta?.target?.includes('email')) {
+        return NextResponse.json({ 
+          error: 'Email già registrata. Usa un\'altra email o contattaci a info@velgance.com.'
+        }, { status: 400 });
+      }
+      
       return NextResponse.json({ 
         error: 'Errore nel salvataggio della candidatura. Riprova.'
       }, { status: 500 });
