@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
     }
 
     if (!firstName || !lastName || !email || !location || !height) {
-      return NextResponse.json({ error: 'Si è verificato un errore. Contattaci a info@velgance.com' }, { status: 400 });
+      return NextResponse.json({ error: 'Campi obbligatori mancanti. Compila tutti i campi richiesti.' }, { status: 400 });
     }
 
     // Upload multiple images to Cloudinary
@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
       } catch (uploadError) {
         console.error('Error uploading images to Cloudinary:', uploadError);
         return NextResponse.json({ 
-          error: 'Si è verificato un errore. Contattaci a info@velgance.com'
+          error: 'Errore nel caricamento delle immagini. Riprova con immagini più piccole.'
         }, { status: 500 });
       }
     }
@@ -74,7 +74,7 @@ export async function POST(request: NextRequest) {
     } catch (dbError) {
       console.error('Database error:', dbError);
       return NextResponse.json({ 
-        error: 'Si è verificato un errore. Contattaci a info@velgance.com'
+        error: 'Errore nel salvataggio della candidatura. Riprova.'
       }, { status: 500 });
     }
 
@@ -110,7 +110,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Error submitting application:', error);
     return NextResponse.json(
-      { error: 'Si è verificato un errore. Contattaci a info@velgance.com' },
+      { error: 'Errore di connessione. Controlla la tua connessione internet e riprova.' },
       { status: 500 }
     );
   }

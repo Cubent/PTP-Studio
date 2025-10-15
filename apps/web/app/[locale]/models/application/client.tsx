@@ -150,16 +150,23 @@ export default function ModelApplicationClient() {
           router.push('/models/application/success');
         } else {
           console.error('Application submission failed:', result.error);
-          alert(result.error || 'Si è verificato un errore. Contattaci a info@velgance.com');
+          const errorMessage = typeof result.error === 'string' ? result.error : 'Errore nell\'invio della candidatura. Riprova.';
+          alert(errorMessage);
         }
       } else {
-        const errorData = await response.json();
-        console.error('Failed to submit application:', errorData);
-        alert(errorData.error || 'Si è verificato un errore. Contattaci a info@velgance.com');
+        try {
+          const errorData = await response.json();
+          console.error('Failed to submit application:', errorData);
+          const errorMessage = typeof errorData.error === 'string' ? errorData.error : 'Errore nell\'invio della candidatura. Riprova.';
+          alert(errorMessage);
+        } catch (parseError) {
+          console.error('Failed to parse error response:', parseError);
+          alert('Errore di connessione. Controlla la tua connessione internet e riprova.');
+        }
       }
     } catch (error) {
       console.error('Error submitting application:', error);
-      alert('Si è verificato un errore. Contattaci a info@velgance.com');
+      alert('Errore di connessione. Controlla la tua connessione internet e riprova.');
     } finally {
       setIsSubmitting(false);
     }
