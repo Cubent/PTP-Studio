@@ -124,9 +124,9 @@ export default function ModelApplicationClient() {
       if (formData.additionalInfo) formDataToSend.append('additionalInfo', formData.additionalInfo);
       
       // Handle portfolio files - Safari compatible
-      if (formData.portfolio && Array.isArray(formData.portfolio)) {
+      if (formData.portfolio && Array.isArray(formData.portfolio) && formData.portfolio.length > 0) {
         formData.portfolio.forEach((file, index) => {
-          if (file instanceof File) {
+          if (file instanceof File && file.size > 0) {
             formDataToSend.append(`portfolio_${index}`, file);
           }
         });
@@ -135,23 +135,18 @@ export default function ModelApplicationClient() {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
       
-      // Add Safari debugging
-      console.log('Safari Debug - Form Data:', {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        portfolioFiles: formData.portfolio?.length || 0,
-        userAgent: navigator.userAgent,
-        isSafari: /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent)
-      });
-      
       const response = await fetch('/api/models/application', {
         method: 'POST',
         body: formDataToSend,
         signal: controller.signal,
+        // Safari-specific headers
         headers: {
           'Accept': 'application/json',
+          'Cache-Control': 'no-cache',
         },
+        // Safari-specific options
+        credentials: 'same-origin',
+        mode: 'cors',
       });
       
       clearTimeout(timeoutId);
