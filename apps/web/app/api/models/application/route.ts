@@ -74,8 +74,8 @@ export async function POST(request: NextRequest) {
     } catch (dbError) {
       console.error('Database error details:', {
         error: dbError,
-        message: dbError.message,
-        code: dbError.code,
+        message: dbError instanceof Error ? dbError.message : 'Unknown error',
+        code: (dbError as any)?.code || 'unknown',
         data: { firstName, lastName, email, location, height }
       });
       return NextResponse.json({ 
