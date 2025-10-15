@@ -6,8 +6,12 @@ import { uploadMultipleImagesToCloudinary } from '../../../../services/cloudinar
 const prisma = new PrismaClient();
 
 export async function POST(request: NextRequest) {
+  console.log('=== Model Application API Route Started ===');
+  console.log('Request headers:', Object.fromEntries(request.headers.entries()));
+  
   try {
     const formData = await request.formData();
+    console.log('FormData received successfully');
     
     const firstName = formData.get('firstName') as string;
     const lastName = formData.get('lastName') as string;
@@ -22,6 +26,8 @@ export async function POST(request: NextRequest) {
     const availability = formData.get('availability') as string;
     const additionalInfo = formData.get('additionalInfo') as string;
     
+    console.log('Extracted form data:', { firstName, lastName, email, location, height });
+    
     // Get multiple portfolio files
     const portfolioFiles: File[] = [];
     let index = 0;
@@ -31,6 +37,8 @@ export async function POST(request: NextRequest) {
       portfolioFiles.push(file);
       index++;
     }
+
+    console.log('Portfolio files count:', portfolioFiles.length);
 
     if (!firstName || !lastName || !email || !location || !height) {
       return NextResponse.json({ error: 'Campi obbligatori mancanti. Compila tutti i campi richiesti.' }, { status: 400 });

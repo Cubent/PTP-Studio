@@ -40,6 +40,7 @@ export default function ModelApplicationClient() {
     additionalInfo: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const steps = [
     { number: 1, title: 'Informazioni Personali', icon: User },
@@ -103,6 +104,7 @@ export default function ModelApplicationClient() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setErrorMessage(null); // Clear previous errors
     
     try {
       const formDataToSend = new FormData();
@@ -133,6 +135,16 @@ export default function ModelApplicationClient() {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
       
+      // Add Safari debugging
+      console.log('Safari Debug - Form Data:', {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        portfolioFiles: formData.portfolio?.length || 0,
+        userAgent: navigator.userAgent,
+        isSafari: /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent)
+      });
+      
       const response = await fetch('/api/models/application', {
         method: 'POST',
         body: formDataToSend,
@@ -151,23 +163,23 @@ export default function ModelApplicationClient() {
           router.push('/models/application/success');
         } else {
           console.error('Application submission failed:', result.error);
-          const errorMessage = typeof result.error === 'string' ? result.error : 'Errore nell\'invio della candidatura. Riprova.';
-          alert(errorMessage);
+          const errorMsg = typeof result.error === 'string' ? result.error : 'Errore nell\'invio della candidatura. Riprova.';
+          setErrorMessage(errorMsg);
         }
       } else {
         try {
           const errorData = await response.json();
           console.error('Failed to submit application:', errorData);
-          const errorMessage = typeof errorData.error === 'string' ? errorData.error : 'Errore nell\'invio della candidatura. Riprova.';
-          alert(errorMessage);
+          const errorMsg = typeof errorData.error === 'string' ? errorData.error : 'Errore nell\'invio della candidatura. Riprova.';
+          setErrorMessage(errorMsg);
         } catch (parseError) {
           console.error('Failed to parse error response:', parseError);
-          alert('Errore di connessione. Controlla la tua connessione internet e riprova.');
+          setErrorMessage('Errore di connessione. Controlla la tua connessione internet e riprova.');
         }
       }
     } catch (error) {
       console.error('Error submitting application:', error);
-      alert('Errore di connessione. Controlla la tua connessione internet e riprova.');
+      setErrorMessage('Errore di connessione. Controlla la tua connessione internet e riprova.');
     } finally {
       setIsSubmitting(false);
     }
@@ -566,6 +578,22 @@ export default function ModelApplicationClient() {
               </button>
             )}
           </div>
+          
+          {/* Error Message Display */}
+          {errorMessage && (
+            <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+              <div className="flex items-center">
+                <div className="flex-shrink-0">
+                  <svg className="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div className="ml-3">
+                  <p className="text-sm text-red-800">{errorMessage}</p>
+                </div>
+              </div>
+            </div>
+          )}
         </form>
       </div>
     </div>
