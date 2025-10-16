@@ -1,7 +1,5 @@
-import { Resend } from 'resend';
-
-// Initialize Resend
-const resend = new Resend(process.env.RESEND_TOKEN);
+import { resend } from '@repo/email';
+import { env } from '@/env';
 
 export interface ModelApplicationData {
   firstName: string;
@@ -284,7 +282,7 @@ function generateModelApplicationConfirmationEmailHTML(data: ModelApplicationDat
 export async function sendModelApplicationAdminEmail(data: ModelApplicationData): Promise<boolean> {
   try {
     const result = await resend.emails.send({
-      from: 'Velgance Agency <noreply@velgance.com>',
+      from: env.RESEND_FROM || 'info@velgance.com',
       to: ['info@velgance.com'],
       subject: `📋 Nuova Candidatura Modello: ${data.firstName} ${data.lastName}`,
       html: generateModelApplicationAdminEmailHTML(data),
@@ -304,7 +302,7 @@ export async function sendModelApplicationAdminEmail(data: ModelApplicationData)
 export async function sendModelApplicationConfirmationEmail(data: ModelApplicationData): Promise<boolean> {
   try {
     const result = await resend.emails.send({
-      from: 'Velgance Agency <noreply@velgance.com>',
+      from: env.RESEND_FROM || 'info@velgance.com',
       to: [data.email],
       subject: '✅ Candidatura Ricevuta - Velgance Agency',
       html: generateModelApplicationConfirmationEmailHTML(data),

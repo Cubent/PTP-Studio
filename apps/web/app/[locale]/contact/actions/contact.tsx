@@ -33,7 +33,7 @@ export const contact = async (
 
     await resend.emails.send({
       from: env.RESEND_FROM || 'info@velgance.com',
-      to: env.RESEND_FROM || 'info@velgance.com',
+      to: 'info@velgance.com',
       subject: 'Contact form submission',
       replyTo: email,
       react: <ContactTemplate name={name} email={email} message={message} />,
