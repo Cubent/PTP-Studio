@@ -430,7 +430,7 @@ export default function ModelApplicationClient() {
                     </p>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                       {formData.portfolio.map((item, index) => (
-                        <div key={index} className="relative w-20 bg-gray-100 rounded">
+                        <div key={index} className="relative w-16 bg-gray-100 rounded">
                           {/* Show image if uploaded successfully */}
                           {item.status === 'success' && item.url ? (
                             <>
@@ -439,18 +439,18 @@ export default function ModelApplicationClient() {
                                 alt="Uploaded image"
                                 className="w-full h-auto object-cover rounded"
                               />
-                              {/* Remove button - only on uploaded images */}
+                              {/* Remove button - positioned on top right of image */}
                               <button
                                 type="button"
                                 onClick={() => removePortfolioItem(index)}
-                                className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center text-xs hover:bg-red-600"
+                                className="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white rounded-full flex items-center justify-center text-xs hover:bg-red-600 transform translate-x-1 -translate-y-1"
                               >
                                 ×
                               </button>
                             </>
                           ) : (
-                            <div className="w-20 h-20 bg-gray-200 rounded flex items-center justify-center text-xs text-gray-500">
-                              Uploading...
+                            <div className="w-16 h-16 bg-gray-200 rounded flex items-center justify-center text-xs text-gray-500">
+                              ...
                             </div>
                           )}
                         </div>
