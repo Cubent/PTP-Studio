@@ -1,5 +1,4 @@
 import { resend } from '@repo/email';
-import { env } from '@/env';
 
 export interface ModelApplicationData {
   firstName: string;
@@ -308,7 +307,7 @@ async function sendEmailWithRetry(emailData: any, maxRetries: number = 3): Promi
  */
 export async function sendModelApplicationAdminEmail(data: ModelApplicationData): Promise<boolean> {
   const emailData = {
-    from: env.RESEND_FROM,
+    from: process.env.RESEND_FROM || 'info@velgance.com',
     to: ['info@velgance.com'],
     subject: `📋 Nuova Candidatura Modello: ${data.firstName} ${data.lastName}`,
     html: generateModelApplicationAdminEmailHTML(data),
@@ -322,7 +321,7 @@ export async function sendModelApplicationAdminEmail(data: ModelApplicationData)
  */
 export async function sendModelApplicationConfirmationEmail(data: ModelApplicationData): Promise<boolean> {
   const emailData = {
-    from: env.RESEND_FROM,
+    from: process.env.RESEND_FROM || 'info@velgance.com',
     to: [data.email],
     subject: '✅ Candidatura Ricevuta - Velgance Agency',
     html: generateModelApplicationConfirmationEmailHTML(data),

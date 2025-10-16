@@ -1,7 +1,6 @@
 import { Resend } from 'resend';
-import { keys } from './keys';
 
-export const resend = new Resend(keys().RESEND_TOKEN);
+export const resend = new Resend(process.env.RESEND_TOKEN);
 
 // Export templates
 export * from './templates';
