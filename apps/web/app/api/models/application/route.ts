@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@repo/database/generated/client';
 import { sendModelApplicationAdminEmail } from '../../../../services/model-application-email';
-import { uploadMultipleImagesToCloudinary } from '../../../../services/cloudinary';
 
 let prisma: PrismaClient;
 
@@ -31,38 +30,22 @@ export async function POST(request: NextRequest) {
     const availability = formData.get('availability') as string;
     const additionalInfo = formData.get('additionalInfo') as string;
     
-    // Get multiple portfolio 
-    // Get multiple portfolio files
-    const portfolioFiles: File[] = [];
-    let index = 0;
-    while (true) {
-      const file = formData.get(`portfolio_${index}`) as File;
-      if (!file) break;
-      portfolioFiles.push(file);
-      index++;
+    // Get portfolio URLs (uploaded directly to Cloudinary)
+    const portfolioUrls: string[] = [];
+    const portfolioCount = parseInt(formData.get('portfolio_count') as string) || 0;
+    
+    for (let i = 0; i < portfolioCount; i++) {
+      const url = formData.get(`portfolio_url_${i}`) as string;
+      if (url) {
+        portfolioUrls.push(url);
+      }
     }
 
     if (!firstName || !lastName || !email || !location || !height) {
       return NextResponse.json({ error: 'Campi obbligatori mancanti. Compila tutti i campi richiesti.' }, { status: 400 });
     }
 
-    // Upload multiple images to Cloudinary
-    let portfolioUrls: string[] = [];
-    
-    if (portfolioFiles.length > 0) {
-      try {
-        const uploadResults = await uploadMultipleImagesToCloudinary(
-          portfolioFiles,
-          `velgance/portfolios/${firstName.toLowerCase()}-${lastName.toLowerCase()}`
-        );
-        portfolioUrls = uploadResults.map(result => result.secure_url);
-      } catch (uploadError) {
-        console.error('Error uploading images to Cloudinary:', uploadError);
-        return NextResponse.json({ 
-          error: 'Errore nel caricamento delle immagini. Riprova con immagini più piccole. Se il problema persiste, contattaci a info@velgance.com'
-        }, { status: 500 });
-      }
-    }
+    // Images are already uploaded directly to Cloudinary by the client
 
     // Create database entry
     let application;
@@ -116,7 +99,6 @@ export async function POST(request: NextRequest) {
       availability: availability || undefined,
       additionalInfo: additionalInfo || undefined,
       portfolioUrls: portfolioUrls,
-      portfolioFiles: portfolioFiles,
     };
 
     // Send notification to admin (don't block on email failure)

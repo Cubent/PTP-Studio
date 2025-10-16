@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ArrowLeft, ArrowRight, User, Mail, MapPin, Ruler, Weight, Camera, Instagram, Upload } from 'lucide-react';
+import { uploadMultipleFilesDirectToCloudinary } from '../../../../services/cloudinary-direct';
 
 interface FormData {
   firstName: string;
@@ -107,9 +108,31 @@ export default function ModelApplicationClient() {
     setErrorMessage(null); // Clear previous errors
     
     try {
+      // Upload images directly to Cloudinary first (bypasses Vercel's 4.5MB limit)
+      let portfolioUrls: string[] = [];
+      
+      if (formData.portfolio && formData.portfolio.length > 0) {
+        try {
+          setErrorMessage('Caricamento immagini in corso...');
+          
+          const uploadResults = await uploadMultipleFilesDirectToCloudinary(
+            formData.portfolio,
+            `velgance/portfolios/${formData.firstName.toLowerCase()}-${formData.lastName.toLowerCase()}`
+          );
+          
+          portfolioUrls = uploadResults.map(result => result.secure_url);
+          setErrorMessage(null); // Clear loading message
+        } catch (uploadError) {
+          console.error('Error uploading to Cloudinary:', uploadError);
+          setErrorMessage('Errore nel caricamento delle immagini. Riprova con immagini più piccole. Se il problema persiste, contattaci a info@velgance.com');
+          return;
+        }
+      }
+
+      // Send form data without files to server
       const formDataToSend = new FormData();
       
-      // Safari-compatible form data handling
+      // Add all form fields
       if (formData.firstName) formDataToSend.append('firstName', formData.firstName);
       if (formData.lastName) formDataToSend.append('lastName', formData.lastName);
       if (formData.email) formDataToSend.append('email', formData.email);
@@ -123,14 +146,11 @@ export default function ModelApplicationClient() {
       if (formData.availability) formDataToSend.append('availability', formData.availability);
       if (formData.additionalInfo) formDataToSend.append('additionalInfo', formData.additionalInfo);
       
-      // Handle portfolio files - Safari compatible
-      if (formData.portfolio && Array.isArray(formData.portfolio) && formData.portfolio.length > 0) {
-        formData.portfolio.forEach((file, index) => {
-          if (file instanceof File && file.size > 0) {
-            formDataToSend.append(`portfolio_${index}`, file);
-          }
-        });
-      }
+      // Add portfolio URLs instead of files
+      portfolioUrls.forEach((url, index) => {
+        formDataToSend.append(`portfolio_url_${index}`, url);
+      });
+      formDataToSend.append('portfolio_count', portfolioUrls.length.toString());
 
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
