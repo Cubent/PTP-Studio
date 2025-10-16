@@ -277,41 +277,56 @@ function generateModelApplicationConfirmationEmailHTML(data: ModelApplicationDat
 }
 
 /**
+ * Send email with retry logic
+ */
+async function sendEmailWithRetry(emailData: any, maxRetries: number = 3): Promise<boolean> {
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      console.log(`Email attempt ${attempt}/${maxRetries}`);
+      const result = await resend.emails.send(emailData);
+      console.log(`Email sent successfully on attempt ${attempt}`, result);
+      return true;
+    } catch (error) {
+      console.error(`Email attempt ${attempt} failed:`, error);
+      
+      if (attempt === maxRetries) {
+        console.error(`All ${maxRetries} email attempts failed`);
+        return false;
+      }
+      
+      // Wait before retry (exponential backoff)
+      const delay = Math.pow(2, attempt) * 1000; // 2s, 4s, 8s
+      console.log(`Waiting ${delay}ms before retry...`);
+      await new Promise(resolve => setTimeout(resolve, delay));
+    }
+  }
+  return false;
+}
+
+/**
  * Send model application notification email to admin
  */
 export async function sendModelApplicationAdminEmail(data: ModelApplicationData): Promise<boolean> {
-  try {
-    const result = await resend.emails.send({
-      from: env.RESEND_FROM || 'info@velgance.com',
-      to: ['info@velgance.com'],
-      subject: `📋 Nuova Candidatura Modello: ${data.firstName} ${data.lastName}`,
-      html: generateModelApplicationAdminEmailHTML(data),
-    });
+  const emailData = {
+    from: env.RESEND_FROM,
+    to: ['info@velgance.com'],
+    subject: `📋 Nuova Candidatura Modello: ${data.firstName} ${data.lastName}`,
+    html: generateModelApplicationAdminEmailHTML(data),
+  };
 
-    console.log(`Model application admin email sent to info@velgance.com`, result);
-    return true;
-  } catch (error) {
-    console.error('Error sending model application admin email:', error);
-    return false;
-  }
+  return await sendEmailWithRetry(emailData);
 }
 
 /**
  * Send confirmation email to model applicant
  */
 export async function sendModelApplicationConfirmationEmail(data: ModelApplicationData): Promise<boolean> {
-  try {
-    const result = await resend.emails.send({
-      from: env.RESEND_FROM || 'info@velgance.com',
-      to: [data.email],
-      subject: '✅ Candidatura Ricevuta - Velgance Agency',
-      html: generateModelApplicationConfirmationEmailHTML(data),
-    });
+  const emailData = {
+    from: env.RESEND_FROM,
+    to: [data.email],
+    subject: '✅ Candidatura Ricevuta - Velgance Agency',
+    html: generateModelApplicationConfirmationEmailHTML(data),
+  };
 
-    console.log(`Model application confirmation email sent to ${data.email}`, result);
-    return true;
-  } catch (error) {
-    console.error('Error sending model application confirmation email:', error);
-    return false;
-  }
+  return await sendEmailWithRetry(emailData);
 }
