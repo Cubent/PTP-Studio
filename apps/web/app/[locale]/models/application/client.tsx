@@ -76,6 +76,13 @@ export default function ModelApplicationClient() {
       return;
     }
 
+    // Check for files over 10MB
+    const oversizedFiles = files.filter(file => file.size > 10 * 1024 * 1024);
+    if (oversizedFiles.length > 0) {
+      setErrorMessage('Alcune immagini sono troppo grandi (limite 10MB). Rimuovi le immagini più grandi e riprova.');
+      return;
+    }
+
     // Add files with uploading status
     const newPortfolioItems: PortfolioItem[] = files.map(file => ({
       file,
@@ -423,31 +430,16 @@ export default function ModelApplicationClient() {
                           <div className="font-medium">{item.file.name}</div>
                           <div className="text-gray-500">{(item.file.size / 1024 / 1024).toFixed(2)} MB</div>
                           
-                          {/* Status indicator */}
-                          <div className="mt-1">
-                            {item.status === 'uploading' && (
-                              <div className="flex items-center text-gray-500">
-                                <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-gray-500 mr-1"></div>
-                                <span className="text-xs">Caricamento...</span>
-                              </div>
-                            )}
-                            {item.status === 'success' && (
-                              <div className="flex items-center text-green-600">
-                                <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                </svg>
-                                <span className="text-xs">Caricato</span>
-                              </div>
-                            )}
-                            {item.status === 'error' && (
-                              <div className="flex items-center text-red-600">
-                                <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                  <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                                </svg>
-                                <span className="text-xs">Errore</span>
-                              </div>
-                            )}
-                          </div>
+                          {/* Show image if uploaded successfully */}
+                          {item.status === 'success' && item.url && (
+                            <div className="mt-2">
+                              <img 
+                                src={item.url} 
+                                alt={item.file.name}
+                                className="w-full h-20 object-cover rounded"
+                              />
+                            </div>
+                          )}
                           
                         </div>
                       ))}
