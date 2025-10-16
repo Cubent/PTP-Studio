@@ -427,15 +427,15 @@ export default function ModelApplicationClient() {
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                       {formData.portfolio.map((item, index) => (
                         <div key={index} className="text-xs text-gray-600 p-2 bg-gray-100 rounded relative">
-                          <div className="font-medium">{item.file.name}</div>
-                          <div className="text-gray-500">{(item.file.size / 1024 / 1024).toFixed(2)} MB</div>
+                          <div className="font-medium">{item?.file?.name || 'Unknown file'}</div>
+                          <div className="text-gray-500">{(item?.file?.size / 1024 / 1024).toFixed(2)} MB</div>
                           
                           {/* Show image if uploaded successfully */}
                           {item.status === 'success' && item.url && (
                             <div className="mt-2">
                               <img 
                                 src={item.url} 
-                                alt={item.file.name}
+                                alt={item?.file?.name || 'Uploaded image'}
                                 className="w-full h-20 object-cover rounded"
                               />
                             </div>
@@ -445,7 +445,7 @@ export default function ModelApplicationClient() {
                       ))}
                     </div>
                     <div className="mt-2 text-sm text-gray-700">
-                      <strong>Totale: {((formData.portfolio.reduce((total, item) => total + item.file.size, 0)) / 1024 / 1024).toFixed(2)} MB</strong>
+                      <strong>Totale: {((formData.portfolio.reduce((total, item) => total + (item?.file?.size || 0), 0)) / 1024 / 1024).toFixed(2)} MB</strong>
                     </div>
                   </div>
                 )}
