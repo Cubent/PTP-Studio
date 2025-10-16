@@ -64,8 +64,10 @@ export default function ModelApplicationClient() {
   };
 
   const removePortfolioItem = (index: number) => {
-    const updatedPortfolio = formData.portfolio.filter((_, i) => i !== index);
-    handleInputChange('portfolio', updatedPortfolio);
+    setFormData(prev => ({
+      ...prev,
+      portfolio: prev.portfolio.filter((_, i) => i !== index)
+    }));
   };
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -106,27 +108,29 @@ export default function ModelApplicationClient() {
         );
         
         // Update the specific item with success
-        const currentItems = formData.portfolio || [];
-        const updatedItems = [...currentItems];
-        updatedItems[itemIndex] = {
-          ...updatedItems[itemIndex],
-          url: uploadResult.secure_url,
-          status: 'success'
-        };
-        handleInputChange('portfolio', updatedItems);
+        setFormData(prev => {
+          const updatedItems = [...prev.portfolio];
+          updatedItems[itemIndex] = {
+            ...updatedItems[itemIndex],
+            url: uploadResult.secure_url,
+            status: 'success'
+          };
+          return { ...prev, portfolio: updatedItems };
+        });
         
       } catch (error) {
         console.error('Error uploading file:', error);
         
         // Update the specific item with error
-        const currentItems = formData.portfolio || [];
-        const updatedItems = [...currentItems];
-        updatedItems[itemIndex] = {
-          ...updatedItems[itemIndex],
-          status: 'error',
-          error: 'Upload failed'
-        };
-        handleInputChange('portfolio', updatedItems);
+        setFormData(prev => {
+          const updatedItems = [...prev.portfolio];
+          updatedItems[itemIndex] = {
+            ...updatedItems[itemIndex],
+            status: 'error',
+            error: 'Upload failed'
+          };
+          return { ...prev, portfolio: updatedItems };
+        });
       }
     }
   };
@@ -426,21 +430,24 @@ export default function ModelApplicationClient() {
                     </p>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                       {formData.portfolio.map((item, index) => (
-                        <div key={index} className="text-xs text-gray-600 p-2 bg-gray-100 rounded relative">
-                          <div className="font-medium">{item?.file?.name || 'Unknown file'}</div>
-                          <div className="text-gray-500">{(item?.file?.size / 1024 / 1024).toFixed(2)} MB</div>
-                          
+                        <div key={index} className="relative w-20 h-20 bg-gray-100 rounded">
                           {/* Show image if uploaded successfully */}
                           {item.status === 'success' && item.url && (
-                            <div className="mt-2">
-                              <img 
-                                src={item.url} 
-                                alt={item?.file?.name || 'Uploaded image'}
-                                className="w-full h-20 object-cover rounded"
-                              />
-                            </div>
+                            <img 
+                              src={item.url} 
+                              alt="Uploaded image"
+                              className="w-full h-full object-cover rounded"
+                            />
                           )}
                           
+                          {/* Remove button */}
+                          <button
+                            type="button"
+                            onClick={() => removePortfolioItem(index)}
+                            className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center text-xs hover:bg-red-600"
+                          >
+                            ×
+                          </button>
                         </div>
                       ))}
                     </div>
