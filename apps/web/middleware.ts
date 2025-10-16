@@ -21,8 +21,8 @@ export const config = {
     '/((?!.*\\..*|_next).*)',
     // Match the root route
     '/',
-    // Match API routes that need authentication
-    '/(api|trpc)(.*)',
+    // Match API routes that need authentication - EXCLUDE EMAIL API
+    '/(api|trpc)(?!(.*models.*application.*))(.*)',
   ],
 };
 
@@ -31,6 +31,11 @@ const securityHeaders = env.FLAGS_SECRET
   : noseconeMiddleware(noseconeOptions);
 
 const middleware: NextMiddleware = async (request: NextRequest) => {
+  // Skip middleware for email API routes to prevent blocking external API calls
+  if (request.nextUrl.pathname.includes('/api/models/application')) {
+    return NextResponse.next();
+  }
+  
   // Skip i18n middleware for API routes
   if (!request.nextUrl.pathname.startsWith('/api/')) {
     const i18nResponse = internationalizationMiddleware(
