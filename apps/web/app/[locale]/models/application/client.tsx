@@ -430,29 +430,31 @@ export default function ModelApplicationClient() {
                     </p>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                       {formData.portfolio.map((item, index) => (
-                        <div key={index} className="relative w-20 h-20 bg-gray-100 rounded">
+                        <div key={index} className="relative w-20 bg-gray-100 rounded">
                           {/* Show image if uploaded successfully */}
-                          {item.status === 'success' && item.url && (
-                            <img 
-                              src={item.url} 
-                              alt="Uploaded image"
-                              className="w-full h-full object-cover rounded"
-                            />
+                          {item.status === 'success' && item.url ? (
+                            <>
+                              <img 
+                                src={item.url} 
+                                alt="Uploaded image"
+                                className="w-full h-auto object-cover rounded"
+                              />
+                              {/* Remove button - only on uploaded images */}
+                              <button
+                                type="button"
+                                onClick={() => removePortfolioItem(index)}
+                                className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center text-xs hover:bg-red-600"
+                              >
+                                ×
+                              </button>
+                            </>
+                          ) : (
+                            <div className="w-20 h-20 bg-gray-200 rounded flex items-center justify-center text-xs text-gray-500">
+                              Uploading...
+                            </div>
                           )}
-                          
-                          {/* Remove button */}
-                          <button
-                            type="button"
-                            onClick={() => removePortfolioItem(index)}
-                            className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center text-xs hover:bg-red-600"
-                          >
-                            ×
-                          </button>
                         </div>
                       ))}
-                    </div>
-                    <div className="mt-2 text-sm text-gray-700">
-                      <strong>Totale: {((formData.portfolio.reduce((total, item) => total + (item?.file?.size || 0), 0)) / 1024 / 1024).toFixed(2)} MB</strong>
                     </div>
                   </div>
                 )}
