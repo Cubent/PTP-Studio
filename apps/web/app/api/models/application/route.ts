@@ -31,6 +31,7 @@ export async function POST(request: NextRequest) {
     const availability = formData.get('availability') as string;
     const additionalInfo = formData.get('additionalInfo') as string;
     
+    // Get multiple portfolio 
     // Get multiple portfolio files
     const portfolioFiles: File[] = [];
     let index = 0;
