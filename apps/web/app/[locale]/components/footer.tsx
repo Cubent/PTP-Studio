@@ -20,7 +20,7 @@ export const Footer = () => {
           {/* Title */}
           <div className="flex flex-col justify-center mb-12">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl leading-relaxed text-white" style={{ fontFamily: 'Inter, sans-serif', fontWeight: 100 }}>
-              Connettendo talento e opportunità
+              Dal 1998 trasformiamo il talento in opportunità
             </h2>
           </div>
         </div>

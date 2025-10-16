@@ -552,15 +552,15 @@ export default function ModelApplicationClient() {
       {/* Header */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-4 py-6">
-          <button
-            onClick={() => router.push('/models')}
-            className="flex items-center gap-2 text-gray-600 hover:text-black transition-colors mb-4"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Torna ai Modelli
-          </button>
+              <button
+                onClick={() => router.push('/')}
+                className="flex items-center gap-2 text-gray-600 hover:text-black transition-colors mb-4"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                Torna alla Home
+              </button>
           <h1 className="text-3xl font-light text-black italic" style={{ fontFamily: 'serif' }}>
-            Candidati come Modello
+            Candidati come Modello/a
           </h1>
           <p className="text-gray-600 mt-2">
             Unisciti al nostro team di modelli professionisti

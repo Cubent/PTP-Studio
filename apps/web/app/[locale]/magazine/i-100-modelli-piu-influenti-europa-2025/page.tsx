@@ -307,7 +307,7 @@ export default function Top100ModelsEurope2025() {
               href="/models/application" 
               className="bg-black text-white px-8 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors"
             >
-              Candidati come modello
+              Candidati come modello/a
             </a>
             <a 
               href="/contact" 
