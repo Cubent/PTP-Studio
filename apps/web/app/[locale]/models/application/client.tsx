@@ -169,7 +169,7 @@ export default function ModelApplicationClient() {
           setErrorMessage(errorMsg);
         } catch (parseError) {
           console.error('Failed to parse error response:', parseError);
-          setErrorMessage('Errore di connessione. Controlla la tua connessione internet e riprova.');
+          setErrorMessage('Errore di connessione. Controlla la tua connessione internet e riprova. Se il problema persiste, contattaci a info@velgance.com');
         }
       }
     } catch (error) {
@@ -351,9 +351,13 @@ export default function ModelApplicationClient() {
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                       {formData.portfolio.map((file, index) => (
                         <div key={index} className="text-xs text-gray-600 p-2 bg-gray-100 rounded">
-                          {file.name}
+                          <div className="font-medium">{file.name}</div>
+                          <div className="text-gray-500">{(file.size / 1024 / 1024).toFixed(2)} MB</div>
                         </div>
                       ))}
+                    </div>
+                    <div className="mt-2 text-sm text-gray-700">
+                      <strong>Totale: {((formData.portfolio.reduce((total, file) => total + file.size, 0)) / 1024 / 1024).toFixed(2)} MB</strong>
                     </div>
                   </div>
                 )}

@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
       } catch (uploadError) {
         console.error('Error uploading images to Cloudinary:', uploadError);
         return NextResponse.json({ 
-          error: 'Errore nel caricamento delle immagini. Riprova con immagini più piccole.'
+          error: 'Errore nel caricamento delle immagini. Riprova con immagini più piccole. Se il problema persiste, contattaci a info@velgance.com'
         }, { status: 500 });
       }
     }
@@ -97,7 +97,7 @@ export async function POST(request: NextRequest) {
       }
       
       return NextResponse.json({ 
-        error: 'Errore nel salvataggio della candidatura. Riprova.'
+        error: 'Errore nel salvataggio della candidatura. Riprova. Se il problema persiste, contattaci a info@velgance.com'
       }, { status: 500 });
     }
 
@@ -133,7 +133,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Error submitting application:', error);
     return NextResponse.json(
-      { error: 'Errore di connessione. Controlla la tua connessione internet e riprova.' },
+      { error: 'Errore di connessione. Controlla la tua connessione internet e riprova. Se il problema persiste, contattaci a info@velgance.com' },
       { status: 500 }
     );
   }
