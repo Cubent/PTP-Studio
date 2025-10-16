@@ -21,8 +21,8 @@ export const config = {
     '/((?!.*\\..*|_next).*)',
     // Match the root route
     '/',
-    // Match API routes that need authentication - EXCLUDE EMAIL API
-    '/(api|trpc)(?!(.*models.*application.*))(.*)',
+    // Match API routes that need authentication
+    '/(api|trpc)(.*)',
   ],
 };
 
