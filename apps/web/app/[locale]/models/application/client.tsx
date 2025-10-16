@@ -3,7 +3,14 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ArrowLeft, ArrowRight, User, Mail, MapPin, Ruler, Weight, Camera, Instagram, Upload } from 'lucide-react';
-import { uploadMultipleFilesDirectToCloudinary } from '../../../../services/cloudinary-direct';
+import { uploadFileDirectToCloudinary } from '../../../../services/cloudinary-direct';
+
+interface PortfolioItem {
+  file: File;
+  url?: string;
+  status: 'uploading' | 'success' | 'error';
+  error?: string;
+}
 
 interface FormData {
   firstName: string;
@@ -15,7 +22,7 @@ interface FormData {
   weight: string;
   gender: string;
   instagram: string;
-  portfolio: File[];
+  portfolio: PortfolioItem[];
   experience: string;
   availability: string;
   additionalInfo: string;
@@ -52,13 +59,67 @@ export default function ModelApplicationClient() {
     { number: 6, title: 'Informazioni Aggiuntive', icon: User }
   ];
 
-  const handleInputChange = (field: keyof FormData, value: string | File[] | null) => {
+  const handleInputChange = (field: keyof FormData, value: string | File[] | PortfolioItem[] | null) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const removePortfolioItem = (index: number) => {
+    const updatedPortfolio = formData.portfolio.filter((_, i) => i !== index);
+    handleInputChange('portfolio', updatedPortfolio);
+  };
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []);
-    handleInputChange('portfolio', files);
+    
+    if (files.length === 0) {
+      handleInputChange('portfolio', []);
+      return;
+    }
+
+    // Add files with uploading status
+    const newPortfolioItems: PortfolioItem[] = files.map(file => ({
+      file,
+      status: 'uploading' as const
+    }));
+    
+    // Add to existing portfolio
+    const currentPortfolio = formData.portfolio || [];
+    const updatedPortfolio = [...currentPortfolio, ...newPortfolioItems];
+    handleInputChange('portfolio', updatedPortfolio);
+
+    // Upload each file individually
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const itemIndex = currentPortfolio.length + i;
+      
+      try {
+        const uploadResult = await uploadFileDirectToCloudinary(
+          file,
+          `velgance/portfolios/${formData.firstName.toLowerCase()}-${formData.lastName.toLowerCase()}`
+        );
+        
+        // Update the specific item with success
+        const updatedItems = [...updatedPortfolio];
+        updatedItems[itemIndex] = {
+          ...updatedItems[itemIndex],
+          url: uploadResult.secure_url,
+          status: 'success'
+        };
+        handleInputChange('portfolio', updatedItems);
+        
+      } catch (error) {
+        console.error('Error uploading file:', error);
+        
+        // Update the specific item with error
+        const updatedItems = [...updatedPortfolio];
+        updatedItems[itemIndex] = {
+          ...updatedItems[itemIndex],
+          status: 'error',
+          error: 'Upload failed'
+        };
+        handleInputChange('portfolio', updatedItems);
+      }
+    }
   };
 
   const validateCurrentStep = () => {
@@ -74,7 +135,9 @@ export default function ModelApplicationClient() {
       case 4:
         return true; // Instagram is optional
       case 5:
-        return formData.portfolio && Array.isArray(formData.portfolio) && formData.portfolio.length > 0;
+        return formData.portfolio && Array.isArray(formData.portfolio) && 
+               formData.portfolio.length > 0 && 
+               formData.portfolio.some(item => item.status === 'success');
       case 6:
         return true; // All fields are optional
       default:
@@ -108,26 +171,10 @@ export default function ModelApplicationClient() {
     setErrorMessage(null); // Clear previous errors
     
     try {
-      // Upload images directly to Cloudinary first (bypasses Vercel's 4.5MB limit)
-      let portfolioUrls: string[] = [];
-      
-      if (formData.portfolio && formData.portfolio.length > 0) {
-        try {
-          setErrorMessage('Caricamento immagini in corso...');
-          
-          const uploadResults = await uploadMultipleFilesDirectToCloudinary(
-            formData.portfolio,
-            `velgance/portfolios/${formData.firstName.toLowerCase()}-${formData.lastName.toLowerCase()}`
-          );
-          
-          portfolioUrls = uploadResults.map(result => result.secure_url);
-          setErrorMessage(null); // Clear loading message
-        } catch (uploadError) {
-          console.error('Error uploading to Cloudinary:', uploadError);
-          setErrorMessage('Errore nel caricamento delle immagini. Riprova con immagini più piccole. Se il problema persiste, contattaci a info@velgance.com');
-          return;
-        }
-      }
+      // Get successfully uploaded portfolio URLs
+      const portfolioUrls = formData.portfolio
+        .filter(item => item.status === 'success' && item.url)
+        .map(item => item.url!);
 
       // Send form data without files to server
       const formDataToSend = new FormData();
@@ -369,15 +416,52 @@ export default function ModelApplicationClient() {
                       {formData.portfolio.length} foto selezionate:
                     </p>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                      {formData.portfolio.map((file, index) => (
-                        <div key={index} className="text-xs text-gray-600 p-2 bg-gray-100 rounded">
-                          <div className="font-medium">{file.name}</div>
-                          <div className="text-gray-500">{(file.size / 1024 / 1024).toFixed(2)} MB</div>
+                      {formData.portfolio.map((item, index) => (
+                        <div key={index} className="text-xs text-gray-600 p-2 bg-gray-100 rounded relative">
+                          <div className="font-medium">{item.file.name}</div>
+                          <div className="text-gray-500">{(item.file.size / 1024 / 1024).toFixed(2)} MB</div>
+                          
+                          {/* Status indicator */}
+                          <div className="mt-1">
+                            {item.status === 'uploading' && (
+                              <div className="flex items-center text-blue-600">
+                                <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-blue-600 mr-1"></div>
+                                <span className="text-xs">Caricamento...</span>
+                              </div>
+                            )}
+                            {item.status === 'success' && (
+                              <div className="flex items-center text-green-600">
+                                <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                </svg>
+                                <span className="text-xs">Caricato</span>
+                              </div>
+                            )}
+                            {item.status === 'error' && (
+                              <div className="flex items-center text-red-600">
+                                <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                  <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                                </svg>
+                                <span className="text-xs">Errore</span>
+                              </div>
+                            )}
+                          </div>
+                          
+                          {/* Remove button */}
+                          <button
+                            type="button"
+                            onClick={() => removePortfolioItem(index)}
+                            className="absolute top-1 right-1 text-red-500 hover:text-red-700"
+                          >
+                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                            </svg>
+                          </button>
                         </div>
                       ))}
                     </div>
                     <div className="mt-2 text-sm text-gray-700">
-                      <strong>Totale: {((formData.portfolio.reduce((total, file) => total + file.size, 0)) / 1024 / 1024).toFixed(2)} MB</strong>
+                      <strong>Totale: {((formData.portfolio.reduce((total, item) => total + item.file.size, 0)) / 1024 / 1024).toFixed(2)} MB</strong>
                     </div>
                   </div>
                 )}
