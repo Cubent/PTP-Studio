@@ -55,12 +55,16 @@ export async function POST(request: NextRequest) {
           firstName,
           lastName,
           email,
+          phone: phone || null,
           igProfileLink: instagram || null,
           image: portfolioUrls.length > 0 ? portfolioUrls[0] : 'https://via.placeholder.com/400x600?text=No+Image',
           height: height || null,
           weight: weight || null,
           location: location || null,
           gender: gender || 'female',
+          experience: experience || null,
+          availability: availability || null,
+          additionalInfo: additionalInfo || null,
           isActive: false, // Applications start as inactive until approved
         }
       });

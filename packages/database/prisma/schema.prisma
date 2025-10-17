@@ -446,12 +446,16 @@ model Model {
   firstName     String
   lastName      String
   email         String   @unique
+  phone         String?  // Phone number
   igProfileLink String?
   image         String
   height        String?  // e.g., "175cm", "5'9""
   weight        String?  // e.g., "65kg", "143lbs"
   location      String?  // e.g., "Milano, Italia", "New York, USA"
   gender        String   @default("female") // "male" or "female"
+  experience    String?  // Model experience description
+  availability  String?  // Availability for jobs and travel
+  additionalInfo String? // Additional information
   isActive      Boolean  @default(true)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
