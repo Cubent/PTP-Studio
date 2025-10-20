@@ -142,21 +142,21 @@ export default function ModelPageClient({ params }: Props) {
                 
                 <div className="space-y-3">
                   {model.height && (
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center justify-center gap-3">
                       <Ruler className="w-5 h-5 text-gray-400" />
                       <span className="text-gray-700">{model.height}</span>
                     </div>
                   )}
 
                   {model.weight && (
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center justify-center gap-3">
                       <Weight className="w-5 h-5 text-gray-400" />
                       <span className="text-gray-700">{model.weight}</span>
                     </div>
                   )}
 
                   {model.location && (
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center justify-center gap-3">
                       <MapPin className="w-5 h-5 text-gray-400" />
                       <span className="text-gray-700">{model.location}</span>
                     </div>
