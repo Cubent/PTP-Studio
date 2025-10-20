@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import type { Model } from '../../../../lib/models';
-import { ArrowLeft, Instagram, Mail, MapPin, Ruler, Weight } from 'lucide-react';
+import { ArrowLeft, Instagram, Mail, MapPin, Ruler, Weight, X } from 'lucide-react';
 
 // Helper function to extract Instagram username from URL
 const getInstagramUsername = (url: string): string => {
@@ -33,6 +33,7 @@ export default function ModelPageClient({ params }: Props) {
   const [model, setModel] = useState<Model | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [modelId, setModelId] = useState<string>('');
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   useEffect(() => {
     const getParams = async () => {
@@ -115,7 +116,7 @@ export default function ModelPageClient({ params }: Props) {
         {/* Mobile Layout - Image First */}
         <div className="lg:hidden space-y-8">
           {/* Mobile Image */}
-          <div className="relative w-full overflow-hidden">
+          <div className="relative w-full overflow-hidden cursor-pointer" onClick={() => setSelectedImage(model.image)}>
             <img
               src={model.image}
               alt={`${model.firstName} ${model.lastName}`}
@@ -220,7 +221,7 @@ export default function ModelPageClient({ params }: Props) {
 
           {/* Right Side - Model Image */}
           <div className="-mr-8">
-            <div className="relative h-full min-h-[600px] overflow-hidden">
+            <div className="relative h-full min-h-[600px] overflow-hidden cursor-pointer" onClick={() => setSelectedImage(model.image)}>
               <img
                 src={model.image}
                 alt={`${model.firstName} ${model.lastName}`}
@@ -247,6 +248,7 @@ export default function ModelPageClient({ params }: Props) {
                   style={{
                     aspectRatio: index === 0 ? '4/3' : index === 1 ? '3/4' : index === 2 ? '3/4' : '1/1'
                   }}
+                  onClick={() => setSelectedImage(image)}
                 >
                   <img
                     src={image}
@@ -261,6 +263,29 @@ export default function ModelPageClient({ params }: Props) {
         )}
 
       </div>
+
+      {/* Image Popup Modal */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
+          onClick={() => setSelectedImage(null)}
+        >
+          <div className="relative max-w-4xl max-h-[90vh] w-full h-full flex items-center justify-center">
+            <img
+              src={selectedImage}
+              alt={`${model.firstName} ${model.lastName}`}
+              className="max-w-full max-h-full object-contain"
+              onClick={(e) => e.stopPropagation()}
+            />
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
+            >
+              <X className="w-8 h-8" />
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
