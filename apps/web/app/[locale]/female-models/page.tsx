@@ -89,6 +89,18 @@ export default function FemaleModelsPage() {
   };
 
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  
+  // Get available letters (letters that have models)
+  const getAvailableLetters = () => {
+    const availableLetters = new Set<string>();
+    allModels.forEach(model => {
+      const firstLetter = model.firstName.charAt(0).toUpperCase();
+      availableLetters.add(firstLetter);
+    });
+    return availableLetters;
+  };
+
+  const availableLetters = getAvailableLetters();
 
   return (
     <div className="min-h-screen bg-white">
@@ -125,19 +137,25 @@ export default function FemaleModelsPage() {
             >
               Tutti
             </button>
-            {alphabet.map((letter) => (
-              <button
-                key={letter}
-                onClick={() => handleLetterFilter(letter)}
-                className={`px-2 py-1 text-sm font-light transition-all duration-200 ${
-                  selectedLetter === letter 
-                    ? 'text-black font-medium' 
-                    : 'text-gray-400 hover:text-gray-600'
-                }`}
-              >
-                {letter}
-              </button>
-            ))}
+            {alphabet.map((letter) => {
+              const isAvailable = availableLetters.has(letter);
+              return (
+                <button
+                  key={letter}
+                  onClick={() => isAvailable ? handleLetterFilter(letter) : null}
+                  disabled={!isAvailable}
+                  className={`px-2 py-1 text-sm font-light transition-all duration-200 ${
+                    !isAvailable 
+                      ? 'text-gray-200 cursor-not-allowed' 
+                      : selectedLetter === letter 
+                        ? 'text-black font-medium' 
+                        : 'text-gray-400 hover:text-gray-600'
+                  }`}
+                >
+                  {letter}
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -208,6 +226,9 @@ export default function FemaleModelsPage() {
           )}
         </div>
       </div>
+
+      {/* Footer Spacing */}
+      <div className="h-16"></div>
     </div>
   );
 }

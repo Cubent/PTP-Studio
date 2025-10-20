@@ -96,7 +96,7 @@ export default function ModelPageClient({ params }: Props) {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="py-6 flex items-center">
+      <div className="py-6 flex items-center hidden lg:flex">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="flex items-center justify-start">
             <button
@@ -128,13 +128,10 @@ export default function ModelPageClient({ params }: Props) {
             <h1 className="text-4xl sm:text-5xl font-light text-black mb-4 italic" style={{ fontFamily: 'serif' }}>
               {model.firstName} {model.lastName}
             </h1>
-            <p className="text-lg text-gray-600">
-              Modello professionale
-            </p>
           </div>
 
           {/* Mobile Stats */}
-          <div className="space-y-6">
+          <div className="space-y-6 text-center">
 
             {/* Physical Stats */}
             {(model.height || model.weight || model.location) && (
@@ -237,7 +234,7 @@ export default function ModelPageClient({ params }: Props) {
         {/* Bento Grid - More Images - Only show if we have additional images */}
         {model.images && model.images.length > 0 && (
           <div className="mt-20">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {model.images.map((image, index) => (
                 <div 
                   key={index} 
