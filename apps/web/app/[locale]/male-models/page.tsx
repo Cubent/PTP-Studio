@@ -143,7 +143,7 @@ export default function MaleModelsPage() {
       </div>
 
       {/* Models Grid */}
-      <div>
+      <div className="pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {isLoading ? (
             <div className="text-center py-12">

@@ -115,11 +115,11 @@ export default function ModelPageClient({ params }: Props) {
         {/* Mobile Layout - Image First */}
         <div className="lg:hidden space-y-8">
           {/* Mobile Image */}
-          <div className="relative w-full aspect-square overflow-hidden">
+          <div className="relative w-full overflow-hidden">
             <img
               src={model.image}
               alt={`${model.firstName} ${model.lastName}`}
-              className="w-full h-full object-cover hover:scale-110 transition-transform duration-700 ease-out"
+              className="w-full h-auto object-cover hover:scale-110 transition-transform duration-700 ease-out"
             />
           </div>
 
@@ -135,38 +135,6 @@ export default function ModelPageClient({ params }: Props) {
 
           {/* Mobile Stats */}
           <div className="space-y-6">
-            {/* Contact Info */}
-            <div className="space-y-4">
-              <h2 className="text-2xl font-light text-black italic" style={{ fontFamily: 'serif' }}>
-                Contatti
-              </h2>
-              
-              <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <Mail className="w-5 h-5 text-gray-400" />
-                  <a
-                    href={`mailto:${model.email}`}
-                    className="text-gray-700 hover:text-black transition-colors"
-                  >
-                    {model.email}
-                  </a>
-                </div>
-
-                {model.igProfileLink && (
-                  <div className="flex items-center gap-3">
-                    <Instagram className="w-5 h-5 text-gray-400" />
-                    <a
-                      href={model.igProfileLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-700 hover:text-black transition-colors"
-                    >
-                      @{getInstagramUsername(model.igProfileLink)}
-                    </a>
-                  </div>
-                )}
-              </div>
-            </div>
 
             {/* Physical Stats */}
             {(model.height || model.weight || model.location) && (
@@ -218,38 +186,6 @@ export default function ModelPageClient({ params }: Props) {
               </p>
             </div>
 
-            {/* Contact Info */}
-            <div className="space-y-4">
-              <h2 className="text-2xl font-light text-black italic" style={{ fontFamily: 'serif' }}>
-                Contatti
-              </h2>
-              
-              <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <Mail className="w-5 h-5 text-gray-400" />
-                  <a
-                    href={`mailto:${model.email}`}
-                    className="text-gray-700 hover:text-black transition-colors"
-                  >
-                    {model.email}
-                  </a>
-                </div>
-
-                {model.igProfileLink && (
-                  <div className="flex items-center gap-3">
-                    <Instagram className="w-5 h-5 text-gray-400" />
-                    <a
-                      href={model.igProfileLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-700 hover:text-black transition-colors"
-                    >
-                      @{getInstagramUsername(model.igProfileLink)}
-                    </a>
-                  </div>
-                )}
-              </div>
-            </div>
 
             {/* Physical Stats */}
             {(model.height || model.weight || model.location) && (
