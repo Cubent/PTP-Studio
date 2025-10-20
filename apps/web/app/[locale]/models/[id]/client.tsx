@@ -115,7 +115,7 @@ export default function ModelPageClient({ params }: Props) {
         {/* Mobile Layout - Image First */}
         <div className="lg:hidden space-y-8">
           {/* Mobile Image */}
-          <div className="relative w-full aspect-square overflow-hidden rounded-lg">
+          <div className="relative w-full aspect-square overflow-hidden">
             <img
               src={model.image}
               alt={`${model.firstName} ${model.lastName}`}
@@ -287,7 +287,7 @@ export default function ModelPageClient({ params }: Props) {
 
           {/* Right Side - Model Image */}
           <div className="-mr-8">
-            <div className="relative h-full min-h-[600px] overflow-hidden rounded-lg">
+            <div className="relative h-full min-h-[600px] overflow-hidden">
               <img
                 src={model.image}
                 alt={`${model.firstName} ${model.lastName}`}
@@ -301,20 +301,11 @@ export default function ModelPageClient({ params }: Props) {
         {/* Bento Grid - More Images - Only show if we have additional images */}
         {model.images && model.images.length > 0 && (
           <div className="mt-20">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-light text-black mb-4 italic" style={{ fontFamily: 'serif' }}>
-                Altre immagini
-              </h2>
-              <p className="text-gray-600">
-                Scopri altre foto di {model.firstName}
-              </p>
-            </div>
-
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {model.images.map((image, index) => (
                 <div 
                   key={index} 
-                  className={`relative overflow-hidden rounded-lg group cursor-pointer ${
+                  className={`relative overflow-hidden group cursor-pointer border border-gray-200 ${
                     index === 0 ? 'md:col-span-2 md:row-span-2' : 
                     index === 1 ? 'md:col-span-1' : 
                     index === 2 ? 'md:col-span-1' : 
