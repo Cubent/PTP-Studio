@@ -235,25 +235,18 @@ export default function ModelPageClient({ params }: Props) {
         {/* Bento Grid - More Images - Only show if we have additional images */}
         {model.images && model.images.length > 0 && (
           <div className="mt-20">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div className="columns-2 md:columns-3 lg:columns-4 gap-0">
               {model.images.map((image, index) => (
                 <div 
                   key={index} 
-                  className={`relative overflow-hidden group cursor-pointer border border-gray-200 ${
-                    index === 0 ? 'md:col-span-2 md:row-span-2' : 
-                    index === 1 ? 'md:col-span-1' : 
-                    index === 2 ? 'md:col-span-1' : 
-                    'md:col-span-1'
-                  }`}
-                  style={{
-                    aspectRatio: index === 0 ? '4/3' : index === 1 ? '3/4' : index === 2 ? '3/4' : '1/1'
-                  }}
+                  className="relative overflow-hidden group cursor-pointer border border-gray-200 mb-0 break-inside-avoid"
                   onClick={() => setSelectedImage(image)}
                 >
                   <img
                     src={image}
                     alt={`${model.firstName} ${model.lastName} - Photo ${index + 1}`}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                    className="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
                 </div>
