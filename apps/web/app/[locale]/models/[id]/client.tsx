@@ -232,21 +232,22 @@ export default function ModelPageClient({ params }: Props) {
           </div>
         </div>
 
-        {/* Bento Grid - More Images - Only show if we have additional images */}
+        {/* Additional Images - Only show if we have additional images */}
         {model.images && model.images.length > 0 && (
           <div className="mt-20">
-            <div className="columns-2 md:columns-3 lg:columns-4 gap-0">
+            <div className="flex flex-wrap gap-0">
               {model.images.map((image, index) => (
                 <div 
                   key={index} 
-                  className="relative overflow-hidden group cursor-pointer border border-gray-200 mb-0 break-inside-avoid"
+                  className="relative overflow-hidden group cursor-pointer border border-gray-200"
                   onClick={() => setSelectedImage(image)}
                 >
                   <img
                     src={image}
                     alt={`${model.firstName} ${model.lastName} - Photo ${index + 1}`}
-                    className="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                    className="block group-hover:scale-110 transition-transform duration-700 ease-out"
                     loading="lazy"
+                    style={{ maxWidth: 'none', height: 'auto' }}
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
                 </div>
