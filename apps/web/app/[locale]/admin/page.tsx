@@ -15,6 +15,7 @@ export default function AdminPage() {
     email: '',
     igProfileLink: '',
     image: '',
+    images: [] as string[],
     height: '',
     weight: '',
     location: '',
@@ -63,6 +64,7 @@ export default function AdminPage() {
           email: '',
           igProfileLink: '',
           image: '',
+          images: [],
           height: '',
           weight: '',
           location: '',
@@ -85,6 +87,23 @@ export default function AdminPage() {
     });
   };
 
+  const handleAddImage = () => {
+    const newImage = prompt('Inserisci URL immagine:');
+    if (newImage && newImage.trim()) {
+      setFormData({
+        ...formData,
+        images: [...formData.images, newImage.trim()]
+      });
+    }
+  };
+
+  const handleRemoveImage = (index: number) => {
+    setFormData({
+      ...formData,
+      images: formData.images.filter((_, i) => i !== index)
+    });
+  };
+
   const handleEdit = (model: Model) => {
     setFormData({
       firstName: model.firstName,
@@ -92,6 +111,7 @@ export default function AdminPage() {
       email: model.email,
       igProfileLink: model.igProfileLink || '',
       image: model.image,
+      images: model.images || [],
       height: model.height || '',
       weight: model.weight || '',
       location: model.location || '',
@@ -107,6 +127,7 @@ export default function AdminPage() {
       email: '',
       igProfileLink: '',
       image: '',
+      images: [],
       height: '',
       weight: '',
       location: '',
@@ -326,6 +347,45 @@ export default function AdminPage() {
                     placeholder="es. Milano, Italia"
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
                   />
+                </div>
+
+                {/* Additional Images Management */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Immagini Aggiuntive
+                  </label>
+                  <div className="space-y-2">
+                    {formData.images.map((image, index) => (
+                      <div key={index} className="flex items-center gap-2 p-2 bg-gray-50 rounded-lg">
+                        <img 
+                          src={image} 
+                          alt={`Preview ${index + 1}`}
+                          className="w-12 h-12 object-cover rounded"
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                          }}
+                        />
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm text-gray-600 truncate">{image}</p>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveImage(index)}
+                          className="p-1 text-red-500 hover:bg-red-50 rounded"
+                        >
+                          <X className="w-4 h-4" />
+                        </button>
+                      </div>
+                    ))}
+                    <button
+                      type="button"
+                      onClick={handleAddImage}
+                      className="w-full flex items-center justify-center gap-2 p-3 border-2 border-dashed border-gray-300 rounded-lg hover:border-gray-400 transition-colors"
+                    >
+                      <Plus className="w-4 h-4" />
+                      Aggiungi Immagine
+                    </button>
+                  </div>
                 </div>
 
                 <div className="pt-4 space-y-3">

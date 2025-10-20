@@ -45,7 +45,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { firstName, lastName, email, igProfileLink, image, height, weight, location } = body;
+    const { firstName, lastName, email, igProfileLink, image, images, height, weight, location } = body;
 
     if (!firstName || !lastName || !email || !image) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
@@ -58,6 +58,7 @@ export async function POST(request: NextRequest) {
         email,
         igProfileLink: igProfileLink || null,
         image,
+        images: images || [],
         height: height || null,
         weight: weight || null,
         location: location || null,

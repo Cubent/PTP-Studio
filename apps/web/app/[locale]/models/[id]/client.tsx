@@ -96,14 +96,14 @@ export default function ModelPageClient({ params }: Props) {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="bg-gray-50 py-4 h-20 flex items-center">
+      <div className="py-6 flex items-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="flex items-center justify-start gap-4">
+          <div className="flex items-center justify-start">
             <button
               onClick={() => router.push('/models')}
-              className="flex items-center gap-2 text-gray-600 hover:text-black transition-colors"
+              className="flex items-center gap-2 text-gray-400 hover:text-black transition-colors text-sm"
             >
-              <ArrowLeft className="w-5 h-5" />
+              <ArrowLeft className="w-4 h-4" />
               Torna ai modelli
             </button>
           </div>
@@ -111,15 +111,15 @@ export default function ModelPageClient({ params }: Props) {
       </div>
 
       {/* Model Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4 py-8">
         {/* Mobile Layout - Image First */}
         <div className="lg:hidden space-y-8">
           {/* Mobile Image */}
-          <div className="relative w-full aspect-square">
+          <div className="relative w-full aspect-square overflow-hidden rounded-lg">
             <img
               src={model.image}
               alt={`${model.firstName} ${model.lastName}`}
-              className="w-full h-full object-cover rounded-lg"
+              className="w-full h-full object-cover hover:scale-110 transition-transform duration-700 ease-out"
             />
           </div>
 
@@ -200,26 +200,6 @@ export default function ModelPageClient({ params }: Props) {
               </div>
             )}
 
-            {/* Mobile Action Buttons */}
-            <div className="pt-8 flex flex-col gap-3">
-              <a
-                href={`mailto:${model.email}`}
-                className="inline-block bg-black text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition-colors text-sm font-medium"
-              >
-                Contatta Modello
-              </a>
-              
-              {model.igProfileLink && (
-                <a
-                  href={model.igProfileLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block bg-gray-100 text-black px-6 py-2 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium"
-                >
-                  Visualizza Instagram
-                </a>
-              )}
-            </div>
           </div>
         </div>
 
@@ -303,40 +283,58 @@ export default function ModelPageClient({ params }: Props) {
               </div>
             )}
 
-            {/* Action Buttons */}
-            <div className="pt-8 flex flex-col sm:flex-row gap-3">
-              <a
-                href={`mailto:${model.email}`}
-                className="inline-block bg-black text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition-colors text-sm font-medium"
-              >
-                Contatta Modello
-              </a>
-              
-              {model.igProfileLink && (
-                <a
-                  href={model.igProfileLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block bg-gray-100 text-black px-6 py-2 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium"
-                >
-                  Visualizza Instagram
-                </a>
-              )}
-            </div>
           </div>
 
           {/* Right Side - Model Image */}
           <div className="-mr-8">
-            <div className="relative h-full min-h-[600px]">
+            <div className="relative h-full min-h-[600px] overflow-hidden rounded-lg">
               <img
                 src={model.image}
                 alt={`${model.firstName} ${model.lastName}`}
-                className="w-full h-full object-cover rounded-lg"
+                className="w-full h-full object-cover hover:scale-110 transition-transform duration-700 ease-out"
               />
             </div>
           </div>
           </div>
         </div>
+
+        {/* Bento Grid - More Images - Only show if we have additional images */}
+        {model.images && model.images.length > 0 && (
+          <div className="mt-20">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-light text-black mb-4 italic" style={{ fontFamily: 'serif' }}>
+                Altre immagini
+              </h2>
+              <p className="text-gray-600">
+                Scopri altre foto di {model.firstName}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {model.images.map((image, index) => (
+                <div 
+                  key={index} 
+                  className={`relative overflow-hidden rounded-lg group cursor-pointer ${
+                    index === 0 ? 'md:col-span-2 md:row-span-2' : 
+                    index === 1 ? 'md:col-span-1' : 
+                    index === 2 ? 'md:col-span-1' : 
+                    'md:col-span-1'
+                  }`}
+                  style={{
+                    aspectRatio: index === 0 ? '4/3' : index === 1 ? '3/4' : index === 2 ? '3/4' : '1/1'
+                  }}
+                >
+                  <img
+                    src={image}
+                    alt={`${model.firstName} ${model.lastName} - Photo ${index + 1}`}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
       </div>
     </div>

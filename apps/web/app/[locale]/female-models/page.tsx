@@ -22,8 +22,11 @@ interface Model {
 
 export default function FemaleModelsPage() {
   const [models, setModels] = useState<Model[]>([]);
+  const [allModels, setAllModels] = useState<Model[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedLetter, setSelectedLetter] = useState<string>('');
   const [isLoading, setIsLoading] = useState(true);
+  const [showStats, setShowStats] = useState<string | null>(null);
 
   useEffect(() => {
     const loadModels = async () => {
@@ -38,6 +41,7 @@ export default function FemaleModelsPage() {
         if (response.ok) {
           const data = await response.json();
           setModels(data);
+          setAllModels(data);
           if (search) {
             setSearchQuery(search);
           }
@@ -63,6 +67,7 @@ export default function FemaleModelsPage() {
       if (response.ok) {
         const data = await response.json();
         setModels(data);
+        setAllModels(data);
       } else {
         console.error('Failed to search models');
       }
@@ -70,6 +75,20 @@ export default function FemaleModelsPage() {
       console.error('Error searching models:', error);
     }
   };
+
+  const handleLetterFilter = (letter: string) => {
+    setSelectedLetter(letter);
+    if (letter === '') {
+      setModels(allModels);
+    } else {
+      const filtered = allModels.filter(model => 
+        model.firstName.toLowerCase().startsWith(letter.toLowerCase())
+      );
+      setModels(filtered);
+    }
+  };
+
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
   return (
     <div className="min-h-screen bg-white">
@@ -92,8 +111,39 @@ export default function FemaleModelsPage() {
         </div>
       </div>
 
+      {/* Letter Filter */}
+      <div className="py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap justify-center gap-1 sm:gap-2">
+            <button
+              onClick={() => handleLetterFilter('')}
+              className={`px-2 py-1 text-sm font-light transition-all duration-200 ${
+                selectedLetter === '' 
+                  ? 'text-black font-medium' 
+                  : 'text-gray-400 hover:text-gray-600'
+              }`}
+            >
+              Tutti
+            </button>
+            {alphabet.map((letter) => (
+              <button
+                key={letter}
+                onClick={() => handleLetterFilter(letter)}
+                className={`px-2 py-1 text-sm font-light transition-all duration-200 ${
+                  selectedLetter === letter 
+                    ? 'text-black font-medium' 
+                    : 'text-gray-400 hover:text-gray-600'
+                }`}
+              >
+                {letter}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* Models Grid */}
-      <div className="py-16">
+      <div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {isLoading ? (
             <div className="text-center py-12">
@@ -109,19 +159,49 @@ export default function FemaleModelsPage() {
                 <Link
                   key={model.id}
                   href={`/models/${model.id}`}
-                  className="group cursor-pointer"
+                  className="cursor-pointer"
                 >
-                  <div className="relative overflow-hidden rounded-lg aspect-square mb-3">
+                  <div className="relative overflow-hidden aspect-[3/4] mb-3">
                     <img
                       src={model.image}
                       alt={`${model.firstName} ${model.lastName}`}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
                   </div>
-                  <h3 className="text-lg font-light text-gray-600 text-center italic" style={{ fontFamily: 'serif' }}>
-                    {model.firstName} {model.lastName}
-                  </h3>
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-lg font-light text-gray-600 text-left italic" style={{ fontFamily: 'serif' }}>
+                      {model.firstName} {model.lastName}
+                    </h3>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setShowStats(showStats === model.id ? null : model.id);
+                      }}
+                      className="text-gray-400 hover:text-gray-600 transition-colors duration-200"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4v16m8-8H4" />
+                      </svg>
+                    </button>
+                  </div>
+                  {showStats === model.id && (
+                    <div className="mb-2 p-3 bg-gray-50 rounded text-sm text-gray-600">
+                      <div className="space-y-1">
+                        {model.height && <div><span className="font-medium">Altezza:</span> {model.height}</div>}
+                        {model.weight && <div><span className="font-medium">Peso:</span> {model.weight}</div>}
+                        {model.location && <div><span className="font-medium">Località:</span> {model.location}</div>}
+                        {model.igProfileLink && (
+                          <div>
+                            <span className="font-medium">Instagram:</span>{' '}
+                            <a href={model.igProfileLink} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">
+                              @{model.igProfileLink.split('/').pop()}
+                            </a>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                  <div className="w-full h-px bg-gray-200"></div>
                 </Link>
               ))}
             </div>

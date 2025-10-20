@@ -20,6 +20,7 @@ export async function GET(
         firstName: true,
         lastName: true,
         image: true,
+        images: true,
         location: true,
         igProfileLink: true,
         email: true,

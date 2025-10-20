@@ -449,6 +449,7 @@ model Model {
   phone         String?  // Phone number
   igProfileLink String?
   image         String
+  images        String[] @default([]) // Array of additional image URLs
   height        String?  // e.g., "175cm", "5'9""
   weight        String?  // e.g., "65kg", "143lbs"
   location      String?  // e.g., "Milano, Italia", "New York, USA"

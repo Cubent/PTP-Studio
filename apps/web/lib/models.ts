@@ -9,6 +9,7 @@ export interface Model {
   email: string;
   igProfileLink?: string | null;
   image: string;
+  images?: string[];
   height?: string | null;
   weight?: string | null;
   location?: string | null;
@@ -23,6 +24,7 @@ export interface CreateModelData {
   email: string;
   igProfileLink?: string;
   image: string;
+  images?: string[];
   height?: string;
   weight?: string;
   location?: string;
