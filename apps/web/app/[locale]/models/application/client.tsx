@@ -93,14 +93,8 @@ export default function ModelApplicationClient() {
   const saveFormData = useCallback(() => {
     try {
       const dataToSave = { ...formData };
-      // Save portfolio URLs instead of file objects
-      if (formData.portfolio && formData.portfolio.length > 0) {
-        dataToSave.portfolio = formData.portfolio.map(item => ({
-          url: item.url,
-          status: item.status,
-          error: item.error
-        }));
-      }
+      // Don't save portfolio to localStorage as it contains File objects
+      delete dataToSave.portfolio;
       localStorage.setItem('model-application-form', JSON.stringify(dataToSave));
       setHasUnsavedChanges(false);
     } catch (error) {
