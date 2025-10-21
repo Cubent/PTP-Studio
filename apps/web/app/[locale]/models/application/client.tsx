@@ -1,9 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, ArrowRight, User, Mail, MapPin, Ruler, Weight, Camera, Instagram, Upload } from 'lucide-react';
+import { ArrowLeft, ArrowRight, User, Mail, MapPin, Ruler, Weight, Camera, Instagram, Upload, X } from 'lucide-react';
 import { uploadFileDirectToCloudinary } from '../../../../services/cloudinary-direct';
+import { ErrorBoundary } from '../../../../components/ErrorBoundary';
+import { NetworkStatus } from '../../../../components/NetworkStatus';
 
 interface PortfolioItem {
   file: File;
@@ -32,7 +34,8 @@ export default function ModelApplicationClient() {
   const router = useRouter();
   const [currentStep, setCurrentStep] = useState(1);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [formData, setFormData] = useState<FormData>({
+  
+  const initialFormData: FormData = {
     firstName: '',
     lastName: '',
     email: '',
@@ -46,9 +49,80 @@ export default function ModelApplicationClient() {
     experience: '',
     availability: '',
     additionalInfo: ''
-  });
+  };
+
+  const [formData, setFormData] = useState<FormData>(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+
+  // Simple offline detection
+  const [isOnline, setIsOnline] = useState(true);
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+
+  // Online/offline detection
+  useEffect(() => {
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+
+    setIsOnline(navigator.onLine);
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
+
+  // Simple form persistence
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('model-application-form');
+      if (saved) {
+        const parsedData = JSON.parse(saved);
+        setFormData(prev => ({ ...prev, ...parsedData }));
+      }
+    } catch (error) {
+      console.warn('Failed to load saved form data:', error);
+    }
+  }, []);
+
+  // Save form data to localStorage
+  const saveFormData = useCallback(() => {
+    try {
+      const dataToSave = { ...formData };
+      // Save portfolio URLs instead of file objects
+      if (formData.portfolio && formData.portfolio.length > 0) {
+        dataToSave.portfolio = formData.portfolio.map(item => ({
+          url: item.url,
+          status: item.status,
+          error: item.error
+        }));
+      }
+      localStorage.setItem('model-application-form', JSON.stringify(dataToSave));
+      setHasUnsavedChanges(false);
+    } catch (error) {
+      console.warn('Failed to save form data:', error);
+    }
+  }, [formData]);
+
+  // Debounced save
+  useEffect(() => {
+    const timeoutId = setTimeout(saveFormData, 1000);
+    return () => clearTimeout(timeoutId);
+  }, [saveFormData]);
+
+  // Clear saved data
+  const clearSavedData = useCallback(() => {
+    try {
+      localStorage.removeItem('model-application-form');
+      setHasUnsavedChanges(false);
+    } catch (error) {
+      console.warn('Failed to clear form data:', error);
+    }
+  }, []);
 
   const steps = [
     { number: 1, title: 'Informazioni Personali', icon: User },
@@ -59,15 +133,79 @@ export default function ModelApplicationClient() {
     { number: 6, title: 'Informazioni Aggiuntive', icon: User }
   ];
 
+  // Inline validation function
+  const validateField = (field: keyof FormData, value: string) => {
+    const errors: Record<string, string> = { ...fieldErrors };
+    
+    switch (field) {
+      case 'firstName':
+      case 'lastName':
+        if (!value || value.trim().length < 2) {
+          errors[field] = 'Deve contenere almeno 2 caratteri';
+        } else {
+          delete errors[field];
+        }
+        break;
+      case 'email':
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!value || !emailRegex.test(value)) {
+          errors[field] = 'Inserisci un indirizzo email valido';
+        } else {
+          delete errors[field];
+        }
+        break;
+      case 'phone':
+        if (value && !/^[\+]?[0-9\s\-\(\)]{10,}$/.test(value)) {
+          errors[field] = 'Inserisci un numero di telefono valido';
+        } else {
+          delete errors[field];
+        }
+        break;
+      case 'height':
+        if (!value || !/^\d{3}$/.test(value.replace('cm', '').trim())) {
+          errors[field] = 'Inserisci l\'altezza in cm (es. 170)';
+        } else {
+          delete errors[field];
+        }
+        break;
+      case 'weight':
+        if (value && !/^\d{2,3}$/.test(value.replace('kg', '').trim())) {
+          errors[field] = 'Inserisci il peso in kg (es. 65)';
+        } else {
+          delete errors[field];
+        }
+        break;
+      case 'instagram':
+        if (value && !/^@?[a-zA-Z0-9._]+$/.test(value)) {
+          errors[field] = 'Inserisci un username Instagram valido (es. @username)';
+        } else {
+          delete errors[field];
+        }
+        break;
+    }
+    
+    setFieldErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
   const handleInputChange = (field: keyof FormData, value: string | File[] | PortfolioItem[] | null) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    const newFormData = { ...formData, [field]: value };
+    setFormData(newFormData);
+    setHasUnsavedChanges(true);
+    
+    // Validate field if it's a string
+    if (typeof value === 'string') {
+      validateField(field, value);
+    }
   };
 
   const removePortfolioItem = (index: number) => {
-    setFormData(prev => ({
-      ...prev,
-      portfolio: prev.portfolio.filter((_, i) => i !== index)
-    }));
+    const newFormData = {
+      ...formData,
+      portfolio: formData.portfolio.filter((_, i) => i !== index)
+    };
+    setFormData(newFormData);
+    setHasUnsavedChanges(true);
   };
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -180,6 +318,13 @@ export default function ModelApplicationClient() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Check if user is offline
+    if (!isOnline) {
+      setErrorMessage('Non sei connesso a internet. La tua candidatura sarà salvata e inviata automaticamente quando tornerai online.');
+      return;
+    }
+    
     setIsSubmitting(true);
     setErrorMessage(null); // Clear previous errors
     
@@ -235,6 +380,8 @@ export default function ModelApplicationClient() {
         const result = await response.json();
         console.log('API Response:', result); // Debug log
         if (result.success) {
+          // Clear saved form data on successful submission
+          clearSavedData();
           router.push('/models/application/success');
         } else {
           console.error('Application submission failed:', result.error);
@@ -273,9 +420,14 @@ export default function ModelApplicationClient() {
                 type="text"
                 value={formData.firstName}
                 onChange={(e) => handleInputChange('firstName', e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent text-black"
+                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-black focus:border-transparent text-black ${
+                  fieldErrors.firstName ? 'border-red-500' : 'border-gray-300'
+                }`}
                 required
               />
+              {fieldErrors.firstName && (
+                <p className="mt-1 text-sm text-red-600">{fieldErrors.firstName}</p>
+              )}
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -285,9 +437,14 @@ export default function ModelApplicationClient() {
                 type="text"
                 value={formData.lastName}
                 onChange={(e) => handleInputChange('lastName', e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent text-black"
+                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-black focus:border-transparent text-black ${
+                  fieldErrors.lastName ? 'border-red-500' : 'border-gray-300'
+                }`}
                 required
               />
+              {fieldErrors.lastName && (
+                <p className="mt-1 text-sm text-red-600">{fieldErrors.lastName}</p>
+              )}
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -428,28 +585,35 @@ export default function ModelApplicationClient() {
                     <p className="text-sm text-green-600 mb-2">
                       {formData.portfolio.length} foto selezionate:
                     </p>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 justify-items-center">
                       {formData.portfolio.map((item, index) => (
-                        <div key={index} className="relative w-20 bg-gray-100 rounded">
+                        <div key={index} className="relative w-40 rounded cursor-pointer" onClick={() => {
+                          if (item.status === 'success' && item.url) {
+                            setSelectedImage(item.url);
+                          }
+                        }}>
                           {/* Show image if uploaded successfully */}
                           {item.status === 'success' && item.url ? (
                             <>
                               <img 
                                 src={item.url} 
                                 alt="Uploaded image"
-                                className="w-full h-auto object-cover rounded"
+                                className="w-full h-auto object-contain rounded hover:scale-105 transition-transform duration-200"
                               />
                               {/* Remove button - white background, black X */}
                               <button
                                 type="button"
-                                onClick={() => removePortfolioItem(index)}
-                                className="absolute top-0 right-0 w-5 h-5 bg-white text-black rounded-full flex items-center justify-center text-xs hover:bg-gray-100 transform translate-x-1 -translate-y-1 border border-gray-300"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  removePortfolioItem(index);
+                                }}
+                                className="absolute top-0 right-0 w-6 h-6 bg-white text-black rounded-full flex items-center justify-center text-sm hover:bg-gray-100 transform translate-x-1 -translate-y-1 border border-gray-300"
                               >
                                 ×
                               </button>
                             </>
                           ) : (
-                            <div className="w-20 h-20 bg-gray-200 rounded flex items-center justify-center text-xs text-gray-500">
+                            <div className="w-40 h-40 rounded flex items-center justify-center text-sm text-gray-500 border border-gray-300">
                               Uploading...
                             </div>
                           )}
@@ -548,9 +712,13 @@ export default function ModelApplicationClient() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header */}
-      <div className="bg-white border-b border-gray-200">
+    <ErrorBoundary>
+      <div className="min-h-screen bg-white">
+        {/* Network Status Banner */}
+        <NetworkStatus isOnline={isOnline} hasUnsavedChanges={hasUnsavedChanges} />
+        
+        {/* Header */}
+        <div className="bg-white border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-4 py-6">
               <button
                 onClick={() => router.push('/')}
@@ -571,6 +739,24 @@ export default function ModelApplicationClient() {
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Progress Steps */}
         <div className="mb-8">
+          {/* Progress Indicator - Hidden on mobile */}
+          <div className="mb-6 hidden sm:block">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-sm font-medium text-gray-700">
+                Passo {currentStep} di {steps.length}
+              </span>
+              <span className="text-sm text-gray-500">
+                {Math.round((currentStep / steps.length) * 100)}% completato
+              </span>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-2">
+              <div 
+                className="bg-black h-2 rounded-full transition-all duration-300"
+                style={{ width: `${(currentStep / steps.length) * 100}%` }}
+              />
+            </div>
+          </div>
+          
           <div className="flex items-center justify-between">
             {steps.map((step, index) => {
               const Icon = step.icon;
@@ -692,6 +878,30 @@ export default function ModelApplicationClient() {
           )}
         </form>
       </div>
-    </div>
+
+      {/* Image Popup Modal */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
+          onClick={() => setSelectedImage(null)}
+        >
+          <div className="relative max-w-4xl max-h-[90vh] w-full h-full flex items-center justify-center">
+            <img
+              src={selectedImage}
+              alt="Portfolio image preview"
+              className="max-w-full max-h-full object-contain"
+              onClick={(e) => e.stopPropagation()}
+            />
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
+            >
+              <X className="w-8 h-8" />
+            </button>
+          </div>
+        </div>
+      )}
+      </div>
+    </ErrorBoundary>
   );
 }

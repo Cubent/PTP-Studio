@@ -116,7 +116,10 @@ export default function ModelPageClient({ params }: Props) {
         {/* Mobile Layout - Image First */}
         <div className="lg:hidden space-y-8">
           {/* Mobile Image */}
-          <div className="relative w-full overflow-hidden cursor-pointer" onClick={() => setSelectedImage(model.image)}>
+          <div className="relative w-full overflow-hidden cursor-pointer" onClick={() => {
+            console.log('Mobile image clicked');
+            setSelectedImage(model.image);
+          }}>
             <img
               src={model.image}
               alt={`${model.firstName} ${model.lastName}`}
@@ -221,7 +224,10 @@ export default function ModelPageClient({ params }: Props) {
 
           {/* Right Side - Model Image */}
           <div className="-mr-8">
-            <div className="relative h-full min-h-[600px] overflow-hidden cursor-pointer" onClick={() => setSelectedImage(model.image)}>
+            <div className="relative h-full min-h-[600px] overflow-hidden cursor-pointer" onClick={() => {
+              console.log('Desktop image clicked');
+              setSelectedImage(model.image);
+            }}>
               <img
                 src={model.image}
                 alt={`${model.firstName} ${model.lastName}`}
@@ -232,22 +238,24 @@ export default function ModelPageClient({ params }: Props) {
           </div>
         </div>
 
-        {/* Additional Images - Only show if we have additional images */}
+        {/* Bento Grid - More Images - Only show if we have additional images */}
         {model.images && model.images.length > 0 && (
           <div className="mt-20">
-            <div className="flex flex-wrap gap-0">
+            <div className="columns-2 md:columns-3 lg:columns-4 gap-4">
               {model.images.map((image, index) => (
                 <div 
                   key={index} 
-                  className="relative overflow-hidden group cursor-pointer border border-gray-200"
-                  onClick={() => setSelectedImage(image)}
+                  className="relative overflow-hidden group cursor-pointer border border-gray-200 mb-4 break-inside-avoid"
+                  onClick={() => {
+                    console.log('Grid image clicked:', image);
+                    setSelectedImage(image);
+                  }}
                 >
                   <img
                     src={image}
                     alt={`${model.firstName} ${model.lastName} - Photo ${index + 1}`}
-                    className="block group-hover:scale-110 transition-transform duration-700 ease-out"
+                    className="w-full h-auto object-contain group-hover:scale-110 transition-transform duration-700 ease-out"
                     loading="lazy"
-                    style={{ maxWidth: 'none', height: 'auto' }}
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
                 </div>
@@ -262,7 +270,10 @@ export default function ModelPageClient({ params }: Props) {
       {selectedImage && (
         <div 
           className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
-          onClick={() => setSelectedImage(null)}
+          onClick={() => {
+            console.log('Modal background clicked, closing modal');
+            setSelectedImage(null);
+          }}
         >
           <div className="relative max-w-4xl max-h-[90vh] w-full h-full flex items-center justify-center">
             <img
