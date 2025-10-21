@@ -241,11 +241,34 @@ export default function ModelPageClient({ params }: Props) {
         {/* Bento Grid - More Images - Only show if we have additional images */}
         {model.images && model.images.length > 0 && (
           <div className="mt-20">
-            <div className="columns-2 md:columns-3 lg:columns-4 gap-4">
+            {/* Mobile Layout - No Grid */}
+            <div className="block md:hidden space-y-4">
               {model.images.map((image, index) => (
                 <div 
                   key={index} 
-                  className="relative overflow-hidden group cursor-pointer border border-gray-200 mb-4 break-inside-avoid"
+                  className="relative overflow-hidden group cursor-pointer border border-gray-200"
+                  onClick={() => {
+                    console.log('Mobile image clicked:', image);
+                    setSelectedImage(image);
+                  }}
+                >
+                  <img
+                    src={image}
+                    alt={`${model.firstName} ${model.lastName} - Photo ${index + 1}`}
+                    className="w-full h-auto object-contain group-hover:scale-110 transition-transform duration-700 ease-out"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
+                </div>
+              ))}
+            </div>
+            
+            {/* Desktop Layout - Grid */}
+            <div className="hidden md:grid md:grid-cols-2 gap-4">
+              {model.images.map((image, index) => (
+                <div 
+                  key={index} 
+                  className="relative overflow-hidden group cursor-pointer border border-gray-200"
                   onClick={() => {
                     console.log('Grid image clicked:', image);
                     setSelectedImage(image);
