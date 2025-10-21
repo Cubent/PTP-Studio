@@ -92,9 +92,8 @@ export default function ModelApplicationClient() {
   // Save form data to localStorage
   const saveFormData = useCallback(() => {
     try {
-      const dataToSave = { ...formData };
+      const { portfolio, ...dataToSave } = formData;
       // Don't save portfolio to localStorage as it contains File objects
-      delete dataToSave.portfolio;
       localStorage.setItem('model-application-form', JSON.stringify(dataToSave));
       setHasUnsavedChanges(false);
     } catch (error) {
