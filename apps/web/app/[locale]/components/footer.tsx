@@ -18,7 +18,12 @@ export const Footer = () => {
         {/* Current CEST Time */}
         <div className="mb-8">
           <div className="inline-flex items-center gap-2 px-2 py-1 border border-gray-300 rounded-lg">
-            <div className="w-1.5 h-1.5 bg-black rounded-full animate-pulse"></div>
+            <div 
+              className="w-1.5 h-1.5 bg-black rounded-full" 
+              style={{ 
+                animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite' 
+              }}
+            ></div>
             <p className="text-sm text-gray-800 font-medium">
               CEST {new Date().toLocaleString('en-US', { timeZone: 'Europe/Rome', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
             </p>
