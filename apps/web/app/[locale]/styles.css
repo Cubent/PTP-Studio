@@ -276,3 +276,17 @@
   }
 }
 
+/* Force partner images to be small */
+.partners-grid img {
+  max-width: 60px !important;
+  max-height: 40px !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+/* Force partner grid items to be small */
+.partners-grid > div {
+  min-height: 60px !important;
+  height: 60px !important;
+}
+
