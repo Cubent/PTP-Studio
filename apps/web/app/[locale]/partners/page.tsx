@@ -1,14 +1,31 @@
-import React from 'react';
-import type { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: 'Partners - Velgance Agency',
-  description: 'I nostri partner e collaborazioni nel settore della moda e dell\'intrattenimento.',
-};
+'use client';
+import React, { useEffect, useState } from 'react';
+import Head from 'next/head';
 
 export default function PartnersPage() {
+  const [gridColumns, setGridColumns] = useState('repeat(2, minmax(0, 1fr))');
+
+  useEffect(() => {
+    const updateGrid = () => {
+      if (window.innerWidth >= 768) {
+        setGridColumns('repeat(5, minmax(0, 1fr))');
+      } else {
+        setGridColumns('repeat(2, minmax(0, 1fr))');
+      }
+    };
+
+    updateGrid();
+    window.addEventListener('resize', updateGrid);
+    return () => window.removeEventListener('resize', updateGrid);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-white">
+    <>
+      <Head>
+        <title>Partners - Velgance Agency</title>
+        <meta name="description" content="I nostri partner e collaborazioni nel settore della moda e dell'intrattenimento." />
+      </Head>
+      <div className="min-h-screen bg-white">
       {/* Header */}
       <div className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -27,7 +44,12 @@ export default function PartnersPage() {
       <div className="py-8">
         <div className="max-w-7xl mx-auto px-2">
           <div 
-            className="grid grid-cols-2 md:grid-cols-5 gap-0 partners-grid"
+            className="grid gap-0"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: gridColumns,
+              gap: '0px'
+            }}
           >
             {/* Generate multiple rows - 2 columns on mobile, 5 on desktop */}
             {Array.from({ length: 40 }, (_, index) => (
@@ -320,6 +342,7 @@ export default function PartnersPage() {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }
