@@ -58,11 +58,27 @@ export default function ContactPage() {
                     <MapPin className="w-6 h-6 text-black" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-medium text-black mb-1">Indirizzo</h3>
-                    <p className="text-gray-600">
-                      Via della Moda, 123<br />
-                      20121 Milano, Italia
-                    </p>
+                    <h3 className="text-lg font-medium text-black mb-1">Indirizzi</h3>
+                     <div className="space-y-3">
+                       <div>
+                         <p className="text-gray-600 font-medium">Italia</p>
+                         <p className="text-gray-600">
+                           Via Felice Bellotti, 12<br />
+                           0129 Milano MI
+                         </p>
+                       </div>
+                       <div>
+                         <p className="text-gray-600 font-medium">United Kingdom</p>
+                         <p className="text-gray-600">
+                           9 Myddelton St<br />
+                           London EC1R 1UB, UK
+                         </p>
+                       </div>
+                       <div>
+                         <p className="text-gray-600 font-medium">Netherlands</p>
+                         <p className="text-gray-500 italic">Coming soon on Amsterdam</p>
+                       </div>
+                     </div>
                   </div>
                 </div>
 

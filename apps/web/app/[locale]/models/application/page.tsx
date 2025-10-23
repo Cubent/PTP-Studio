@@ -4,10 +4,10 @@ import ModelApplicationClient from './client';
 
 export const metadata: Metadata = {
   title: 'Candidati come Modello/a - Velgance Agency',
-  description: 'Unisciti al nostro team di modelli professionisti. Compila la domanda per iniziare la tua carriera nel mondo della moda con Velgance Agency.',
+  description: 'Diventa parte del nostro network di talenti internazionali. Compila la domanda per iniziare la tua carriera nel mondo della moda con Velgance Agency.',
   openGraph: {
     title: 'Candidati come Modello/a - Velgance Agency',
-    description: 'Unisciti al nostro team di modelli professionisti. Compila la domanda per iniziare la tua carriera nel mondo della moda con Velgance Agency.',
+    description: 'Diventa parte del nostro network di talenti internazionali. Compila la domanda per iniziare la tua carriera nel mondo della moda con Velgance Agency.',
   },
 };
 

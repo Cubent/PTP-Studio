@@ -724,7 +724,7 @@ export default function ModelApplicationClient() {
             Candidati come Modello/a
           </h1>
           <p className="text-gray-600 mt-2">
-            Unisciti al nostro team di modelli professionisti
+            Diventa parte del nostro network di talenti internazionali
           </p>
         </div>
       </div>
@@ -870,6 +870,25 @@ export default function ModelApplicationClient() {
             </div>
           )}
         </form>
+      </div>
+
+      {/* Disclaimer Section */}
+      <div className="max-w-4xl mx-auto px-4 py-4">
+        <div className="bg-gray-50 rounded-lg p-4">
+          <h3 className="text-base font-medium text-black mb-2">Problemi con la candidatura?</h3>
+          <p className="text-sm text-gray-600 mb-3">
+            Se riscontri difficoltà nel completare la candidatura online, puoi inviare la tua domanda direttamente via email.
+          </p>
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-gray-500">Contattaci a:</span>
+            <a 
+              href="mailto:info@velgance.com" 
+              className="text-xs text-black hover:text-gray-600 transition-colors font-medium"
+            >
+              info@velgance.com
+            </a>
+          </div>
+        </div>
       </div>
 
       {/* Image Popup Modal */}

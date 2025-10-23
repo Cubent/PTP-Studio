@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@repo/design-system/components/ui/button';
-import { ChevronDown, User, LayoutDashboard, LogOut, Search, Menu } from 'lucide-react';
+import { ChevronDown, User, LayoutDashboard, LogOut, Search, Menu, Plus } from 'lucide-react';
 import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
@@ -130,9 +130,10 @@ export const Header = ({ dictionary }: HeaderProps) => {
                     setIsModelliDropdownOpen(true);
                   }
                 }}
-                className="text-sm text-black hover:text-gray-600 transition-colors whitespace-nowrap py-4 bg-transparent border-none cursor-pointer"
+                className="text-sm text-gray-600 hover:text-gray-800 transition-colors whitespace-nowrap py-4 bg-transparent border-none cursor-pointer flex items-center gap-1"
               >
                 Modelli
+                <Plus className="w-3 h-3" />
               </button>
               
               {/* Dropdown Menu */}
@@ -198,19 +199,31 @@ export const Header = ({ dictionary }: HeaderProps) => {
             </div>
             <Link 
               href="/magazine" 
-              className="text-sm text-black hover:text-gray-600 transition-colors whitespace-nowrap"
+              className="text-sm text-gray-600 hover:text-gray-800 transition-colors whitespace-nowrap"
             >
               Magazine
             </Link>
             <Link 
               href="/chi-siamo" 
-              className="text-sm text-black hover:text-gray-600 transition-colors whitespace-nowrap"
+              className="text-sm text-gray-600 hover:text-gray-800 transition-colors whitespace-nowrap"
             >
               Chi Siamo
             </Link>
             <Link 
+              href="/partners" 
+              className="text-sm text-gray-600 hover:text-gray-800 transition-colors whitespace-nowrap"
+            >
+              Clienti
+            </Link>
+            <Link 
+              href="/portfolio" 
+              className="text-sm text-gray-600 hover:text-gray-800 transition-colors whitespace-nowrap"
+            >
+              Portfolio
+            </Link>
+            <Link 
               href="/contact" 
-              className="text-sm text-black hover:text-gray-600 transition-colors whitespace-nowrap"
+              className="text-sm text-gray-600 hover:text-gray-800 transition-colors whitespace-nowrap"
             >
               Contatti
             </Link>
@@ -350,9 +363,12 @@ export const Header = ({ dictionary }: HeaderProps) => {
                 <div className="fixed inset-0 z-50 animate-in fade-in-0 duration-300 bg-white" style={{ backgroundColor: 'white !important' }}>
                   {/* Header */}
                   <div className="flex justify-between items-center p-6 border-b border-gray-300" style={{ backgroundColor: '#fafafa' }}>
-                    <h2 className="text-2xl font-medium text-black" style={{ fontFamily: 'Raleway, sans-serif' }}>
-                      Menu
-                    </h2>
+                    <div className="inline-flex items-center gap-2 px-2 py-1 border border-gray-300 rounded-lg">
+                      <div className="w-1.5 h-1.5 bg-black rounded-full animate-pulse"></div>
+                      <p className="text-sm text-gray-800 font-medium">
+                        CEST {new Date().toLocaleString('en-US', { timeZone: 'Europe/Rome', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
+                      </p>
+                    </div>
                     <button
                       onClick={() => setIsMobileMenuOpen(false)}
                       className="p-3 hover:bg-gray-200 rounded-full transition-colors"
@@ -377,12 +393,23 @@ export const Header = ({ dictionary }: HeaderProps) => {
                     <div className="h-px bg-gray-300 my-2 w-48"></div>
                     
                     <Link
-                      href="/magazine"
+                      href="/partners"
                       className="flex items-center px-6 py-6 text-2xl text-black hover:bg-gray-100/50 rounded-xl transition-all duration-200"
                       onClick={() => setIsMobileMenuOpen(false)}
                       style={{ fontFamily: 'Raleway, sans-serif' }}
                     >
-                      Magazine
+                      Clienti
+                    </Link>
+                    
+                    <div className="h-px bg-gray-300 my-2 w-48"></div>
+                    
+                    <Link
+                      href="/portfolio"
+                      className="flex items-center px-6 py-6 text-2xl text-black hover:bg-gray-100/50 rounded-xl transition-all duration-200"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      style={{ fontFamily: 'Raleway, sans-serif' }}
+                    >
+                      Portfolio
                     </Link>
                     
                     <div className="h-px bg-gray-300 my-2 w-48"></div>
@@ -396,7 +423,18 @@ export const Header = ({ dictionary }: HeaderProps) => {
                       Chi Siamo
                     </Link>
                     
-                    <div className="h-px bg-gray-300 my-4 w-48"></div>
+                    <div className="h-px bg-gray-300 my-2 w-48"></div>
+                    
+                    <Link
+                      href="/magazine"
+                      className="flex items-center px-6 py-6 text-2xl text-black hover:bg-gray-100/50 rounded-xl transition-all duration-200"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      style={{ fontFamily: 'Raleway, sans-serif' }}
+                    >
+                      Magazine
+                    </Link>
+                    
+                    <div className="h-px bg-gray-300 my-2 w-48"></div>
                     
                     <Link
                       href="/contact"

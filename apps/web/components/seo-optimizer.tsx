@@ -108,7 +108,7 @@ export const generateStructuredData = (type: 'Organization' | 'WebSite' | 'Artic
           '@type': 'PostalAddress',
           addressCountry: 'IT',
           addressLocality: 'Milano',
-          streetAddress: 'Via della Moda, 123',
+          streetAddress: 'Via Felice Bellotti, 12',
         },
         keywords: 'agenzia modelli, modelle, casting, sfilate, shooting fotografici, video commerciali, eventi, hostess, steward, influencer marketing, fashion week, milano',
         ...data,
