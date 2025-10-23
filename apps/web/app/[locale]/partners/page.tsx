@@ -26,7 +26,9 @@ export default function PartnersPage() {
       {/* Partners Grid */}
       <div className="py-8">
         <div className="max-w-7xl mx-auto px-2">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-0">
+          <div 
+            className="grid grid-cols-2 md:grid-cols-5 gap-0 partners-grid"
+          >
             {/* Generate multiple rows - 2 columns on mobile, 5 on desktop */}
             {Array.from({ length: 40 }, (_, index) => (
               <div 

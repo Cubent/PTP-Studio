@@ -218,6 +218,23 @@
   }
 }
 
+/* Force 5 columns on desktop for partners page */
+@media (min-width: 768px) {
+  .grid.grid-cols-2.md\:grid-cols-5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  }
+  
+  /* More specific override for partners page */
+  .max-w-7xl .grid.grid-cols-2.md\:grid-cols-5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  }
+  
+  /* Even more specific */
+  div.grid.grid-cols-2.md\:grid-cols-5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  }
+}
+
 /* Ensure grid display and auto-rows work */
 .grid {
   display: grid !important;
@@ -238,6 +255,24 @@
 }
 
 .animate-pulse {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
+}
+
+/* Force pulse animation on time displays */
+.w-1\.5.h-1\.5.bg-black.rounded-full.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
+}
+
+/* Partners grid specific override */
+.partners-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 0 !important;
+}
+
+@media (min-width: 768px) {
+  .partners-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  }
 }
 
