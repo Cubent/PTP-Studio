@@ -45,7 +45,7 @@ export default function PortfolioPage() {
         <div className="max-w-7xl mx-auto px-2">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Video 1 */}
-            <div className="border border-gray-200/30 bg-white hover:bg-gray-50 transition-colors duration-200">
+            <div className="border border-gray-300 bg-white hover:bg-gray-50 transition-colors duration-200">
               <iframe
                 src="https://player.cloudinary.com/embed/?cloud_name=dbr1nfgbr&public_id=9a03151d5c1286bd_1_qgavy0&profile=cld-looping&controls=false"
                 width="100%"
@@ -61,7 +61,7 @@ export default function PortfolioPage() {
             </div>
             
             {/* Video 2 */}
-            <div className="border border-gray-200/30 bg-white hover:bg-gray-50 transition-colors duration-200">
+            <div className="border border-gray-300 bg-white hover:bg-gray-50 transition-colors duration-200">
               <iframe
                 src="https://player.cloudinary.com/embed/?cloud_name=dbr1nfgbr&public_id=90d4fd9ecdf6bcbf_xhi9jx&profile=cld-looping&controls=false"
                 width="100%"
@@ -77,7 +77,7 @@ export default function PortfolioPage() {
             </div>
             
             {/* Video 3 */}
-            <div className="border border-gray-200/30 bg-white hover:bg-gray-50 transition-colors duration-200">
+            <div className="border border-gray-300 bg-white hover:bg-gray-50 transition-colors duration-200">
               <iframe
                 src="https://player.cloudinary.com/embed/?cloud_name=dbr1nfgbr&public_id=8200793bb684c596_cgdnfz&profile=cld-looping&controls=false"
                 width="100%"
@@ -93,7 +93,7 @@ export default function PortfolioPage() {
             </div>
             
             {/* Video 4 */}
-            <div className="border border-gray-200/30 bg-white hover:bg-gray-50 transition-colors duration-200">
+            <div className="border border-gray-300 bg-white hover:bg-gray-50 transition-colors duration-200">
               <iframe
                 src="https://player.cloudinary.com/embed/?cloud_name=dbr1nfgbr&public_id=bfee11d76a218ee9_o85sa5&profile=cld-looping&controls=false"
                 width="100%"
@@ -109,7 +109,7 @@ export default function PortfolioPage() {
             </div>
             
             {/* Video 5 */}
-            <div className="border border-gray-200/30 bg-white hover:bg-gray-50 transition-colors duration-200">
+            <div className="border border-gray-300 bg-white hover:bg-gray-50 transition-colors duration-200">
               <iframe
                 src="https://player.cloudinary.com/embed/?cloud_name=dbr1nfgbr&public_id=a9449f34cae8a97e_io0ou3&profile=cld-looping&controls=false"
                 width="100%"

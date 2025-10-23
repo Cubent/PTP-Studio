@@ -26,12 +26,12 @@ export default function PartnersPage() {
       {/* Partners Grid */}
       <div className="py-8">
         <div className="max-w-7xl mx-auto px-2">
-          <div className="grid grid-cols-2 lg:grid-cols-5 gap-0">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-0">
             {/* Generate multiple rows - 2 columns on mobile, 5 on desktop */}
             {Array.from({ length: 40 }, (_, index) => (
               <div 
                 key={index} 
-                className="border border-gray-200/30 min-h-[120px] bg-white hover:bg-gray-50 transition-colors duration-200 flex items-center justify-center"
+                className="border border-gray-300 min-h-[120px] bg-white hover:bg-gray-50 transition-colors duration-200 flex items-center justify-center"
               >
                 {index === 0 && (
                   <img 
