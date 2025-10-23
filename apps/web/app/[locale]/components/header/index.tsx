@@ -362,7 +362,7 @@ export const Header = ({ dictionary }: HeaderProps) => {
               {isMobileMenuOpen && (
                 <div className="fixed inset-0 z-50 animate-in fade-in-0 duration-300 bg-white" style={{ backgroundColor: 'white !important' }}>
                   {/* Header */}
-                  <div className="flex justify-between items-center p-4 border-b border-gray-300" style={{ backgroundColor: '#fafafa' }}>
+                  <div className="flex justify-between items-center p-3 border-b border-gray-300" style={{ backgroundColor: '#fafafa' }}>
                     <div className="inline-flex items-center gap-2 px-2 py-1 border border-gray-300 rounded-lg">
                       <div className="w-2 h-2 bg-black rounded-full"></div>
                       <p className="text-xs text-gray-800 font-medium">
@@ -380,7 +380,7 @@ export const Header = ({ dictionary }: HeaderProps) => {
                   </div>
                   
                   {/* Menu Items - Centered */}
-                  <div className="flex flex-col justify-center items-center h-[calc(100vh-120px)] p-6 space-y-2 bg-white" style={{ backgroundColor: 'white !important' }}>
+                  <div className="flex flex-col justify-center items-center h-[calc(100vh-100px)] p-4 space-y-2 bg-white" style={{ backgroundColor: 'white !important' }}>
                     <Link
                       href="/models"
                       className="flex items-center px-4 py-4 text-xl text-black hover:bg-gray-100/50 rounded-xl transition-all duration-200"
