@@ -24,7 +24,7 @@ export default function PortfolioPage() {
       </div>
 
       {/* Main Video Section */}
-      <div className="py-16">
+      <div className="py-16 hidden md:block">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative w-full">
             <iframe

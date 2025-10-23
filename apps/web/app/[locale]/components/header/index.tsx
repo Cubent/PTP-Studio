@@ -362,10 +362,10 @@ export const Header = ({ dictionary }: HeaderProps) => {
               {isMobileMenuOpen && (
                 <div className="fixed inset-0 z-50 animate-in fade-in-0 duration-300 bg-white" style={{ backgroundColor: 'white !important' }}>
                   {/* Header */}
-                  <div className="flex justify-between items-center p-6 border-b border-gray-300" style={{ backgroundColor: '#fafafa' }}>
+                  <div className="flex justify-between items-center p-4 border-b border-gray-300" style={{ backgroundColor: '#fafafa' }}>
                     <div className="inline-flex items-center gap-2 px-2 py-1 border border-gray-300 rounded-lg">
                       <div className="w-2 h-2 bg-black rounded-full"></div>
-                      <p className="text-sm text-gray-800 font-medium">
+                      <p className="text-xs text-gray-800 font-medium">
                         CEST {new Date().toLocaleString('en-US', { timeZone: 'Europe/Rome', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
                       </p>
                     </div>
@@ -383,7 +383,7 @@ export const Header = ({ dictionary }: HeaderProps) => {
                   <div className="flex flex-col justify-center items-center h-[calc(100vh-120px)] p-6 space-y-2 bg-white" style={{ backgroundColor: 'white !important' }}>
                     <Link
                       href="/models"
-                      className="flex items-center px-6 py-6 text-2xl text-black hover:bg-gray-100/50 rounded-xl transition-all duration-200"
+                      className="flex items-center px-4 py-4 text-xl text-black hover:bg-gray-100/50 rounded-xl transition-all duration-200"
                       onClick={() => setIsMobileMenuOpen(false)}
                       style={{ fontFamily: 'Raleway, sans-serif' }}
                     >
@@ -394,7 +394,7 @@ export const Header = ({ dictionary }: HeaderProps) => {
                     
                     <Link
                       href="/partners"
-                      className="flex items-center px-6 py-6 text-2xl text-black hover:bg-gray-100/50 rounded-xl transition-all duration-200"
+                      className="flex items-center px-4 py-4 text-xl text-black hover:bg-gray-100/50 rounded-xl transition-all duration-200"
                       onClick={() => setIsMobileMenuOpen(false)}
                       style={{ fontFamily: 'Raleway, sans-serif' }}
                     >
@@ -405,7 +405,7 @@ export const Header = ({ dictionary }: HeaderProps) => {
                     
                     <Link
                       href="/portfolio"
-                      className="flex items-center px-6 py-6 text-2xl text-black hover:bg-gray-100/50 rounded-xl transition-all duration-200"
+                      className="flex items-center px-4 py-4 text-xl text-black hover:bg-gray-100/50 rounded-xl transition-all duration-200"
                       onClick={() => setIsMobileMenuOpen(false)}
                       style={{ fontFamily: 'Raleway, sans-serif' }}
                     >
@@ -416,7 +416,7 @@ export const Header = ({ dictionary }: HeaderProps) => {
                     
                     <Link
                       href="/chi-siamo"
-                      className="flex items-center px-6 py-6 text-2xl text-black hover:bg-gray-100/50 rounded-xl transition-all duration-200"
+                      className="flex items-center px-4 py-4 text-xl text-black hover:bg-gray-100/50 rounded-xl transition-all duration-200"
                       onClick={() => setIsMobileMenuOpen(false)}
                       style={{ fontFamily: 'Raleway, sans-serif' }}
                     >
@@ -427,7 +427,7 @@ export const Header = ({ dictionary }: HeaderProps) => {
                     
                     <Link
                       href="/magazine"
-                      className="flex items-center px-6 py-6 text-2xl text-black hover:bg-gray-100/50 rounded-xl transition-all duration-200"
+                      className="flex items-center px-4 py-4 text-xl text-black hover:bg-gray-100/50 rounded-xl transition-all duration-200"
                       onClick={() => setIsMobileMenuOpen(false)}
                       style={{ fontFamily: 'Raleway, sans-serif' }}
                     >
@@ -438,7 +438,7 @@ export const Header = ({ dictionary }: HeaderProps) => {
                     
                     <Link
                       href="/contact"
-                      className="flex items-center px-6 py-6 text-2xl text-black hover:bg-gray-100/50 rounded-xl transition-all duration-200"
+                      className="flex items-center px-4 py-4 text-xl text-black hover:bg-gray-100/50 rounded-xl transition-all duration-200"
                       onClick={() => setIsMobileMenuOpen(false)}
                       style={{ fontFamily: 'Raleway, sans-serif' }}
                     >

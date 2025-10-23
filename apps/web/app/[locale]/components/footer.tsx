@@ -19,7 +19,7 @@ export const Footer = () => {
         <div className="mb-8">
           <div className="inline-flex items-center gap-2 px-2 py-1 border border-gray-300 rounded-lg">
             <div className="w-2 h-2 bg-black rounded-full"></div>
-            <p className="text-sm text-gray-800 font-medium">
+            <p className="text-xs text-gray-800 font-medium">
               CEST {new Date().toLocaleString('en-US', { timeZone: 'Europe/Rome', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
             </p>
           </div>
