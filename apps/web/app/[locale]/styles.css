@@ -190,6 +190,10 @@
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
   
+  .md\:grid-cols-5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  }
+  
   .md\:grid-rows-2 {
     grid-template-rows: repeat(2, minmax(200px, 1fr)) !important;
   }
@@ -221,5 +225,19 @@
 
 .auto-rows-fr {
   grid-auto-rows: 1fr !important;
+}
+
+/* Pulse animation for time displays */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
