@@ -1,13 +1,54 @@
-import React from 'react';
-import { Mail, MapPin, Clock } from 'lucide-react';
-import type { Metadata } from 'next';
+'use client';
 
-export const metadata: Metadata = {
-  title: 'Contattaci - Velgance Agency',
-  description: 'Contatta Velgance Agency per informazioni sui nostri servizi di modellistica e rappresentanza.',
-};
+import React, { useState } from 'react';
+import { Mail, MapPin, Clock } from 'lucide-react';
 
 export default function ContactPage() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error' | null;
+    message: string;
+  }>({ type: null, message: '' });
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: '' });
+
+    const formData = new FormData(e.currentTarget);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const result = await response.json();
+      
+      if (!response.ok || result.error) {
+        setSubmitStatus({ 
+          type: 'error', 
+          message: result.error || 'Failed to send message. Please try again.' 
+        });
+      } else {
+        setSubmitStatus({ 
+          type: 'success', 
+          message: 'Message sent successfully! We will get back to you soon.' 
+        });
+        // Reset form
+        (e.target as HTMLFormElement).reset();
+      }
+    } catch (error) {
+      console.error('Contact form error:', error);
+      setSubmitStatus({ 
+        type: 'error', 
+        message: 'Failed to send message. Please try again or contact us directly.' 
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
@@ -15,10 +56,10 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-5xl sm:text-5xl lg:text-6xl font-light text-black mb-6 italic" style={{ fontFamily: 'serif' }}>
-              Contattaci
+              Contact Us
             </h1>
             <p className="text-base sm:text-lg text-gray-700 max-w-3xl mx-auto">
-              Siamo qui per aiutarti. Contattaci per qualsiasi domanda sui nostri servizi
+              We are here to help you. Contact us for any questions about our services
             </p>
           </div>
         </div>
@@ -32,11 +73,11 @@ export default function ContactPage() {
             <div className="space-y-8">
               <div>
                 <h2 className="text-3xl font-light text-black mb-6 italic" style={{ fontFamily: 'serif' }}>
-                  Informazioni di Contatto
+                  Contact Information
                 </h2>
                 <p className="text-gray-600 leading-relaxed mb-8">
-                  Siamo sempre disponibili per rispondere alle tue domande e fornirti 
-                  tutte le informazioni sui nostri servizi di modellistica e rappresentanza.
+                  We are always available to answer your questions and provide you 
+                  with all the information about our modeling and representation services.
                 </p>
               </div>
 
@@ -58,10 +99,10 @@ export default function ContactPage() {
                     <MapPin className="w-6 h-6 text-black" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-medium text-black mb-1">Indirizzi</h3>
+                    <h3 className="text-lg font-medium text-black mb-1">Addresses</h3>
                      <div className="space-y-3">
                        <div>
-                         <p className="text-gray-600 font-medium">Italia</p>
+                         <p className="text-gray-600 font-medium">Italy</p>
                          <p className="text-gray-600">
                            Via Felice Bellotti, 12<br />
                            0129 Milano MI
@@ -87,11 +128,11 @@ export default function ContactPage() {
                     <Clock className="w-6 h-6 text-black" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-medium text-black mb-1">Orari</h3>
+                    <h3 className="text-lg font-medium text-black mb-1">Hours</h3>
                     <p className="text-gray-600">
-                      Lunedì - Venerdì: 9:00 - 18:00<br />
-                      Sabato: 10:00 - 16:00<br />
-                      Domenica: Chiuso
+                      Monday - Friday: 9:00 - 18:00<br />
+                      Saturday: 10:00 - 16:00<br />
+                      Sunday: Closed
                     </p>
                   </div>
                 </div>
@@ -101,33 +142,44 @@ export default function ContactPage() {
             {/* Contact Form */}
             <div className="bg-gray-50 p-8 rounded-lg">
               <h2 className="text-3xl font-light text-black mb-6 italic" style={{ fontFamily: 'serif' }}>
-                Invia un Messaggio
+                Send a Message
               </h2>
               
-              <form className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Status Messages */}
+                {submitStatus.type && (
+                  <div className={`p-4 rounded-lg ${
+                    submitStatus.type === 'success' 
+                      ? 'bg-green-50 text-green-800 border border-green-200' 
+                      : 'bg-red-50 text-red-800 border border-red-200'
+                  }`}>
+                    {submitStatus.message}
+                  </div>
+                )}
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
-                      Nome *
+                      First Name *
                     </label>
                     <input
                       type="text"
                       id="firstName"
                       name="firstName"
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent text-black"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent text-black placeholder-gray-500"
                     />
                   </div>
                   <div>
                     <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
-                      Cognome *
+                      Last Name *
                     </label>
                     <input
                       type="text"
                       id="lastName"
                       name="lastName"
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent text-black"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent text-black placeholder-gray-500"
                     />
                   </div>
                 </div>
@@ -141,60 +193,61 @@ export default function ContactPage() {
                     id="email"
                     name="email"
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent text-black placeholder-gray-500"
                   />
                 </div>
 
                 <div>
                   <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                    Telefono
+                    Phone
                   </label>
                   <input
                     type="tel"
                     id="phone"
                     name="phone"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent text-black placeholder-gray-500"
                   />
                 </div>
 
                 <div>
                   <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-                    Oggetto *
+                    Subject *
                   </label>
                   <select
                     id="subject"
                     name="subject"
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent text-black"
                   >
-                    <option value="">Seleziona un argomento</option>
-                    <option value="modelling">Servizi di Modellistica</option>
-                    <option value="booking">Prenotazioni</option>
+                    <option value="">Select a topic</option>
+                    <option value="modelling">Modeling Services</option>
+                    <option value="booking">Bookings</option>
                     <option value="partnership">Partnership</option>
-                    <option value="general">Informazioni Generali</option>
-                    <option value="other">Altro</option>
+                    <option value="general">General Information</option>
+                    <option value="other">Other</option>
                   </select>
                 </div>
 
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                    Messaggio *
+                    Message *
                   </label>
                   <textarea
                     id="message"
                     name="message"
                     rows={6}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
-                    placeholder="Scrivi il tuo messaggio qui..."
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent text-black placeholder-gray-500"
+                    placeholder="Write your message here..."
                   ></textarea>
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full bg-black text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors"
+                  disabled={isSubmitting}
+                  className="w-full bg-black text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Invia Messaggio
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
                 </button>
               </form>
             </div>
