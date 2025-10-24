@@ -70,8 +70,8 @@ export default function ContactPage() {
                        <div>
                          <p className="text-gray-600 font-medium">United Kingdom</p>
                          <p className="text-gray-600">
-                           9 Myddelton St<br />
-                           London EC1R 1UB, UK
+                           128 City Rd<br />
+                           London EC1V 2NX, UK
                          </p>
                        </div>
                        <div>
