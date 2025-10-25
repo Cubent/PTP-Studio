@@ -135,7 +135,7 @@ export const Header = ({ dictionary }: HeaderProps) => {
         
         .menu-button {
           position: absolute !important;
-          top: 1rem !important;
+          top: 1.5rem !important;
           left: 2rem !important;
           z-index: 20 !important;
           display: flex !important;
@@ -145,12 +145,26 @@ export const Header = ({ dictionary }: HeaderProps) => {
         
         .right-buttons {
           position: absolute !important;
-          top: 1rem !important;
+          top: 1.5rem !important;
           right: 2rem !important;
           z-index: 20 !important;
           display: flex !important;
           align-items: center !important;
           gap: 0.25rem !important;
+        }
+        
+        @media (max-width: 768px) {
+          .menu-button {
+            top: 1.25rem !important;
+            left: 1rem !important;
+            gap: 0.75rem !important;
+          }
+          
+          .right-buttons {
+            top: 1.25rem !important;
+            right: 1rem !important;
+            gap: 0.25rem !important;
+          }
         }
         
         @media (min-width: 640px) {

@@ -316,6 +316,10 @@ const Home = ({ params }: HomeProps) => {
           max-width: 24rem !important;
         }
         
+        .homepage-text .typing-animation {
+          border-right: none !important;
+        }
+        
         .homepage-footer {
           background-color: white !important;
           padding: 4rem 0 !important;
@@ -409,12 +413,12 @@ const Home = ({ params }: HomeProps) => {
           }
           
           .homepage-header {
-            top: 1rem !important;
+            top: 1.5rem !important;
             left: 1rem !important;
           }
           
           .homepage-right-button {
-            top: 1rem !important;
+            top: 1.5rem !important;
             right: 1rem !important;
           }
         }
