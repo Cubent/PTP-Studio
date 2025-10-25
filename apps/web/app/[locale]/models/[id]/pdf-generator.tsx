@@ -60,11 +60,9 @@ export default function PDFGenerator({ model }: PDFGeneratorProps) {
       // Add main model image filling most of the page
       if (model.image) {
         try {
-          // Convert image to base64
-          const response = await fetch(model.image, {
-            mode: 'cors',
-            credentials: 'omit'
-          });
+          // Use image proxy to avoid CORS issues
+          const proxyUrl = `/api/image-proxy?url=${encodeURIComponent(model.image)}`;
+          const response = await fetch(proxyUrl);
           
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -107,7 +105,15 @@ export default function PDFGenerator({ model }: PDFGeneratorProps) {
                   const imagesToProcess = Math.min(model.images!.length, 4);
                   for (let i = 0; i < imagesToProcess; i++) {
                     try {
-                      const imgResponse = await fetch(model.images![i]);
+                      // Use image proxy to avoid CORS issues
+                      const proxyUrl = `/api/image-proxy?url=${encodeURIComponent(model.images![i])}`;
+                      const imgResponse = await fetch(proxyUrl);
+                      
+                      if (!imgResponse.ok) {
+                        console.error(`Failed to load image ${i}:`, imgResponse.status);
+                        continue; // Skip this image and continue with the next one
+                      }
+                      
                       const imgBlob = await imgResponse.blob();
                       const imgBase64 = await new Promise<string>((resolve) => {
                         const reader = new FileReader();
