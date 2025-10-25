@@ -108,7 +108,6 @@ export default function ModelPageClient({ params }: Props) {
               <ArrowLeft className="w-4 h-4" />
               Torna ai modelli
             </button>
-            <PDFGenerator model={model} />
           </div>
         </div>
       </div>
@@ -134,9 +133,6 @@ export default function ModelPageClient({ params }: Props) {
             <h1 className="text-4xl sm:text-5xl font-light text-black mb-4 italic" style={{ fontFamily: 'serif' }}>
               {model.firstName} {model.lastName}
             </h1>
-            <div className="flex justify-center mb-6">
-              <PDFGenerator model={model} />
-            </div>
           </div>
 
           {/* Mobile Stats */}
@@ -174,6 +170,11 @@ export default function ModelPageClient({ params }: Props) {
               </div>
             )}
 
+            {/* PDF Download Button */}
+            <div className="flex justify-center mt-8">
+              <PDFGenerator model={model} />
+            </div>
+
           </div>
         </div>
 
@@ -187,9 +188,6 @@ export default function ModelPageClient({ params }: Props) {
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light text-black mb-4 italic" style={{ fontFamily: 'serif' }}>
                 {model.firstName} {model.lastName}
               </h1>
-              <p className="text-lg text-gray-600">
-                Modello professionale
-              </p>
             </div>
 
 
@@ -224,6 +222,11 @@ export default function ModelPageClient({ params }: Props) {
                 </div>
               </div>
             )}
+
+            {/* PDF Download Button */}
+            <div className="mt-8">
+              <PDFGenerator model={model} />
+            </div>
 
           </div>
 

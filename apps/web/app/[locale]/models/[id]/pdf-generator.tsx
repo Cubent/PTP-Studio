@@ -9,6 +9,18 @@ interface PDFGeneratorProps {
 }
 
 export default function PDFGenerator({ model }: PDFGeneratorProps) {
+  const addVelganceBranding = (pdf: jsPDF) => {
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+    
+    // Add Velgance logo at bottom left corner (very small and light)
+    pdf.setFontSize(8);
+    pdf.setFont('helvetica', 'normal');
+    pdf.setTextColor(150, 150, 150);
+    pdf.text('Velgance Agency', 20, pageHeight - 15);
+    pdf.text('Europe\'s Leading Agency for Models', 20, pageHeight - 10);
+  };
+
   const generatePDF = async () => {
     try {
       // Create new PDF document
@@ -16,89 +28,18 @@ export default function PDFGenerator({ model }: PDFGeneratorProps) {
       const pageWidth = pdf.internal.pageSize.getWidth();
       const pageHeight = pdf.internal.pageSize.getHeight();
       
-      // Add Velgance logo at bottom left
-      pdf.setFontSize(16);
-      pdf.setFont('helvetica', 'bold');
+      // Add Velgance branding to first page
+      addVelganceBranding(pdf);
+      
+      // Add model name at the top (centered, classy font)
+      pdf.setFontSize(36);
+      pdf.setFont('times', 'normal');
       pdf.setTextColor(0, 0, 0);
-      pdf.text('Velgance Agency', 20, pageHeight - 20);
+      const nameText = `${model.firstName} ${model.lastName}`;
+      const nameWidth = pdf.getTextWidth(nameText);
+      pdf.text(nameText, (pageWidth - nameWidth) / 2, 30);
       
-      // Add subtitle
-      pdf.setFontSize(10);
-      pdf.setFont('helvetica', 'normal');
-      pdf.setTextColor(100, 100, 100);
-      pdf.text('Europe\'s Leading Agency for Models', 20, pageHeight - 15);
-      
-      // Add model name
-      pdf.setFontSize(28);
-      pdf.setFont('helvetica', 'bold');
-      pdf.setTextColor(0, 0, 0);
-      pdf.text(`${model.firstName} ${model.lastName}`, 20, 50);
-      
-      // Add profession
-      pdf.setFontSize(14);
-      pdf.setFont('helvetica', 'italic');
-      pdf.setTextColor(100, 100, 100);
-      pdf.text('Professional Model', 20, 65);
-      
-      // Add divider line
-      pdf.setDrawColor(200, 200, 200);
-      pdf.line(20, 75, pageWidth - 20, 75);
-      
-      // Add model stats in a more organized way
-      pdf.setFontSize(12);
-      pdf.setFont('helvetica', 'normal');
-      let yPosition = 85;
-      
-      // Create a stats box
-      pdf.setFillColor(248, 249, 250);
-      pdf.rect(20, yPosition - 5, pageWidth - 40, 60, 'F');
-      pdf.setDrawColor(220, 220, 220);
-      pdf.rect(20, yPosition - 5, pageWidth - 40, 60, 'S');
-      
-      if (model.height) {
-        pdf.setTextColor(0, 0, 0);
-        pdf.setFont('helvetica', 'bold');
-        pdf.text('Height:', 30, yPosition);
-        pdf.setFont('helvetica', 'normal');
-        pdf.text(model.height, 50, yPosition);
-        yPosition += 8;
-      }
-      
-      if (model.weight) {
-        pdf.setFont('helvetica', 'bold');
-        pdf.text('Weight:', 30, yPosition);
-        pdf.setFont('helvetica', 'normal');
-        pdf.text(model.weight, 50, yPosition);
-        yPosition += 8;
-      }
-      
-      if (model.location) {
-        pdf.setFont('helvetica', 'bold');
-        pdf.text('Location:', 30, yPosition);
-        pdf.setFont('helvetica', 'normal');
-        pdf.text(model.location, 60, yPosition);
-        yPosition += 8;
-      }
-      
-      if (model.email) {
-        pdf.setFont('helvetica', 'bold');
-        pdf.text('Email:', 30, yPosition);
-        pdf.setFont('helvetica', 'normal');
-        pdf.setTextColor(0, 100, 200);
-        pdf.text(model.email, 50, yPosition);
-        yPosition += 8;
-      }
-      
-      if (model.igProfileLink) {
-        pdf.setTextColor(0, 0, 0);
-        pdf.setFont('helvetica', 'bold');
-        pdf.text('Instagram:', 30, yPosition);
-        pdf.setFont('helvetica', 'normal');
-        pdf.text(`@${model.igProfileLink.split('/').pop()}`, 70, yPosition);
-        yPosition += 8;
-      }
-      
-      // Add main model image
+      // Add main model image filling most of the page
       if (model.image) {
         try {
           // Convert image to base64
@@ -111,47 +52,48 @@ export default function PDFGenerator({ model }: PDFGeneratorProps) {
             const img = new Image();
             
             img.onload = function() {
-              // Calculate dimensions to fit image properly
-              const maxWidth = pageWidth - 40;
-              const maxHeight = 120;
+              // Calculate dimensions to fill most of the page
+              const margin = 20;
+              const maxWidth = pageWidth - (margin * 2);
+              const maxHeight = pageHeight - 120; // Leave space for stats at bottom
+              
               let imgWidth = img.width;
               let imgHeight = img.height;
               
-              // Scale image to fit
-              if (imgWidth > maxWidth) {
-                imgHeight = (imgHeight * maxWidth) / imgWidth;
-                imgWidth = maxWidth;
-              }
-              if (imgHeight > maxHeight) {
-                imgWidth = (imgWidth * maxHeight) / imgHeight;
-                imgHeight = maxHeight;
-              }
+              // Scale image to fill the available space
+              const widthRatio = maxWidth / imgWidth;
+              const heightRatio = maxHeight / imgHeight;
+              const scale = Math.min(widthRatio, heightRatio);
+              
+              imgWidth = imgWidth * scale;
+              imgHeight = imgHeight * scale;
               
               // Center the image
               const x = (pageWidth - imgWidth) / 2;
-              const y = yPosition + 20;
-              
-              // Add image border
-              pdf.setDrawColor(200, 200, 200);
-              pdf.rect(x - 2, y - 2, imgWidth + 4, imgHeight + 4, 'S');
+              const y = 50; // Start below the name
               
               pdf.addImage(base64, 'JPEG', x, y, imgWidth, imgHeight);
               
-              // Add additional images if available
+              // Add minimal stats at the bottom (centered)
+              const statsY = y + imgHeight + 20;
+              pdf.setFontSize(10);
+              pdf.setFont('helvetica', 'normal');
+              pdf.setTextColor(100, 100, 100);
+              
+              // Collect stats and center them
+              const stats = [];
+              if (model.height) stats.push(model.height);
+              if (model.weight) stats.push(model.weight);
+              if (model.location) stats.push(model.location);
+              
+              if (stats.length > 0) {
+                const statsText = stats.join(' • ');
+                const statsWidth = pdf.getTextWidth(statsText);
+                pdf.text(statsText, (pageWidth - statsWidth) / 2, statsY);
+              }
+              
+              // Add additional images if available - each on a new page
               if (model.images && model.images.length > 0) {
-                let currentY = y + imgHeight + 40;
-                
-                // Check if we need a new page
-                if (currentY > pageHeight - 100) {
-                  pdf.addPage();
-                  currentY = 30;
-                }
-                
-                let currentX = 20;
-                let imagesPerRow = 2;
-                let imageWidth = (pageWidth - 60) / imagesPerRow;
-                let imageHeight = imageWidth * 1.2; // Maintain aspect ratio
-                
                 // Process additional images sequentially
                 const processImages = async () => {
                   const imagesToProcess = Math.min(model.images!.length, 4);
@@ -167,16 +109,33 @@ export default function PDFGenerator({ model }: PDFGeneratorProps) {
                       
                       const img = new Image();
                       img.onload = () => {
-                        const col = i % imagesPerRow;
-                        const row = Math.floor(i / imagesPerRow);
-                        const xPos = currentX + (col * (imageWidth + 20));
-                        const yPos = currentY + (row * (imageHeight + 20));
+                        // Add new page for each image
+                        pdf.addPage();
                         
-                        // Add image border
-                        pdf.setDrawColor(200, 200, 200);
-                        pdf.rect(xPos - 1, yPos - 1, imageWidth + 2, imageHeight + 2, 'S');
+                        // Add Velgance branding to this page
+                        addVelganceBranding(pdf);
                         
-                        pdf.addImage(imgBase64, 'JPEG', xPos, yPos, imageWidth, imageHeight);
+                        // Calculate dimensions to fill the entire page
+                        const margin = 20;
+                        const maxWidth = pageWidth - (margin * 2);
+                        const maxHeight = pageHeight - (margin * 2);
+                        
+                        let imgWidth = img.width;
+                        let imgHeight = img.height;
+                        
+                        // Scale image to fill the available space
+                        const widthRatio = maxWidth / imgWidth;
+                        const heightRatio = maxHeight / imgHeight;
+                        const scale = Math.min(widthRatio, heightRatio);
+                        
+                        imgWidth = imgWidth * scale;
+                        imgHeight = imgHeight * scale;
+                        
+                        // Center the image on the page
+                        const x = (pageWidth - imgWidth) / 2;
+                        const y = (pageHeight - imgHeight) / 2;
+                        
+                        pdf.addImage(imgBase64, 'JPEG', x, y, imgWidth, imgHeight);
                         
                         // If this is the last image, save the PDF
                         if (i === imagesToProcess - 1) {
