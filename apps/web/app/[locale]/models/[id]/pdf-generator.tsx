@@ -31,31 +31,15 @@ export default function PDFGenerator({ model }: PDFGeneratorProps) {
       // Add Velgance branding to first page
       addVelganceBranding(pdf);
       
-      // Add model name at the top (centered, classy font)
-      pdf.setFontSize(36);
+      // Add model name at the top (centered, minimalistic)
+      pdf.setFontSize(24);
       pdf.setFont('times', 'normal');
-      pdf.setTextColor(0, 0, 0);
+      pdf.setTextColor(120, 120, 120);
       const nameText = `${model.firstName} ${model.lastName}`;
       const nameWidth = pdf.getTextWidth(nameText);
       pdf.text(nameText, (pageWidth - nameWidth) / 2, 30);
       
-      // Add minimal stats at the bottom (centered) - always add these
-      const statsY = 200; // Fixed position for stats
-      pdf.setFontSize(10);
-      pdf.setFont('helvetica', 'normal');
-      pdf.setTextColor(100, 100, 100);
-      
-      // Collect stats and center them
-      const stats = [];
-      if (model.height) stats.push(model.height);
-      if (model.weight) stats.push(model.weight);
-      if (model.location) stats.push(model.location);
-      
-      if (stats.length > 0) {
-        const statsText = stats.join(' • ');
-        const statsWidth = pdf.getTextWidth(statsText);
-        pdf.text(statsText, (pageWidth - statsWidth) / 2, statsY);
-      }
+      // Stats will be added after the main image is processed
       
       // Add main model image filling most of the page
       if (model.image) {
@@ -97,6 +81,24 @@ export default function PDFGenerator({ model }: PDFGeneratorProps) {
               const y = 50; // Start below the name
               
               pdf.addImage(base64, 'JPEG', x, y, imgWidth, imgHeight);
+              
+              // Add minimal stats below the image (centered)
+              const statsY = y + imgHeight + 20;
+              pdf.setFontSize(10);
+              pdf.setFont('helvetica', 'normal');
+              pdf.setTextColor(100, 100, 100);
+              
+              // Collect stats and center them
+              const stats = [];
+              if (model.height) stats.push(model.height);
+              if (model.weight) stats.push(model.weight);
+              if (model.location) stats.push(model.location);
+              
+              if (stats.length > 0) {
+                const statsText = stats.join(' • ');
+                const statsWidth = pdf.getTextWidth(statsText);
+                pdf.text(statsText, (pageWidth - statsWidth) / 2, statsY);
+              }
               
               // Add additional images if available - each on a new page
               if (model.images && model.images.length > 0) {
@@ -176,11 +178,43 @@ export default function PDFGenerator({ model }: PDFGeneratorProps) {
           reader.readAsDataURL(blob);
         } catch (error) {
           console.error('Error loading main image:', error);
-          // Save PDF without images but with stats
+          // Add stats even when image fails
+          const statsY = 200;
+          pdf.setFontSize(10);
+          pdf.setFont('helvetica', 'normal');
+          pdf.setTextColor(100, 100, 100);
+          
+          const stats = [];
+          if (model.height) stats.push(model.height);
+          if (model.weight) stats.push(model.weight);
+          if (model.location) stats.push(model.location);
+          
+          if (stats.length > 0) {
+            const statsText = stats.join(' • ');
+            const statsWidth = pdf.getTextWidth(statsText);
+            pdf.text(statsText, (pageWidth - statsWidth) / 2, statsY);
+          }
+          
           pdf.save(`${model.firstName}_${model.lastName}_Portfolio.pdf`);
         }
       } else {
-        // No main image, save the PDF with stats
+        // No main image, add stats and save
+        const statsY = 200;
+        pdf.setFontSize(10);
+        pdf.setFont('helvetica', 'normal');
+        pdf.setTextColor(100, 100, 100);
+        
+        const stats = [];
+        if (model.height) stats.push(model.height);
+        if (model.weight) stats.push(model.weight);
+        if (model.location) stats.push(model.location);
+        
+        if (stats.length > 0) {
+          const statsText = stats.join(' • ');
+          const statsWidth = pdf.getTextWidth(statsText);
+          pdf.text(statsText, (pageWidth - statsWidth) / 2, statsY);
+        }
+        
         pdf.save(`${model.firstName}_${model.lastName}_Portfolio.pdf`);
       }
       
