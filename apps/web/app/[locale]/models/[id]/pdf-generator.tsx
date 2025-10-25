@@ -168,17 +168,20 @@ export default function PDFGenerator({ model }: PDFGeneratorProps) {
                 let imageWidth = (pageWidth - 60) / imagesPerRow;
                 let imageHeight = imageWidth * 1.2; // Maintain aspect ratio
                 
-                for (let i = 0; i < Math.min(model.images.length, 4); i++) {
-                  try {
-                    const imgResponse = await fetch(model.images[i]);
-                    const imgBlob = await imgResponse.blob();
-                    const imgReader = new FileReader();
-                    
-                    imgReader.onload = function() {
-                      const imgBase64 = imgReader.result as string;
-                      const img = new Image();
+                // Process additional images sequentially
+                const processImages = async () => {
+                  for (let i = 0; i < Math.min(model.images.length, 4); i++) {
+                    try {
+                      const imgResponse = await fetch(model.images[i]);
+                      const imgBlob = await imgResponse.blob();
+                      const imgBase64 = await new Promise<string>((resolve) => {
+                        const reader = new FileReader();
+                        reader.onload = () => resolve(reader.result as string);
+                        reader.readAsDataURL(imgBlob);
+                      });
                       
-                      img.onload = function() {
+                      const img = new Image();
+                      img.onload = () => {
                         const col = i % imagesPerRow;
                         const row = Math.floor(i / imagesPerRow);
                         const xPos = currentX + (col * (imageWidth + 20));
@@ -195,15 +198,14 @@ export default function PDFGenerator({ model }: PDFGeneratorProps) {
                           pdf.save(`${model.firstName}_${model.lastName}_Portfolio.pdf`);
                         }
                       };
-                      
                       img.src = imgBase64;
-                    };
-                    
-                    imgReader.readAsDataURL(imgBlob);
-                  } catch (error) {
-                    console.error('Error loading image:', error);
+                    } catch (error) {
+                      console.error('Error loading image:', error);
+                    }
                   }
-                }
+                };
+                
+                processImages();
               } else {
                 // No additional images, save the PDF
                 pdf.save(`${model.firstName}_${model.lastName}_Portfolio.pdf`);
