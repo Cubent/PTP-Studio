@@ -2,23 +2,7 @@
 
 import React from 'react';
 import jsPDF from 'jspdf';
-
-interface Model {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  igProfileLink?: string;
-  image: string;
-  images: string[];
-  height?: string;
-  weight?: string;
-  location?: string;
-  gender: string;
-  isActive: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
+import type { Model } from '../../../../lib/models';
 
 interface PDFGeneratorProps {
   model: Model;
