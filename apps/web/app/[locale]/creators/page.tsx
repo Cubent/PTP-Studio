@@ -287,6 +287,11 @@ export default function CreatorsPage() {
                   <div className="mb-2">
                     <p className="text-sm text-gray-500 italic">
                       {creator.profession.charAt(0).toUpperCase() + creator.profession.slice(1).replace('-', ' ')}
+                      {creator.igProfileLink && (
+                        <span className="ml-2 text-gray-400">
+                          • {creator.igProfileLink.split('/').pop()}
+                        </span>
+                      )}
                     </p>
                   </div>
                   {showStats === creator.id && (
@@ -294,14 +299,6 @@ export default function CreatorsPage() {
                       <div className="space-y-1">
                         {creator.location && <div><span className="font-medium">Location:</span> {creator.location}</div>}
                         {creator.experience && <div><span className="font-medium">Experience:</span> {creator.experience}</div>}
-                        {creator.igProfileLink && (
-                          <div>
-                            <span className="font-medium">Instagram:</span>{' '}
-                            <a href={creator.igProfileLink} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">
-                              @{creator.igProfileLink.split('/').pop()}
-                            </a>
-                          </div>
-                        )}
                       </div>
                     </div>
                   )}
