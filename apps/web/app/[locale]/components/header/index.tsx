@@ -57,6 +57,30 @@ export const Header = ({ dictionary }: HeaderProps) => {
           transform: translateX(0) !important;
         }
         
+        .submenu-line {
+          position: relative !important;
+        }
+        
+        .submenu-line::before {
+          content: '' !important;
+          position: absolute !important;
+          left: 0 !important;
+          top: 0 !important;
+          bottom: 0 !important;
+          width: 1px !important;
+          background-color: #d1d5db !important;
+        }
+        
+        .submenu-line::after {
+          content: '' !important;
+          position: absolute !important;
+          left: 0 !important;
+          top: 1rem !important;
+          width: 1rem !important;
+          height: 1px !important;
+          background-color: #d1d5db !important;
+        }
+        
         .mobile-menu-overlay {
           position: fixed !important;
           top: 0 !important;
@@ -169,20 +193,24 @@ export const Header = ({ dictionary }: HeaderProps) => {
                       Men
                     </div>
                     <div className="ml-3 mt-1 space-y-1">
-                      <Link 
-                        href="/models/men/mainboard" 
-                        className="block text-sm text-gray-600 hover:text-black transition-colors duration-300"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        Mainboard
-                      </Link>
-                      <Link 
-                        href="/models/men/new-faces" 
-                        className="block text-sm text-gray-600 hover:text-black transition-colors duration-300"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        New Faces
-                      </Link>
+                      <div className="submenu-line">
+                        <Link 
+                          href="/models/men/mainboard" 
+                          className="block text-sm text-gray-600 hover:text-black transition-colors duration-300 ml-6"
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          Mainboard
+                        </Link>
+                      </div>
+                      <div className="submenu-line">
+                        <Link 
+                          href="/models/men/new-faces" 
+                          className="block text-sm text-gray-600 hover:text-black transition-colors duration-300 ml-6"
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          New Faces
+                        </Link>
+                      </div>
                     </div>
                   </div>
                   
@@ -192,20 +220,24 @@ export const Header = ({ dictionary }: HeaderProps) => {
                       Women
                     </div>
                     <div className="ml-3 mt-1 space-y-1">
-                      <Link 
-                        href="/models/women/mainboard" 
-                        className="block text-sm text-gray-600 hover:text-black transition-colors duration-300"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        Mainboard
-                      </Link>
-                      <Link 
-                        href="/models/women/new-faces" 
-                        className="block text-sm text-gray-600 hover:text-black transition-colors duration-300"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        New Faces
-                      </Link>
+                      <div className="submenu-line">
+                        <Link 
+                          href="/models/women/mainboard" 
+                          className="block text-sm text-gray-600 hover:text-black transition-colors duration-300 ml-6"
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          Mainboard
+                        </Link>
+                      </div>
+                      <div className="submenu-line">
+                        <Link 
+                          href="/models/women/new-faces" 
+                          className="block text-sm text-gray-600 hover:text-black transition-colors duration-300 ml-6"
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          New Faces
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>

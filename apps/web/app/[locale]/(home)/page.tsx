@@ -220,11 +220,11 @@ const Home = ({ params }: HomeProps) => {
     <>
       <style jsx>{`
         .typing-animation {
-          overflow: hidden;
-          white-space: nowrap;
-          border-right: 2px solid white;
-          animation: typing 2s steps(40, end), blink-caret 0.75s step-end 1;
-          animation-fill-mode: both;
+          overflow: hidden !important;
+          white-space: nowrap !important;
+          border-right: 2px solid white !important;
+          animation: typing 2s steps(40, end), blink-caret 0.75s step-end 1 !important;
+          animation-fill-mode: both !important;
         }
         
         @keyframes typing {
@@ -235,6 +235,57 @@ const Home = ({ params }: HomeProps) => {
         @keyframes blink-caret {
           from, to { border-color: transparent; }
           50% { border-color: white; }
+        }
+        
+        .homepage-menu {
+          position: fixed !important;
+          top: 0 !important;
+          left: 0 !important;
+          height: 100vh !important;
+          width: 320px !important;
+          background-color: white !important;
+          z-index: 30 !important;
+          transform: translateX(-100%) !important;
+          transition: transform 0.3s ease-in-out !important;
+          box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1) !important;
+        }
+        
+        .homepage-menu.open {
+          transform: translateX(0) !important;
+        }
+        
+        .homepage-menu-overlay {
+          position: fixed !important;
+          top: 0 !important;
+          left: 0 !important;
+          right: 0 !important;
+          bottom: 0 !important;
+          background-color: rgba(0, 0, 0, 0.5) !important;
+          z-index: 20 !important;
+        }
+        
+        .homepage-submenu-line {
+          position: relative !important;
+        }
+        
+        .homepage-submenu-line::before {
+          content: '' !important;
+          position: absolute !important;
+          left: 0 !important;
+          top: 0 !important;
+          bottom: 0 !important;
+          width: 1px !important;
+          background-color: #d1d5db !important;
+        }
+        
+        .homepage-submenu-line::after {
+          content: '' !important;
+          position: absolute !important;
+          left: 0 !important;
+          top: 1rem !important;
+          width: 1rem !important;
+          height: 1px !important;
+          background-color: #d1d5db !important;
         }
       `}</style>
       <div className="min-h-screen">
@@ -294,9 +345,7 @@ const Home = ({ params }: HomeProps) => {
         </div>
 
         {/* Sidebar Menu */}
-        <div className={`fixed top-0 left-0 h-full w-80 bg-white z-30 transform transition-transform duration-300 ease-in-out ${
-          isMenuOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}>
+        <div className={`homepage-menu ${isMenuOpen ? 'open' : ''}`}>
           <div className="p-8">
             <div className="mb-12">
               <button 
@@ -322,9 +371,7 @@ const Home = ({ params }: HomeProps) => {
                       Men
                     </div>
                     <div className="ml-4 mt-2 space-y-2">
-                      <div className="relative">
-                        <div className="absolute left-0 top-0 bottom-0 w-px bg-gray-300"></div>
-                        <div className="absolute left-0 top-4 w-4 h-px bg-gray-300"></div>
+                      <div className="homepage-submenu-line">
                         <Link 
                           href="/models/men/mainboard" 
                           className="block text-base text-gray-600 hover:text-black transition-colors duration-300 ml-6"
@@ -333,9 +380,7 @@ const Home = ({ params }: HomeProps) => {
                           Mainboard
                         </Link>
                       </div>
-                      <div className="relative">
-                        <div className="absolute left-0 top-0 bottom-0 w-px bg-gray-300"></div>
-                        <div className="absolute left-0 top-4 w-4 h-px bg-gray-300"></div>
+                      <div className="homepage-submenu-line">
                         <Link 
                           href="/models/men/new-faces" 
                           className="block text-base text-gray-600 hover:text-black transition-colors duration-300 ml-6"
@@ -353,9 +398,7 @@ const Home = ({ params }: HomeProps) => {
                       Women
                     </div>
                     <div className="ml-4 mt-2 space-y-2">
-                      <div className="relative">
-                        <div className="absolute left-0 top-0 bottom-0 w-px bg-gray-300"></div>
-                        <div className="absolute left-0 top-4 w-4 h-px bg-gray-300"></div>
+                      <div className="homepage-submenu-line">
                         <Link 
                           href="/models/women/mainboard" 
                           className="block text-base text-gray-600 hover:text-black transition-colors duration-300 ml-6"
@@ -364,16 +407,14 @@ const Home = ({ params }: HomeProps) => {
                           Mainboard
                         </Link>
                       </div>
-                      <div className="relative">
-                        <div className="absolute left-0 top-0 bottom-0 w-px bg-gray-300"></div>
-                        <div className="absolute left-0 top-4 w-4 h-px bg-gray-300"></div>
-              <Link 
+                      <div className="homepage-submenu-line">
+                        <Link 
                           href="/models/women/new-faces" 
                           className="block text-base text-gray-600 hover:text-black transition-colors duration-300 ml-6"
-                onClick={() => setIsMenuOpen(false)}
-              >
+                          onClick={() => setIsMenuOpen(false)}
+                        >
                           New Faces
-              </Link>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -430,7 +471,7 @@ const Home = ({ params }: HomeProps) => {
         {/* Overlay */}
         {isMenuOpen && (
           <div 
-            className="fixed inset-0 bg-black/50 z-20"
+            className="homepage-menu-overlay"
             onClick={() => setIsMenuOpen(false)}
           />
         )}
