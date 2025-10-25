@@ -304,37 +304,149 @@ const Home = ({ params }: HomeProps) => {
           height: 1px !important;
           background-color: #d1d5db !important;
         }
+        
+        .homepage-text {
+          position: absolute !important;
+          bottom: 2rem !important;
+          left: 2rem !important;
+          z-index: 20 !important;
+          color: white !important;
+          font-size: 0.875rem !important;
+          font-weight: 300 !important;
+          max-width: 24rem !important;
+        }
+        
+        .homepage-footer {
+          background-color: white !important;
+          padding: 4rem 0 !important;
+        }
+        
+        .homepage-footer-content {
+          max-width: 80rem !important;
+          margin: 0 auto !important;
+          padding: 0 1.5rem !important;
+        }
+        
+        .homepage-footer-bottom {
+          border-top: 1px solid #e5e7eb !important;
+          padding-top: 2rem !important;
+        }
+        
+        .homepage-footer-row {
+          display: flex !important;
+          flex-direction: column !important;
+          justify-content: space-between !important;
+          align-items: flex-start !important;
+          gap: 1rem !important;
+        }
+        
+        @media (min-width: 1024px) {
+          .homepage-footer-row {
+            flex-direction: row !important;
+            align-items: center !important;
+          }
+        }
+        
+        .homepage-footer-links {
+          display: flex !important;
+          gap: 1.5rem !important;
+        }
+        
+        .homepage-footer-addresses {
+          margin-top: 1.5rem !important;
+          display: grid !important;
+          grid-template-columns: 1fr !important;
+          gap: 1rem !important;
+        }
+        
+        @media (min-width: 768px) {
+          .homepage-footer-addresses {
+            grid-template-columns: 1fr 1fr !important;
+          }
+        }
+        
+        .homepage-video-container {
+          position: relative !important;
+          height: 100vh !important;
+          overflow: hidden !important;
+        }
+        
+        .homepage-video {
+          width: 100% !important;
+          height: 100% !important;
+          object-fit: cover !important;
+          object-position: center !important;
+        }
+        
+        .homepage-video-overlay {
+          position: absolute !important;
+          top: 0 !important;
+          left: 0 !important;
+          right: 0 !important;
+          bottom: 0 !important;
+          background-color: rgba(0, 0, 0, 0.3) !important;
+        }
+        
+        @media (max-width: 768px) {
+          .homepage-video-container {
+            height: 100vh !important;
+            min-height: 100vh !important;
+          }
+          
+          .homepage-video {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            object-position: center center !important;
+          }
+          
+          .homepage-text {
+            bottom: 1rem !important;
+            left: 1rem !important;
+            right: 1rem !important;
+            max-width: none !important;
+            font-size: 0.8rem !important;
+          }
+          
+          .homepage-header {
+            top: 1rem !important;
+            left: 1rem !important;
+          }
+          
+          .homepage-right-button {
+            top: 1rem !important;
+            right: 1rem !important;
+          }
+        }
       `}</style>
       <div className="min-h-screen">
       {/* Video Background Section */}
-      <div className="relative h-screen overflow-hidden">
+      <div className="homepage-video-container">
         <video
           autoPlay
           muted
           loop
           playsInline
-          className="w-full h-full object-cover"
+          className="homepage-video"
         >
           <source src="https://res.cloudinary.com/dbr1nfgbr/video/upload/v1761335524/3753692-uhd_3840_2160_25fps_q9zr6z.mp4" type="video/mp4" />
         </video>
         {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/30"></div>
+        <div className="homepage-video-overlay"></div>
 
         {/* Left-aligned services text */}
-        <div className="absolute bottom-8 left-8 z-20">
-          <div className="text-white text-sm font-light max-w-md">
-            <div className="typing-animation">
-              <p className="mb-2">
-                <span className="relative">
-                  Europe's Leading
-                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-white/60 transform -skew-x-12"></span>
-                </span>
-                <span> Agency for Models,</span>
-              </p>
-              <p className="mb-2">Influencers, and Brand Partnerships,</p>
-              <p className="mb-2">Creating High-Impact Campaigns and</p>
-              <p>Exceptional Industry Opportunities.</p>
-            </div>
+        <div className="homepage-text">
+          <div className="typing-animation">
+            <p className="mb-2">
+              <span className="relative">
+                Europe's Leading
+                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-white/60 transform -skew-x-12"></span>
+              </span>
+              <span> Agency for Models,</span>
+            </p>
+            <p className="mb-2">Influencers, and Brand Partnerships,</p>
+            <p className="mb-2">Creating High-Impact Campaigns and</p>
+            <p>Exceptional Industry Opportunities.</p>
           </div>
         </div>
 
@@ -832,14 +944,14 @@ const Home = ({ params }: HomeProps) => {
       </div>
 
       {/* Footer Section - Scrollable */}
-      <div className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="border-t border-gray-200 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center">
-              <p className="text-sm text-gray-600 mb-4 md:mb-0">
+      <div className="homepage-footer">
+        <div className="homepage-footer-content">
+          <div className="homepage-footer-bottom">
+            <div className="homepage-footer-row">
+              <p className="text-sm text-gray-600">
                 © 2025 Velgance Agency. All rights reserved.
               </p>
-              <div className="flex space-x-6">
+              <div className="homepage-footer-links">
                 <Link href="/privacy-policy" className="text-sm text-gray-600 hover:text-black transition-colors">
                   Privacy Policy
                 </Link>

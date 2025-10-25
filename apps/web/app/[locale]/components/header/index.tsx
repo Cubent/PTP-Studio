@@ -62,7 +62,25 @@ export const Header = ({ dictionary }: HeaderProps) => {
           margin-top: 0.5rem !important;
           display: flex !important;
           flex-direction: column !important;
-          gap: 0.25rem !important;
+          gap: 0.5rem !important;
+        }
+        
+        .submenu-section {
+          margin-bottom: 1rem !important;
+        }
+        
+        .submenu-section-title {
+          font-size: 1rem !important;
+          font-weight: 300 !important;
+          color: #374151 !important;
+          margin-bottom: 0.5rem !important;
+        }
+        
+        .submenu-items {
+          margin-left: 0.75rem !important;
+          display: flex !important;
+          flex-direction: column !important;
+          gap: 0.5rem !important;
         }
         
         .submenu-line {
@@ -196,11 +214,11 @@ export const Header = ({ dictionary }: HeaderProps) => {
                 {/* Models Submenu */}
                 <div className="submenu-container">
                   {/* Men Submenu */}
-                  <div>
-                    <div className="text-base font-light text-gray-700">
+                  <div className="submenu-section">
+                    <div className="submenu-section-title">
                       Men
                     </div>
-                    <div className="submenu-container">
+                    <div className="submenu-items">
                       <div className="submenu-line">
                         <Link 
                           href="/models/men/mainboard" 
@@ -223,11 +241,11 @@ export const Header = ({ dictionary }: HeaderProps) => {
                   </div>
                   
                   {/* Women Submenu */}
-                  <div>
-                    <div className="text-base font-light text-gray-700">
+                  <div className="submenu-section">
+                    <div className="submenu-section-title">
                       Women
                     </div>
-                    <div className="submenu-container">
+                    <div className="submenu-items">
                       <div className="submenu-line">
                         <Link 
                           href="/models/women/mainboard" 
