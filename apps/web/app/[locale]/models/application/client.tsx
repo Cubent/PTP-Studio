@@ -461,8 +461,13 @@ export default function ModelApplicationClient() {
                 <select
                   value={formData.gender}
                   onChange={(e) => handleInputChange('gender', e.target.value)}
-                  className="w-full px-4 py-4 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent text-black appearance-none bg-white cursor-pointer hover:border-gray-400 transition-colors text-base"
-                  style={{ backgroundImage: 'none' }}
+                  className="w-full px-4 py-4 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent text-black cursor-pointer hover:border-gray-400 transition-colors text-base"
+                  style={{ 
+                    backgroundImage: 'none',
+                    appearance: 'none',
+                    WebkitAppearance: 'none',
+                    MozAppearance: 'none'
+                  }}
                   required
                 >
                   <option value="female">Female</option>
@@ -934,7 +939,7 @@ export default function ModelApplicationClient() {
       {/* Important Notice Popup */}
       {showNoticePopup && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="bg-gray-50 bg-opacity-95 rounded-xl max-w-lg w-full p-8 relative shadow-2xl">
+          <div className="bg-gray-200 bg-opacity-95 rounded-xl max-w-lg w-full p-8 relative shadow-2xl">
             <button
               onClick={handleCloseNotice}
               className="absolute top-6 right-6 text-gray-400 hover:text-gray-600 transition-colors"
