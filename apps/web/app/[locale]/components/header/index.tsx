@@ -116,6 +116,12 @@ export const Header = ({ dictionary }: HeaderProps) => {
           padding: 2rem 1rem !important;
         }
         
+        @media (min-width: 1024px) {
+          .header-container {
+            padding-bottom: 3rem !important;
+          }
+        }
+        
         .menu-button {
           position: absolute !important;
           top: 1.5rem !important;
