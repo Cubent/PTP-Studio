@@ -56,10 +56,24 @@ export default function ModelApplicationClient() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const [showNoticePopup, setShowNoticePopup] = useState(false);
 
   // Simple offline detection
   const [isOnline, setIsOnline] = useState(true);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+
+  // Check if this is the first visit
+  useEffect(() => {
+    const hasSeenNotice = localStorage.getItem('velgance-notice-seen');
+    if (!hasSeenNotice) {
+      setShowNoticePopup(true);
+    }
+  }, []);
+
+  const handleCloseNotice = () => {
+    setShowNoticePopup(false);
+    localStorage.setItem('velgance-notice-seen', 'true');
+  };
 
   // Online/offline detection
   useEffect(() => {
@@ -447,7 +461,8 @@ export default function ModelApplicationClient() {
                 <select
                   value={formData.gender}
                   onChange={(e) => handleInputChange('gender', e.target.value)}
-                  className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent text-black appearance-none bg-white cursor-pointer hover:border-gray-400 transition-colors text-base"
+                  className="w-full px-4 py-4 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent text-black appearance-none bg-white cursor-pointer hover:border-gray-400 transition-colors text-base"
+                  style={{ backgroundImage: 'none' }}
                   required
                 >
                   <option value="female">Female</option>
@@ -911,6 +926,54 @@ export default function ModelApplicationClient() {
               className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
             >
               <X className="w-8 h-8" />
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Important Notice Popup */}
+      {showNoticePopup && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="bg-white bg-opacity-95 rounded-xl max-w-lg w-full p-8 relative shadow-2xl">
+            <button
+              onClick={handleCloseNotice}
+              className="absolute top-6 right-6 text-gray-400 hover:text-gray-600 transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            
+            <div className="mb-6">
+              <h2 className="text-2xl font-light text-black mb-6">
+                Important Notice
+              </h2>
+              
+              <div className="space-y-4 text-gray-600 leading-relaxed">
+                <p>
+                  <strong>@velgancemodels</strong> and <strong>@velgancescouting</strong> are our only official profiles.
+                </p>
+                
+                <p>
+                  Please be aware that there are individuals online falsely representing themselves as agents and model scouts for Velgance Models.
+                </p>
+                
+                <p>
+                  For your safety, please do not engage with anyone claiming to work for Velgance Models unless you have verified their identity directly with us.
+                </p>
+                
+                <p>
+                  You can contact Velgance Models by emailing{' '}
+                  <a href="mailto:info@velgance.com" className="text-black hover:underline font-medium">
+                    info@velgance.com
+                  </a>
+                </p>
+              </div>
+            </div>
+            
+            <button
+              onClick={handleCloseNotice}
+              className="w-full bg-black text-white py-3 px-6 rounded-lg font-light hover:bg-gray-800 transition-colors"
+            >
+              I Understand
             </button>
           </div>
         </div>
