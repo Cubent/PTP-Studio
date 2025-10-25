@@ -264,6 +264,23 @@ const Home = ({ params }: HomeProps) => {
           z-index: 20 !important;
         }
         
+        .homepage-header {
+          position: absolute !important;
+          top: 2rem !important;
+          left: 2rem !important;
+          z-index: 20 !important;
+          display: flex !important;
+          align-items: center !important;
+          gap: 1rem !important;
+        }
+        
+        .homepage-right-button {
+          position: absolute !important;
+          top: 2rem !important;
+          right: 2rem !important;
+          z-index: 20 !important;
+        }
+        
         .homepage-submenu-line {
           position: relative !important;
         }
@@ -322,7 +339,7 @@ const Home = ({ params }: HomeProps) => {
         </div>
 
         {/* Top Left Hamburger Menu */}
-        <div className="absolute top-8 left-8 z-20 flex items-center gap-4">
+        <div className="homepage-header">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="text-white hover:text-gray-300 transition-colors duration-300"
@@ -335,7 +352,7 @@ const Home = ({ params }: HomeProps) => {
         </div>
 
         {/* Top Right Button */}
-        <div className="absolute top-8 right-8 z-20">
+        <div className="homepage-right-button">
           <Link 
             href="/models/application" 
             className="text-white px-6 py-3 font-medium hover:text-gray-300 transition-colors duration-300"

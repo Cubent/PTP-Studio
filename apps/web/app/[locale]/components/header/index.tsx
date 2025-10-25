@@ -43,18 +43,26 @@ export const Header = ({ dictionary }: HeaderProps) => {
         .mobile-menu {
           position: fixed !important;
           top: 0 !important;
-          right: 0 !important;
+          left: 0 !important;
           height: 100vh !important;
           width: 256px !important;
           background-color: white !important;
           z-index: 30 !important;
-          transform: translateX(100%) !important;
+          transform: translateX(-100%) !important;
           transition: transform 0.3s ease-in-out !important;
-          box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1) !important;
+          box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1) !important;
         }
         
         .mobile-menu.open {
           transform: translateX(0) !important;
+        }
+        
+        .submenu-container {
+          margin-left: 0.75rem !important;
+          margin-top: 0.5rem !important;
+          display: flex !important;
+          flex-direction: column !important;
+          gap: 0.25rem !important;
         }
         
         .submenu-line {
@@ -186,13 +194,13 @@ export const Header = ({ dictionary }: HeaderProps) => {
                 </div>
                 
                 {/* Models Submenu */}
-                <div className="ml-3 mt-2 space-y-2">
+                <div className="submenu-container">
                   {/* Men Submenu */}
                   <div>
                     <div className="text-base font-light text-gray-700">
                       Men
                     </div>
-                    <div className="ml-3 mt-1 space-y-1">
+                    <div className="submenu-container">
                       <div className="submenu-line">
                         <Link 
                           href="/models/men/mainboard" 
@@ -219,7 +227,7 @@ export const Header = ({ dictionary }: HeaderProps) => {
                     <div className="text-base font-light text-gray-700">
                       Women
                     </div>
-                    <div className="ml-3 mt-1 space-y-1">
+                    <div className="submenu-container">
                       <div className="submenu-line">
                         <Link 
                           href="/models/women/mainboard" 
