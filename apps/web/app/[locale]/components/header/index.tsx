@@ -134,7 +134,7 @@ export const Header = ({ dictionary }: HeaderProps) => {
         
         .right-buttons {
           position: absolute !important;
-          top: 1.5rem !important;
+          top: 1.25rem !important;
           right: 2rem !important;
           z-index: 20 !important;
           display: flex !important;
@@ -150,7 +150,7 @@ export const Header = ({ dictionary }: HeaderProps) => {
           }
           
           .right-buttons {
-            top: 1.25rem !important;
+            top: 1rem !important;
             right: 1rem !important;
             gap: 0.25rem !important;
           }
@@ -173,8 +173,8 @@ export const Header = ({ dictionary }: HeaderProps) => {
           </button>
           <Link href="/" className="text-black text-xl font-normal hover:text-gray-600 transition-colors duration-300">
             Velgance Models
-          </Link>
-        </div>
+            </Link>
+          </div>
 
         {/* Top Right Buttons */}
         <div className="right-buttons">
@@ -199,7 +199,7 @@ export const Header = ({ dictionary }: HeaderProps) => {
         <div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
           <div className="p-6">
             <div className="mb-8">
-              <button 
+              <button
                 onClick={() => setIsMenuOpen(false)}
                 className="text-xl font-light text-black hover:text-gray-600 transition-colors duration-300"
               >
@@ -216,8 +216,8 @@ export const Header = ({ dictionary }: HeaderProps) => {
                 >
                   <span>Models</span>
                   {isModelsOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
-                </button>
-                
+              </button>
+              
                 {isModelsOpen && (
                   <div className="ml-4 space-y-2">
                     {/* Men Section */}
@@ -238,7 +238,7 @@ export const Header = ({ dictionary }: HeaderProps) => {
                           >
                             Mainboard
                           </Link>
-                          <Link 
+                    <Link
                             href="/models/men/new-faces" 
                             className="block text-sm text-gray-600 hover:text-black transition-colors duration-300 py-1"
                             onClick={() => setIsMenuOpen(false)}
@@ -247,7 +247,7 @@ export const Header = ({ dictionary }: HeaderProps) => {
                           </Link>
                         </div>
                       )}
-                    </div>
+                      </div>
                     
                     {/* Women Section */}
                     <div>
@@ -266,8 +266,8 @@ export const Header = ({ dictionary }: HeaderProps) => {
                             onClick={() => setIsMenuOpen(false)}
                           >
                             Mainboard
-                          </Link>
-                          <Link 
+                    </Link>
+                    <Link
                             href="/models/women/new-faces" 
                             className="block text-sm text-gray-600 hover:text-black transition-colors duration-300 py-1"
                             onClick={() => setIsMenuOpen(false)}
@@ -276,57 +276,57 @@ export const Header = ({ dictionary }: HeaderProps) => {
                           </Link>
                         </div>
                       )}
-                    </div>
+                      </div>
                   </div>
                 )}
               </div>
               
               {/* Other Links */}
-              <Link 
+            <Link 
                 href="/creators" 
                 className="block text-lg font-light text-black hover:text-gray-600 transition-colors duration-300"
                 onClick={() => setIsMenuOpen(false)}
-              >
+            >
                 Creators
-              </Link>
+            </Link>
               
-              <Link 
-                href="/chi-siamo" 
+            <Link 
+              href="/chi-siamo" 
                 className="block text-lg font-light text-black hover:text-gray-600 transition-colors duration-300"
                 onClick={() => setIsMenuOpen(false)}
-              >
-                About Us
-              </Link>
+            >
+              About Us
+            </Link>
               
-              <Link 
-                href="/portfolio" 
+            <Link 
+              href="/portfolio" 
                 className="block text-lg font-light text-black hover:text-gray-600 transition-colors duration-300"
                 onClick={() => setIsMenuOpen(false)}
-              >
-                Portfolio
-              </Link>
+            >
+              Portfolio
+            </Link>
               
-              <Link 
-                href="/contact" 
+            <Link 
+              href="/contact" 
                 className="block text-lg font-light text-black hover:text-gray-600 transition-colors duration-300"
                 onClick={() => setIsMenuOpen(false)}
-              >
-                Contact
-              </Link>
+            >
+              Contact
+            </Link>
             </nav>
             
             <div className="border-t border-gray-200 mt-8 pt-4">
-            </div>
+                      </div>
             <div className="mt-3">
               <div className="inline-flex items-center gap-2 px-2 py-1 border border-gray-300 rounded-lg">
                 <div className="w-2 h-2 bg-black rounded-full"></div>
                 <p className="text-xs text-gray-800 font-medium">
                   CEST {new Date().toLocaleString('en-US', { timeZone: 'Europe/Rome', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
                 </p>
-              </div>
+                </div>
+            </div>
             </div>
           </div>
-        </div>
 
         {/* Full-page Search Dropdown */}
         {isSearchOpen && (
@@ -360,27 +360,27 @@ export const Header = ({ dictionary }: HeaderProps) => {
                 {searchQuery && searchResults.length > 0 ? (
                   <div className="space-y-4">
                     {searchResults.map((model) => (
-                      <Link
-                        key={model.id}
-                        href={`/models/${model.id}`}
+                          <Link
+                            key={model.id}
+                            href={`/models/${model.id}`}
                         className="flex items-center gap-4 p-4 hover:bg-gray-100 rounded-lg transition-colors"
                         onClick={() => setIsSearchOpen(false)}
-                      >
-                        <img
-                          src={model.image}
-                          alt={`${model.firstName} ${model.lastName}`}
+                          >
+                            <img
+                              src={model.image}
+                              alt={`${model.firstName} ${model.lastName}`}
                           className="w-16 h-16 rounded-full object-cover"
-                        />
-                        <div>
+                            />
+                            <div>
                           <p className="font-medium text-lg text-black">
-                            {model.firstName} {model.lastName}
-                          </p>
+                                {model.firstName} {model.lastName}
+                              </p>
                           <p className="text-gray-600 text-sm">
                             {model.age && `${model.age} years old`}
                           </p>
-                        </div>
-                      </Link>
-                    ))}
+                            </div>
+                          </Link>
+                        ))}
                   </div>
                 ) : searchQuery ? (
                   <div className="text-center py-8">

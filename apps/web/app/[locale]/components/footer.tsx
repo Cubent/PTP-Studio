@@ -13,7 +13,21 @@ export const Footer = () => {
     }));
   };
   return (
-    <footer className="border-t border-gray-200 bg-white">
+    <>
+      <style jsx>{`
+        .social-icons-container {
+          gap: 0.75rem !important;
+        }
+        
+        .social-icons-container a {
+          margin-right: 0.75rem !important;
+        }
+        
+        .social-icons-container a:last-child {
+          margin-right: 0 !important;
+        }
+      `}</style>
+      <footer className="border-t border-gray-200 bg-white">
       <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8 lg:py-16">
         {/* Current CEST Time */}
         <div className="mb-8">
@@ -125,7 +139,7 @@ export const Footer = () => {
           {/* Follow Us */}
           <div>
             <h3 className="text-black font-semibold mb-4">Follow Us</h3>
-            <div className="flex space-x-3">
+            <div className="flex space-x-3 social-icons-container">
               <a 
                 href="https://www.linkedin.com/company/velgance-agency" 
                 target="_blank" 
@@ -192,5 +206,6 @@ export const Footer = () => {
         </div>
       </div>
     </footer>
+    </>
   );
 };

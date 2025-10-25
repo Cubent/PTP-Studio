@@ -402,7 +402,12 @@ const Home = ({ params }: HomeProps) => {
           
           .homepage-right-button {
             top: 1.5rem !important;
-            right: 1rem !important;
+            right: 0.5rem !important;
+          }
+          
+          .homepage-right-button a {
+            font-size: 0.75rem !important;
+            padding: 0.5rem 0.75rem !important;
           }
         }
       `}</style>
