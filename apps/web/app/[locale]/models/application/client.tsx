@@ -939,22 +939,22 @@ export default function ModelApplicationClient() {
       {/* Important Notice Popup */}
       {showNoticePopup && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="bg-gray-200 bg-opacity-95 rounded-xl max-w-lg w-full p-8 relative shadow-2xl">
+          <div className="bg-black bg-opacity-95 rounded-xl max-w-lg w-full p-6 sm:p-8 relative shadow-2xl">
             <button
               onClick={handleCloseNotice}
-              className="absolute top-6 right-6 text-gray-400 hover:text-gray-600 transition-colors"
+              className="absolute top-4 right-4 sm:top-6 sm:right-6 text-gray-400 hover:text-white transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
             
             <div className="mb-6">
-              <h2 className="text-2xl font-light text-black mb-6">
+              <h2 className="text-xl sm:text-2xl font-light text-white mb-4 sm:mb-6">
                 Important Notice
               </h2>
               
-              <div className="space-y-4 text-gray-600 leading-relaxed">
+              <div className="space-y-3 sm:space-y-4 text-gray-300 leading-relaxed text-sm sm:text-base">
                 <p>
-                  <strong>@velgancemodels</strong> and <strong>@velgancescouting</strong> are our only official profiles.
+                  <strong className="text-white">@velgancemodels</strong> and <strong className="text-white">@velgancescouting</strong> are our only official profiles.
                 </p>
                 
                 <p>
@@ -967,7 +967,7 @@ export default function ModelApplicationClient() {
                 
                 <p>
                   You can contact Velgance Models by emailing{' '}
-                  <a href="mailto:info@velgance.com" className="text-black hover:underline font-medium">
+                  <a href="mailto:info@velgance.com" className="text-white hover:underline font-medium">
                     info@velgance.com
                   </a>
                 </p>
@@ -976,7 +976,7 @@ export default function ModelApplicationClient() {
             
             <button
               onClick={handleCloseNotice}
-              className="w-full bg-black text-white py-3 px-6 rounded-lg font-light hover:bg-gray-800 transition-colors"
+              className="w-full bg-white text-black py-3 px-6 rounded-lg font-light hover:bg-gray-100 transition-colors"
             >
               I Understand
             </button>
