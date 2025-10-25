@@ -154,9 +154,10 @@ export default function PDFGenerator({ model }: PDFGeneratorProps) {
                 
                 // Process additional images sequentially
                 const processImages = async () => {
-                  for (let i = 0; i < Math.min(model.images.length, 4); i++) {
+                  const imagesToProcess = Math.min(model.images!.length, 4);
+                  for (let i = 0; i < imagesToProcess; i++) {
                     try {
-                      const imgResponse = await fetch(model.images[i]);
+                      const imgResponse = await fetch(model.images![i]);
                       const imgBlob = await imgResponse.blob();
                       const imgBase64 = await new Promise<string>((resolve) => {
                         const reader = new FileReader();
@@ -178,7 +179,7 @@ export default function PDFGenerator({ model }: PDFGeneratorProps) {
                         pdf.addImage(imgBase64, 'JPEG', xPos, yPos, imageWidth, imageHeight);
                         
                         // If this is the last image, save the PDF
-                        if (i === Math.min(model.images.length, 4) - 1) {
+                        if (i === imagesToProcess - 1) {
                           pdf.save(`${model.firstName}_${model.lastName}_Portfolio.pdf`);
                         }
                       };
