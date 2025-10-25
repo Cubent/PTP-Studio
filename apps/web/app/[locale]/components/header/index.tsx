@@ -48,7 +48,7 @@ export const Header = ({ dictionary }: HeaderProps) => {
           top: 0 !important;
           left: 0 !important;
           height: 100vh !important;
-          width: 256px !important;
+          width: 320px !important;
           background-color: white !important;
           z-index: 30 !important;
           transform: translateX(-100%) !important;
@@ -195,9 +195,9 @@ export const Header = ({ dictionary }: HeaderProps) => {
           </Link>
         </div>
 
-        {/* Sidebar Menu - Smaller and closer to right */}
+        {/* Sidebar Menu - Like homepage */}
         <div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
-          <div className="p-6">
+          <div className="p-8">
             <div className="mb-8">
               <button
                 onClick={() => setIsMenuOpen(false)}
@@ -282,37 +282,45 @@ export const Header = ({ dictionary }: HeaderProps) => {
               </div>
               
               {/* Other Links */}
-            <Link 
+              <Link 
                 href="/creators" 
                 className="block text-lg font-light text-black hover:text-gray-600 transition-colors duration-300"
                 onClick={() => setIsMenuOpen(false)}
-            >
+              >
                 Creators
-            </Link>
+              </Link>
               
-            <Link 
-              href="/chi-siamo" 
+              <Link 
+                href="/partners" 
                 className="block text-lg font-light text-black hover:text-gray-600 transition-colors duration-300"
                 onClick={() => setIsMenuOpen(false)}
-            >
-              About Us
-            </Link>
+              >
+                Partners
+              </Link>
               
-            <Link 
-              href="/portfolio" 
+              <Link 
+                href="/portfolio" 
                 className="block text-lg font-light text-black hover:text-gray-600 transition-colors duration-300"
                 onClick={() => setIsMenuOpen(false)}
-            >
-              Portfolio
-            </Link>
+              >
+                Portfolio
+              </Link>
               
-            <Link 
-              href="/contact" 
+              <Link 
+                href="/contact" 
                 className="block text-lg font-light text-black hover:text-gray-600 transition-colors duration-300"
                 onClick={() => setIsMenuOpen(false)}
-            >
-              Contact
-            </Link>
+              >
+                Contact
+              </Link>
+              
+              <Link 
+                href="/chi-siamo" 
+                className="block text-lg font-light text-black hover:text-gray-600 transition-colors duration-300"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                About Us
+              </Link>
             </nav>
             
             <div className="border-t border-gray-200 mt-8 pt-4">

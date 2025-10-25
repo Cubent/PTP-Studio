@@ -575,11 +575,11 @@ const Home = ({ params }: HomeProps) => {
               </Link>
               
               <Link 
-                href="/chi-siamo" 
+                href="/partners" 
                 className="block text-xl font-light text-black hover:text-gray-600 transition-colors duration-300"
                 onClick={() => setIsMenuOpen(false)}
               >
-                About Us
+                Partners
               </Link>
               
               <Link 
@@ -596,6 +596,14 @@ const Home = ({ params }: HomeProps) => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact
+              </Link>
+              
+              <Link 
+                href="/chi-siamo" 
+                className="block text-xl font-light text-black hover:text-gray-600 transition-colors duration-300"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                About Us
               </Link>
             </nav>
             

@@ -31,10 +31,10 @@ export default function PartnersPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-left">
             <h1 className="text-2xl font-medium text-black mb-3" style={{ fontFamily: 'serif' }}>
-              Clienti
+              Clients
             </h1>
             <p className="text-sm text-gray-600">
-              Fidati da oltre 200+ marchi di moda europei e case di moda internazionali
+              Trusted by over 200+ European fashion brands and international fashion houses
             </p>
           </div>
         </div>
