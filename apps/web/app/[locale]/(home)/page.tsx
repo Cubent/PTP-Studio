@@ -1034,7 +1034,7 @@ const Home = ({ params }: HomeProps) => {
       {/* Important Notice Popup */}
       {showNoticePopup && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="bg-white bg-opacity-95 rounded-xl max-w-lg w-full p-8 relative shadow-2xl">
+          <div className="bg-gray-50 bg-opacity-95 rounded-xl max-w-lg w-full p-8 relative shadow-2xl">
             <button
               onClick={handleCloseNotice}
               className="absolute top-6 right-6 text-gray-400 hover:text-gray-600 transition-colors"
