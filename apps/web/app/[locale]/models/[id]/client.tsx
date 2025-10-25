@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import type { Model } from '../../../../lib/models';
 import { ArrowLeft, Instagram, Mail, MapPin, Ruler, Weight, X } from 'lucide-react';
+import PDFGenerator from './pdf-generator';
 
 // Helper function to extract Instagram username from URL
 const getInstagramUsername = (url: string): string => {
@@ -97,9 +98,9 @@ export default function ModelPageClient({ params }: Props) {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="py-6 flex items-center hidden lg:flex">
+      <div className="py-6 flex items-center justify-between hidden lg:flex">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="flex items-center justify-start">
+          <div className="flex items-center justify-between">
             <button
               onClick={() => router.push('/models')}
               className="flex items-center gap-2 text-gray-400 hover:text-black transition-colors text-sm"
@@ -107,6 +108,7 @@ export default function ModelPageClient({ params }: Props) {
               <ArrowLeft className="w-4 h-4" />
               Torna ai modelli
             </button>
+            <PDFGenerator model={model} />
           </div>
         </div>
       </div>
@@ -132,6 +134,9 @@ export default function ModelPageClient({ params }: Props) {
             <h1 className="text-4xl sm:text-5xl font-light text-black mb-4 italic" style={{ fontFamily: 'serif' }}>
               {model.firstName} {model.lastName}
             </h1>
+            <div className="flex justify-center mb-6">
+              <PDFGenerator model={model} />
+            </div>
           </div>
 
           {/* Mobile Stats */}

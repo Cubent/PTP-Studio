@@ -254,7 +254,7 @@ export default function CreatorsPage() {
               <p className="text-gray-500 text-lg">No creators found</p>
             </div>
           ) : (
-            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-12">
               {creators.map((creator) => (
                 <Link
                   key={creator.id}
