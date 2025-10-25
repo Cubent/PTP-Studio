@@ -59,11 +59,6 @@ export const Footer = () => {
             </button>
             <ul className={`space-y-2 transition-all duration-200 ${openSections.navigation ? 'block' : 'hidden lg:block'}`}>
               <li>
-                <Link href="/models" className="text-gray-600 hover:text-black transition-colors">
-                  Models
-                </Link>
-              </li>
-              <li>
                 <Link href="/contact" className="text-gray-600 hover:text-black transition-colors">
                   Contact Us
                 </Link>
