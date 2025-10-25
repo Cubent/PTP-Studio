@@ -214,14 +214,6 @@ export default function MenNewFacesPage() {
                         {model.height && <div><span className="font-medium">Altezza:</span> {model.height}</div>}
                         {model.weight && <div><span className="font-medium">Peso:</span> {model.weight}</div>}
                         {model.location && <div><span className="font-medium">Località:</span> {model.location}</div>}
-                        {model.igProfileLink && (
-                          <div>
-                            <span className="font-medium">Instagram:</span>{' '}
-                            <a href={model.igProfileLink} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">
-                              @{model.igProfileLink.split('/').pop()}
-                            </a>
-                          </div>
-                        )}
                       </div>
                     </div>
                   )}
