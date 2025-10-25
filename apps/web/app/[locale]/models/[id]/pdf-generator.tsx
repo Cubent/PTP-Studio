@@ -39,11 +39,37 @@ export default function PDFGenerator({ model }: PDFGeneratorProps) {
       const nameWidth = pdf.getTextWidth(nameText);
       pdf.text(nameText, (pageWidth - nameWidth) / 2, 30);
       
+      // Add minimal stats at the bottom (centered) - always add these
+      const statsY = 200; // Fixed position for stats
+      pdf.setFontSize(10);
+      pdf.setFont('helvetica', 'normal');
+      pdf.setTextColor(100, 100, 100);
+      
+      // Collect stats and center them
+      const stats = [];
+      if (model.height) stats.push(model.height);
+      if (model.weight) stats.push(model.weight);
+      if (model.location) stats.push(model.location);
+      
+      if (stats.length > 0) {
+        const statsText = stats.join(' • ');
+        const statsWidth = pdf.getTextWidth(statsText);
+        pdf.text(statsText, (pageWidth - statsWidth) / 2, statsY);
+      }
+      
       // Add main model image filling most of the page
       if (model.image) {
         try {
           // Convert image to base64
-          const response = await fetch(model.image);
+          const response = await fetch(model.image, {
+            mode: 'cors',
+            credentials: 'omit'
+          });
+          
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          
           const blob = await response.blob();
           const reader = new FileReader();
           
@@ -73,24 +99,6 @@ export default function PDFGenerator({ model }: PDFGeneratorProps) {
               const y = 50; // Start below the name
               
               pdf.addImage(base64, 'JPEG', x, y, imgWidth, imgHeight);
-              
-              // Add minimal stats at the bottom (centered)
-              const statsY = y + imgHeight + 20;
-              pdf.setFontSize(10);
-              pdf.setFont('helvetica', 'normal');
-              pdf.setTextColor(100, 100, 100);
-              
-              // Collect stats and center them
-              const stats = [];
-              if (model.height) stats.push(model.height);
-              if (model.weight) stats.push(model.weight);
-              if (model.location) stats.push(model.location);
-              
-              if (stats.length > 0) {
-                const statsText = stats.join(' • ');
-                const statsWidth = pdf.getTextWidth(statsText);
-                pdf.text(statsText, (pageWidth - statsWidth) / 2, statsY);
-              }
               
               // Add additional images if available - each on a new page
               if (model.images && model.images.length > 0) {
@@ -162,11 +170,11 @@ export default function PDFGenerator({ model }: PDFGeneratorProps) {
           reader.readAsDataURL(blob);
         } catch (error) {
           console.error('Error loading main image:', error);
-          // Save PDF without images
+          // Save PDF without images but with stats
           pdf.save(`${model.firstName}_${model.lastName}_Portfolio.pdf`);
         }
       } else {
-        // No main image, save the PDF
+        // No main image, save the PDF with stats
         pdf.save(`${model.firstName}_${model.lastName}_Portfolio.pdf`);
       }
       
