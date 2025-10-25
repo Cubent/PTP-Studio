@@ -39,9 +39,79 @@ export const Header = ({ dictionary }: HeaderProps) => {
 
   return (
     <>
-      <div className="relative bg-white py-8 px-4">
+      <style jsx>{`
+        .mobile-menu {
+          position: fixed !important;
+          top: 0 !important;
+          right: 0 !important;
+          height: 100vh !important;
+          width: 256px !important;
+          background-color: white !important;
+          z-index: 30 !important;
+          transform: translateX(100%) !important;
+          transition: transform 0.3s ease-in-out !important;
+          box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1) !important;
+        }
+        
+        .mobile-menu.open {
+          transform: translateX(0) !important;
+        }
+        
+        .mobile-menu-overlay {
+          position: fixed !important;
+          top: 0 !important;
+          left: 0 !important;
+          right: 0 !important;
+          bottom: 0 !important;
+          background-color: rgba(0, 0, 0, 0.5) !important;
+          z-index: 20 !important;
+        }
+        
+        .search-overlay {
+          position: fixed !important;
+          top: 0 !important;
+          left: 0 !important;
+          right: 0 !important;
+          bottom: 0 !important;
+          background-color: white !important;
+          z-index: 50 !important;
+        }
+        
+        .header-container {
+          position: relative !important;
+          background-color: white !important;
+          padding: 2rem 1rem !important;
+        }
+        
+        .menu-button {
+          position: absolute !important;
+          top: 1rem !important;
+          left: 2rem !important;
+          z-index: 20 !important;
+          display: flex !important;
+          align-items: center !important;
+          gap: 1rem !important;
+        }
+        
+        .right-buttons {
+          position: absolute !important;
+          top: 1rem !important;
+          right: 2rem !important;
+          z-index: 20 !important;
+          display: flex !important;
+          align-items: center !important;
+          gap: 0.25rem !important;
+        }
+        
+        @media (min-width: 640px) {
+          .right-buttons {
+            gap: 1rem !important;
+          }
+        }
+      `}</style>
+      <div className="relative bg-white py-8 px-4 header-container">
         {/* Top Left Hamburger Menu */}
-        <div className="absolute top-4 left-8 z-20 flex items-center gap-4">
+        <div className="menu-button">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="text-black hover:text-gray-600 transition-colors duration-300"
@@ -54,7 +124,7 @@ export const Header = ({ dictionary }: HeaderProps) => {
         </div>
 
         {/* Top Right Buttons */}
-        <div className="absolute top-4 right-8 z-20 flex items-center gap-1 sm:gap-4">
+        <div className="right-buttons">
           {/* Search Icon */}
           <button
             onClick={() => setIsSearchOpen(!isSearchOpen)}
@@ -73,9 +143,7 @@ export const Header = ({ dictionary }: HeaderProps) => {
         </div>
 
         {/* Sidebar Menu - Smaller and closer to right */}
-        <div className={`fixed top-0 right-0 h-full w-64 bg-white z-30 transform transition-transform duration-300 ease-in-out ${
-          isMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}>
+        <div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
           <div className="p-6">
             <div className="mb-8">
               <button 
@@ -192,7 +260,7 @@ export const Header = ({ dictionary }: HeaderProps) => {
 
         {/* Full-page Search Dropdown */}
         {isSearchOpen && (
-          <div className="fixed inset-0 bg-white z-50">
+          <div className="search-overlay">
             <div className="p-6">
               {/* Header */}
               <div className="flex justify-between items-center mb-8">
@@ -261,7 +329,7 @@ export const Header = ({ dictionary }: HeaderProps) => {
         {/* Overlay */}
         {isMenuOpen && (
           <div 
-            className="fixed inset-0 bg-black/50 z-20"
+            className="mobile-menu-overlay"
             onClick={() => setIsMenuOpen(false)}
           />
         )}
