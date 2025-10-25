@@ -285,14 +285,29 @@ export default function CreatorsPage() {
                     </button>
                   </div>
                   <div className="mb-2">
-                    <p className="text-sm text-gray-500 italic">
-                      {creator.profession.charAt(0).toUpperCase() + creator.profession.slice(1).replace('-', ' ')}
+                    {/* Mobile: Separate lines */}
+                    <div className="block sm:hidden">
+                      <p className="text-sm text-gray-500 italic">
+                        {creator.profession.charAt(0).toUpperCase() + creator.profession.slice(1).replace('-', ' ')}
+                      </p>
                       {creator.igProfileLink && (
-                        <span className="ml-2 text-gray-400">
-                          • {creator.igProfileLink.split('/').pop()}
-                        </span>
+                        <p className="text-sm text-gray-400 mt-1">
+                          {creator.igProfileLink.split('/').pop()}
+                        </p>
                       )}
-                    </p>
+                    </div>
+                    
+                    {/* Desktop: Same line */}
+                    <div className="hidden sm:block">
+                      <p className="text-sm text-gray-500 italic">
+                        {creator.profession.charAt(0).toUpperCase() + creator.profession.slice(1).replace('-', ' ')}
+                        {creator.igProfileLink && (
+                          <span className="ml-2 text-gray-400">
+                            • {creator.igProfileLink.split('/').pop()}
+                          </span>
+                        )}
+                      </p>
+                    </div>
                   </div>
                   {showStats === creator.id && (
                     <div className="mb-2 p-3 bg-gray-50 rounded text-sm text-gray-600">
