@@ -440,21 +440,21 @@ export default function ModelApplicationClient() {
               )}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-3">
                 Gender *
               </label>
               <div className="relative">
                 <select
                   value={formData.gender}
                   onChange={(e) => handleInputChange('gender', e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent text-black appearance-none bg-white cursor-pointer hover:border-gray-400 transition-colors"
+                  className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent text-black appearance-none bg-white cursor-pointer hover:border-gray-400 transition-colors text-base"
                   required
                 >
-                  <option value="female" selected>Female</option>
+                  <option value="female">Female</option>
                   <option value="male">Male</option>
                 </select>
-                <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                  <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
+                  <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </div>
@@ -718,25 +718,20 @@ export default function ModelApplicationClient() {
         <NetworkStatus isOnline={isOnline} hasUnsavedChanges={hasUnsavedChanges} />
         
         {/* Header */}
-        <div className="bg-white border-b border-gray-200">
-        <div className="max-w-4xl mx-auto px-4 py-6">
-              <button
-                onClick={() => router.push('/')}
-                className="flex items-center gap-2 text-gray-600 hover:text-black transition-colors mb-4"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                Back to Home
-              </button>
-          <h1 className="text-3xl font-light text-black italic" style={{ fontFamily: 'serif' }}>
-            Get Scouted
-          </h1>
-          <p className="text-gray-600 mt-2">
-            Become part of our international talent network
-          </p>
+        <div className="bg-white">
+          <div className="max-w-4xl mx-auto px-4 py-4">
+            <div className="border-t border-gray-200 pt-4">
+              <h1 className="text-3xl font-light text-black italic" style={{ fontFamily: 'serif' }}>
+                Get Scouted
+              </h1>
+              <p className="text-gray-600 mt-2">
+                Become part of our Europe and UK talent network
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="max-w-4xl mx-auto px-4 py-6">
         {/* Progress Steps */}
         <div className="mb-8">
           {/* Progress Indicator - Hidden on mobile */}

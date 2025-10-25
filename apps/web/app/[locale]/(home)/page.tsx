@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { Menu, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Menu, X, ChevronLeft, ChevronRight, Plus, Minus } from 'lucide-react';
 
 type HomeProps = {
   params: Promise<{
@@ -12,6 +12,9 @@ type HomeProps = {
 
 const Home = ({ params }: HomeProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isModelsOpen, setIsModelsOpen] = useState(false);
+  const [isMenOpen, setIsMenOpen] = useState(false);
+  const [isWomenOpen, setIsWomenOpen] = useState(false);
   const [isModelsSubmenuOpen, setIsModelsSubmenuOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [selectedProject, setSelectedProject] = useState<any>(null);
@@ -285,26 +288,6 @@ const Home = ({ params }: HomeProps) => {
           position: relative !important;
         }
         
-        .homepage-submenu-line::before {
-          content: '' !important;
-          position: absolute !important;
-          left: 0 !important;
-          top: 0 !important;
-          bottom: 0 !important;
-          width: 1px !important;
-          background-color: #d1d5db !important;
-        }
-        
-        .homepage-submenu-line::after {
-          content: '' !important;
-          position: absolute !important;
-          left: 0 !important;
-          top: 1rem !important;
-          width: 1rem !important;
-          height: 1px !important;
-          background-color: #d1d5db !important;
-        }
-        
         .homepage-text {
           position: absolute !important;
           bottom: 2rem !important;
@@ -490,68 +473,77 @@ const Home = ({ params }: HomeProps) => {
             </div>
             
             <nav className="space-y-6">
-              {/* Models with Submenu */}
+              {/* Models Dropdown */}
               <div>
-                <div className="text-xl font-light text-black">
-                  Models
-                </div>
+                <button
+                  onClick={() => setIsModelsOpen(!isModelsOpen)}
+                  className="flex items-center justify-between w-full text-xl font-light text-black hover:text-gray-600 transition-colors duration-300 py-2"
+                >
+                  <span>Models</span>
+                  {isModelsOpen ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
+                </button>
                 
-                {/* Models Submenu */}
-                <div className="ml-4 mt-2 space-y-3">
-                  {/* Men Submenu */}
-                  <div>
-                    <div className="text-lg font-light text-gray-700">
-                      Men
+                {isModelsOpen && (
+                  <div className="ml-4 space-y-3">
+                    {/* Men Section */}
+                    <div>
+                      <button
+                        onClick={() => setIsMenOpen(!isMenOpen)}
+                        className="flex items-center justify-between w-full text-lg font-light text-gray-700 hover:text-black transition-colors duration-300 py-1"
+                      >
+                        <span>Men</span>
+                        {isMenOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                      </button>
+                      {isMenOpen && (
+                        <div className="ml-4 space-y-2">
+                          <Link 
+                            href="/models/men/mainboard" 
+                            className="block text-base text-gray-600 hover:text-black transition-colors duration-300 py-1"
+                            onClick={() => setIsMenuOpen(false)}
+                          >
+                            Mainboard
+                          </Link>
+                          <Link 
+                            href="/models/men/new-faces" 
+                            className="block text-base text-gray-600 hover:text-black transition-colors duration-300 py-1"
+                            onClick={() => setIsMenuOpen(false)}
+                          >
+                            New Faces
+                          </Link>
+                        </div>
+                      )}
                     </div>
-                    <div className="ml-4 mt-2 space-y-2">
-                      <div className="homepage-submenu-line">
-                        <Link 
-                          href="/models/men/mainboard" 
-                          className="block text-base text-gray-600 hover:text-black transition-colors duration-300 ml-6"
-                          onClick={() => setIsMenuOpen(false)}
-                        >
-                          Mainboard
-                        </Link>
-                      </div>
-                      <div className="homepage-submenu-line">
-                        <Link 
-                          href="/models/men/new-faces" 
-                          className="block text-base text-gray-600 hover:text-black transition-colors duration-300 ml-6"
-                          onClick={() => setIsMenuOpen(false)}
-                        >
-                          New Faces
-                        </Link>
-                      </div>
+                    
+                    {/* Women Section */}
+                    <div>
+                      <button
+                        onClick={() => setIsWomenOpen(!isWomenOpen)}
+                        className="flex items-center justify-between w-full text-lg font-light text-gray-700 hover:text-black transition-colors duration-300 py-1"
+                      >
+                        <span>Women</span>
+                        {isWomenOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                      </button>
+                      {isWomenOpen && (
+                        <div className="ml-4 space-y-2">
+                          <Link 
+                            href="/models/women/mainboard" 
+                            className="block text-base text-gray-600 hover:text-black transition-colors duration-300 py-1"
+                            onClick={() => setIsMenuOpen(false)}
+                          >
+                            Mainboard
+                          </Link>
+                          <Link 
+                            href="/models/women/new-faces" 
+                            className="block text-base text-gray-600 hover:text-black transition-colors duration-300 py-1"
+                            onClick={() => setIsMenuOpen(false)}
+                          >
+                            New Faces
+                          </Link>
+                        </div>
+                      )}
                     </div>
                   </div>
-                  
-                  {/* Women Submenu */}
-                  <div>
-                    <div className="text-lg font-light text-gray-700">
-                      Women
-                    </div>
-                    <div className="ml-4 mt-2 space-y-2">
-                      <div className="homepage-submenu-line">
-                        <Link 
-                          href="/models/women/mainboard" 
-                          className="block text-base text-gray-600 hover:text-black transition-colors duration-300 ml-6"
-                          onClick={() => setIsMenuOpen(false)}
-                        >
-                          Mainboard
-                        </Link>
-                      </div>
-                      <div className="homepage-submenu-line">
-                        <Link 
-                          href="/models/women/new-faces" 
-                          className="block text-base text-gray-600 hover:text-black transition-colors duration-300 ml-6"
-                          onClick={() => setIsMenuOpen(false)}
-                        >
-                          New Faces
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                )}
               </div>
               
               {/* Creators */}

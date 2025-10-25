@@ -1,6 +1,6 @@
 'use client';
 
-import { Menu, X, Search } from 'lucide-react';
+import { Menu, X, Search, Plus, Minus } from 'lucide-react';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
@@ -15,6 +15,9 @@ export const Header = ({ dictionary }: HeaderProps) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [isModelsOpen, setIsModelsOpen] = useState(false);
+  const [isMenOpen, setIsMenOpen] = useState(false);
+  const [isWomenOpen, setIsWomenOpen] = useState(false);
 
   // Search functionality
   useEffect(() => {
@@ -85,26 +88,6 @@ export const Header = ({ dictionary }: HeaderProps) => {
         
         .submenu-line {
           position: relative !important;
-        }
-        
-        .submenu-line::before {
-          content: '' !important;
-          position: absolute !important;
-          left: 0 !important;
-          top: 0 !important;
-          bottom: 0 !important;
-          width: 1px !important;
-          background-color: #d1d5db !important;
-        }
-        
-        .submenu-line::after {
-          content: '' !important;
-          position: absolute !important;
-          left: 0 !important;
-          top: 1rem !important;
-          width: 1rem !important;
-          height: 1px !important;
-          background-color: #d1d5db !important;
         }
         
         .mobile-menu-overlay {
@@ -219,68 +202,77 @@ export const Header = ({ dictionary }: HeaderProps) => {
             </div>
             
             <nav className="space-y-4">
-              {/* Models with Submenu */}
+              {/* Models Dropdown */}
               <div>
-                <div className="text-lg font-light text-black">
-                  Models
-                </div>
+                <button
+                  onClick={() => setIsModelsOpen(!isModelsOpen)}
+                  className="flex items-center justify-between w-full text-lg font-light text-black hover:text-gray-600 transition-colors duration-300 py-2"
+                >
+                  <span>Models</span>
+                  {isModelsOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                </button>
                 
-                {/* Models Submenu */}
-                <div className="submenu-container">
-                  {/* Men Submenu */}
-                  <div className="submenu-section">
-                    <div className="submenu-section-title">
-                      Men
+                {isModelsOpen && (
+                  <div className="ml-4 space-y-2">
+                    {/* Men Section */}
+                    <div>
+                      <button
+                        onClick={() => setIsMenOpen(!isMenOpen)}
+                        className="flex items-center justify-between w-full text-base font-light text-gray-600 hover:text-black transition-colors duration-300 py-1"
+                      >
+                        <span>Men</span>
+                        {isMenOpen ? <Minus className="w-3 h-3" /> : <Plus className="w-3 h-3" />}
+                      </button>
+                      {isMenOpen && (
+                        <div className="ml-4 space-y-1">
+                          <Link 
+                            href="/models/men/mainboard" 
+                            className="block text-sm text-gray-600 hover:text-black transition-colors duration-300 py-1"
+                            onClick={() => setIsMenuOpen(false)}
+                          >
+                            Mainboard
+                          </Link>
+                          <Link 
+                            href="/models/men/new-faces" 
+                            className="block text-sm text-gray-600 hover:text-black transition-colors duration-300 py-1"
+                            onClick={() => setIsMenuOpen(false)}
+                          >
+                            New Faces
+                          </Link>
+                        </div>
+                      )}
                     </div>
-                    <div className="submenu-items">
-                      <div className="submenu-line">
-                        <Link 
-                          href="/models/men/mainboard" 
-                          className="block text-sm text-gray-600 hover:text-black transition-colors duration-300 ml-6"
-                          onClick={() => setIsMenuOpen(false)}
-                        >
-                          Mainboard
-                        </Link>
-                      </div>
-                      <div className="submenu-line">
-                        <Link 
-                          href="/models/men/new-faces" 
-                          className="block text-sm text-gray-600 hover:text-black transition-colors duration-300 ml-6"
-                          onClick={() => setIsMenuOpen(false)}
-                        >
-                          New Faces
-                        </Link>
-                      </div>
+                    
+                    {/* Women Section */}
+                    <div>
+                      <button
+                        onClick={() => setIsWomenOpen(!isWomenOpen)}
+                        className="flex items-center justify-between w-full text-base font-light text-gray-600 hover:text-black transition-colors duration-300 py-1"
+                      >
+                        <span>Women</span>
+                        {isWomenOpen ? <Minus className="w-3 h-3" /> : <Plus className="w-3 h-3" />}
+                      </button>
+                      {isWomenOpen && (
+                        <div className="ml-4 space-y-1">
+                          <Link 
+                            href="/models/women/mainboard" 
+                            className="block text-sm text-gray-600 hover:text-black transition-colors duration-300 py-1"
+                            onClick={() => setIsMenuOpen(false)}
+                          >
+                            Mainboard
+                          </Link>
+                          <Link 
+                            href="/models/women/new-faces" 
+                            className="block text-sm text-gray-600 hover:text-black transition-colors duration-300 py-1"
+                            onClick={() => setIsMenuOpen(false)}
+                          >
+                            New Faces
+                          </Link>
+                        </div>
+                      )}
                     </div>
                   </div>
-                  
-                  {/* Women Submenu */}
-                  <div className="submenu-section">
-                    <div className="submenu-section-title">
-                      Women
-                    </div>
-                    <div className="submenu-items">
-                      <div className="submenu-line">
-                        <Link 
-                          href="/models/women/mainboard" 
-                          className="block text-sm text-gray-600 hover:text-black transition-colors duration-300 ml-6"
-                          onClick={() => setIsMenuOpen(false)}
-                        >
-                          Mainboard
-                        </Link>
-                      </div>
-                      <div className="submenu-line">
-                        <Link 
-                          href="/models/women/new-faces" 
-                          className="block text-sm text-gray-600 hover:text-black transition-colors duration-300 ml-6"
-                          onClick={() => setIsMenuOpen(false)}
-                        >
-                          New Faces
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                )}
               </div>
               
               {/* Other Links */}
