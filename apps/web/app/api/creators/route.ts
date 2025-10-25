@@ -7,19 +7,13 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const search = searchParams.get('search');
-    const gender = searchParams.get('gender');
-    const category = searchParams.get('category');
+    const profession = searchParams.get('profession');
 
     let whereClause: any = { isActive: true };
     
-    // Add gender filter if provided
-    if (gender && (gender === 'male' || gender === 'female')) {
-      whereClause.gender = gender;
-    }
-    
-    // Add category filter if provided
-    if (category && (category === 'mainboard' || category === 'new-faces')) {
-      whereClause.category = category;
+    // Add profession filter if provided
+    if (profession) {
+      whereClause.profession = profession;
     }
     
     // Add search filter if provided
@@ -27,6 +21,7 @@ export async function GET(request: NextRequest) {
       whereClause.OR = [
         { firstName: { contains: search, mode: 'insensitive' } },
         { lastName: { contains: search, mode: 'insensitive' } },
+        { profession: { contains: search, mode: 'insensitive' } },
         {
           AND: [
             { firstName: { contains: search.split(' ')[0] || '', mode: 'insensitive' } },
@@ -36,46 +31,47 @@ export async function GET(request: NextRequest) {
       ];
     }
 
-    const models = await prisma.model.findMany({
+    const creators = await prisma.creator.findMany({
       where: whereClause,
       orderBy: { createdAt: 'desc' }
     });
 
-    return NextResponse.json(models);
+    return NextResponse.json(creators);
   } catch (error) {
-    console.error('Error fetching models:', error);
-    return NextResponse.json({ error: 'Failed to fetch models' }, { status: 500 });
+    console.error('Error fetching creators:', error);
+    return NextResponse.json({ error: 'Failed to fetch creators' }, { status: 500 });
   }
 }
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { firstName, lastName, email, igProfileLink, image, images, height, weight, location } = body;
+    const { firstName, lastName, email, phone, igProfileLink, image, images, profession, location, experience, portfolio } = body;
 
-    if (!firstName || !lastName || !email || !image) {
+    if (!firstName || !lastName || !email || !image || !profession) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    const model = await prisma.model.create({
+    const creator = await prisma.creator.create({
       data: {
         firstName,
         lastName,
         email,
+        phone: phone || null,
         igProfileLink: igProfileLink || null,
         image,
         images: images || [],
-        height: height || null,
-        weight: weight || null,
+        profession,
         location: location || null,
+        experience: experience || null,
+        portfolio: portfolio || [],
         isActive: true
       }
     });
 
-    return NextResponse.json(model);
+    return NextResponse.json(creator);
   } catch (error) {
-    console.error('Error creating model:', error);
-    return NextResponse.json({ error: 'Failed to create model' }, { status: 500 });
+    console.error('Error creating creator:', error);
+    return NextResponse.json({ error: 'Failed to create creator' }, { status: 500 });
   }
 }
-

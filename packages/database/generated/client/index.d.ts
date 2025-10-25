@@ -98,6 +98,11 @@ export type ScheduledEvent = $Result.DefaultSelection<Prisma.$ScheduledEventPayl
  * 
  */
 export type Model = $Result.DefaultSelection<Prisma.$ModelPayload>
+/**
+ * Model Creator
+ * 
+ */
+export type Creator = $Result.DefaultSelection<Prisma.$CreatorPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -393,6 +398,16 @@ export class PrismaClient<
     * ```
     */
   get model(): Prisma.ModelDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.creator`: Exposes CRUD operations for the **Creator** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Creators
+    * const creators = await prisma.creator.findMany()
+    * ```
+    */
+  get creator(): Prisma.CreatorDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -849,7 +864,8 @@ export namespace Prisma {
     StripeSubscription: 'StripeSubscription',
     EmailNotification: 'EmailNotification',
     ScheduledEvent: 'ScheduledEvent',
-    Model: 'Model'
+    Model: 'Model',
+    Creator: 'Creator'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -865,7 +881,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "extensionSession" | "usageMetrics" | "usageAnalytics" | "autocompleteAnalytics" | "autocompleteMetrics" | "apiKey" | "userProfile" | "pendingLogin" | "page" | "userPreferences" | "influencer" | "flightRecommendation" | "stripeSubscription" | "emailNotification" | "scheduledEvent" | "model"
+      modelProps: "user" | "extensionSession" | "usageMetrics" | "usageAnalytics" | "autocompleteAnalytics" | "autocompleteMetrics" | "apiKey" | "userProfile" | "pendingLogin" | "page" | "userPreferences" | "influencer" | "flightRecommendation" | "stripeSubscription" | "emailNotification" | "scheduledEvent" | "model" | "creator"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2127,6 +2143,80 @@ export namespace Prisma {
           }
         }
       }
+      Creator: {
+        payload: Prisma.$CreatorPayload<ExtArgs>
+        fields: Prisma.CreatorFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CreatorFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CreatorPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CreatorFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CreatorPayload>
+          }
+          findFirst: {
+            args: Prisma.CreatorFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CreatorPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CreatorFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CreatorPayload>
+          }
+          findMany: {
+            args: Prisma.CreatorFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CreatorPayload>[]
+          }
+          create: {
+            args: Prisma.CreatorCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CreatorPayload>
+          }
+          createMany: {
+            args: Prisma.CreatorCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CreatorCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CreatorPayload>[]
+          }
+          delete: {
+            args: Prisma.CreatorDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CreatorPayload>
+          }
+          update: {
+            args: Prisma.CreatorUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CreatorPayload>
+          }
+          deleteMany: {
+            args: Prisma.CreatorDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CreatorUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CreatorUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CreatorPayload>[]
+          }
+          upsert: {
+            args: Prisma.CreatorUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CreatorPayload>
+          }
+          aggregate: {
+            args: Prisma.CreatorAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCreator>
+          }
+          groupBy: {
+            args: Prisma.CreatorGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CreatorGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CreatorCountArgs<ExtArgs>
+            result: $Utils.Optional<CreatorCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2232,6 +2322,7 @@ export namespace Prisma {
     emailNotification?: EmailNotificationOmit
     scheduledEvent?: ScheduledEventOmit
     model?: ModelOmit
+    creator?: CreatorOmit
   }
 
   /* Types for Logging */
@@ -21522,6 +21613,7 @@ export namespace Prisma {
     weight: string | null
     location: string | null
     gender: string | null
+    category: string | null
     experience: string | null
     availability: string | null
     additionalInfo: string | null
@@ -21542,6 +21634,7 @@ export namespace Prisma {
     weight: string | null
     location: string | null
     gender: string | null
+    category: string | null
     experience: string | null
     availability: string | null
     additionalInfo: string | null
@@ -21563,6 +21656,7 @@ export namespace Prisma {
     weight: number
     location: number
     gender: number
+    category: number
     experience: number
     availability: number
     additionalInfo: number
@@ -21585,6 +21679,7 @@ export namespace Prisma {
     weight?: true
     location?: true
     gender?: true
+    category?: true
     experience?: true
     availability?: true
     additionalInfo?: true
@@ -21605,6 +21700,7 @@ export namespace Prisma {
     weight?: true
     location?: true
     gender?: true
+    category?: true
     experience?: true
     availability?: true
     additionalInfo?: true
@@ -21626,6 +21722,7 @@ export namespace Prisma {
     weight?: true
     location?: true
     gender?: true
+    category?: true
     experience?: true
     availability?: true
     additionalInfo?: true
@@ -21720,6 +21817,7 @@ export namespace Prisma {
     weight: string | null
     location: string | null
     gender: string
+    category: string | null
     experience: string | null
     availability: string | null
     additionalInfo: string | null
@@ -21758,6 +21856,7 @@ export namespace Prisma {
     weight?: boolean
     location?: boolean
     gender?: boolean
+    category?: boolean
     experience?: boolean
     availability?: boolean
     additionalInfo?: boolean
@@ -21779,6 +21878,7 @@ export namespace Prisma {
     weight?: boolean
     location?: boolean
     gender?: boolean
+    category?: boolean
     experience?: boolean
     availability?: boolean
     additionalInfo?: boolean
@@ -21800,6 +21900,7 @@ export namespace Prisma {
     weight?: boolean
     location?: boolean
     gender?: boolean
+    category?: boolean
     experience?: boolean
     availability?: boolean
     additionalInfo?: boolean
@@ -21821,6 +21922,7 @@ export namespace Prisma {
     weight?: boolean
     location?: boolean
     gender?: boolean
+    category?: boolean
     experience?: boolean
     availability?: boolean
     additionalInfo?: boolean
@@ -21829,7 +21931,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ModelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "phone" | "igProfileLink" | "image" | "images" | "height" | "weight" | "location" | "gender" | "experience" | "availability" | "additionalInfo" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["model"]>
+  export type ModelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "phone" | "igProfileLink" | "image" | "images" | "height" | "weight" | "location" | "gender" | "category" | "experience" | "availability" | "additionalInfo" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["model"]>
 
   export type $ModelPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Model"
@@ -21847,6 +21949,7 @@ export namespace Prisma {
       weight: string | null
       location: string | null
       gender: string
+      category: string | null
       experience: string | null
       availability: string | null
       additionalInfo: string | null
@@ -22288,6 +22391,7 @@ export namespace Prisma {
     readonly weight: FieldRef<"Model", 'String'>
     readonly location: FieldRef<"Model", 'String'>
     readonly gender: FieldRef<"Model", 'String'>
+    readonly category: FieldRef<"Model", 'String'>
     readonly experience: FieldRef<"Model", 'String'>
     readonly availability: FieldRef<"Model", 'String'>
     readonly additionalInfo: FieldRef<"Model", 'String'>
@@ -22661,6 +22765,1123 @@ export namespace Prisma {
 
 
   /**
+   * Model Creator
+   */
+
+  export type AggregateCreator = {
+    _count: CreatorCountAggregateOutputType | null
+    _min: CreatorMinAggregateOutputType | null
+    _max: CreatorMaxAggregateOutputType | null
+  }
+
+  export type CreatorMinAggregateOutputType = {
+    id: string | null
+    firstName: string | null
+    lastName: string | null
+    email: string | null
+    phone: string | null
+    igProfileLink: string | null
+    image: string | null
+    profession: string | null
+    location: string | null
+    experience: string | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CreatorMaxAggregateOutputType = {
+    id: string | null
+    firstName: string | null
+    lastName: string | null
+    email: string | null
+    phone: string | null
+    igProfileLink: string | null
+    image: string | null
+    profession: string | null
+    location: string | null
+    experience: string | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CreatorCountAggregateOutputType = {
+    id: number
+    firstName: number
+    lastName: number
+    email: number
+    phone: number
+    igProfileLink: number
+    image: number
+    images: number
+    profession: number
+    location: number
+    experience: number
+    portfolio: number
+    isActive: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type CreatorMinAggregateInputType = {
+    id?: true
+    firstName?: true
+    lastName?: true
+    email?: true
+    phone?: true
+    igProfileLink?: true
+    image?: true
+    profession?: true
+    location?: true
+    experience?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CreatorMaxAggregateInputType = {
+    id?: true
+    firstName?: true
+    lastName?: true
+    email?: true
+    phone?: true
+    igProfileLink?: true
+    image?: true
+    profession?: true
+    location?: true
+    experience?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CreatorCountAggregateInputType = {
+    id?: true
+    firstName?: true
+    lastName?: true
+    email?: true
+    phone?: true
+    igProfileLink?: true
+    image?: true
+    images?: true
+    profession?: true
+    location?: true
+    experience?: true
+    portfolio?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type CreatorAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Creator to aggregate.
+     */
+    where?: CreatorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Creators to fetch.
+     */
+    orderBy?: CreatorOrderByWithRelationInput | CreatorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CreatorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Creators from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Creators.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Creators
+    **/
+    _count?: true | CreatorCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CreatorMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CreatorMaxAggregateInputType
+  }
+
+  export type GetCreatorAggregateType<T extends CreatorAggregateArgs> = {
+        [P in keyof T & keyof AggregateCreator]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCreator[P]>
+      : GetScalarType<T[P], AggregateCreator[P]>
+  }
+
+
+
+
+  export type CreatorGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CreatorWhereInput
+    orderBy?: CreatorOrderByWithAggregationInput | CreatorOrderByWithAggregationInput[]
+    by: CreatorScalarFieldEnum[] | CreatorScalarFieldEnum
+    having?: CreatorScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CreatorCountAggregateInputType | true
+    _min?: CreatorMinAggregateInputType
+    _max?: CreatorMaxAggregateInputType
+  }
+
+  export type CreatorGroupByOutputType = {
+    id: string
+    firstName: string
+    lastName: string
+    email: string
+    phone: string | null
+    igProfileLink: string | null
+    image: string
+    images: string[]
+    profession: string
+    location: string | null
+    experience: string | null
+    portfolio: string[]
+    isActive: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: CreatorCountAggregateOutputType | null
+    _min: CreatorMinAggregateOutputType | null
+    _max: CreatorMaxAggregateOutputType | null
+  }
+
+  type GetCreatorGroupByPayload<T extends CreatorGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CreatorGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CreatorGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CreatorGroupByOutputType[P]>
+            : GetScalarType<T[P], CreatorGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CreatorSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    email?: boolean
+    phone?: boolean
+    igProfileLink?: boolean
+    image?: boolean
+    images?: boolean
+    profession?: boolean
+    location?: boolean
+    experience?: boolean
+    portfolio?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["creator"]>
+
+  export type CreatorSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    email?: boolean
+    phone?: boolean
+    igProfileLink?: boolean
+    image?: boolean
+    images?: boolean
+    profession?: boolean
+    location?: boolean
+    experience?: boolean
+    portfolio?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["creator"]>
+
+  export type CreatorSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    email?: boolean
+    phone?: boolean
+    igProfileLink?: boolean
+    image?: boolean
+    images?: boolean
+    profession?: boolean
+    location?: boolean
+    experience?: boolean
+    portfolio?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["creator"]>
+
+  export type CreatorSelectScalar = {
+    id?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    email?: boolean
+    phone?: boolean
+    igProfileLink?: boolean
+    image?: boolean
+    images?: boolean
+    profession?: boolean
+    location?: boolean
+    experience?: boolean
+    portfolio?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type CreatorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "phone" | "igProfileLink" | "image" | "images" | "profession" | "location" | "experience" | "portfolio" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["creator"]>
+
+  export type $CreatorPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Creator"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      firstName: string
+      lastName: string
+      email: string
+      phone: string | null
+      igProfileLink: string | null
+      image: string
+      images: string[]
+      profession: string
+      location: string | null
+      experience: string | null
+      portfolio: string[]
+      isActive: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["creator"]>
+    composites: {}
+  }
+
+  type CreatorGetPayload<S extends boolean | null | undefined | CreatorDefaultArgs> = $Result.GetResult<Prisma.$CreatorPayload, S>
+
+  type CreatorCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CreatorFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CreatorCountAggregateInputType | true
+    }
+
+  export interface CreatorDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Creator'], meta: { name: 'Creator' } }
+    /**
+     * Find zero or one Creator that matches the filter.
+     * @param {CreatorFindUniqueArgs} args - Arguments to find a Creator
+     * @example
+     * // Get one Creator
+     * const creator = await prisma.creator.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CreatorFindUniqueArgs>(args: SelectSubset<T, CreatorFindUniqueArgs<ExtArgs>>): Prisma__CreatorClient<$Result.GetResult<Prisma.$CreatorPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one Creator that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CreatorFindUniqueOrThrowArgs} args - Arguments to find a Creator
+     * @example
+     * // Get one Creator
+     * const creator = await prisma.creator.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CreatorFindUniqueOrThrowArgs>(args: SelectSubset<T, CreatorFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CreatorClient<$Result.GetResult<Prisma.$CreatorPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first Creator that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CreatorFindFirstArgs} args - Arguments to find a Creator
+     * @example
+     * // Get one Creator
+     * const creator = await prisma.creator.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CreatorFindFirstArgs>(args?: SelectSubset<T, CreatorFindFirstArgs<ExtArgs>>): Prisma__CreatorClient<$Result.GetResult<Prisma.$CreatorPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first Creator that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CreatorFindFirstOrThrowArgs} args - Arguments to find a Creator
+     * @example
+     * // Get one Creator
+     * const creator = await prisma.creator.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CreatorFindFirstOrThrowArgs>(args?: SelectSubset<T, CreatorFindFirstOrThrowArgs<ExtArgs>>): Prisma__CreatorClient<$Result.GetResult<Prisma.$CreatorPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more Creators that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CreatorFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Creators
+     * const creators = await prisma.creator.findMany()
+     * 
+     * // Get first 10 Creators
+     * const creators = await prisma.creator.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const creatorWithIdOnly = await prisma.creator.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CreatorFindManyArgs>(args?: SelectSubset<T, CreatorFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatorPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a Creator.
+     * @param {CreatorCreateArgs} args - Arguments to create a Creator.
+     * @example
+     * // Create one Creator
+     * const Creator = await prisma.creator.create({
+     *   data: {
+     *     // ... data to create a Creator
+     *   }
+     * })
+     * 
+     */
+    create<T extends CreatorCreateArgs>(args: SelectSubset<T, CreatorCreateArgs<ExtArgs>>): Prisma__CreatorClient<$Result.GetResult<Prisma.$CreatorPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many Creators.
+     * @param {CreatorCreateManyArgs} args - Arguments to create many Creators.
+     * @example
+     * // Create many Creators
+     * const creator = await prisma.creator.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CreatorCreateManyArgs>(args?: SelectSubset<T, CreatorCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Creators and returns the data saved in the database.
+     * @param {CreatorCreateManyAndReturnArgs} args - Arguments to create many Creators.
+     * @example
+     * // Create many Creators
+     * const creator = await prisma.creator.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Creators and only return the `id`
+     * const creatorWithIdOnly = await prisma.creator.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CreatorCreateManyAndReturnArgs>(args?: SelectSubset<T, CreatorCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatorPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a Creator.
+     * @param {CreatorDeleteArgs} args - Arguments to delete one Creator.
+     * @example
+     * // Delete one Creator
+     * const Creator = await prisma.creator.delete({
+     *   where: {
+     *     // ... filter to delete one Creator
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CreatorDeleteArgs>(args: SelectSubset<T, CreatorDeleteArgs<ExtArgs>>): Prisma__CreatorClient<$Result.GetResult<Prisma.$CreatorPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one Creator.
+     * @param {CreatorUpdateArgs} args - Arguments to update one Creator.
+     * @example
+     * // Update one Creator
+     * const creator = await prisma.creator.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CreatorUpdateArgs>(args: SelectSubset<T, CreatorUpdateArgs<ExtArgs>>): Prisma__CreatorClient<$Result.GetResult<Prisma.$CreatorPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more Creators.
+     * @param {CreatorDeleteManyArgs} args - Arguments to filter Creators to delete.
+     * @example
+     * // Delete a few Creators
+     * const { count } = await prisma.creator.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CreatorDeleteManyArgs>(args?: SelectSubset<T, CreatorDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Creators.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CreatorUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Creators
+     * const creator = await prisma.creator.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CreatorUpdateManyArgs>(args: SelectSubset<T, CreatorUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Creators and returns the data updated in the database.
+     * @param {CreatorUpdateManyAndReturnArgs} args - Arguments to update many Creators.
+     * @example
+     * // Update many Creators
+     * const creator = await prisma.creator.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Creators and only return the `id`
+     * const creatorWithIdOnly = await prisma.creator.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CreatorUpdateManyAndReturnArgs>(args: SelectSubset<T, CreatorUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatorPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one Creator.
+     * @param {CreatorUpsertArgs} args - Arguments to update or create a Creator.
+     * @example
+     * // Update or create a Creator
+     * const creator = await prisma.creator.upsert({
+     *   create: {
+     *     // ... data to create a Creator
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Creator we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CreatorUpsertArgs>(args: SelectSubset<T, CreatorUpsertArgs<ExtArgs>>): Prisma__CreatorClient<$Result.GetResult<Prisma.$CreatorPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of Creators.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CreatorCountArgs} args - Arguments to filter Creators to count.
+     * @example
+     * // Count the number of Creators
+     * const count = await prisma.creator.count({
+     *   where: {
+     *     // ... the filter for the Creators we want to count
+     *   }
+     * })
+    **/
+    count<T extends CreatorCountArgs>(
+      args?: Subset<T, CreatorCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CreatorCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Creator.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CreatorAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CreatorAggregateArgs>(args: Subset<T, CreatorAggregateArgs>): Prisma.PrismaPromise<GetCreatorAggregateType<T>>
+
+    /**
+     * Group by Creator.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CreatorGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CreatorGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CreatorGroupByArgs['orderBy'] }
+        : { orderBy?: CreatorGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CreatorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCreatorGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Creator model
+   */
+  readonly fields: CreatorFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Creator.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CreatorClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Creator model
+   */ 
+  interface CreatorFieldRefs {
+    readonly id: FieldRef<"Creator", 'String'>
+    readonly firstName: FieldRef<"Creator", 'String'>
+    readonly lastName: FieldRef<"Creator", 'String'>
+    readonly email: FieldRef<"Creator", 'String'>
+    readonly phone: FieldRef<"Creator", 'String'>
+    readonly igProfileLink: FieldRef<"Creator", 'String'>
+    readonly image: FieldRef<"Creator", 'String'>
+    readonly images: FieldRef<"Creator", 'String[]'>
+    readonly profession: FieldRef<"Creator", 'String'>
+    readonly location: FieldRef<"Creator", 'String'>
+    readonly experience: FieldRef<"Creator", 'String'>
+    readonly portfolio: FieldRef<"Creator", 'String[]'>
+    readonly isActive: FieldRef<"Creator", 'Boolean'>
+    readonly createdAt: FieldRef<"Creator", 'DateTime'>
+    readonly updatedAt: FieldRef<"Creator", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Creator findUnique
+   */
+  export type CreatorFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Creator
+     */
+    select?: CreatorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Creator
+     */
+    omit?: CreatorOmit<ExtArgs> | null
+    /**
+     * Filter, which Creator to fetch.
+     */
+    where: CreatorWhereUniqueInput
+  }
+
+  /**
+   * Creator findUniqueOrThrow
+   */
+  export type CreatorFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Creator
+     */
+    select?: CreatorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Creator
+     */
+    omit?: CreatorOmit<ExtArgs> | null
+    /**
+     * Filter, which Creator to fetch.
+     */
+    where: CreatorWhereUniqueInput
+  }
+
+  /**
+   * Creator findFirst
+   */
+  export type CreatorFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Creator
+     */
+    select?: CreatorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Creator
+     */
+    omit?: CreatorOmit<ExtArgs> | null
+    /**
+     * Filter, which Creator to fetch.
+     */
+    where?: CreatorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Creators to fetch.
+     */
+    orderBy?: CreatorOrderByWithRelationInput | CreatorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Creators.
+     */
+    cursor?: CreatorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Creators from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Creators.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Creators.
+     */
+    distinct?: CreatorScalarFieldEnum | CreatorScalarFieldEnum[]
+  }
+
+  /**
+   * Creator findFirstOrThrow
+   */
+  export type CreatorFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Creator
+     */
+    select?: CreatorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Creator
+     */
+    omit?: CreatorOmit<ExtArgs> | null
+    /**
+     * Filter, which Creator to fetch.
+     */
+    where?: CreatorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Creators to fetch.
+     */
+    orderBy?: CreatorOrderByWithRelationInput | CreatorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Creators.
+     */
+    cursor?: CreatorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Creators from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Creators.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Creators.
+     */
+    distinct?: CreatorScalarFieldEnum | CreatorScalarFieldEnum[]
+  }
+
+  /**
+   * Creator findMany
+   */
+  export type CreatorFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Creator
+     */
+    select?: CreatorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Creator
+     */
+    omit?: CreatorOmit<ExtArgs> | null
+    /**
+     * Filter, which Creators to fetch.
+     */
+    where?: CreatorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Creators to fetch.
+     */
+    orderBy?: CreatorOrderByWithRelationInput | CreatorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Creators.
+     */
+    cursor?: CreatorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Creators from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Creators.
+     */
+    skip?: number
+    distinct?: CreatorScalarFieldEnum | CreatorScalarFieldEnum[]
+  }
+
+  /**
+   * Creator create
+   */
+  export type CreatorCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Creator
+     */
+    select?: CreatorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Creator
+     */
+    omit?: CreatorOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Creator.
+     */
+    data: XOR<CreatorCreateInput, CreatorUncheckedCreateInput>
+  }
+
+  /**
+   * Creator createMany
+   */
+  export type CreatorCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Creators.
+     */
+    data: CreatorCreateManyInput | CreatorCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Creator createManyAndReturn
+   */
+  export type CreatorCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Creator
+     */
+    select?: CreatorSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Creator
+     */
+    omit?: CreatorOmit<ExtArgs> | null
+    /**
+     * The data used to create many Creators.
+     */
+    data: CreatorCreateManyInput | CreatorCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Creator update
+   */
+  export type CreatorUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Creator
+     */
+    select?: CreatorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Creator
+     */
+    omit?: CreatorOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Creator.
+     */
+    data: XOR<CreatorUpdateInput, CreatorUncheckedUpdateInput>
+    /**
+     * Choose, which Creator to update.
+     */
+    where: CreatorWhereUniqueInput
+  }
+
+  /**
+   * Creator updateMany
+   */
+  export type CreatorUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Creators.
+     */
+    data: XOR<CreatorUpdateManyMutationInput, CreatorUncheckedUpdateManyInput>
+    /**
+     * Filter which Creators to update
+     */
+    where?: CreatorWhereInput
+    /**
+     * Limit how many Creators to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Creator updateManyAndReturn
+   */
+  export type CreatorUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Creator
+     */
+    select?: CreatorSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Creator
+     */
+    omit?: CreatorOmit<ExtArgs> | null
+    /**
+     * The data used to update Creators.
+     */
+    data: XOR<CreatorUpdateManyMutationInput, CreatorUncheckedUpdateManyInput>
+    /**
+     * Filter which Creators to update
+     */
+    where?: CreatorWhereInput
+    /**
+     * Limit how many Creators to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Creator upsert
+   */
+  export type CreatorUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Creator
+     */
+    select?: CreatorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Creator
+     */
+    omit?: CreatorOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Creator to update in case it exists.
+     */
+    where: CreatorWhereUniqueInput
+    /**
+     * In case the Creator found by the `where` argument doesn't exist, create a new Creator with this data.
+     */
+    create: XOR<CreatorCreateInput, CreatorUncheckedCreateInput>
+    /**
+     * In case the Creator was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CreatorUpdateInput, CreatorUncheckedUpdateInput>
+  }
+
+  /**
+   * Creator delete
+   */
+  export type CreatorDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Creator
+     */
+    select?: CreatorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Creator
+     */
+    omit?: CreatorOmit<ExtArgs> | null
+    /**
+     * Filter which Creator to delete.
+     */
+    where: CreatorWhereUniqueInput
+  }
+
+  /**
+   * Creator deleteMany
+   */
+  export type CreatorDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Creators to delete
+     */
+    where?: CreatorWhereInput
+    /**
+     * Limit how many Creators to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Creator without action
+   */
+  export type CreatorDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Creator
+     */
+    select?: CreatorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Creator
+     */
+    omit?: CreatorOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -22987,6 +24208,7 @@ export namespace Prisma {
     weight: 'weight',
     location: 'location',
     gender: 'gender',
+    category: 'category',
     experience: 'experience',
     availability: 'availability',
     additionalInfo: 'additionalInfo',
@@ -22996,6 +24218,27 @@ export namespace Prisma {
   };
 
   export type ModelScalarFieldEnum = (typeof ModelScalarFieldEnum)[keyof typeof ModelScalarFieldEnum]
+
+
+  export const CreatorScalarFieldEnum: {
+    id: 'id',
+    firstName: 'firstName',
+    lastName: 'lastName',
+    email: 'email',
+    phone: 'phone',
+    igProfileLink: 'igProfileLink',
+    image: 'image',
+    images: 'images',
+    profession: 'profession',
+    location: 'location',
+    experience: 'experience',
+    portfolio: 'portfolio',
+    isActive: 'isActive',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type CreatorScalarFieldEnum = (typeof CreatorScalarFieldEnum)[keyof typeof CreatorScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -24692,6 +25935,7 @@ export namespace Prisma {
     weight?: StringNullableFilter<"Model"> | string | null
     location?: StringNullableFilter<"Model"> | string | null
     gender?: StringFilter<"Model"> | string
+    category?: StringNullableFilter<"Model"> | string | null
     experience?: StringNullableFilter<"Model"> | string | null
     availability?: StringNullableFilter<"Model"> | string | null
     additionalInfo?: StringNullableFilter<"Model"> | string | null
@@ -24713,6 +25957,7 @@ export namespace Prisma {
     weight?: SortOrderInput | SortOrder
     location?: SortOrderInput | SortOrder
     gender?: SortOrder
+    category?: SortOrderInput | SortOrder
     experience?: SortOrderInput | SortOrder
     availability?: SortOrderInput | SortOrder
     additionalInfo?: SortOrderInput | SortOrder
@@ -24737,6 +25982,7 @@ export namespace Prisma {
     weight?: StringNullableFilter<"Model"> | string | null
     location?: StringNullableFilter<"Model"> | string | null
     gender?: StringFilter<"Model"> | string
+    category?: StringNullableFilter<"Model"> | string | null
     experience?: StringNullableFilter<"Model"> | string | null
     availability?: StringNullableFilter<"Model"> | string | null
     additionalInfo?: StringNullableFilter<"Model"> | string | null
@@ -24758,6 +26004,7 @@ export namespace Prisma {
     weight?: SortOrderInput | SortOrder
     location?: SortOrderInput | SortOrder
     gender?: SortOrder
+    category?: SortOrderInput | SortOrder
     experience?: SortOrderInput | SortOrder
     availability?: SortOrderInput | SortOrder
     additionalInfo?: SortOrderInput | SortOrder
@@ -24785,12 +26032,115 @@ export namespace Prisma {
     weight?: StringNullableWithAggregatesFilter<"Model"> | string | null
     location?: StringNullableWithAggregatesFilter<"Model"> | string | null
     gender?: StringWithAggregatesFilter<"Model"> | string
+    category?: StringNullableWithAggregatesFilter<"Model"> | string | null
     experience?: StringNullableWithAggregatesFilter<"Model"> | string | null
     availability?: StringNullableWithAggregatesFilter<"Model"> | string | null
     additionalInfo?: StringNullableWithAggregatesFilter<"Model"> | string | null
     isActive?: BoolWithAggregatesFilter<"Model"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Model"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Model"> | Date | string
+  }
+
+  export type CreatorWhereInput = {
+    AND?: CreatorWhereInput | CreatorWhereInput[]
+    OR?: CreatorWhereInput[]
+    NOT?: CreatorWhereInput | CreatorWhereInput[]
+    id?: StringFilter<"Creator"> | string
+    firstName?: StringFilter<"Creator"> | string
+    lastName?: StringFilter<"Creator"> | string
+    email?: StringFilter<"Creator"> | string
+    phone?: StringNullableFilter<"Creator"> | string | null
+    igProfileLink?: StringNullableFilter<"Creator"> | string | null
+    image?: StringFilter<"Creator"> | string
+    images?: StringNullableListFilter<"Creator">
+    profession?: StringFilter<"Creator"> | string
+    location?: StringNullableFilter<"Creator"> | string | null
+    experience?: StringNullableFilter<"Creator"> | string | null
+    portfolio?: StringNullableListFilter<"Creator">
+    isActive?: BoolFilter<"Creator"> | boolean
+    createdAt?: DateTimeFilter<"Creator"> | Date | string
+    updatedAt?: DateTimeFilter<"Creator"> | Date | string
+  }
+
+  export type CreatorOrderByWithRelationInput = {
+    id?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    email?: SortOrder
+    phone?: SortOrderInput | SortOrder
+    igProfileLink?: SortOrderInput | SortOrder
+    image?: SortOrder
+    images?: SortOrder
+    profession?: SortOrder
+    location?: SortOrderInput | SortOrder
+    experience?: SortOrderInput | SortOrder
+    portfolio?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CreatorWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    email?: string
+    AND?: CreatorWhereInput | CreatorWhereInput[]
+    OR?: CreatorWhereInput[]
+    NOT?: CreatorWhereInput | CreatorWhereInput[]
+    firstName?: StringFilter<"Creator"> | string
+    lastName?: StringFilter<"Creator"> | string
+    phone?: StringNullableFilter<"Creator"> | string | null
+    igProfileLink?: StringNullableFilter<"Creator"> | string | null
+    image?: StringFilter<"Creator"> | string
+    images?: StringNullableListFilter<"Creator">
+    profession?: StringFilter<"Creator"> | string
+    location?: StringNullableFilter<"Creator"> | string | null
+    experience?: StringNullableFilter<"Creator"> | string | null
+    portfolio?: StringNullableListFilter<"Creator">
+    isActive?: BoolFilter<"Creator"> | boolean
+    createdAt?: DateTimeFilter<"Creator"> | Date | string
+    updatedAt?: DateTimeFilter<"Creator"> | Date | string
+  }, "id" | "email">
+
+  export type CreatorOrderByWithAggregationInput = {
+    id?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    email?: SortOrder
+    phone?: SortOrderInput | SortOrder
+    igProfileLink?: SortOrderInput | SortOrder
+    image?: SortOrder
+    images?: SortOrder
+    profession?: SortOrder
+    location?: SortOrderInput | SortOrder
+    experience?: SortOrderInput | SortOrder
+    portfolio?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: CreatorCountOrderByAggregateInput
+    _max?: CreatorMaxOrderByAggregateInput
+    _min?: CreatorMinOrderByAggregateInput
+  }
+
+  export type CreatorScalarWhereWithAggregatesInput = {
+    AND?: CreatorScalarWhereWithAggregatesInput | CreatorScalarWhereWithAggregatesInput[]
+    OR?: CreatorScalarWhereWithAggregatesInput[]
+    NOT?: CreatorScalarWhereWithAggregatesInput | CreatorScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Creator"> | string
+    firstName?: StringWithAggregatesFilter<"Creator"> | string
+    lastName?: StringWithAggregatesFilter<"Creator"> | string
+    email?: StringWithAggregatesFilter<"Creator"> | string
+    phone?: StringNullableWithAggregatesFilter<"Creator"> | string | null
+    igProfileLink?: StringNullableWithAggregatesFilter<"Creator"> | string | null
+    image?: StringWithAggregatesFilter<"Creator"> | string
+    images?: StringNullableListFilter<"Creator">
+    profession?: StringWithAggregatesFilter<"Creator"> | string
+    location?: StringNullableWithAggregatesFilter<"Creator"> | string | null
+    experience?: StringNullableWithAggregatesFilter<"Creator"> | string | null
+    portfolio?: StringNullableListFilter<"Creator">
+    isActive?: BoolWithAggregatesFilter<"Creator"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Creator"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Creator"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -26600,6 +27950,7 @@ export namespace Prisma {
     weight?: string | null
     location?: string | null
     gender?: string
+    category?: string | null
     experience?: string | null
     availability?: string | null
     additionalInfo?: string | null
@@ -26621,6 +27972,7 @@ export namespace Prisma {
     weight?: string | null
     location?: string | null
     gender?: string
+    category?: string | null
     experience?: string | null
     availability?: string | null
     additionalInfo?: string | null
@@ -26642,6 +27994,7 @@ export namespace Prisma {
     weight?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
     experience?: NullableStringFieldUpdateOperationsInput | string | null
     availability?: NullableStringFieldUpdateOperationsInput | string | null
     additionalInfo?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26663,6 +28016,7 @@ export namespace Prisma {
     weight?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
     experience?: NullableStringFieldUpdateOperationsInput | string | null
     availability?: NullableStringFieldUpdateOperationsInput | string | null
     additionalInfo?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26684,6 +28038,7 @@ export namespace Prisma {
     weight?: string | null
     location?: string | null
     gender?: string
+    category?: string | null
     experience?: string | null
     availability?: string | null
     additionalInfo?: string | null
@@ -26705,6 +28060,7 @@ export namespace Prisma {
     weight?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
     experience?: NullableStringFieldUpdateOperationsInput | string | null
     availability?: NullableStringFieldUpdateOperationsInput | string | null
     additionalInfo?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26726,9 +28082,136 @@ export namespace Prisma {
     weight?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
     experience?: NullableStringFieldUpdateOperationsInput | string | null
     availability?: NullableStringFieldUpdateOperationsInput | string | null
     additionalInfo?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CreatorCreateInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    phone?: string | null
+    igProfileLink?: string | null
+    image: string
+    images?: CreatorCreateimagesInput | string[]
+    profession: string
+    location?: string | null
+    experience?: string | null
+    portfolio?: CreatorCreateportfolioInput | string[]
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CreatorUncheckedCreateInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    phone?: string | null
+    igProfileLink?: string | null
+    image: string
+    images?: CreatorCreateimagesInput | string[]
+    profession: string
+    location?: string | null
+    experience?: string | null
+    portfolio?: CreatorCreateportfolioInput | string[]
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CreatorUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    igProfileLink?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: StringFieldUpdateOperationsInput | string
+    images?: CreatorUpdateimagesInput | string[]
+    profession?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    experience?: NullableStringFieldUpdateOperationsInput | string | null
+    portfolio?: CreatorUpdateportfolioInput | string[]
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CreatorUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    igProfileLink?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: StringFieldUpdateOperationsInput | string
+    images?: CreatorUpdateimagesInput | string[]
+    profession?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    experience?: NullableStringFieldUpdateOperationsInput | string | null
+    portfolio?: CreatorUpdateportfolioInput | string[]
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CreatorCreateManyInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    phone?: string | null
+    igProfileLink?: string | null
+    image: string
+    images?: CreatorCreateimagesInput | string[]
+    profession: string
+    location?: string | null
+    experience?: string | null
+    portfolio?: CreatorCreateportfolioInput | string[]
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CreatorUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    igProfileLink?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: StringFieldUpdateOperationsInput | string
+    images?: CreatorUpdateimagesInput | string[]
+    profession?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    experience?: NullableStringFieldUpdateOperationsInput | string | null
+    portfolio?: CreatorUpdateportfolioInput | string[]
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CreatorUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    igProfileLink?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: StringFieldUpdateOperationsInput | string
+    images?: CreatorUpdateimagesInput | string[]
+    profession?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    experience?: NullableStringFieldUpdateOperationsInput | string | null
+    portfolio?: CreatorUpdateportfolioInput | string[]
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28068,6 +29551,7 @@ export namespace Prisma {
     weight?: SortOrder
     location?: SortOrder
     gender?: SortOrder
+    category?: SortOrder
     experience?: SortOrder
     availability?: SortOrder
     additionalInfo?: SortOrder
@@ -28088,6 +29572,7 @@ export namespace Prisma {
     weight?: SortOrder
     location?: SortOrder
     gender?: SortOrder
+    category?: SortOrder
     experience?: SortOrder
     availability?: SortOrder
     additionalInfo?: SortOrder
@@ -28108,9 +29593,60 @@ export namespace Prisma {
     weight?: SortOrder
     location?: SortOrder
     gender?: SortOrder
+    category?: SortOrder
     experience?: SortOrder
     availability?: SortOrder
     additionalInfo?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CreatorCountOrderByAggregateInput = {
+    id?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    email?: SortOrder
+    phone?: SortOrder
+    igProfileLink?: SortOrder
+    image?: SortOrder
+    images?: SortOrder
+    profession?: SortOrder
+    location?: SortOrder
+    experience?: SortOrder
+    portfolio?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CreatorMaxOrderByAggregateInput = {
+    id?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    email?: SortOrder
+    phone?: SortOrder
+    igProfileLink?: SortOrder
+    image?: SortOrder
+    profession?: SortOrder
+    location?: SortOrder
+    experience?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CreatorMinOrderByAggregateInput = {
+    id?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    email?: SortOrder
+    phone?: SortOrder
+    igProfileLink?: SortOrder
+    image?: SortOrder
+    profession?: SortOrder
+    location?: SortOrder
+    experience?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -28761,6 +30297,24 @@ export namespace Prisma {
   }
 
   export type ModelUpdateimagesInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type CreatorCreateimagesInput = {
+    set: string[]
+  }
+
+  export type CreatorCreateportfolioInput = {
+    set: string[]
+  }
+
+  export type CreatorUpdateimagesInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type CreatorUpdateportfolioInput = {
     set?: string[]
     push?: string | string[]
   }

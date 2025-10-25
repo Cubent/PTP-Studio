@@ -9,7 +9,7 @@ export default function ChiSiamoPage() {
       <div className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl leading-relaxed text-black" style={{ fontFamily: 'Inter, sans-serif', fontWeight: 100 }}>
-            <span style={{ backgroundColor: '#fef08a', padding: '0.25rem 0.5rem', borderRadius: '0.25rem' }}>Dal 1998</span> trasformiamo il talento in opportunità. Siamo un'agenzia di modelli professionisti specializzata in sfilate, shooting, video commerciali e eventi aziendali, che connette volti unici con i più grandi brand internazionali.
+            <span style={{ backgroundColor: '#fef08a', padding: '0.25rem 0.5rem', borderRadius: '0.25rem' }}>Since 1998</span> we transform talent into opportunities. We are a professional modeling agency specialized in fashion shows, photo shoots, commercial videos and corporate events, connecting unique faces with the biggest international brands.
           </h2>
         </div>
       </div>
@@ -28,19 +28,19 @@ export default function ChiSiamoPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="text-center">
               <div className="text-5xl font-light text-white mb-2" style={{ fontFamily: 'serif' }}>25+</div>
-              <div className="text-gray-200">Anni di Esperienza</div>
+              <div className="text-gray-200">Years of Experience</div>
             </div>
             <div className="text-center">
               <div className="text-5xl font-light text-white mb-2" style={{ fontFamily: 'serif' }}>500+</div>
-              <div className="text-gray-200">Talenti Rappresentati</div>
+              <div className="text-gray-200">Talents Represented</div>
             </div>
             <div className="text-center">
               <div className="text-5xl font-light text-white mb-2" style={{ fontFamily: 'serif' }}>1000+</div>
-              <div className="text-gray-200">Progetti Realizzati</div>
+              <div className="text-gray-200">Projects Completed</div>
             </div>
             <div className="text-center">
               <div className="text-5xl font-light text-white mb-2" style={{ fontFamily: 'serif' }}>50+</div>
-              <div className="text-gray-200">Brand Partner</div>
+              <div className="text-gray-200">Brand Partners</div>
             </div>
           </div>
         </div>
@@ -112,8 +112,8 @@ export default function ChiSiamoPage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 items-center">
             <div className="lg:col-span-2">
               <p className="text-2xl sm:text-3xl lg:text-4xl leading-relaxed text-black" style={{ fontFamily: 'Inter, sans-serif', fontWeight: 100 }}>
-                Il nostro team è composto da professionisti appassionati con anni di <span style={{ backgroundColor: '#fef08a', padding: '0.25rem 0.5rem', borderRadius: '0.25rem' }}>esperienza nel settore della moda, dello spettacolo e degli eventi.</span> Ogni membro porta competenze uniche e una dedizione condivisa 
-                verso l'eccellenza e il successo dei nostri talenti.
+                Our team consists of passionate professionals with years of <span style={{ backgroundColor: '#fef08a', padding: '0.25rem 0.5rem', borderRadius: '0.25rem' }}>experience in the fashion, entertainment and events industry.</span> Each member brings unique skills and a shared dedication 
+                to excellence and the success of our talents.
               </p>
             </div>
             <div className="flex justify-center lg:justify-end">
@@ -121,7 +121,7 @@ export default function ChiSiamoPage() {
                 href="/contact" 
                 className="inline-block bg-black text-white px-8 py-4 rounded-lg font-medium hover:bg-gray-800 transition-colors text-lg"
               >
-                Entra in Contatto
+                Get in Touch
               </Link>
             </div>
           </div>

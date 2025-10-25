@@ -1,8 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import React, { useState, useEffect } from 'react';
-import { ArrowRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { Menu, X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 type HomeProps = {
   params: Promise<{
@@ -10,365 +10,762 @@ type HomeProps = {
   }>;
 };
 
-const HeroImageCarousel = () => {
-  const images = [
-    'https://static.wixstatic.com/media/4da6c5_f9910d1e1eb84abf92e2c9938de1c1a0~mv2.png', // Original image
-    'https://static.wixstatic.com/media/4da6c5_595f9fb8bf464e639674981630e7d6db~mv2.png',
-    'https://static.wixstatic.com/media/4da6c5_35ae9d97680f4cea96a079760af6b535~mv2.png',
-    'https://static.wixstatic.com/media/4da6c5_1abd4da8c2a341b9b280a8f4b4c30ba8~mv2.png',
+const Home = ({ params }: HomeProps) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isModelsSubmenuOpen, setIsModelsSubmenuOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [selectedProject, setSelectedProject] = useState<any>(null);
+
+  const projects = [
+    {
+      id: 'essence',
+      title: 'ESSENCE for NUMÉRO 255 - DUNES',
+      model: '@_essencetaylor',
+      mainImage: 'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/45220/600/45220_000-9-15-2025-1757963889218.jpg',
+      hoverImage: 'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/45220/600/45220_000-9-15-2025-1757963875943.jpg',
+      gallery: [
+        'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/45220/600/45220_000-9-15-2025-1757963889218.jpg',
+        'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/45220/600/45220_000-9-15-2025-1757963875943.jpg',
+        'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/45220/600/45220_000-9-15-2025-1757963896663.jpg',
+        'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/45220/600/45220_000-9-15-2025-1757963868949.jpg'
+      ],
+      credits: {
+        photographer: '@Julien_Vallon',
+        stylist: '@RebeccaBleynie',
+        watches: 'Oyster Perpetual by @Rolex',
+        hair: '@AnneSofie.Begtrup',
+        makeup: '@LiliChoiMakeup',
+        dop: '@Clement_de_Hollogne',
+        specialThanks: '@ChateaudeBourron'
+      }
+    },
+    {
+      id: 'ariub',
+      title: 'ARIUB for MANIFESTO Magazine',
+      model: '@manifestomedia',
+      mainImage: 'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/52039/600/52039_000-3-19-2024-1710866296162.jpg',
+      hoverImage: 'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/52039/600/52039_000-3-19-2024-1710866317505.jpg',
+      gallery: [
+        'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/52039/600/52039_000-3-19-2024-1710866296162.jpg',
+        'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/52039/600/52039_000-3-19-2024-1710866317505.jpg'
+      ],
+      credits: {
+        fashionDirector: '@yeejonathan',
+        photographer: 'Brent Chua',
+        stylist: '@junglelin',
+        hair: '@tomoaki_sato',
+        makeup: '@go_ny_go_ny'
+      }
+    },
+    {
+      id: 'bethany',
+      title: 'Bethany for d la Repubblica',
+      model: '@bethany_model',
+      mainImage: 'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/6660/600/6660_000-11-14-2024-1731595661715.jpg',
+      hoverImage: 'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/6660/600/6660_000-11-14-2024-1731595650112.jpg',
+      gallery: [
+        'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/6660/600/6660_000-11-14-2024-1731595661715.jpg',
+        'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/6660/600/6660_000-11-14-2024-1731595650112.jpg',
+        'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/6660/600/6660_000-11-14-2024-1731595655569.jpg',
+        'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/6660/600/6660_000-11-14-2024-1731595644481.jpg'
+      ],
+      credits: {
+        magazine: 'd la Repubblica',
+        photographer: '@caspersejersenstudio',
+        stylist: '@leopolda.duchemin',
+        eic: '@efarneti',
+        casting: '@piergiorgio & @giuliamassullo',
+        hair: '@cimmahony',
+        makeup: '@minkimmakeup',
+        manicure: '@alexfeller',
+        setDesign: '@jeannebriand_',
+        movementDirector: '@ryanchappell',
+        production: '@whitedotproductions'
+      }
+    },
+    {
+      id: 'chey',
+      title: 'CHEY for BURBERRY BEAUTY',
+      model: '@chey_model',
+      mainImage: 'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/17644/600/17644_000-6-6-2025-1749218098631.jpg',
+      hoverImage: 'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/17644/600/17644_000-6-6-2025-1749218142508.jpg',
+      gallery: [
+        'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/17644/600/17644_000-6-6-2025-1749218098631.jpg',
+        'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/17644/600/17644_000-6-6-2025-1749218142508.jpg',
+        'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/17644/600/17644_000-6-6-2025-1749218150562.jpg',
+        'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/17644/600/17644_000-6-6-2025-1749218126639.jpg',
+        'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/17644/600/17644_000-6-6-2025-1749218159500.jpg',
+        'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/17644/600/17644_000-6-6-2025-1749218135133.jpg'
+      ],
+      credits: {
+        brand: 'BURBERRY BEAUTY',
+        photographer: 'Josh Olins @josholins',
+        stylist: 'James Campbell @jamesrncampbell',
+        casting: 'Shyra Gaillard @shyra.hx',
+        hair: '@burberry_hair_team',
+        makeup: '@burberry_beauty_team',
+        location: 'London',
+        agency: 'Velgance Agency'
+      }
+    },
+    {
+      id: 'sunty',
+      title: 'SUNTY for NIKE AIR MAX',
+      model: '@sunty_model',
+      mainImage: 'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/48421/600/48421_568072-444-3-31-2025-1743101170875.jpg',
+      hoverImage: 'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/48421/600/48421_000-3-27-2025-1743101417982.jpg',
+      gallery: [
+        'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/48421/600/48421_568072-444-3-31-2025-1743101170875.jpg',
+        'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/48421/600/48421_000-3-27-2025-1743101417982.jpg'
+      ],
+      credits: {
+        brand: 'NIKE AIR MAX',
+        photographer: '@nike_official',
+        stylist: '@nike_styling',
+        hair: '@nike_hair_team',
+        makeup: '@nike_beauty_team',
+        location: 'Global',
+        agency: 'Velgance Agency'
+      }
+    },
+    {
+      id: 'houjing',
+      title: 'HOUJING for Bottega Veneta 24 Campaign',
+      model: '@houjingcui',
+      mainImage: 'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/49777/600/49777_000-7-18-2024-1721304466229.jpg',
+      hoverImage: 'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/49777/600/49777_000-7-18-2024-1721304447648.jpg',
+      gallery: [
+        'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/49777/600/49777_000-7-18-2024-1721304466229.jpg',
+        'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/49777/600/49777_000-7-18-2024-1721304447648.jpg'
+      ],
+      credits: {
+        brand: 'Bottega Veneta',
+        creativeDirector: '@matthieu_blazy',
+        production: 'Red Plus',
+        executiveProducer: 'Allan Shen, Jessie Huang',
+        headOfProduction: 'Tracy Zhu',
+        videoProducer: 'Jing Wen Hao',
+        printProducer: 'Li Yue',
+        director: 'Dongxun Guo',
+        directorOfPhotography: 'Bowie',
+        photographer: 'Xiaopeng Yuan',
+        castingDirector: 'Summer',
+        cast: 'Houjing Cui, Tianqi Zhang',
+        hair: 'Li Shuang',
+        makeup: 'Taka Lam',
+        executiveStylist: 'Wenjun Wu',
+        editor: 'Teng',
+        musicComposer: 'Sega Bodega',
+        agency: 'Velgance Agency'
+      }
+    },
+    {
+      id: 'sofia-evi',
+      title: 'Sofia Evi for Intimissimi',
+      model: '@sofia_evi',
+      mainImage: 'https://www.skinsmodels.com/wp_2021/wp-content/uploads/2025/10/sophie-evi-skins-models-amsterdam-1229x1536.jpg',
+      hoverImage: 'https://www.skinsmodels.com/wp_2021/wp-content/uploads/2025/10/sophie-evi_skins_models-amsterdam-1-1229x1536.jpg',
+      gallery: [
+        'https://www.skinsmodels.com/wp_2021/wp-content/uploads/2025/10/sophie-evi-skins-models-amsterdam-1229x1536.jpg',
+        'https://www.skinsmodels.com/wp_2021/wp-content/uploads/2025/10/sophie-evi_skins_models-amsterdam-1-1229x1536.jpg',
+        'https://www.skinsmodels.com/wp_2021/wp-content/uploads/2025/10/sophie-evi_skins-models-amsterdam-1229x1536.jpg',
+        'https://www.skinsmodels.com/wp_2021/wp-content/uploads/2025/10/sophie_evi-skins_models-amsterdam-1229x1536.jpg'
+      ],
+      credits: {
+        brand: 'Intimissimi',
+        photographer: '@intimissimi_official',
+        stylist: '@intimissimi_styling',
+        hair: '@intimissimi_hair',
+        makeup: '@intimissimi_beauty',
+        location: 'Amsterdam',
+        agency: 'Skins Models'
+      }
+    },
+    {
+      id: 'sienna',
+      title: 'SIENNA for ELLE ITALIA',
+      model: '@sienna_model',
+      mainImage: 'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/29338/600/29338_000-10-17-2024-1729186392595.jpg',
+      hoverImage: 'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/29338/600/29338_604931-444-10-17-2024-1729185701976.jpg',
+      gallery: [
+        'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/29338/600/29338_000-10-17-2024-1729186392595.jpg',
+        'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/29338/600/29338_604931-444-10-17-2024-1729185701976.jpg',
+        'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/29338/600/29338_000-10-17-2024-1729186398859.jpg',
+        'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/29338/600/29338_000-10-17-2024-1729186420993.jpg',
+        'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/29338/600/29338_000-10-17-2024-1729186406360.jpg',
+        'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/29338/600/29338_128125-444-10-18-2024-1729185726093.jpg',
+        'https://s3.amazonaws.com/media-ima002.globaltalentsystems.com/29338/600/29338_000-10-17-2024-1729185740387.jpg'
+      ],
+      credits: {
+        magazine: 'ELLE ITALIA',
+        photographer: '@francoisrotger',
+        stylist: '@lauras9226',
+        hair: '@elle_hair_team',
+        makeup: '@elle_beauty_team',
+        location: 'Italy',
+        agency: 'Velgance Agency'
+      }
+    }
   ];
 
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+  };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 1500); // Change image every 1.5 seconds for faster rotation
-
-    return () => clearInterval(interval);
-  }, [images.length]);
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
 
   return (
-    <div 
-      className="w-[300px] h-[300px] sm:w-[600px] sm:h-[600px] lg:w-[700px] lg:h-[700px] bg-contain bg-center bg-no-repeat mx-auto transition-all duration-1000 ease-in-out"
-      style={{
-        backgroundImage: `url(${images[currentImageIndex]})`
-      }}
-    />
-  );
-};
-
-const Home = ({ params }: HomeProps) => {
-  return (
-    <div className="min-h-screen" style={{ backgroundColor: 'white' }}>
-      {/* Hero Section */}
-      <div className="relative overflow-hidden min-h-[80vh] sm:min-h-screen bg-white flex items-center justify-center">
-        {/* Velgance Background Image */}
-        <div 
-          className="absolute inset-0 flex items-center justify-center"
+    <>
+      <style jsx>{`
+        .typing-animation {
+          overflow: hidden;
+          white-space: nowrap;
+          border-right: 2px solid white;
+          animation: typing 2s steps(40, end), blink-caret 0.75s step-end 1;
+          animation-fill-mode: both;
+        }
+        
+        @keyframes typing {
+          from { width: 0; }
+          to { width: 100%; }
+        }
+        
+        @keyframes blink-caret {
+          from, to { border-color: transparent; }
+          50% { border-color: white; }
+        }
+      `}</style>
+      <div className="min-h-screen">
+      {/* Video Background Section */}
+      <div className="relative h-screen overflow-hidden">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover"
         >
-          <HeroImageCarousel />
-        </div>
-        
-        {/* Elegant Title - Top Left */}
-        <div className="absolute top-4 sm:top-20 left-8 z-10 max-w-[280px] sm:max-w-sm lg:max-w-md">
-          <h1 className="text-4xl sm:text-4xl lg:text-5xl font-extralight text-[#212121] tracking-wide leading-tight italic" style={{ fontFamily: 'serif' }}>
-            Dal 1998 trasformiamo il talento in opportunità
-          </h1>
-        </div>
-        
-        {/* Description - Bottom Right */}
-        <div className="absolute bottom-20 left-4 right-4 sm:left-auto sm:right-8 z-10 max-w-sm lg:max-w-md text-center sm:text-right">
-          <p className="text-base sm:text-lg lg:text-xl text-black leading-relaxed">
-            La nostra agenzia connette modelle e modelli con brand, fotografi e aziende in cerca di volti unici.
-          </p>
-        </div>
-        
-        {/* Glassy Fade Effect at Bottom */}
-        <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-white/95 via-white/70 via-white/50 via-white/30 via-white/15 via-white/5 to-transparent backdrop-blur-sm"></div>
-      </div>
+          <source src="https://res.cloudinary.com/dbr1nfgbr/video/upload/v1761335524/3753692-uhd_3840_2160_25fps_q9zr6z.mp4" type="video/mp4" />
+        </video>
+        {/* Dark overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/30"></div>
 
-      {/* Portfolio Gallery Section */}
-      <div className="pt-2 pb-1 bg-[#25201f] overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Scrolling Portfolio Images */}
-          <div className="relative overflow-hidden">
-            <div className="flex space-x-8 sm:space-x-16 items-center animate-scroll">
-              {[
-                { name: 'Velgance 1', logo: 'https://static.wixstatic.com/media/4da6c5_3862699386e044e8a5f80a881765406b~mv2.png' },
-                { name: 'Velgance 2', logo: 'https://static.wixstatic.com/media/4da6c5_39ca991612d64e078fbc83dfa86f1725~mv2.png' },
-                { name: 'Velgance 3', logo: 'https://static.wixstatic.com/media/4da6c5_0a33b7201aa5418bae1509de73074c5b~mv2.png' },
-                { name: 'Velgance 4', logo: 'https://static.wixstatic.com/media/4da6c5_55e12c9f082f4c089ccf49b80b1b454b~mv2.png' },
-                { name: 'Velgance 5', logo: 'https://static.wixstatic.com/media/4da6c5_967d3853b8bd42169ade557feabf861c~mv2.png' },
-                { name: 'Velgance 6', logo: 'https://static.wixstatic.com/media/4da6c5_2ee558a7a0a2428cad0f640a86f7b47e~mv2.png' }
-              ].concat([
-                { name: 'Velgance 1', logo: 'https://static.wixstatic.com/media/4da6c5_3862699386e044e8a5f80a881765406b~mv2.png' },
-                { name: 'Velgance 2', logo: 'https://static.wixstatic.com/media/4da6c5_39ca991612d64e078fbc83dfa86f1725~mv2.png' },
-                { name: 'Velgance 3', logo: 'https://static.wixstatic.com/media/4da6c5_0a33b7201aa5418bae1509de73074c5b~mv2.png' },
-                { name: 'Velgance 4', logo: 'https://static.wixstatic.com/media/4da6c5_55e12c9f082f4c089ccf49b80b1b454b~mv2.png' },
-                { name: 'Velgance 5', logo: 'https://static.wixstatic.com/media/4da6c5_967d3853b8bd42169ade557feabf861c~mv2.png' },
-                { name: 'Velgance 6', logo: 'https://static.wixstatic.com/media/4da6c5_2ee558a7a0a2428cad0f640a86f7b47e~mv2.png' }
-              ]).map((image, i) => (
-                <div key={`duplicate-${i}`} className="flex-shrink-0 flex items-center justify-center h-28 w-56 overflow-hidden">
-                  <img
-                    src={image.logo}
-                    alt={image.name}
-                    className="h-20 w-auto object-cover object-center opacity-90 hover:opacity-100 transition-opacity"
-                  />
-                </div>
-              ))}
+        {/* Left-aligned services text */}
+        <div className="absolute bottom-8 left-8 z-20">
+          <div className="text-white text-sm font-light max-w-md">
+            <div className="typing-animation">
+              <p className="mb-2">
+                <span className="relative">
+                  Europe's Leading
+                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-white/60 transform -skew-x-12"></span>
+                </span>
+                <span> Agency for Models,</span>
+              </p>
+              <p className="mb-2">Influencers, and Brand Partnerships,</p>
+              <p className="mb-2">Creating High-Impact Campaigns and</p>
+              <p>Exceptional Industry Opportunities.</p>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* I Nostri Lavori Più Recenti Section */}
-      <div className="py-16 sm:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-black mb-6 italic" style={{ fontFamily: 'serif' }}>
-              I Nostri Lavori Più Popolari
-            </h2>
-            <p className="text-lg sm:text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto">
-              Scopri i nostri lavori attraverso le riviste di settore e i progetti realizzati con i nostri talenti.
-            </p>
-          </div>
-          
-          {/* Magazine Cards - Horizontal Scroll on All Devices */}
-          <div 
-            className="overflow-x-auto scrollbar-subtle" 
-            style={{
-              scrollbarWidth: 'thin',
-              scrollbarColor: 'rgba(255, 255, 255, 0.9) rgba(0, 0, 0, 0.2)',
-              WebkitOverflowScrolling: 'touch'
-            }}
+        {/* Top Left Hamburger Menu */}
+        <div className="absolute top-8 left-8 z-20 flex items-center gap-4">
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="text-white hover:text-gray-300 transition-colors duration-300"
           >
-            <div className="flex gap-6 pb-4">
-              {/* Magazine Card 1 */}
-              <div className="group cursor-pointer flex-shrink-0 w-64 sm:w-64">
-                <div className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                  <img 
-                    src="https://static.wixstatic.com/media/4da6c5_b9accaf0b3cd4b0d96e6d65d5fb1d2a9~mv2.png" 
-                    alt="Magazine 1" 
-                    className="w-full h-96 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
-                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <h3 className="text-white font-medium text-sm">Magazine Feature</h3>
-                  </div>
-                </div>
-              </div>
-
-              {/* Magazine Card 2 */}
-              <div className="group cursor-pointer flex-shrink-0 w-64 sm:w-64">
-                <div className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                  <img 
-                    src="https://edicolaonline.store/cdn/shop/files/VI_2405COVER_PASSEPARTOUT.webp?v=1746351936" 
-                    alt="Magazine 2" 
-                    className="w-full h-96 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
-                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <h3 className="text-white font-medium text-sm">Editorial Spread</h3>
-                  </div>
-                </div>
-              </div>
-
-              {/* Magazine Card 3 */}
-              <div className="group cursor-pointer flex-shrink-0 w-64 sm:w-64">
-                <div className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                  <img 
-                    src="https://static.wixstatic.com/media/4da6c5_f5ec7d33e8c141b1a88196ffb720aaf6~mv2.png" 
-                    alt="Magazine 3" 
-                    className="w-full h-96 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
-                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <h3 className="text-white font-medium text-sm">Fashion Story</h3>
-                  </div>
-                </div>
-              </div>
-
-              {/* Magazine Card 4 */}
-              <div className="group cursor-pointer flex-shrink-0 w-64 sm:w-64">
-                <div className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                  <img 
-                    src="https://static.wixstatic.com/media/4da6c5_f85f676ca8d34cf391e79bbb60d9b83b~mv2.png" 
-                    alt="Magazine 4" 
-                    className="w-full h-96 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
-                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <h3 className="text-white font-medium text-sm">Cover Story</h3>
-                  </div>
-                </div>
-              </div>
-
-              {/* Magazine Card 5 */}
-              <div className="group cursor-pointer flex-shrink-0 w-64 sm:w-64">
-                <div className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                  <img 
-                    src="https://static.wixstatic.com/media/4da6c5_7153cc635edb443785807d168550e2e5~mv2.png" 
-                    alt="Magazine 5" 
-                    className="w-full h-96 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
-                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <h3 className="text-white font-medium text-sm">Portfolio Feature</h3>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* View More Text */}
-          <div className="text-center mt-12">
-            <Link href="/portfolio" className="text-gray-600 hover:text-black transition-colors text-lg">
-              e molto altro...
-            </Link>
-          </div>
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+          <Link href="/" className="text-white text-xl font-light hover:text-gray-300 transition-colors duration-300">
+            Velgance Models
+          </Link>
         </div>
-      </div>
 
-      {/* Elegant Stats Section */}
-      <div className="py-8 sm:py-12 bg-white">
-        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-0 border border-gray-200">
+        {/* Top Right Button */}
+        <div className="absolute top-8 right-8 z-20">
+          <Link 
+            href="/models/application" 
+            className="text-white px-6 py-3 font-medium hover:text-gray-300 transition-colors duration-300"
+          >
+            Get Scouted
+          </Link>
+        </div>
+
+        {/* Sidebar Menu */}
+        <div className={`fixed top-0 left-0 h-full w-80 bg-white z-30 transform transition-transform duration-300 ease-in-out ${
+          isMenuOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}>
+          <div className="p-8">
+            <div className="mb-12">
+              <button 
+                onClick={() => setIsMenuOpen(false)}
+                className="text-2xl font-light text-black hover:text-gray-600 transition-colors duration-300"
+              >
+                X
+              </button>
+            </div>
             
-            {/* Card 1 - Modelli in Evidenza (Mobile First) */}
-            <div className="bg-white border-r border-b border-gray-200 p-6 sm:p-10 hover:bg-gray-50 transition-colors duration-300 relative overflow-hidden" style={{ backgroundImage: 'url(https://static.wixstatic.com/media/4da6c5_d225d60b413948a1ae1359f084eb06f4~mv2.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-              <div className="absolute inset-0 bg-black/40"></div>
-              <div className="relative z-10">
-                <h3 className="text-xs font-bold text-white mb-4 tracking-widest uppercase">Modelli in Evidenza</h3>
-                <div className="mb-4">
-                  <span className="font-light text-white block leading-none" style={{ fontFamily: 'Inter, sans-serif', fontSize: '6rem', lineHeight: '1' }}>15</span>
+            <nav className="space-y-6">
+              {/* Models with Submenu */}
+              <div>
+                <div className="text-xl font-light text-black">
+                  Models
                 </div>
-                <p className="text-sm text-white leading-relaxed font-medium">
-                  talenti <strong className="text-white">Featured</strong> su copertine globali nel <strong className="text-white">2024</strong>.
+                
+                {/* Models Submenu */}
+                <div className="ml-4 mt-2 space-y-3">
+                  {/* Men Submenu */}
+                  <div>
+                    <div className="text-lg font-light text-gray-700">
+                      Men
+                    </div>
+                    <div className="ml-4 mt-2 space-y-2">
+                      <div className="relative">
+                        <div className="absolute left-0 top-0 bottom-0 w-px bg-gray-300"></div>
+                        <div className="absolute left-0 top-4 w-4 h-px bg-gray-300"></div>
+                        <Link 
+                          href="/models/men/mainboard" 
+                          className="block text-base text-gray-600 hover:text-black transition-colors duration-300 ml-6"
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          Mainboard
+                        </Link>
+                      </div>
+                      <div className="relative">
+                        <div className="absolute left-0 top-0 bottom-0 w-px bg-gray-300"></div>
+                        <div className="absolute left-0 top-4 w-4 h-px bg-gray-300"></div>
+                        <Link 
+                          href="/models/men/new-faces" 
+                          className="block text-base text-gray-600 hover:text-black transition-colors duration-300 ml-6"
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          New Faces
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Women Submenu */}
+                  <div>
+                    <div className="text-lg font-light text-gray-700">
+                      Women
+                    </div>
+                    <div className="ml-4 mt-2 space-y-2">
+                      <div className="relative">
+                        <div className="absolute left-0 top-0 bottom-0 w-px bg-gray-300"></div>
+                        <div className="absolute left-0 top-4 w-4 h-px bg-gray-300"></div>
+                        <Link 
+                          href="/models/women/mainboard" 
+                          className="block text-base text-gray-600 hover:text-black transition-colors duration-300 ml-6"
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          Mainboard
+                        </Link>
+                      </div>
+                      <div className="relative">
+                        <div className="absolute left-0 top-0 bottom-0 w-px bg-gray-300"></div>
+                        <div className="absolute left-0 top-4 w-4 h-px bg-gray-300"></div>
+              <Link 
+                          href="/models/women/new-faces" 
+                          className="block text-base text-gray-600 hover:text-black transition-colors duration-300 ml-6"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                          New Faces
+              </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Creators */}
+              <Link 
+                href="/creators" 
+                className="block text-xl font-light text-black hover:text-gray-600 transition-colors duration-300"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Creators
+              </Link>
+              
+              <Link 
+                href="/chi-siamo" 
+                className="block text-xl font-light text-black hover:text-gray-600 transition-colors duration-300"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                About Us
+              </Link>
+              
+              <Link 
+                href="/portfolio" 
+                className="block text-xl font-light text-black hover:text-gray-600 transition-colors duration-300"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Portfolio
+              </Link>
+              
+              <Link 
+                href="/contact" 
+                className="block text-xl font-light text-black hover:text-gray-600 transition-colors duration-300"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contact
+              </Link>
+            </nav>
+            
+            <div className="border-t border-gray-200 mt-12 pt-8">
+            </div>
+            <div className="mt-4">
+              <div className="inline-flex items-center gap-2 px-2 py-1 border border-gray-300 rounded-lg">
+                <div className="w-2 h-2 bg-black rounded-full"></div>
+                <p className="text-xs text-gray-800 font-medium">
+                  CEST {new Date().toLocaleString('en-US', { timeZone: 'Europe/Rome', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
                 </p>
               </div>
-              <div className="absolute -bottom-4 -right-4 text-6xl font-black text-gray-100 opacity-30 select-none">★</div>
             </div>
-
-            {/* Card 2 - Quota Mercato Italia (Mobile Second) */}
-            <div className="bg-white border-r border-b border-gray-200 p-6 sm:p-10 hover:bg-gray-50 transition-colors duration-300 flex flex-col relative overflow-hidden">
-              <div className="flex-1 relative z-10">
-                <h3 className="text-xs font-bold text-gray-900 mb-6 tracking-widest uppercase transform -rotate-90 origin-left absolute left-0 top-0">Quota Mercato</h3>
-                <div className="mt-8">
-                  <span className="font-light text-black block leading-none" style={{ fontFamily: 'Inter, sans-serif', fontSize: '6rem', lineHeight: '1' }}>41</span>
-                  <span className="text-3xl font-bold text-gray-700">%</span>
-                </div>
-              </div>
-              <div className="mt-auto relative z-10">
-                <p className="text-xs text-gray-700 leading-relaxed font-medium">
-                  <strong className="text-black">Italia #1</strong> in Europa. La quota di fatturato moda generata dall'Italia.
-                </p>
-              </div>
-              <div className="absolute -bottom-6 -right-6 text-8xl font-black text-gray-200 opacity-30 select-none">IT</div>
-            </div>
-
-            {/* Card 3 - La Nostra Portata EU (Mobile Third) */}
-            <div className="bg-white border-r border-b border-gray-200 p-6 sm:p-10 hover:bg-gray-50 transition-colors duration-300 relative overflow-hidden" style={{ backgroundImage: 'url(https://static.wixstatic.com/media/4da6c5_10f012687f7a4a24ab7fce989e16b820~mv2.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-              <div className="absolute inset-0 bg-black/40"></div>
-              <div className="relative z-10">
-                <h3 className="text-xs font-bold text-white mb-4 tracking-widest uppercase">La Nostra Portata</h3>
-                <div className="mb-4">
-                  <span className="font-light text-white block leading-none" style={{ fontFamily: 'Inter, sans-serif', fontSize: '6rem', lineHeight: '1' }}>75</span>
-                  <span className="text-2xl font-bold text-white">%</span>
-                </div>
-                <p className="text-sm text-white leading-relaxed font-medium">
-                  dei nostri modelli ha lavorato su <strong className="text-white">progetti internazionali</strong> in Europa nell'ultimo anno.
-                </p>
-              </div>
-              <div className="absolute -bottom-4 -right-4 text-9xl font-black text-gray-100 opacity-30 select-none">EU</div>
-            </div>
-
-            {/* Card 4 - Settore Moda Italia */}
-            <div className="bg-white border-r border-b border-gray-200 p-6 sm:p-10 hover:bg-gray-50 transition-colors duration-300 relative overflow-hidden">
-              <div className="relative z-10">
-                <h3 className="text-xs font-bold text-gray-900 mb-4 tracking-widest uppercase">Settore Moda Italia</h3>
-                <div className="mb-4 flex items-baseline">
-                  <span className="text-2xl font-bold text-gray-700">€</span>
-                  <span className="font-light text-black block leading-none" style={{ fontFamily: 'Inter, sans-serif', fontSize: '6rem', lineHeight: '1' }}>102</span>
-                  <span className="text-3xl font-bold text-gray-700 ml-1">B</span>
-                </div>
-                <p className="text-sm text-gray-700 leading-relaxed font-medium">
-                  Fatturato <strong className="text-black">previsto</strong> del settore moda italiano per il <strong className="text-black">2024</strong>.
-                </p>
-              </div>
-              <div className="absolute -bottom-4 -right-4 text-7xl font-black text-gray-200 opacity-40 select-none">€</div>
-            </div>
-
-
-
           </div>
         </div>
+
+        {/* Overlay */}
+        {isMenuOpen && (
+          <div 
+            className="fixed inset-0 bg-black/50 z-20"
+            onClick={() => setIsMenuOpen(false)}
+          />
+        )}
       </div>
 
-      {/* I nostri modelli e modelle Section */}
-      <div className="py-16 sm:py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-black mb-6 italic" style={{ fontFamily: 'serif' }}>
-            I nostri modelli e modelle
-          </h2>
-          <p className="text-lg sm:text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto mb-12">
-            Modelle e modelli professionisti per sfilate, presentazioni aziendali, shooting, video commerciali, show-room e fiere.
-          </p>
-          
-          {/* Two Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {/* Uomini Card */}
-            <Link href="/male-models" className="group cursor-pointer">
-              <div className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <img 
-                  src="https://static.wixstatic.com/media/4da6c5_e15fb5c603a94d298fa2a6d16f0a503e~mv2.png" 
-                  alt="Uomini" 
-                  className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors duration-300"></div>
-                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                  <h3 className="text-2xl font-light" style={{ fontFamily: 'Raleway, sans-serif' }}>Uomini</h3>
-                </div>
-              </div>
-            </Link>
-
-            {/* Donne Card */}
-            <Link href="/female-models" className="group cursor-pointer">
-              <div className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <img 
-                  src="https://static.wixstatic.com/media/4da6c5_eb0d8957ca4140da80d1c51ed53b7d1c~mv2.png" 
-                  alt="Donne" 
-                  className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors duration-300"></div>
-                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                  <h3 className="text-2xl font-light" style={{ fontFamily: 'Raleway, sans-serif' }}>Donne</h3>
-                </div>
-              </div>
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      {/* Servizi per le aziende Section */}
-      <div className="py-16 sm:py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-black mb-6 italic" style={{ fontFamily: 'serif' }}>
-              Servizi per le aziende
+      {/* Our Latest Work Section */}
+      <div className="bg-white py-16">
+        <div className="w-full px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl sm:text-5xl font-light text-black mb-6 italic" style={{ fontFamily: 'serif' }}>
+              Latest Editorial Work
             </h2>
-          <p className="text-lg sm:text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto">
-            Velgance Agency offre soluzioni su misura per le esigenze di promozione e rappresentanza delle aziende: dalle modelle e modelli per eventi e sfilate, ai promoter e influencer per campagne pubblicitarie.
-          </p>
-        </div>
-      </div>
-
-      {/* Influencer Section */}
-      <div className="py-16 sm:py-20 bg-[#f7f7f7]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-lg p-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              {/* Left Column - Text */}
-            <div className="order-2 lg:order-1">
-                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-black mb-6 italic" style={{ fontFamily: 'serif' }}>
-                    Influencer
-                  </h2>
-                <p className="text-lg sm:text-xl text-gray-700 leading-relaxed max-w-md mb-6">
-                  Selezioniamo e proponiamo influencer in linea con l'immagine e i valori delle aziende.
-                </p>
-                <Link href="/contact" className="flex items-center gap-2 text-black hover:text-gray-600 transition-colors">
-                  <span>Scopri di più</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
           </div>
+          
+          {/* Horizontal Scrollable Layout */}
+          <div className="overflow-x-auto bg-white" style={{ scrollbarWidth: 'thin', scrollbarColor: '#e5e7eb #ffffff' }}>
+            <div className="flex space-x-4 pb-2" style={{ scrollbarWidth: 'thin', msOverflowStyle: 'none' }}>
+              {/* ESSENCE Project - First Project */}
+              <div className="flex-shrink-0 w-80">
+                <div 
+                  className="group cursor-pointer"
+                  onClick={() => setSelectedProject(projects[0])}
+                >
+                  <div className="relative overflow-hidden transition-all duration-300">
+                    {/* Default Image */}
+                    <img 
+                      src={projects[0].mainImage}
+                      alt={projects[0].title}
+                      className="w-full h-[400px] object-cover group-hover:opacity-0 transition-opacity duration-300"
+                    />
+                    {/* Hover Image */}
+                    <img 
+                      src={projects[0].hoverImage}
+                      alt={`${projects[0].title} - Hover`}
+                      className="absolute inset-0 w-full h-[400px] object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+                  </div>
+                  <div className="mt-4">
+                    <h3 className="text-lg font-medium text-black mb-1">{projects[0].title}</h3>
+                    <p className="text-gray-600 text-sm mb-3">{projects[0].credits.photographer}</p>
+                    
+                    {/* Project Details */}
+                    <div className="p-2">
+                      <div className="space-y-1 text-xs text-gray-700">
+                        <p><strong>Photographer:</strong> {projects[0].credits.photographer}</p>
+                        <p><strong>Styled by:</strong> {projects[0].credits.stylist}</p>
+                        <p><strong>Watches:</strong> {projects[0].credits.watches}</p>
+                        <p><strong>Hair:</strong> {projects[0].credits.hair}</p>
+                        <p><strong>Make-Up:</strong> {projects[0].credits.makeup}</p>
+                        <p><strong>DOP:</strong> {projects[0].credits.dop}</p>
+                        <p><strong>Special thanks:</strong> {projects[0].credits.specialThanks}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-              {/* Right Column - Image */}
-              <div className="order-1 lg:order-2">
-                <div className="relative overflow-hidden rounded-lg max-w-md mx-auto">
-                  <img 
-                    src="https://static.wixstatic.com/media/4da6c5_b0dada0912bb4026a98097253dda726b~mv2.png" 
-                    alt="Influencer" 
-                    className="w-full h-80 object-cover"
-                  />
+              {/* ARIUB Project - Second Project */}
+              <div className="flex-shrink-0 w-80">
+                <div 
+                  className="group cursor-pointer"
+                  onClick={() => setSelectedProject(projects[1])}
+                >
+                  <div className="relative overflow-hidden transition-all duration-300">
+                    {/* Default Image */}
+                    <img 
+                      src={projects[1].mainImage}
+                      alt={projects[1].title}
+                      className="w-full h-[400px] object-cover group-hover:opacity-0 transition-opacity duration-300"
+                    />
+                    {/* Hover Image */}
+                    <img 
+                      src={projects[1].hoverImage}
+                      alt={`${projects[1].title} - Hover`}
+                      className="absolute inset-0 w-full h-[400px] object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+                        </div>
+                  <div className="mt-4">
+                    <h3 className="text-lg font-medium text-black mb-1">{projects[1].title}</h3>
+                    <p className="text-gray-600 text-sm mb-3">{projects[1].credits.photographer}</p>
+                    
+                    {/* Project Details */}
+                    <div className="p-2">
+                      <div className="space-y-1 text-xs text-gray-700">
+                        <p><strong>Fashion Director:</strong> {projects[1].credits.fashionDirector}</p>
+                        <p><strong>Photographer:</strong> {projects[1].credits.photographer}</p>
+                        <p><strong>Stylist:</strong> {projects[1].credits.stylist}</p>
+                        <p><strong>Hair:</strong> {projects[1].credits.hair}</p>
+                        <p><strong>Makeup:</strong> {projects[1].credits.makeup}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Bethany Project - Third Project */}
+              <div className="flex-shrink-0 w-80">
+                <div 
+                  className="group cursor-pointer"
+                  onClick={() => setSelectedProject(projects[2])}
+                >
+                  <div className="relative overflow-hidden transition-all duration-300">
+                    {/* Default Image */}
+                    <img 
+                      src={projects[2].mainImage}
+                      alt={projects[2].title}
+                      className="w-full h-[400px] object-cover group-hover:opacity-0 transition-opacity duration-300"
+                    />
+                    {/* Hover Image */}
+                    <img 
+                      src={projects[2].hoverImage}
+                      alt={`${projects[2].title} - Hover`}
+                      className="absolute inset-0 w-full h-[400px] object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+                        </div>
+                  <div className="mt-4">
+                    <h3 className="text-lg font-medium text-black mb-1">{projects[2].title}</h3>
+                    <p className="text-gray-600 text-sm mb-3">{projects[2].credits.magazine}</p>
+                    
+                    {/* Project Details */}
+                    <div className="p-2">
+                      <div className="space-y-1 text-xs text-gray-700">
+                        <p><strong>Magazine:</strong> {projects[2].credits.magazine}</p>
+                        <p><strong>Photographer:</strong> {projects[2].credits.photographer}</p>
+                        <p><strong>Stylist:</strong> {projects[2].credits.stylist}</p>
+                        <p><strong>EIC:</strong> {projects[2].credits.eic}</p>
+                        <p><strong>Casting:</strong> {projects[2].credits.casting}</p>
+                        <p><strong>Hair:</strong> {projects[2].credits.hair}</p>
+                        <p><strong>Makeup:</strong> {projects[2].credits.makeup}</p>
+                        <p><strong>Production:</strong> {projects[2].credits.production}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* CHEY Project - Fourth Project */}
+              <div className="flex-shrink-0 w-80">
+                <div 
+                  className="group cursor-pointer"
+                  onClick={() => setSelectedProject(projects[3])}
+                >
+                  <div className="relative overflow-hidden transition-all duration-300">
+                    {/* Default Image */}
+                    <img 
+                      src={projects[3].mainImage}
+                      alt={projects[3].title}
+                      className="w-full h-[400px] object-cover group-hover:opacity-0 transition-opacity duration-300"
+                    />
+                    {/* Hover Image */}
+                    <img 
+                      src={projects[3].hoverImage}
+                      alt={`${projects[3].title} - Hover`}
+                      className="absolute inset-0 w-full h-[400px] object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+                        </div>
+                  <div className="mt-4">
+                    <h3 className="text-lg font-medium text-black mb-1">{projects[3].title}</h3>
+                    <p className="text-gray-600 text-sm mb-3">{projects[3].credits.brand}</p>
+                    
+                    {/* Project Details */}
+                    <div className="p-2">
+                      <div className="space-y-1 text-xs text-gray-700">
+                        <p><strong>Brand:</strong> {projects[3].credits.brand}</p>
+                        <p><strong>Photographer:</strong> {projects[3].credits.photographer}</p>
+                        <p><strong>Stylist:</strong> {projects[3].credits.stylist}</p>
+                        <p><strong>Casting:</strong> {projects[3].credits.casting}</p>
+                        <p><strong>Hair:</strong> {projects[3].credits.hair}</p>
+                        <p><strong>Makeup:</strong> {projects[3].credits.makeup}</p>
+                        <p><strong>Location:</strong> {projects[3].credits.location}</p>
+                        <p><strong>Agency:</strong> {projects[3].credits.agency}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* SUNTY Project - Fifth Project */}
+              <div className="flex-shrink-0 w-80">
+                <div 
+                  className="group cursor-pointer"
+                  onClick={() => setSelectedProject(projects[4])}
+                >
+                  <div className="relative overflow-hidden transition-all duration-300">
+                    {/* Default Image */}
+                    <img 
+                      src={projects[4].mainImage}
+                      alt={projects[4].title}
+                      className="w-full h-[400px] object-cover group-hover:opacity-0 transition-opacity duration-300"
+                    />
+                    {/* Hover Image */}
+                    <img 
+                      src={projects[4].hoverImage}
+                      alt={`${projects[4].title} - Hover`}
+                      className="absolute inset-0 w-full h-[400px] object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+                        </div>
+                  <div className="mt-4">
+                    <h3 className="text-lg font-medium text-black mb-1">{projects[4].title}</h3>
+                    <p className="text-gray-600 text-sm mb-3">{projects[4].credits.brand}</p>
+                    
+                    {/* Project Details */}
+                    <div className="p-2">
+                      <div className="space-y-1 text-xs text-gray-700">
+                        <p><strong>Brand:</strong> {projects[4].credits.brand}</p>
+                        <p><strong>Photographer:</strong> {projects[4].credits.photographer}</p>
+                        <p><strong>Stylist:</strong> {projects[4].credits.stylist}</p>
+                        <p><strong>Hair:</strong> {projects[4].credits.hair}</p>
+                        <p><strong>Makeup:</strong> {projects[4].credits.makeup}</p>
+                        <p><strong>Location:</strong> {projects[4].credits.location}</p>
+                        <p><strong>Agency:</strong> {projects[4].credits.agency}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* HOUJING Project - Sixth Project */}
+              <div className="flex-shrink-0 w-80">
+                <div 
+                  className="group cursor-pointer"
+                  onClick={() => setSelectedProject(projects[5])}
+                >
+                  <div className="relative overflow-hidden transition-all duration-300">
+                    {/* Default Image */}
+                    <img 
+                      src={projects[5].mainImage}
+                      alt={projects[5].title}
+                      className="w-full h-[400px] object-cover group-hover:opacity-0 transition-opacity duration-300"
+                    />
+                    {/* Hover Image */}
+                    <img 
+                      src={projects[5].hoverImage}
+                      alt={`${projects[5].title} - Hover`}
+                      className="absolute inset-0 w-full h-[400px] object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+                        </div>
+                  <div className="mt-4">
+                    <h3 className="text-lg font-medium text-black mb-1">{projects[5].title}</h3>
+                    <p className="text-gray-600 text-sm mb-3">{projects[5].credits.brand}</p>
+                    
+                    {/* Project Details */}
+                    <div className="p-2">
+                      <div className="space-y-1 text-xs text-gray-700">
+                        <p><strong>Brand:</strong> {projects[5].credits.brand}</p>
+                        <p><strong>Creative Director:</strong> {projects[5].credits.creativeDirector}</p>
+                        <p><strong>Production:</strong> {projects[5].credits.production}</p>
+                        <p><strong>Director:</strong> {projects[5].credits.director}</p>
+                        <p><strong>Photographer:</strong> {projects[5].credits.photographer}</p>
+                        <p><strong>Hair:</strong> {projects[5].credits.hair}</p>
+                        <p><strong>Makeup:</strong> {projects[5].credits.makeup}</p>
+                        <p><strong>Agency:</strong> {projects[5].credits.agency}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Sofia Evi Project - Seventh Project */}
+              <div className="flex-shrink-0 w-80">
+                <div 
+                  className="group cursor-pointer"
+                  onClick={() => setSelectedProject(projects[6])}
+                >
+                  <div className="relative overflow-hidden transition-all duration-300">
+                    {/* Default Image */}
+                    <img 
+                      src={projects[6].mainImage}
+                      alt={projects[6].title}
+                      className="w-full h-[400px] object-cover group-hover:opacity-0 transition-opacity duration-300"
+                    />
+                    {/* Hover Image */}
+                    <img 
+                      src={projects[6].hoverImage}
+                      alt={`${projects[6].title} - Hover`}
+                      className="absolute inset-0 w-full h-[400px] object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+                        </div>
+                  <div className="mt-4">
+                    <h3 className="text-lg font-medium text-black mb-1">{projects[6].title}</h3>
+                    <p className="text-gray-600 text-sm mb-3">{projects[6].credits.brand}</p>
+                    
+                    {/* Project Details */}
+                    <div className="p-2">
+                      <div className="space-y-1 text-xs text-gray-700">
+                        <p><strong>Brand:</strong> {projects[6].credits.brand}</p>
+                        <p><strong>Photographer:</strong> {projects[6].credits.photographer}</p>
+                        <p><strong>Stylist:</strong> {projects[6].credits.stylist}</p>
+                        <p><strong>Hair:</strong> {projects[6].credits.hair}</p>
+                        <p><strong>Makeup:</strong> {projects[6].credits.makeup}</p>
+                        <p><strong>Location:</strong> {projects[6].credits.location}</p>
+                        <p><strong>Agency:</strong> {projects[6].credits.agency}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* SIENNA Project - Eighth Project */}
+              <div className="flex-shrink-0 w-80">
+                <div 
+                  className="group cursor-pointer"
+                  onClick={() => setSelectedProject(projects[7])}
+                >
+                  <div className="relative overflow-hidden transition-all duration-300">
+                    {/* Default Image */}
+                    <img 
+                      src={projects[7].mainImage}
+                      alt={projects[7].title}
+                      className="w-full h-[400px] object-cover group-hover:opacity-0 transition-opacity duration-300"
+                    />
+                    {/* Hover Image */}
+                    <img 
+                      src={projects[7].hoverImage}
+                      alt={`${projects[7].title} - Hover`}
+                      className="absolute inset-0 w-full h-[400px] object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+                        </div>
+                  <div className="mt-4">
+                    <h3 className="text-lg font-medium text-black mb-1">{projects[7].title}</h3>
+                    <p className="text-gray-600 text-sm mb-3">{projects[7].credits.magazine}</p>
+                    
+                    {/* Project Details */}
+                    <div className="p-2">
+                      <div className="space-y-1 text-xs text-gray-700">
+                        <p><strong>Magazine:</strong> {projects[7].credits.magazine}</p>
+                        <p><strong>Photographer:</strong> {projects[7].credits.photographer}</p>
+                        <p><strong>Stylist:</strong> {projects[7].credits.stylist}</p>
+                        <p><strong>Hair:</strong> {projects[7].credits.hair}</p>
+                        <p><strong>Makeup:</strong> {projects[7].credits.makeup}</p>
+                        <p><strong>Location:</strong> {projects[7].credits.location}</p>
+                        <p><strong>Agency:</strong> {projects[7].credits.agency}</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -376,41 +773,81 @@ const Home = ({ params }: HomeProps) => {
         </div>
       </div>
 
-      {/* Hostess/Steward Section */}
-      <div className="py-16 sm:py-20 bg-[#f7f7f7]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-lg p-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              {/* Left Column - Image */}
-              <div className="order-1">
-                <div className="relative overflow-hidden rounded-lg max-w-md mx-auto">
-                  <img 
-                    src="https://static.wixstatic.com/media/4da6c5_4fd2c6ba24414877b29ae25b2725f96e~mv2.png" 
-                    alt="Hostess/Steward" 
-                    className="w-full h-80 object-cover"
-                  />
-                </div>
-          </div>
-
-              {/* Right Column - Text */}
-              <div className="order-2">
-                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-black mb-6 italic" style={{ fontFamily: 'serif' }}>
-                    Hostess/Steward
-                  </h2>
-                <p className="text-lg sm:text-xl text-gray-700 leading-relaxed max-w-md mb-6">
-                  Offriamo servizio di hostess/steward per aziende che organizzano eventi, fiere e manifestazioni.
-                </p>
-                <Link href="/contact" className="flex items-center gap-2 text-black hover:text-gray-600 transition-colors">
-                  <span>Scopri di più</span>
-                  <ArrowRight className="w-4 h-4" />
+      {/* Footer Section - Scrollable */}
+      <div className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="border-t border-gray-200 pt-8">
+            <div className="flex flex-col md:flex-row justify-between items-center">
+              <p className="text-sm text-gray-600 mb-4 md:mb-0">
+                © 2025 Velgance Agency. All rights reserved.
+              </p>
+              <div className="flex space-x-6">
+                <Link href="/privacy-policy" className="text-sm text-gray-600 hover:text-black transition-colors">
+                  Privacy Policy
+                </Link>
+                <Link href="/terms-and-conditions" className="text-sm text-gray-600 hover:text-black transition-colors">
+                  Terms and Conditions
                 </Link>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Project Details Modal */}
+      {selectedProject && (
+        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+          <div className="bg-white max-w-4xl w-full max-h-[90vh] overflow-y-auto" style={{ scrollbarWidth: 'thin', scrollbarColor: '#e5e7eb #ffffff' }}>
+            <div className="p-6">
+              {/* Header */}
+              <div className="flex justify-between items-start mb-6">
+                <div>
+                  <h2 className="text-2xl font-light text-black mb-2">{selectedProject.title}</h2>
+                  <p className="text-gray-600">{selectedProject.model}</p>
+                </div>
+                <button
+                  onClick={() => setSelectedProject(null)}
+                  className="text-gray-500 hover:text-black text-2xl"
+                >
+                  ×
+                </button>
+              </div>
+
+              {/* Image Gallery */}
+              <div className="mb-6">
+                <div className="grid grid-cols-2 gap-4">
+                  {selectedProject.gallery.map((image: string, index: number) => (
+                    <img
+                      key={index}
+                      src={image}
+                      alt={`${selectedProject.title} - Image ${index + 1}`}
+                      className="w-full h-64 object-cover"
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Credits */}
+              <div className="border-t pt-6">
+                <h3 className="text-lg font-medium text-black mb-4">Credits</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {Object.entries(selectedProject.credits).map(([key, value]) => (
+                    <div key={key} className="flex">
+                      <span className="font-medium text-gray-700 capitalize mr-2">
+                        {key.replace(/([A-Z])/g, ' $1').trim()}:
+                      </span>
+                      <span className="text-gray-600">{value as string}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
+    </>
   );
 };
 

@@ -382,9 +382,28 @@ exports.Prisma.ModelScalarFieldEnum = {
   weight: 'weight',
   location: 'location',
   gender: 'gender',
+  category: 'category',
   experience: 'experience',
   availability: 'availability',
   additionalInfo: 'additionalInfo',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CreatorScalarFieldEnum = {
+  id: 'id',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  email: 'email',
+  phone: 'phone',
+  igProfileLink: 'igProfileLink',
+  image: 'image',
+  images: 'images',
+  profession: 'profession',
+  location: 'location',
+  experience: 'experience',
+  portfolio: 'portfolio',
   isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -438,7 +457,8 @@ exports.Prisma.ModelName = {
   StripeSubscription: 'StripeSubscription',
   EmailNotification: 'EmailNotification',
   ScheduledEvent: 'ScheduledEvent',
-  Model: 'Model'
+  Model: 'Model',
+  Creator: 'Creator'
 };
 
 /**

@@ -114,10 +114,10 @@ export default function MaleModelsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-5xl sm:text-5xl lg:text-6xl font-light text-white mb-6 italic" style={{ fontFamily: 'serif' }}>
-              Talento Maschile
+              Male Talent
             </h1>
             <p className="text-base sm:text-lg text-white max-w-3xl mx-auto">
-              Scopri i talenti maschili della nostra agenzia
+              Discover the male talents of our agency
             </p>
           </div>
         </div>
@@ -135,7 +135,7 @@ export default function MaleModelsPage() {
                   : 'text-gray-400 hover:text-gray-600'
               }`}
             >
-              Tutti
+              All
             </button>
             {alphabet.map((letter) => {
               const isAvailable = availableLetters.has(letter);
@@ -169,7 +169,7 @@ export default function MaleModelsPage() {
             </div>
           ) : models.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-gray-500 text-lg">Nessun modello maschile trovato</p>
+              <p className="text-gray-500 text-lg">No male models found</p>
             </div>
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-12">

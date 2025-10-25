@@ -4,8 +4,8 @@ import { ArrowLeft, Calendar, Tag } from 'lucide-react';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Diversità e inclusione nel fashion - Velgance Agency',
-  description: 'Come il mondo della moda sta abbracciando la diversità e promuovendo l\'inclusività.',
+  title: 'Diversity and inclusion in fashion - Velgance Agency',
+  description: 'How the fashion world is embracing diversity and promoting inclusivity.',
 };
 
 export default function DiversitaPage() {
@@ -22,14 +22,14 @@ export default function DiversitaPage() {
           <div className="text-center">
             <div className="flex items-center justify-center gap-2 mb-6">
               <Tag className="w-4 h-4 text-white" />
-              <span className="text-sm text-white/80 uppercase tracking-wide">Diversità</span>
+              <span className="text-sm text-white/80 uppercase tracking-wide">Diversity</span>
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light text-white mb-6 italic" style={{ fontFamily: 'serif' }}>
-              Diversità e inclusione nel fashion
+              Diversity and inclusion in fashion
             </h1>
             <div className="flex items-center justify-center gap-2 text-white/80">
               <Calendar className="w-4 h-4" />
-              <span className="text-sm">3 Gennaio 2025</span>
+              <span className="text-sm">January 3, 2025</span>
             </div>
           </div>
         </div>
@@ -43,7 +43,7 @@ export default function DiversitaPage() {
             className="inline-flex items-center gap-2 text-gray-600 hover:text-black transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            Torna al Magazine
+            Back to Magazine
           </Link>
         </div>
       </div>
@@ -53,55 +53,55 @@ export default function DiversitaPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="prose prose-lg max-w-none">
             <p className="text-xl text-gray-600 leading-relaxed mb-8">
-              Il mondo della moda sta finalmente abbracciando la diversità e l'inclusività, 
-              creando uno spazio più rappresentativo e autentico per tutti.
+              The fashion world is finally embracing diversity and inclusivity, 
+              creating a more representative and authentic space for everyone.
             </p>
 
             <h2 className="text-3xl font-light text-black mb-6 italic" style={{ fontFamily: 'serif' }}>
-              Rappresentazione Autentica
+              Authentic Representation
             </h2>
             <p className="text-gray-600 leading-relaxed mb-6">
-              La diversità nella moda non è più solo una tendenza, ma una necessità. 
-              I brand stanno includendo modelli di tutte le età, corporature, etnie e 
-              abilità, riflettendo la ricchezza e la varietà del mondo reale.
+              Diversity in fashion is no longer just a trend, but a necessity. 
+              Brands are including models of all ages, body types, ethnicities and 
+              abilities, reflecting the richness and variety of the real world.
             </p>
 
             <h2 className="text-3xl font-light text-black mb-6 italic" style={{ fontFamily: 'serif' }}>
-              Inclusività nelle Passerelle
+              Inclusivity on the Runway
             </h2>
             <p className="text-gray-600 leading-relaxed mb-6">
-              Le sfilate stanno diventando più inclusive, con designer che abbracciano 
-              la diversità come fonte di ispirazione e creatività. Ogni modello porta 
-              la propria storia e personalità, arricchendo la narrativa della moda.
+              Fashion shows are becoming more inclusive, with designers embracing 
+              diversity as a source of inspiration and creativity. Each model brings 
+              their own story and personality, enriching the narrative of fashion.
             </p>
 
             <h2 className="text-3xl font-light text-black mb-6 italic" style={{ fontFamily: 'serif' }}>
-              L'Impatto Sociale
+              Social Impact
             </h2>
             <p className="text-gray-600 leading-relaxed mb-6">
-              L'inclusività nella moda ha un impatto profondo sulla società, promuovendo 
-              l'accettazione di sé e la celebrazione delle differenze. I messaggi positivi 
-              raggiungono milioni di persone, influenzando la percezione della bellezza.
+              Inclusivity in fashion has a profound impact on society, promoting 
+              self-acceptance and celebration of differences. Positive messages 
+              reach millions of people, influencing the perception of beauty.
             </p>
 
             <h2 className="text-3xl font-light text-black mb-6 italic" style={{ fontFamily: 'serif' }}>
-              Il Futuro Inclusivo
+              The Inclusive Future
             </h2>
             <p className="text-gray-600 leading-relaxed mb-6">
-              Il movimento verso l'inclusività sta ridefinendo gli standard di bellezza 
-              e creando opportunità per talenti che prima erano esclusi. La moda sta 
-              diventando un veicolo per il cambiamento sociale positivo.
+              The movement towards inclusivity is redefining beauty standards 
+              and creating opportunities for talents who were previously excluded. Fashion is 
+              becoming a vehicle for positive social change.
             </p>
 
             <div className="bg-gray-50 p-8 rounded-lg my-12">
               <h3 className="text-2xl font-light text-black mb-4 italic" style={{ fontFamily: 'serif' }}>
-                Una Moda per Tutti
+                Fashion for Everyone
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                La diversità e l'inclusività stanno trasformando la moda in un'industria 
-                più rappresentativa e autentica. Ogni persona merita di vedersi rappresentata 
-                e celebrata nel mondo della moda, indipendentemente dal proprio background 
-                o dalle proprie caratteristiche fisiche.
+                Diversity and inclusivity are transforming fashion into a more 
+                representative and authentic industry. Every person deserves to see themselves 
+                represented and celebrated in the fashion world, regardless of their background 
+                or physical characteristics.
               </p>
             </div>
           </div>

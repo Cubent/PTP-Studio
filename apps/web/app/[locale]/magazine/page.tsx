@@ -4,67 +4,67 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Magazine - Velgance Agency',
-  description: 'Scopri le ultime tendenze, storie e ispirazioni dal mondo della moda con Velgance Agency.',
+  description: 'Discover the latest trends, stories and inspirations from the fashion world with Velgance Agency.',
 };
 
 export default function MagazinePage() {
   const posts = [
     {
       id: 1,
-      title: "Le tendenze della moda 2025",
-      excerpt: "Scopri le nuove tendenze che definiranno il prossimo anno nel mondo della moda e dello stile.",
-      category: "Tendenze",
-      date: "15 Gennaio 2025",
+      title: "Fashion trends 2025",
+      excerpt: "Discover the new trends that will define next year in the world of fashion and style.",
+      category: "Trends",
+      date: "January 15, 2025",
       featured: true,
       size: "large",
       image: "https://static.wixstatic.com/media/4da6c5_b0021b2be93045aab30cfecad1c59d94~mv2.png"
     },
     {
       id: 2,
-      title: "Backstage: Dietro le quinte di una sfilata",
-      excerpt: "Un'esclusiva dietro le quinte per scoprire cosa succede prima che i modelli salgano in passerella.",
+      title: "Backstage: Behind the scenes of a fashion show",
+      excerpt: "An exclusive behind the scenes look to discover what happens before models walk the runway.",
       category: "Backstage",
-      date: "12 Gennaio 2025",
+      date: "January 12, 2025",
       featured: false,
       size: "medium",
       image: "https://static.wixstatic.com/media/4da6c5_ae4587d8c26540449360765ceb09ffc7~mv2.png"
     },
     {
       id: 3,
-      title: "Sostenibilità nella moda",
-      excerpt: "Come l'industria della moda sta evolvendo verso pratiche più sostenibili e responsabili.",
-      category: "Sostenibilità",
-      date: "10 Gennaio 2025",
+      title: "Sustainability in fashion",
+      excerpt: "How the fashion industry is evolving towards more sustainable and responsible practices.",
+      category: "Sustainability",
+      date: "January 10, 2025",
       featured: false,
       size: "small",
       image: "https://static.wixstatic.com/media/4da6c5_fd1341ccd94b448b8b36a3d114179b79~mv2.png"
     },
     {
       id: 4,
-      title: "Intervista esclusiva con i nostri modelli",
-      excerpt: "Le storie personali e i sogni dei talenti che lavorano con Velgance Agency.",
-      category: "Interviste",
-      date: "8 Gennaio 2025",
+      title: "Exclusive interview with our models",
+      excerpt: "The personal stories and dreams of the talents who work with Velgance Agency.",
+      category: "Interviews",
+      date: "January 8, 2025",
       featured: false,
       size: "medium",
       image: "https://images.unsplash.com/photo-1602743297108-4c9061884285?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
       id: 5,
-      title: "La fotografia di moda: arte e tecnica",
-      excerpt: "Esploriamo l'arte della fotografia di moda e le tecniche che creano immagini iconiche.",
-      category: "Fotografia",
-      date: "5 Gennaio 2025",
+      title: "Fashion photography: art and technique",
+      excerpt: "We explore the art of fashion photography and the techniques that create iconic images.",
+      category: "Photography",
+      date: "January 5, 2025",
       featured: false,
       size: "small",
       image: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&h=600&fit=crop&crop=center"
     },
     {
       id: 6,
-      title: "Diversità e inclusione nel fashion",
-      excerpt: "Come il mondo della moda sta abbracciando la diversità e promuovendo l'inclusività.",
-      category: "Diversità",
-      date: "3 Gennaio 2025",
+      title: "Diversity and inclusion in fashion",
+      excerpt: "How the fashion world is embracing diversity and promoting inclusivity.",
+      category: "Diversity",
+      date: "January 3, 2025",
       featured: true,
       size: "large",
       image: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=800&h=600&fit=crop&crop=center"
@@ -86,7 +86,7 @@ export default function MagazinePage() {
               Magazine
             </h1>
             <p className="text-base sm:text-lg text-white max-w-3xl mx-auto">
-              Scopri le ultime tendenze, storie e ispirazioni dal mondo della moda
+              Discover the latest trends, stories and inspirations from the fashion world
             </p>
           </div>
         </div>

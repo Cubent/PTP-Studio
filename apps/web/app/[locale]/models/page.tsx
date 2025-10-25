@@ -8,10 +8,10 @@ export default function ModelsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-5xl sm:text-5xl lg:text-6xl font-light text-black mb-6 italic" style={{ fontFamily: 'serif' }}>
-              I nostri modelli
+              Our models
             </h1>
             <p className="text-base sm:text-lg text-gray-700 max-w-3xl mx-auto">
-              Scopri i talenti della nostra agenzia
+              Discover the talents of our agency
             </p>
           </div>
         </div>
@@ -38,13 +38,13 @@ export default function ModelsPage() {
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
                     <h2 className="text-4xl sm:text-5xl font-light text-white mb-4 italic" style={{ fontFamily: 'serif' }}>
-                      Talento Femminile
+                      Female Talent
                     </h2>
                     <p className="text-lg text-white mb-6">
-                      Scopri i talenti femminili
+                      Discover female talents
                     </p>
                     <button className="inline-flex items-center gap-2 text-white px-6 py-3 rounded-lg">
-                      Esplora
+                      Explore
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
@@ -71,13 +71,13 @@ export default function ModelsPage() {
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
                     <h2 className="text-4xl sm:text-5xl font-light text-white mb-4 italic" style={{ fontFamily: 'serif' }}>
-                      Talento Maschile
+                      Male Talent
                     </h2>
                     <p className="text-lg text-white mb-6">
-                      Scopri i talenti maschili
+                      Discover male talents
                     </p>
                     <button className="inline-flex items-center gap-2 text-white px-6 py-3 rounded-lg">
-                      Esplora
+                      Explore
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>

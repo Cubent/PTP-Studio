@@ -13,12 +13,13 @@ interface ConditionalHeaderFooterProps {
 export function ConditionalHeaderFooter({ children, dictionary }: ConditionalHeaderFooterProps) {
   const pathname = usePathname();
   const isAuthPage = pathname.includes('/sign-in') || pathname.includes('/sign-up');
+  const isHomePage = pathname === '/' || pathname === '/en' || pathname === '/it';
 
   return (
     <>
-      {!isAuthPage && <Header dictionary={dictionary} />}
+      {!isAuthPage && !isHomePage && <Header dictionary={dictionary} />}
       {children}
-      {!isAuthPage && <Footer />}
+      {!isAuthPage && !isHomePage && <Footer />}
     </>
   );
 }

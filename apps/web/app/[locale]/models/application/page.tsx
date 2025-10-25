@@ -3,11 +3,11 @@ import type { Metadata } from 'next';
 import ModelApplicationClient from './client';
 
 export const metadata: Metadata = {
-  title: 'Candidati come Modello/a - Velgance Agency',
-  description: 'Diventa parte del nostro network di talenti internazionali. Compila la domanda per iniziare la tua carriera nel mondo della moda con Velgance Agency.',
+  title: 'Get Scouted - Velgance Agency',
+  description: 'Become part of our international talent network. Fill out the application to start your career in the fashion world with Velgance Agency.',
   openGraph: {
-    title: 'Candidati come Modello/a - Velgance Agency',
-    description: 'Diventa parte del nostro network di talenti internazionali. Compila la domanda per iniziare la tua carriera nel mondo della moda con Velgance Agency.',
+    title: 'Get Scouted - Velgance Agency',
+    description: 'Become part of our international talent network. Fill out the application to start your career in the fashion world with Velgance Agency.',
   },
 };
 

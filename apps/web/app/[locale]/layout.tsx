@@ -80,7 +80,7 @@ const RootLayout = async ({ children, params }: RootLayoutProperties) => {
             "@context": "https://schema.org",
             "@type": "Organization",
             "name": "Velgance Agency",
-            "description": "Dal 1998 trasformiamo il talento in opportunità. Agenzia di modelli professionisti per sfilate, shooting, video commerciali e eventi aziendali.",
+            "description": "Since 1998 we transform talent into opportunities. Professional modeling agency for fashion shows, photo shoots, commercial videos and corporate events.",
             "url": "https://velgance.com",
             "logo": "https://velgance.com/favicon.svg",
             "sameAs": [
@@ -104,7 +104,7 @@ const RootLayout = async ({ children, params }: RootLayoutProperties) => {
               "addressLocality": "Milano",
               "streetAddress": "Via Felice Bellotti, 12"
             },
-            "keywords": "agenzia modelli, modelle, casting, sfilate, shooting fotografici, video commerciali, eventi, hostess, steward, influencer marketing, fashion week, milano"
+            "keywords": "modeling agency, models, casting, fashion shows, photo shoots, commercial videos, events, hostess, steward, influencer marketing, fashion week, milan"
           })
         }}
       />

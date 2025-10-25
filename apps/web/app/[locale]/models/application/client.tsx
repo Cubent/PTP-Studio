@@ -118,12 +118,12 @@ export default function ModelApplicationClient() {
   }, []);
 
   const steps = [
-    { number: 1, title: 'Informazioni Personali', icon: User },
-    { number: 2, title: 'Contatti', icon: Mail },
-    { number: 3, title: 'Caratteristiche Fisiche', icon: Ruler },
+    { number: 1, title: 'Personal Information', icon: User },
+    { number: 2, title: 'Contact', icon: Mail },
+    { number: 3, title: 'Physical Characteristics', icon: Ruler },
     { number: 4, title: 'Social Media', icon: Instagram },
     { number: 5, title: 'Portfolio', icon: Camera },
-    { number: 6, title: 'Informazioni Aggiuntive', icon: User }
+    { number: 6, title: 'Additional Information', icon: User }
   ];
 
   // Inline validation function
@@ -170,7 +170,7 @@ export default function ModelApplicationClient() {
         break;
       case 'instagram':
         if (value && !/^@?[a-zA-Z0-9._]+$/.test(value)) {
-          errors[field] = 'Inserisci un username Instagram valido (es. @username)';
+          errors[field] = 'Enter a valid Instagram username (e.g. @username)';
         } else {
           delete errors[field];
         }
@@ -212,7 +212,7 @@ export default function ModelApplicationClient() {
     // Check for files over 10MB
     const oversizedFiles = files.filter(file => file.size > 10 * 1024 * 1024);
     if (oversizedFiles.length > 0) {
-      setErrorMessage('Alcune immagini sono troppo grandi (limite 10MB). Rimuovi le immagini più grandi e riprova.');
+      setErrorMessage('Some images are too large (10MB limit). Remove the larger images and try again.');
       return;
     }
 
@@ -407,7 +407,7 @@ export default function ModelApplicationClient() {
           <div className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Nome *
+                First Name *
               </label>
               <input
                 type="text"
@@ -424,7 +424,7 @@ export default function ModelApplicationClient() {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Cognome *
+                Last Name *
               </label>
               <input
                 type="text"
@@ -441,17 +441,24 @@ export default function ModelApplicationClient() {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Genere *
+                Gender *
               </label>
-              <select
-                value={formData.gender}
-                onChange={(e) => handleInputChange('gender', e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent text-black"
-                required
-              >
-                <option value="female">Donna</option>
-                <option value="male">Uomo</option>
-              </select>
+              <div className="relative">
+                <select
+                  value={formData.gender}
+                  onChange={(e) => handleInputChange('gender', e.target.value)}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent text-black appearance-none bg-white cursor-pointer hover:border-gray-400 transition-colors"
+                  required
+                >
+                  <option value="female" selected>Female</option>
+                  <option value="male">Male</option>
+                </select>
+                <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                  <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </div>
             </div>
           </div>
         );
@@ -473,7 +480,7 @@ export default function ModelApplicationClient() {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Telefono
+                Phone
               </label>
               <input
                 type="tel"
@@ -502,7 +509,7 @@ export default function ModelApplicationClient() {
           <div className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Altezza *
+                Height *
               </label>
               <input
                 type="text"
@@ -515,7 +522,7 @@ export default function ModelApplicationClient() {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Peso
+                Weight
               </label>
               <input
                 type="text"
@@ -551,12 +558,12 @@ export default function ModelApplicationClient() {
           <div className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Portfolio (Foto) *
+                Portfolio (Photos) *
               </label>
               <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
                 <Upload className="w-8 h-8 mx-auto text-gray-400 mb-2" />
                 <p className="text-sm text-gray-600 mb-2">
-                  Carica le tue migliori foto portfolio (minimo 3, massimo 10)
+                  Upload your best portfolio photos (minimum 3, maximum 10)
                 </p>
                 <input
                   type="file"
@@ -665,34 +672,34 @@ export default function ModelApplicationClient() {
           <div className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Esperienza
+                Experience
               </label>
               <textarea
                 value={formData.experience}
                 onChange={(e) => handleInputChange('experience', e.target.value)}
-                placeholder="Descrivi la tua esperienza nel mondo della moda..."
+                placeholder="Describe your experience in the fashion world..."
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent h-24 text-black"
               />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Disponibilità
+                Availability
               </label>
               <textarea
                 value={formData.availability}
                 onChange={(e) => handleInputChange('availability', e.target.value)}
-                placeholder="Descrivi la tua disponibilità per lavori e viaggi..."
+                placeholder="Describe your availability for jobs and travel..."
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent h-24 text-black"
               />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Informazioni Aggiuntive
+                Additional Information
               </label>
               <textarea
                 value={formData.additionalInfo}
                 onChange={(e) => handleInputChange('additionalInfo', e.target.value)}
-                placeholder="Qualsiasi altra informazione che vorresti condividere..."
+                placeholder="Any other information you would like to share..."
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent h-24 text-black"
               />
             </div>
@@ -718,13 +725,13 @@ export default function ModelApplicationClient() {
                 className="flex items-center gap-2 text-gray-600 hover:text-black transition-colors mb-4"
               >
                 <ArrowLeft className="w-4 h-4" />
-                Torna alla Home
+                Back to Home
               </button>
           <h1 className="text-3xl font-light text-black italic" style={{ fontFamily: 'serif' }}>
-            Candidati come Modello/a
+            Get Scouted
           </h1>
           <p className="text-gray-600 mt-2">
-            Diventa parte del nostro network di talenti internazionali
+            Become part of our international talent network
           </p>
         </div>
       </div>
@@ -826,7 +833,7 @@ export default function ModelApplicationClient() {
               }`}
             >
               <ArrowLeft className="w-4 h-4" />
-              Indietro
+              Back
             </button>
 
             {currentStep < steps.length ? (
@@ -840,7 +847,7 @@ export default function ModelApplicationClient() {
                     : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                 }`}
               >
-                Avanti
+                Next
                 <ArrowRight className="w-4 h-4" />
               </button>
             ) : (
@@ -849,7 +856,7 @@ export default function ModelApplicationClient() {
                 disabled={isSubmitting}
                 className="flex items-center gap-2 bg-black text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors disabled:bg-gray-400"
               >
-                {isSubmitting ? 'Invio in corso...' : 'Invia Candidatura'}
+                {isSubmitting ? 'Submitting...' : 'Submit Application'}
               </button>
             )}
           </div>
@@ -875,12 +882,12 @@ export default function ModelApplicationClient() {
       {/* Disclaimer Section */}
       <div className="max-w-4xl mx-auto px-4 py-4">
         <div className="bg-gray-50 rounded-lg p-4">
-          <h3 className="text-base font-medium text-black mb-2">Problemi con la candidatura?</h3>
+          <h3 className="text-base font-medium text-black mb-2">Having trouble with your application?</h3>
           <p className="text-sm text-gray-600 mb-3">
-            Se riscontri difficoltà nel completare la candidatura online, puoi inviare la tua domanda direttamente via email.
+            If you're having difficulty completing the online application, you can send your application directly via email.
           </p>
           <div className="flex items-center gap-2">
-            <span className="text-xs text-gray-500">Contattaci a:</span>
+            <span className="text-xs text-gray-500">Contact us at:</span>
             <a 
               href="mailto:info@velgance.com" 
               className="text-xs text-black hover:text-gray-600 transition-colors font-medium"

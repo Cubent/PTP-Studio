@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+
 // Define Model type locally
 interface Model {
   id: string;
@@ -15,12 +16,13 @@ interface Model {
   weight?: string;
   location?: string;
   gender: string;
+  category?: string;
   isActive: boolean;
   createdAt: string;
   updatedAt: string;
 }
 
-export default function FemaleModelsPage() {
+export default function WomenMainboardPage() {
   const [models, setModels] = useState<Model[]>([]);
   const [allModels, setAllModels] = useState<Model[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -35,7 +37,9 @@ export default function FemaleModelsPage() {
       const search = urlParams.get('search');
       
       try {
-        const url = search ? `/api/models?search=${encodeURIComponent(search)}&gender=female` : '/api/models?gender=female';
+        const url = search 
+          ? `/api/models?search=${encodeURIComponent(search)}&gender=female&category=mainboard` 
+          : '/api/models?gender=female&category=mainboard';
         const response = await fetch(url);
         
         if (response.ok) {
@@ -61,7 +65,9 @@ export default function FemaleModelsPage() {
   const handleSearch = async (query: string) => {
     setSearchQuery(query);
     try {
-      const url = query.trim() ? `/api/models?search=${encodeURIComponent(query)}&gender=female` : '/api/models?gender=female';
+      const url = query.trim() 
+        ? `/api/models?search=${encodeURIComponent(query)}&gender=female&category=mainboard` 
+        : '/api/models?gender=female&category=mainboard';
       const response = await fetch(url);
       
       if (response.ok) {
@@ -114,10 +120,10 @@ export default function FemaleModelsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-5xl sm:text-5xl lg:text-6xl font-light text-white mb-6 italic" style={{ fontFamily: 'serif' }}>
-              Female Talent
+              Women Mainboard
             </h1>
             <p className="text-base sm:text-lg text-white max-w-3xl mx-auto">
-              Discover the female talents of our agency
+              Discover our mainboard female talent
             </p>
           </div>
         </div>
@@ -169,7 +175,7 @@ export default function FemaleModelsPage() {
             </div>
           ) : models.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-gray-500 text-lg">No female models found</p>
+              <p className="text-gray-500 text-lg">No female mainboard models found</p>
             </div>
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-12">

@@ -53,45 +53,45 @@ export default function IntervistaPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="prose prose-lg max-w-none">
             <p className="text-xl text-gray-600 leading-relaxed mb-8">
-              Abbiamo incontrato alcuni dei nostri modelli più talentuosi per scoprire le loro 
-              storie, i loro sogni e cosa significa per loro lavorare nel mondo della moda.
+              We met some of our most talented models to discover their 
+              stories, their dreams and what it means for them to work in the fashion world.
             </p>
 
             <h2 className="text-3xl font-light text-black mb-6 italic" style={{ fontFamily: 'serif' }}>
-              Le Storie Dietro i Volti
+              The Stories Behind the Faces
             </h2>
             <p className="text-gray-600 leading-relaxed mb-6">
-              Ogni modello ha una storia unica da raccontare. Dalle loro origini alle loro 
-              aspirazioni, scopriamo cosa li spinge a perseguire una carriera nella moda 
-              e come Velgance Agency li ha aiutati a realizzare i loro sogni.
+              Every model has a unique story to tell. From their origins to their 
+              aspirations, we discover what drives them to pursue a career in fashion 
+              and how Velgance Agency has helped them realize their dreams.
             </p>
 
             <h2 className="text-3xl font-light text-black mb-6 italic" style={{ fontFamily: 'serif' }}>
-              I Sogni e le Aspirazioni
+              Dreams and Aspirations
             </h2>
             <p className="text-gray-600 leading-relaxed mb-6">
-              I nostri modelli condividono le loro ambizioni più profonde, dai progetti 
-              futuri alle collaborazioni che sognano di realizzare. Ogni intervista 
-              rivela la passione e la dedizione che li caratterizza.
+              Our models share their deepest ambitions, from future 
+              projects to collaborations they dream of achieving. Each interview 
+              reveals the passion and dedication that characterizes them.
             </p>
 
             <h2 className="text-3xl font-light text-black mb-6 italic" style={{ fontFamily: 'serif' }}>
-              L'Esperienza con Velgance
+              The Velgance Experience
             </h2>
             <p className="text-gray-600 leading-relaxed mb-6">
-              Scopriamo come l'agenzia ha influenzato le loro carriere, le opportunità 
-              che hanno ricevuto e l'ambiente di lavoro che li circonda. Le testimonianze 
-              rivelano l'approccio unico di Velgance nel supportare i talenti.
+              We discover how the agency has influenced their careers, the opportunities 
+              they have received and the work environment that surrounds them. The testimonials 
+              reveal Velgance's unique approach to supporting talent.
             </p>
 
             <div className="bg-gray-50 p-8 rounded-lg my-12">
               <h3 className="text-2xl font-light text-black mb-4 italic" style={{ fontFamily: 'serif' }}>
-                La Famiglia Velgance
+                The Velgance Family
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                Queste interviste mostrano come Velgance Agency non sia solo un'agenzia, 
-                ma una famiglia che supporta e nutre i talenti emergenti, creando 
-                opportunità uniche nel mondo della moda.
+                These interviews show how Velgance Agency is not just an agency, 
+                but a family that supports and nurtures emerging talent, creating 
+                unique opportunities in the fashion world.
               </p>
             </div>
           </div>

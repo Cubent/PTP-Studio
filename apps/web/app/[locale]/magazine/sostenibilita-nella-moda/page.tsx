@@ -4,8 +4,8 @@ import { ArrowLeft, Calendar, Tag } from 'lucide-react';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Sostenibilità nella moda - Velgance Agency',
-  description: 'Come l\'industria della moda sta evolvendo verso pratiche più sostenibili e responsabili.',
+  title: 'Sustainability in fashion - Velgance Agency',
+  description: 'How the fashion industry is evolving towards more sustainable and responsible practices.',
 };
 
 export default function SostenibilitaPage() {
@@ -22,14 +22,14 @@ export default function SostenibilitaPage() {
           <div className="text-center">
             <div className="flex items-center justify-center gap-2 mb-6">
               <Tag className="w-4 h-4 text-white" />
-              <span className="text-sm text-white/80 uppercase tracking-wide">Sostenibilità</span>
+              <span className="text-sm text-white/80 uppercase tracking-wide">Sustainability</span>
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light text-white mb-6 italic" style={{ fontFamily: 'serif' }}>
-              Sostenibilità nella moda
+              Sustainability in fashion
             </h1>
             <div className="flex items-center justify-center gap-2 text-white/80">
               <Calendar className="w-4 h-4" />
-              <span className="text-sm">10 Gennaio 2025</span>
+              <span className="text-sm">January 10, 2025</span>
             </div>
           </div>
         </div>
@@ -43,7 +43,7 @@ export default function SostenibilitaPage() {
             className="inline-flex items-center gap-2 text-gray-600 hover:text-black transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            Torna al Magazine
+            Back to Magazine
           </Link>
         </div>
       </div>
@@ -53,60 +53,60 @@ export default function SostenibilitaPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="prose prose-lg max-w-none">
             <p className="text-xl text-gray-600 leading-relaxed mb-8">
-              L'industria della moda sta attraversando una trasformazione fondamentale, 
-              spostando l'attenzione verso pratiche più sostenibili e responsabili nei 
-              confronti dell'ambiente e della società.
+              The fashion industry is undergoing a fundamental transformation, 
+              shifting focus towards more sustainable and responsible practices towards 
+              the environment and society.
             </p>
 
             <h2 className="text-3xl font-light text-black mb-6 italic" style={{ fontFamily: 'serif' }}>
-              Materiali Innovativi
+              Innovative Materials
             </h2>
             <p className="text-gray-600 leading-relaxed mb-6">
-              La ricerca di materiali sostenibili sta rivoluzionando il settore. Tessuti 
-              ricavati da scarti alimentari, fibre sintetiche biodegradabili e materiali 
-              riciclati stanno aprendo nuove possibilità creative. L'innovazione tecnologica 
-              permette di creare capi belli e funzionali senza compromettere l'ambiente.
+              The search for sustainable materials is revolutionizing the industry. Fabrics 
+              derived from food waste, biodegradable synthetic fibers and recycled 
+              materials are opening new creative possibilities. Technological innovation 
+              allows creating beautiful and functional garments without compromising the environment.
             </p>
 
             <h2 className="text-3xl font-light text-black mb-6 italic" style={{ fontFamily: 'serif' }}>
-              Economia Circolare
+              Circular Economy
             </h2>
             <p className="text-gray-600 leading-relaxed mb-6">
-              Il modello di business sta evolvendo verso un'economia circolare dove ogni 
-              capo ha un ciclo di vita esteso. Programmi di riciclo, riparazione e 
-              rivendita stanno diventando parte integrante delle strategie aziendali, 
-              riducendo gli sprechi e massimizzando il valore dei prodotti.
+              The business model is evolving towards a circular economy where every 
+              garment has an extended life cycle. Recycling, repair and 
+              resale programs are becoming an integral part of business strategies, 
+              reducing waste and maximizing product value.
             </p>
 
             <h2 className="text-3xl font-light text-black mb-6 italic" style={{ fontFamily: 'serif' }}>
-              Trasparenza e Tracciabilità
+              Transparency and Traceability
             </h2>
             <p className="text-gray-600 leading-relaxed mb-6">
-              I consumatori richiedono sempre più trasparenza sui processi produttivi. 
-              La tecnologia blockchain e i sistemi di tracciabilità permettono di 
-              seguire l'intero percorso di un capo, dalla materia prima al prodotto 
-              finale, garantendo standard etici e ambientali.
+              Consumers are increasingly demanding transparency in production processes. 
+              Blockchain technology and traceability systems allow to 
+              follow the entire journey of a garment, from raw material to final 
+              product, ensuring ethical and environmental standards.
             </p>
 
             <h2 className="text-3xl font-light text-black mb-6 italic" style={{ fontFamily: 'serif' }}>
-              Consapevolezza del Consumatore
+              Consumer Awareness
             </h2>
             <p className="text-gray-600 leading-relaxed mb-6">
-              La crescente consapevolezza dei consumatori sta guidando il cambiamento. 
-              Sempre più persone scelgono brand che condividono i loro valori, 
-              privilegiando qualità, durabilità e impatto sociale positivo rispetto 
-              al semplice prezzo.
+              Growing consumer awareness is driving change. 
+              More and more people choose brands that share their values, 
+              prioritizing quality, durability and positive social impact over 
+              simple price.
             </p>
 
             <div className="bg-gray-50 p-8 rounded-lg my-12">
               <h3 className="text-2xl font-light text-black mb-4 italic" style={{ fontFamily: 'serif' }}>
-                Il Futuro Sostenibile
+                The Sustainable Future
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                La sostenibilità nella moda non è più un'opzione, ma una necessità. 
-                L'industria sta dimostrando che è possibile creare bellezza e stile 
-                rispettando l'ambiente e le persone. Il futuro della moda è verde, 
-                etico e innovativo.
+                Sustainability in fashion is no longer an option, but a necessity. 
+                The industry is proving that it's possible to create beauty and style 
+                while respecting the environment and people. The future of fashion is green, 
+                ethical and innovative.
               </p>
             </div>
           </div>
