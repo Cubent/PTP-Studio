@@ -108,6 +108,47 @@ const RootLayout = async ({ children, params }: RootLayoutProperties) => {
           })
         }}
       />
+      
+      {/* Application Page Specific Schema */}
+      {pathname.includes('/models/application') && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebPage",
+              "name": "Get Scouted - Velgance Agency",
+              "description": "Become part of our international talent network. Fill out the application to start your career in the fashion world with Velgance Agency.",
+              "url": "https://velgance.com/models/application",
+              "image": {
+                "@type": "ImageObject",
+                "url": "https://i.postimg.cc/pXHkXTG6/Full-Body-Picture-7.png",
+                "width": 1200,
+                "height": 630,
+                "alt": "Get Scouted - Velgance Agency Model Application"
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "Velgance Agency",
+                "url": "https://velgance.com",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://i.postimg.cc/mrvCXXK5/Velgance-31.png"
+                }
+              },
+              "mainEntity": {
+                "@type": "Service",
+                "name": "Model Application Service",
+                "description": "Professional model application and scouting service for fashion industry talent",
+                "provider": {
+                  "@type": "Organization",
+                  "name": "Velgance Agency"
+                }
+              }
+            })
+          }}
+        />
+      )}
       <ReferralTracker />
       <ErrorBoundary>
         <AuthProvider>
