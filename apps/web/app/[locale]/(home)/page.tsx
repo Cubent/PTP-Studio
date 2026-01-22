@@ -426,17 +426,13 @@ const Home = ({ params }: HomeProps) => {
         }
       `}</style>
       <div className="min-h-screen">
-      {/* Video Background Section */}
+      {/* Image Background Section */}
       <div className="homepage-video-container">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
+        <img
+          src="https://images.unsplash.com/photo-1714409847420-499ec71be6ca?q=80&w=1464&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt="Background"
           className="homepage-video"
-        >
-          <source src="https://res.cloudinary.com/dbr1nfgbr/video/upload/v1761335524/3753692-uhd_3840_2160_25fps_q9zr6z.mp4" type="video/mp4" />
-        </video>
+        />
         {/* Dark overlay for better text readability */}
         <div className="homepage-video-overlay"></div>
 
