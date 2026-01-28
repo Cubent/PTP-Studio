@@ -3,7 +3,7 @@ import Stripe from 'stripe';
 import { keys } from './keys';
 
 export const stripe = new Stripe(keys().STRIPE_SECRET_KEY || 'sk_test_placeholder_for_build', {
-  apiVersion: '2025-04-30.basil',
+  apiVersion: '2025-08-27.basil',
 });
 
 export type { Stripe } from 'stripe';
