@@ -38,9 +38,7 @@ const middleware: NextMiddleware = async (request: NextRequest) => {
   
   // Skip i18n middleware for API routes
   if (!request.nextUrl.pathname.startsWith('/api/')) {
-    const i18nResponse = internationalizationMiddleware(
-      request as unknown as NextRequest
-    );
+    const i18nResponse = internationalizationMiddleware(request);
     if (i18nResponse) {
       return i18nResponse;
     }
