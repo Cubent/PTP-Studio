@@ -14,12 +14,13 @@ export function ConditionalHeaderFooter({ children, dictionary }: ConditionalHea
   const pathname = usePathname();
   const isAuthPage = pathname.includes('/sign-in') || pathname.includes('/sign-up');
   const isHomePage = pathname === '/' || pathname === '/en' || pathname === '/it';
+  const isExpertisePage = pathname.includes('/expertise');
 
   return (
     <>
-      {!isAuthPage && !isHomePage && <Header dictionary={dictionary} />}
+      {!isAuthPage && !isHomePage && !isExpertisePage && <Header dictionary={dictionary} />}
       {children}
-      {!isAuthPage && !isHomePage && <Footer />}
+      {!isAuthPage && !isHomePage && !isExpertisePage && <Footer />}
     </>
   );
 }

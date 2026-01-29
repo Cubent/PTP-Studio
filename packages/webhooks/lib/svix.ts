@@ -1,5 +1,4 @@
 import 'server-only';
-import { auth } from '@repo/auth/server';
 import { Svix } from 'svix';
 import { keys } from '../keys';
 
@@ -11,11 +10,9 @@ export const send = async (eventType: string, payload: object) => {
   }
 
   const svix = new Svix(svixToken);
-  const { orgId } = await auth();
-
-  if (!orgId) {
-    return;
-  }
+  
+  // Auth removed - implement your own organization ID logic
+  const orgId = 'default-org';
 
   return svix.message.create(orgId, {
     eventType,
@@ -36,11 +33,9 @@ export const getAppPortal = async () => {
   }
 
   const svix = new Svix(svixToken);
-  const { orgId } = await auth();
-
-  if (!orgId) {
-    return;
-  }
+  
+  // Auth removed - implement your own organization ID logic
+  const orgId = 'default-org';
 
   return svix.authentication.appPortalAccess(orgId, {
     application: {

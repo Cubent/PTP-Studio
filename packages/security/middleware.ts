@@ -14,7 +14,7 @@ export const noseconeOptions: NoseconeOptions = {
   // https://www.next-forge.com/packages/security/headers for guidance on how
   // to configure it.
   contentSecurityPolicy: false,
-  // Relax COEP to allow Stripe and other third-party services to load
+  // Relax COEP to allow third-party services to load
   crossOriginEmbedderPolicy: false,
 };
 

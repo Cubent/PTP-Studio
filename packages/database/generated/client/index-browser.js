@@ -119,7 +119,6 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
-  clerkId: 'clerkId',
   email: 'email',
   name: 'name',
   picture: 'picture',
@@ -321,26 +320,6 @@ exports.Prisma.FlightRecommendationScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.StripeSubscriptionScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  stripeCustomerId: 'stripeCustomerId',
-  stripeSubscriptionId: 'stripeSubscriptionId',
-  stripePriceId: 'stripePriceId',
-  status: 'status',
-  currentPeriodStart: 'currentPeriodStart',
-  currentPeriodEnd: 'currentPeriodEnd',
-  cancelAtPeriodEnd: 'cancelAtPeriodEnd',
-  amount: 'amount',
-  currency: 'currency',
-  interval: 'interval',
-  trialEnd: 'trialEnd',
-  canceledAt: 'canceledAt',
-  endedAt: 'endedAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
 exports.Prisma.EmailNotificationScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -454,7 +433,6 @@ exports.Prisma.ModelName = {
   UserPreferences: 'UserPreferences',
   Influencer: 'Influencer',
   FlightRecommendation: 'FlightRecommendation',
-  StripeSubscription: 'StripeSubscription',
   EmailNotification: 'EmailNotification',
   ScheduledEvent: 'ScheduledEvent',
   Model: 'Model',

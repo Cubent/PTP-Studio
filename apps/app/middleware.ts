@@ -1,4 +1,3 @@
-import { authMiddleware } from '@repo/auth/middleware';
 import {
   noseconeMiddleware,
   noseconeOptions,
@@ -11,9 +10,8 @@ const securityHeaders = env.FLAGS_SECRET
   ? noseconeMiddleware(noseconeOptionsWithToolbar)
   : noseconeMiddleware(noseconeOptions);
 
-export default authMiddleware(() =>
-  securityHeaders()
-) as unknown as NextMiddleware;
+// Auth middleware removed - implement your own authentication
+export default securityHeaders as unknown as NextMiddleware;
 
 export const config = {
   matcher: [

@@ -1,7 +1,6 @@
 // Main layout component for the Cubent website
 import './styles.css';
 import { AnalyticsProvider } from '@repo/analytics';
-import { AuthProvider } from '@repo/auth/provider';
 
 import { DesignSystemProvider } from '@repo/design-system';
 import { fonts } from '@repo/design-system/lib/fonts';
@@ -16,7 +15,6 @@ import { ConditionalHeaderFooter } from './components/conditional-header-footer'
 import { PerformanceOptimizer } from '../../components/performance-optimizer';
 import { PerformanceHints } from '../../components/seo-optimizer';
 import { ErrorBoundary, ConsoleErrorSuppressor } from '../../components/error-boundary';
-import { ReferralTracker } from '../../components/ReferralTracker';
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 
@@ -149,11 +147,9 @@ const RootLayout = async ({ children, params }: RootLayoutProperties) => {
           }}
         />
       )}
-      <ReferralTracker />
       <ErrorBoundary>
-        <AuthProvider>
-          <AnalyticsProvider>
-            <DesignSystemProvider>
+        <AnalyticsProvider>
+          <DesignSystemProvider>
               <PerformanceOptimizer />
               <PageWrapper>
                 <ConditionalHeaderFooter dictionary={dictionary}>
@@ -163,7 +159,6 @@ const RootLayout = async ({ children, params }: RootLayoutProperties) => {
             </DesignSystemProvider>
             <Toolbar />
           </AnalyticsProvider>
-        </AuthProvider>
       </ErrorBoundary>
     </>
   );

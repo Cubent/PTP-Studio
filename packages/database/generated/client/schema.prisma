@@ -17,7 +17,6 @@ datasource db {
 
 model User {
   id      String  @id @default(cuid())
-  clerkId String  @unique
   email   String  @unique
   name    String?
   picture String?
@@ -56,7 +55,6 @@ model User {
   // Travira relations
   travelPreferences     UserPreferences?
   flightRecommendations FlightRecommendation[]
-  stripeSubscription    StripeSubscription?
   emailNotifications    EmailNotification[]
   scheduledEvents       ScheduledEvent[]
 
@@ -349,40 +347,6 @@ model FlightRecommendation {
   @@index([departureDate])
   @@index([price])
   @@index([isActive])
-}
-
-model StripeSubscription {
-  id     String @id @default(cuid())
-  userId String @unique
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  // Stripe identifiers
-  stripeCustomerId     String  @unique
-  stripeSubscriptionId String? @unique
-  stripePriceId        String?
-
-  // Subscription details
-  status             String    @default("inactive") // "active", "inactive", "canceled", "past_due"
-  currentPeriodStart DateTime?
-  currentPeriodEnd   DateTime?
-  cancelAtPeriodEnd  Boolean   @default(false)
-
-  // Billing
-  amount   Float  @default(99.00) // $99/year
-  currency String @default("USD")
-  interval String @default("year") // "month", "year"
-
-  // Metadata
-  trialEnd   DateTime?
-  canceledAt DateTime?
-  endedAt    DateTime?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@index([userId])
-  @@index([stripeCustomerId])
-  @@index([status])
 }
 
 model EmailNotification {

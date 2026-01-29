@@ -1,1 +1,4 @@
-export { clerkMiddleware as authMiddleware } from '@clerk/nextjs/server';
+// Placeholder auth middleware - implement your own authentication
+export function authMiddleware(handler: any) {
+  return handler;
+}

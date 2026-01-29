@@ -3,6 +3,12 @@
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronLeft, ChevronRight, Plus, Minus } from 'lucide-react';
+import { LuminaInteractiveList } from '@repo/design-system';
+import { Testimonial } from '@/components/testimonial';
+import { CTASection } from '@/components/cta-section';
+import { ExpertiseSection } from '@/components/expertise-section';
+import { FAQSection } from '@/components/faq-section';
+import { Header } from '@/components/header';
 
 type HomeProps = {
   params: Promise<{
@@ -11,11 +17,6 @@ type HomeProps = {
 };
 
 const Home = ({ params }: HomeProps) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isModelsOpen, setIsModelsOpen] = useState(false);
-  const [isMenOpen, setIsMenOpen] = useState(false);
-  const [isWomenOpen, setIsWomenOpen] = useState(false);
-  const [isModelsSubmenuOpen, setIsModelsSubmenuOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [selectedProject, setSelectedProject] = useState<any>(null);
   const [showNoticePopup, setShowNoticePopup] = useState(false);
@@ -254,6 +255,14 @@ const Home = ({ params }: HomeProps) => {
           50% { border-color: white; }
         }
         
+        .services-scroll::-webkit-scrollbar {
+          display: none;
+        }
+        
+        .projects-scroll::-webkit-scrollbar {
+          display: none;
+        }
+        
         .homepage-menu {
           position: fixed !important;
           top: 0 !important;
@@ -426,533 +435,592 @@ const Home = ({ params }: HomeProps) => {
         }
       `}</style>
       <div className="min-h-screen">
-      {/* Image Background Section */}
-      <div className="homepage-video-container">
-        <img
-          src="https://images.unsplash.com/photo-1714409847420-499ec71be6ca?q=80&w=1464&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt="Background"
-          className="homepage-video"
-        />
-        {/* Dark overlay for better text readability */}
-        <div className="homepage-video-overlay"></div>
+      {/* New Header Component */}
+      <Header />
+      
+      {/* Lumina Interactive List */}
+      <div className="relative">
+        <LuminaInteractiveList />
+      </div>
 
-        {/* Left-aligned services text */}
-        <div className="homepage-text">
-          <div className="typing-animation">
-            <p className="mb-2">
-              <span className="relative">
-                Europe's Leading
-                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-white/60 transform -skew-x-12"></span>
-              </span>
-              <span> Agency for Models,</span>
+      {/* Services Section */}
+      <div className="bg-[#1a1a1a] py-20" data-section="services">
+        <div className="w-full px-4 sm:px-6 lg:px-8">
+          <div className="mb-12">
+            <h2 className="text-4xl sm:text-5xl font-sans font-normal text-white mb-4">
+              <span className="font-bold">Web Agency</span>,
+              <br />
+              <span className="font-bold">Marketing</span> & <span className="font-bold">Communication</span>
+            </h2>
+            <p className="text-gray-400 text-base">
+              A global web agency delivering cutting-edge digital solutions to clients worldwide.
             </p>
-            <p className="mb-2">Influencers, and Brand Partnerships,</p>
-            <p className="mb-2">Creating High-Impact Campaigns and</p>
-            <p>Exceptional Industry Opportunities.</p>
+          </div>
+          
+          {/* Horizontal Scrollable Cards */}
+          <div className="overflow-x-auto overflow-y-hidden services-scroll" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+            <div className="flex gap-6 pb-4">
+              <div className="flex-shrink-0 w-80 h-48 border-2 border-white rounded-2xl flex items-center justify-center bg-[#1a1a1a] hover:bg-[#252525] transition-colors duration-300">
+                <h3 className="text-white text-2xl font-medium">UI & UX</h3>
+              </div>
+              <div className="flex-shrink-0 w-80 h-48 border-2 border-white rounded-2xl flex items-center justify-center bg-[#1a1a1a] hover:bg-[#252525] transition-colors duration-300">
+                <h3 className="text-white text-2xl font-medium">Websites</h3>
+              </div>
+              <div className="flex-shrink-0 w-80 h-48 border-2 border-white rounded-2xl flex items-center justify-center bg-[#1a1a1a] hover:bg-[#252525] transition-colors duration-300">
+                <h3 className="text-white text-2xl font-medium">Full Stack Apps</h3>
+              </div>
+              <div className="flex-shrink-0 w-80 h-48 border-2 border-white rounded-2xl flex items-center justify-center bg-[#1a1a1a] hover:bg-[#252525] transition-colors duration-300">
+                <h3 className="text-white text-2xl font-medium">Mobile Apps</h3>
+              </div>
+              <div className="flex-shrink-0 w-80 h-48 border-2 border-white rounded-2xl flex items-center justify-center bg-[#1a1a1a] hover:bg-[#252525] transition-colors duration-300">
+                <h3 className="text-white text-2xl font-medium">E-Commerce</h3>
+              </div>
+              <div className="flex-shrink-0 w-80 h-48 border-2 border-white rounded-2xl flex items-center justify-center bg-[#1a1a1a] hover:bg-[#252525] transition-colors duration-300">
+                <h3 className="text-white text-2xl font-medium">API Development</h3>
+              </div>
+              <div className="flex-shrink-0 w-80 h-48 border-2 border-white rounded-2xl flex items-center justify-center bg-[#1a1a1a] hover:bg-[#252525] transition-colors duration-300">
+                <h3 className="text-white text-2xl font-medium">Cloud Solutions</h3>
+              </div>
+              <div className="flex-shrink-0 w-80 h-48 border-2 border-white rounded-2xl flex items-center justify-center bg-[#1a1a1a] hover:bg-[#252525] transition-colors duration-300">
+                <h3 className="text-white text-2xl font-medium">AI Integration</h3>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
 
-        {/* Top Left Hamburger Menu */}
-        <div className="homepage-header">
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="text-white hover:text-gray-300 transition-colors duration-300"
-          >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-          <Link href="/" className="text-white text-xl font-light hover:text-gray-300 transition-colors duration-300">
-            Velgance Models
-          </Link>
-        </div>
-
-        {/* Top Right Button */}
-        <div className="homepage-right-button">
-          <Link 
-            href="/models/application" 
-            className="text-white px-6 py-3 font-medium hover:text-gray-300 transition-colors duration-300"
-          >
-            Get Scouted
-          </Link>
-        </div>
-
-        {/* Sidebar Menu */}
-        <div className={`homepage-menu ${isMenuOpen ? 'open' : ''}`}>
-          <div className="p-8">
-            <div className="mb-12">
-              <button 
-                onClick={() => setIsMenuOpen(false)}
-                className="text-2xl font-light text-black hover:text-gray-600 transition-colors duration-300"
-              >
-                X
+      {/* Growing Synergies Section */}
+      <div className="bg-[#f5f5f5] py-20" data-section="synergies">
+        <div className="w-full px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div>
+              <p className="text-sm text-gray-600 uppercase tracking-wider mb-4">GROWING SYNERGIES</p>
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-sans font-bold text-black mb-6 leading-tight">
+                Building digital products that drive real business growth.
+              </h2>
+              <p className="text-gray-700 text-base leading-relaxed mb-6">
+                We design and develop custom web applications, mobile apps, and digital platforms. From initial concept to launch and beyond, we partner with businesses to create scalable solutions that solve real problems and deliver measurable results.
+              </p>
+              <button className="border-2 border-black text-black px-8 py-3 rounded-full font-medium hover:bg-black hover:text-white transition-colors duration-300">
+                Contact Us
               </button>
             </div>
-            
-            <nav className="space-y-6">
-              {/* Models Dropdown */}
-              <div>
-                <button
-                  onClick={() => setIsModelsOpen(!isModelsOpen)}
-                  className="flex items-center justify-between w-full text-xl font-light text-black hover:text-gray-600 transition-colors duration-300 py-2"
-                >
-                  <span>Models</span>
-                  {isModelsOpen ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
-                </button>
-                
-                {isModelsOpen && (
-                  <div className="ml-4 space-y-3">
-                    {/* Men Section */}
-                    <div>
-                      <button
-                        onClick={() => setIsMenOpen(!isMenOpen)}
-                        className="flex items-center justify-between w-full text-lg font-light text-gray-700 hover:text-black transition-colors duration-300 py-1"
-                      >
-                        <span>Men</span>
-                        {isMenOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
-                      </button>
-                      {isMenOpen && (
-                        <div className="ml-4 space-y-2">
-                          <Link 
-                            href="/models/men/mainboard" 
-                            className="block text-base text-gray-600 hover:text-black transition-colors duration-300 py-1"
-                            onClick={() => setIsMenuOpen(false)}
-                          >
-                            Mainboard
-                          </Link>
-                          <Link 
-                            href="/models/men/new-faces" 
-                            className="block text-base text-gray-600 hover:text-black transition-colors duration-300 py-1"
-                            onClick={() => setIsMenuOpen(false)}
-                          >
-                            New Faces
-                          </Link>
-                        </div>
-                      )}
-                    </div>
-                    
-                    {/* Women Section */}
-                    <div>
-                      <button
-                        onClick={() => setIsWomenOpen(!isWomenOpen)}
-                        className="flex items-center justify-between w-full text-lg font-light text-gray-700 hover:text-black transition-colors duration-300 py-1"
-                      >
-                        <span>Women</span>
-                        {isWomenOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
-                      </button>
-                      {isWomenOpen && (
-                        <div className="ml-4 space-y-2">
-                          <Link 
-                            href="/models/women/mainboard" 
-                            className="block text-base text-gray-600 hover:text-black transition-colors duration-300 py-1"
-                            onClick={() => setIsMenuOpen(false)}
-                          >
-                            Mainboard
-                          </Link>
-                          <Link 
-                            href="/models/women/new-faces" 
-                            className="block text-base text-gray-600 hover:text-black transition-colors duration-300 py-1"
-                            onClick={() => setIsMenuOpen(false)}
-                          >
-                            New Faces
-                          </Link>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
+
+            {/* Right Images Stacked with Offset */}
+            <div className="space-y-6 relative">
+              <div className="rounded-lg overflow-hidden relative z-10">
+                <img 
+                  src="https://images.unsplash.com/photo-1684139517679-032b7213ad2e?q=80&w=1528&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  alt="Digital workspace"
+                  className="w-full h-auto object-cover max-h-64"
+                />
               </div>
-              
-              {/* Creators */}
-              <Link 
-                href="/creators" 
-                className="block text-xl font-light text-black hover:text-gray-600 transition-colors duration-300"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Creators
-              </Link>
-              
-              <Link 
-                href="/partners" 
-                className="block text-xl font-light text-black hover:text-gray-600 transition-colors duration-300"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Partners
-              </Link>
-              
-              <Link 
-                href="/portfolio" 
-                className="block text-xl font-light text-black hover:text-gray-600 transition-colors duration-300"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Portfolio
-              </Link>
-              
-              <Link 
-                href="/contact" 
-                className="block text-xl font-light text-black hover:text-gray-600 transition-colors duration-300"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Contact
-              </Link>
-              
-              <Link 
-                href="/chi-siamo" 
-                className="block text-xl font-light text-black hover:text-gray-600 transition-colors duration-300"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                About Us
-              </Link>
-            </nav>
-            
-            <div className="border-t border-gray-200 mt-12 pt-8">
-            </div>
-            <div className="mt-4">
-              <div className="inline-flex items-center gap-2 px-2 py-1 border border-gray-300 rounded-lg">
-                <div className="w-2 h-2 bg-black rounded-full"></div>
-                <p className="text-xs text-gray-800 font-medium">
-                  CEST {new Date().toLocaleString('en-US', { timeZone: 'Europe/Rome', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
-                </p>
+              <div className="rounded-lg overflow-hidden relative -mt-12 ml-12">
+                <img 
+                  src="https://images.unsplash.com/photo-1758043323593-d4511bcf82a1?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  alt="Creative workspace"
+                  className="w-full h-auto object-cover max-h-64"
+                />
               </div>
             </div>
           </div>
         </div>
-
-        {/* Overlay */}
-        {isMenuOpen && (
-          <div 
-            className="homepage-menu-overlay"
-            onClick={() => setIsMenuOpen(false)}
-          />
-        )}
       </div>
 
       {/* Our Latest Work Section */}
-      <div className="bg-white py-16">
+      <div className="bg-[#f5f5f5] py-16" id="latest-work" data-section="work">
         <div className="w-full px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl sm:text-5xl font-light text-black mb-6 italic" style={{ fontFamily: 'serif' }}>
-              Latest Editorial Work
+          <div className="mb-12">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-sans font-bold text-black leading-tight">
+              Our Latest Work
             </h2>
           </div>
           
           {/* Horizontal Scrollable Layout */}
-          <div className="overflow-x-auto bg-white" style={{ scrollbarWidth: 'thin', scrollbarColor: '#e5e7eb #ffffff' }}>
-            <div className="flex space-x-4 pb-2" style={{ scrollbarWidth: 'thin', msOverflowStyle: 'none' }}>
-              {/* ESSENCE Project - First Project */}
-              <div className="flex-shrink-0 w-80">
-                <div 
-                  className="group cursor-pointer"
-                  onClick={() => setSelectedProject(projects[0])}
-                >
-                  <div className="relative overflow-hidden transition-all duration-300">
-                    {/* Default Image */}
+          <div className="overflow-x-auto overflow-y-hidden bg-[#f5f5f5] projects-scroll" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+            <div className="flex space-x-8 pb-2" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+              {/* Comza Project */}
+              <div className="flex-shrink-0" style={{ width: '400px' }}>
+                <div className="group cursor-pointer">
+                  {/* Title and Subtitle Above Image */}
+                  <div className="mb-4">
+                    <h3 className="text-2xl font-semibold text-black mb-1">Comza</h3>
+                    <p className="text-gray-600 text-base">International Calling Platform</p>
+                  </div>
+                  
+                  <div className="relative overflow-hidden transition-all duration-300 rounded-lg bg-white border-2 border-gray-200">
+                    {/* Browser Bar */}
+                    <div className="bg-white border-b border-gray-200 px-4 py-2.5 flex items-center justify-center relative">
+                      <div className="absolute left-4 flex items-center gap-1.5">
+                        <div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
+                        <div className="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
+                        <div className="w-2.5 h-2.5 rounded-full bg-green-400"></div>
+                      </div>
+                      <div className="bg-gray-100 rounded-md px-4 py-1 text-xs text-gray-600">
+                        https://comza.org/
+                      </div>
+                    </div>
                     <img 
-                      src={projects[0].mainImage}
-                      alt={projects[0].title}
-                      className="w-full h-[400px] object-cover group-hover:opacity-0 transition-opacity duration-300"
-                    />
-                    {/* Hover Image */}
-                    <img 
-                      src={projects[0].hoverImage}
-                      alt={`${projects[0].title} - Hover`}
-                      className="absolute inset-0 w-full h-[400px] object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      src="/New Website Instagram Post (1).png"
+                      alt="Comza - International Calling Platform"
+                      className="w-full h-auto object-contain"
+                      style={{ maxHeight: '600px' }}
                     />
                   </div>
-                  <div className="mt-4">
-                    <h3 className="text-lg font-medium text-black mb-1">{projects[0].title}</h3>
-                    <p className="text-gray-600 text-sm mb-3">{projects[0].credits.photographer}</p>
-                    
-                    {/* Project Details */}
-                    <div className="p-2">
-                      <div className="space-y-1 text-xs text-gray-700">
-                        <p><strong>Photographer:</strong> {projects[0].credits.photographer}</p>
-                        <p><strong>Styled by:</strong> {projects[0].credits.stylist}</p>
-                        <p><strong>Watches:</strong> {projects[0].credits.watches}</p>
-                        <p><strong>Hair:</strong> {projects[0].credits.hair}</p>
-                        <p><strong>Make-Up:</strong> {projects[0].credits.makeup}</p>
-                        <p><strong>DOP:</strong> {projects[0].credits.dop}</p>
-                        <p><strong>Special thanks:</strong> {projects[0].credits.specialThanks}</p>
-                      </div>
+                  
+                  {/* Visit Button */}
+                  <a 
+                    href="https://comza.org" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-black text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-800 transition-colors mt-4"
+                  >
+                    Visit Comza
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                      <path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </a>
+                  
+                  <div className="mt-6">
+                    {/* Project Description */}
+                    <div className="space-y-4">
+                      <p className="text-gray-700 leading-relaxed text-sm">
+                        A browser-based international calling platform that enables users to make affordable calls worldwide without apps or subscriptions.
+                      </p>
+                      
+                      {/* Expandable Tech Details */}
+                      <details className="group">
+                        <summary className="cursor-pointer text-black font-medium text-sm flex items-center gap-2 hover:text-gray-700 transition-colors">
+                          <svg className="w-4 h-4 transition-transform group-open:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                          Tech Stack & Details
+                        </summary>
+                        <div className="mt-3 ml-6 space-y-2 text-sm">
+                          <div className="flex items-start gap-2">
+                            <span className="text-black font-medium min-w-[90px]">Tech Stack:</span>
+                            <span className="text-gray-600">Next.js, React, WebRTC, Stripe, PostgreSQL</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <span className="text-black font-medium min-w-[90px]">Features:</span>
+                            <span className="text-gray-600">Browser calling, Credit system, Global coverage</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <span className="text-black font-medium min-w-[90px]">Timeline:</span>
+                            <span className="text-gray-600">3 weeks</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <span className="text-black font-medium min-w-[90px]">Results:</span>
+                            <span className="text-gray-600">200+ countries, 99.9% uptime</span>
+                          </div>
+                        </div>
+                      </details>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* ARIUB Project - Second Project */}
-              <div className="flex-shrink-0 w-80">
-                <div 
-                  className="group cursor-pointer"
-                  onClick={() => setSelectedProject(projects[1])}
-                >
-                  <div className="relative overflow-hidden transition-all duration-300">
-                    {/* Default Image */}
-                    <img 
-                      src={projects[1].mainImage}
-                      alt={projects[1].title}
-                      className="w-full h-[400px] object-cover group-hover:opacity-0 transition-opacity duration-300"
-                    />
-                    {/* Hover Image */}
-                    <img 
-                      src={projects[1].hoverImage}
-                      alt={`${projects[1].title} - Hover`}
-                      className="absolute inset-0 w-full h-[400px] object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    />
-                        </div>
-                  <div className="mt-4">
-                    <h3 className="text-lg font-medium text-black mb-1">{projects[1].title}</h3>
-                    <p className="text-gray-600 text-sm mb-3">{projects[1].credits.photographer}</p>
-                    
-                    {/* Project Details */}
-                    <div className="p-2">
-                      <div className="space-y-1 text-xs text-gray-700">
-                        <p><strong>Fashion Director:</strong> {projects[1].credits.fashionDirector}</p>
-                        <p><strong>Photographer:</strong> {projects[1].credits.photographer}</p>
-                        <p><strong>Stylist:</strong> {projects[1].credits.stylist}</p>
-                        <p><strong>Hair:</strong> {projects[1].credits.hair}</p>
-                        <p><strong>Makeup:</strong> {projects[1].credits.makeup}</p>
+              {/* Beitha Project */}
+              <div className="flex-shrink-0" style={{ width: '400px' }}>
+                <div className="group cursor-pointer">
+                  {/* Title and Subtitle Above Image */}
+                  <div className="mb-4">
+                    <h3 className="text-2xl font-semibold text-black mb-1">Beitha</h3>
+                    <p className="text-gray-600 text-base">AI Browser Extension</p>
+                  </div>
+                  
+                  <div className="relative overflow-hidden transition-all duration-300 rounded-lg bg-white border-2 border-gray-200">
+                    {/* Browser Bar */}
+                    <div className="bg-white border-b border-gray-200 px-4 py-2.5 flex items-center justify-center relative">
+                      <div className="absolute left-4 flex items-center gap-1.5">
+                        <div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
+                        <div className="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
+                        <div className="w-2.5 h-2.5 rounded-full bg-green-400"></div>
                       </div>
+                      <div className="bg-gray-100 rounded-md px-4 py-1 text-xs text-gray-600">
+                        https://beitha.org/
+                      </div>
+                    </div>
+                    <img 
+                      src="/New Website Instagram Post (2).png"
+                      alt="Beitha - AI Browser Extension"
+                      className="w-full h-auto object-contain"
+                      style={{ maxHeight: '600px' }}
+                    />
+                  </div>
+                  
+                  {/* Visit Button */}
+                  <a 
+                    href="https://beitha.org" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-black text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-800 transition-colors mt-4"
+                  >
+                    Visit Beitha
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                      <path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </a>
+                  
+                  <div className="mt-6">
+                    {/* Project Description */}
+                    <div className="space-y-4">
+                      <p className="text-gray-700 leading-relaxed text-sm">
+                        AI-powered browser extension that understands, organizes, and helps you achieve more—right where you work.
+                      </p>
+                      
+                      {/* Expandable Tech Details */}
+                      <details className="group">
+                        <summary className="cursor-pointer text-black font-medium text-sm flex items-center gap-2 hover:text-gray-700 transition-colors">
+                          <svg className="w-4 h-4 transition-transform group-open:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                          Tech Stack & Details
+                        </summary>
+                        <div className="mt-3 ml-6 space-y-2 text-sm">
+                          <div className="flex items-start gap-2">
+                            <span className="text-black font-medium min-w-[90px]">Tech Stack:</span>
+                            <span className="text-gray-600">Chrome Extension, AI/ML, JavaScript</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <span className="text-black font-medium min-w-[90px]">Features:</span>
+                            <span className="text-gray-600">Tab organization, Email drafting, Smart shopping</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <span className="text-black font-medium min-w-[90px]">Timeline:</span>
+                            <span className="text-gray-600">4 weeks</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <span className="text-black font-medium min-w-[90px]">Privacy:</span>
+                            <span className="text-gray-600">Privacy-first, no data collection</span>
+                          </div>
+                        </div>
+                      </details>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Bethany Project - Third Project */}
-              <div className="flex-shrink-0 w-80">
-                <div 
-                  className="group cursor-pointer"
-                  onClick={() => setSelectedProject(projects[2])}
-                >
-                  <div className="relative overflow-hidden transition-all duration-300">
-                    {/* Default Image */}
-                    <img 
-                      src={projects[2].mainImage}
-                      alt={projects[2].title}
-                      className="w-full h-[400px] object-cover group-hover:opacity-0 transition-opacity duration-300"
-                    />
-                    {/* Hover Image */}
-                    <img 
-                      src={projects[2].hoverImage}
-                      alt={`${projects[2].title} - Hover`}
-                      className="absolute inset-0 w-full h-[400px] object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    />
-                        </div>
-                  <div className="mt-4">
-                    <h3 className="text-lg font-medium text-black mb-1">{projects[2].title}</h3>
-                    <p className="text-gray-600 text-sm mb-3">{projects[2].credits.magazine}</p>
-                    
-                    {/* Project Details */}
-                    <div className="p-2">
-                      <div className="space-y-1 text-xs text-gray-700">
-                        <p><strong>Magazine:</strong> {projects[2].credits.magazine}</p>
-                        <p><strong>Photographer:</strong> {projects[2].credits.photographer}</p>
-                        <p><strong>Stylist:</strong> {projects[2].credits.stylist}</p>
-                        <p><strong>EIC:</strong> {projects[2].credits.eic}</p>
-                        <p><strong>Casting:</strong> {projects[2].credits.casting}</p>
-                        <p><strong>Hair:</strong> {projects[2].credits.hair}</p>
-                        <p><strong>Makeup:</strong> {projects[2].credits.makeup}</p>
-                        <p><strong>Production:</strong> {projects[2].credits.production}</p>
+              {/* Travira Project */}
+              <div className="flex-shrink-0" style={{ width: '400px' }}>
+                <div className="group cursor-pointer">
+                  {/* Title and Subtitle Above Image */}
+                  <div className="mb-4">
+                    <h3 className="text-2xl font-semibold text-black mb-1">Travira</h3>
+                    <p className="text-gray-600 text-base">Flight Deal Alerts Platform</p>
+                  </div>
+                  
+                  <div className="relative overflow-hidden transition-all duration-300 rounded-lg bg-white border-2 border-gray-200">
+                    {/* Browser Bar */}
+                    <div className="bg-white border-b border-gray-200 px-4 py-2.5 flex items-center justify-center relative">
+                      <div className="absolute left-4 flex items-center gap-1.5">
+                        <div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
+                        <div className="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
+                        <div className="w-2.5 h-2.5 rounded-full bg-green-400"></div>
                       </div>
+                      <div className="bg-gray-100 rounded-md px-4 py-1 text-xs text-gray-600">
+                        https://travira.org/
+                      </div>
+                    </div>
+                    <img 
+                      src="/travira-project.png"
+                      alt="Travira - Flight Deal Alerts"
+                      className="w-full h-auto object-contain"
+                      style={{ maxHeight: '600px' }}
+                    />
+                  </div>
+                  
+                  {/* Visit Button */}
+                  <a 
+                    href="https://travira.org" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-black text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-800 transition-colors mt-4"
+                  >
+                    Visit Travira
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                      <path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </a>
+                  
+                  <div className="mt-6">
+                    {/* Project Description */}
+                    <div className="space-y-4">
+                      <p className="text-gray-700 leading-relaxed text-sm">
+                        Never miss a great flight deal again. Get alerts when airlines publish flights 50-90% off regular price from your airport.
+                      </p>
+                      
+                      {/* Expandable Tech Details */}
+                      <details className="group">
+                        <summary className="cursor-pointer text-black font-medium text-sm flex items-center gap-2 hover:text-gray-700 transition-colors">
+                          <svg className="w-4 h-4 transition-transform group-open:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                          Tech Stack & Details
+                        </summary>
+                        <div className="mt-3 ml-6 space-y-2 text-sm">
+                          <div className="flex items-start gap-2">
+                            <span className="text-black font-medium min-w-[90px]">Tech Stack:</span>
+                            <span className="text-gray-600">Next.js, React, Node.js, MongoDB</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <span className="text-black font-medium min-w-[90px]">Features:</span>
+                            <span className="text-gray-600">Price alerts, Deal tracking, Email notifications</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <span className="text-black font-medium min-w-[90px]">Timeline:</span>
+                            <span className="text-gray-600">3 weeks</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <span className="text-black font-medium min-w-[90px]">Savings:</span>
+                            <span className="text-gray-600">Up to 90% off regular prices</span>
+                          </div>
+                        </div>
+                      </details>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* CHEY Project - Fourth Project */}
-              <div className="flex-shrink-0 w-80">
-                <div 
-                  className="group cursor-pointer"
-                  onClick={() => setSelectedProject(projects[3])}
-                >
-                  <div className="relative overflow-hidden transition-all duration-300">
-                    {/* Default Image */}
-                    <img 
-                      src={projects[3].mainImage}
-                      alt={projects[3].title}
-                      className="w-full h-[400px] object-cover group-hover:opacity-0 transition-opacity duration-300"
-                    />
-                    {/* Hover Image */}
-                    <img 
-                      src={projects[3].hoverImage}
-                      alt={`${projects[3].title} - Hover`}
-                      className="absolute inset-0 w-full h-[400px] object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    />
-                        </div>
-                  <div className="mt-4">
-                    <h3 className="text-lg font-medium text-black mb-1">{projects[3].title}</h3>
-                    <p className="text-gray-600 text-sm mb-3">{projects[3].credits.brand}</p>
-                    
-                    {/* Project Details */}
-                    <div className="p-2">
-                      <div className="space-y-1 text-xs text-gray-700">
-                        <p><strong>Brand:</strong> {projects[3].credits.brand}</p>
-                        <p><strong>Photographer:</strong> {projects[3].credits.photographer}</p>
-                        <p><strong>Stylist:</strong> {projects[3].credits.stylist}</p>
-                        <p><strong>Casting:</strong> {projects[3].credits.casting}</p>
-                        <p><strong>Hair:</strong> {projects[3].credits.hair}</p>
-                        <p><strong>Makeup:</strong> {projects[3].credits.makeup}</p>
-                        <p><strong>Location:</strong> {projects[3].credits.location}</p>
-                        <p><strong>Agency:</strong> {projects[3].credits.agency}</p>
+              {/* MREI Project */}
+              <div className="flex-shrink-0" style={{ width: '400px' }}>
+                <div className="group cursor-pointer">
+                  {/* Title and Subtitle Above Image */}
+                  <div className="mb-4">
+                    <h3 className="text-2xl font-semibold text-black mb-1">MREI</h3>
+                    <p className="text-gray-600 text-base">Real Estate Education Platform</p>
+                  </div>
+                  
+                  <div className="relative overflow-hidden transition-all duration-300 rounded-lg bg-white border-2 border-gray-200">
+                    {/* Browser Bar */}
+                    <div className="bg-white border-b border-gray-200 px-4 py-2.5 flex items-center justify-center relative">
+                      <div className="absolute left-4 flex items-center gap-1.5">
+                        <div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
+                        <div className="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
+                        <div className="w-2.5 h-2.5 rounded-full bg-green-400"></div>
                       </div>
+                      <div className="bg-gray-100 rounded-md px-4 py-1 text-xs text-gray-600">
+                        https://www.mrei.co.uk/
+                      </div>
+                    </div>
+                    <img 
+                      src="/newproject.png"
+                      alt="MREI - Real Estate Education"
+                      className="w-full h-auto object-contain"
+                      style={{ maxHeight: '600px' }}
+                    />
+                  </div>
+                  
+                  {/* Visit Button */}
+                  <a 
+                    href="https://www.mrei.co.uk/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-black text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-800 transition-colors mt-4"
+                  >
+                    Visit MREI
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                      <path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </a>
+                  
+                  <div className="mt-6">
+                    {/* Project Description */}
+                    <div className="space-y-4">
+                      <p className="text-gray-700 leading-relaxed text-sm">
+                        The membership body for real estate and finance professionals. Build your career with an international standard of excellence.
+                      </p>
+                      
+                      {/* Expandable Tech Details */}
+                      <details className="group">
+                        <summary className="cursor-pointer text-black font-medium text-sm flex items-center gap-2 hover:text-gray-700 transition-colors">
+                          <svg className="w-4 h-4 transition-transform group-open:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                          Tech Stack & Details
+                        </summary>
+                        <div className="mt-3 ml-6 space-y-2 text-sm">
+                          <div className="flex items-start gap-2">
+                            <span className="text-black font-medium min-w-[90px]">Tech Stack:</span>
+                            <span className="text-gray-600">Next.js, React, LMS Platform, Blockchain</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <span className="text-black font-medium min-w-[90px]">Features:</span>
+                            <span className="text-gray-600">42+ Courses, CPE Credits, Certifications</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <span className="text-black font-medium min-w-[90px]">Timeline:</span>
+                            <span className="text-gray-600">8 weeks</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <span className="text-black font-medium min-w-[90px]">Members:</span>
+                            <span className="text-gray-600">30,000+ across 40+ countries</span>
+                          </div>
+                        </div>
+                      </details>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* SUNTY Project - Fifth Project */}
-              <div className="flex-shrink-0 w-80">
-                <div 
-                  className="group cursor-pointer"
-                  onClick={() => setSelectedProject(projects[4])}
-                >
-                  <div className="relative overflow-hidden transition-all duration-300">
-                    {/* Default Image */}
-                    <img 
-                      src={projects[4].mainImage}
-                      alt={projects[4].title}
-                      className="w-full h-[400px] object-cover group-hover:opacity-0 transition-opacity duration-300"
-                    />
-                    {/* Hover Image */}
-                    <img 
-                      src={projects[4].hoverImage}
-                      alt={`${projects[4].title} - Hover`}
-                      className="absolute inset-0 w-full h-[400px] object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    />
-                        </div>
-                  <div className="mt-4">
-                    <h3 className="text-lg font-medium text-black mb-1">{projects[4].title}</h3>
-                    <p className="text-gray-600 text-sm mb-3">{projects[4].credits.brand}</p>
-                    
-                    {/* Project Details */}
-                    <div className="p-2">
-                      <div className="space-y-1 text-xs text-gray-700">
-                        <p><strong>Brand:</strong> {projects[4].credits.brand}</p>
-                        <p><strong>Photographer:</strong> {projects[4].credits.photographer}</p>
-                        <p><strong>Stylist:</strong> {projects[4].credits.stylist}</p>
-                        <p><strong>Hair:</strong> {projects[4].credits.hair}</p>
-                        <p><strong>Makeup:</strong> {projects[4].credits.makeup}</p>
-                        <p><strong>Location:</strong> {projects[4].credits.location}</p>
-                        <p><strong>Agency:</strong> {projects[4].credits.agency}</p>
+              {/* Cubent Project */}
+              <div className="flex-shrink-0" style={{ width: '400px' }}>
+                <div className="group cursor-pointer">
+                  {/* Title and Subtitle Above Image */}
+                  <div className="mb-4">
+                    <h3 className="text-2xl font-semibold text-black mb-1">Cubent</h3>
+                    <p className="text-gray-600 text-base">AI Coding Assistant</p>
+                  </div>
+                  
+                  <div className="relative overflow-hidden transition-all duration-300 rounded-lg bg-white border-2 border-gray-200">
+                    {/* Browser Bar */}
+                    <div className="bg-white border-b border-gray-200 px-4 py-2.5 flex items-center justify-center relative">
+                      <div className="absolute left-4 flex items-center gap-1.5">
+                        <div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
+                        <div className="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
+                        <div className="w-2.5 h-2.5 rounded-full bg-green-400"></div>
                       </div>
+                      <div className="bg-gray-100 rounded-md px-4 py-1 text-xs text-gray-600">
+                        https://cubent.dev/
+                      </div>
+                    </div>
+                    <img 
+                      src="/cubent-project.png"
+                      alt="Cubent - AI Coding Assistant"
+                      className="w-full h-auto object-contain"
+                      style={{ maxHeight: '600px' }}
+                    />
+                  </div>
+                  
+                  {/* Visit Button */}
+                  <a 
+                    href="https://cubent.dev/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-black text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-800 transition-colors mt-4"
+                  >
+                    Visit Cubent
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                      <path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </a>
+                  
+                  <div className="mt-6">
+                    {/* Project Description */}
+                    <div className="space-y-4">
+                      <p className="text-gray-700 leading-relaxed text-sm">
+                        Your AI coding partner inside the editor. Generate code, solve bugs, document faster, and build smarter with simple language.
+                      </p>
+                      
+                      {/* Expandable Tech Details */}
+                      <details className="group">
+                        <summary className="cursor-pointer text-black font-medium text-sm flex items-center gap-2 hover:text-gray-700 transition-colors">
+                          <svg className="w-4 h-4 transition-transform group-open:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                          Tech Stack & Details
+                        </summary>
+                        <div className="mt-3 ml-6 space-y-2 text-sm">
+                          <div className="flex items-start gap-2">
+                            <span className="text-black font-medium min-w-[90px]">Tech Stack:</span>
+                            <span className="text-gray-600">VS Code Extension, AI/ML, TypeScript</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <span className="text-black font-medium min-w-[90px]">Features:</span>
+                            <span className="text-gray-600">Code generation, Bug fixing, Auto-complete</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <span className="text-black font-medium min-w-[90px]">Timeline:</span>
+                            <span className="text-gray-600">6 weeks</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <span className="text-black font-medium min-w-[90px]">Models:</span>
+                            <span className="text-gray-600">GPT-5, Claude 4.5, Gemini</span>
+                          </div>
+                        </div>
+                      </details>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* HOUJING Project - Sixth Project */}
-              <div className="flex-shrink-0 w-80">
-                <div 
-                  className="group cursor-pointer"
-                  onClick={() => setSelectedProject(projects[5])}
-                >
-                  <div className="relative overflow-hidden transition-all duration-300">
-                    {/* Default Image */}
-                    <img 
-                      src={projects[5].mainImage}
-                      alt={projects[5].title}
-                      className="w-full h-[400px] object-cover group-hover:opacity-0 transition-opacity duration-300"
-                    />
-                    {/* Hover Image */}
-                    <img 
-                      src={projects[5].hoverImage}
-                      alt={`${projects[5].title} - Hover`}
-                      className="absolute inset-0 w-full h-[400px] object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    />
-                        </div>
-                  <div className="mt-4">
-                    <h3 className="text-lg font-medium text-black mb-1">{projects[5].title}</h3>
-                    <p className="text-gray-600 text-sm mb-3">{projects[5].credits.brand}</p>
-                    
-                    {/* Project Details */}
-                    <div className="p-2">
-                      <div className="space-y-1 text-xs text-gray-700">
-                        <p><strong>Brand:</strong> {projects[5].credits.brand}</p>
-                        <p><strong>Creative Director:</strong> {projects[5].credits.creativeDirector}</p>
-                        <p><strong>Production:</strong> {projects[5].credits.production}</p>
-                        <p><strong>Director:</strong> {projects[5].credits.director}</p>
-                        <p><strong>Photographer:</strong> {projects[5].credits.photographer}</p>
-                        <p><strong>Hair:</strong> {projects[5].credits.hair}</p>
-                        <p><strong>Makeup:</strong> {projects[5].credits.makeup}</p>
-                        <p><strong>Agency:</strong> {projects[5].credits.agency}</p>
+              {/* Velgance Agency Project */}
+              <div className="flex-shrink-0" style={{ width: '400px' }}>
+                <div className="group cursor-pointer">
+                  {/* Title and Subtitle Above Image */}
+                  <div className="mb-4">
+                    <h3 className="text-2xl font-semibold text-black mb-1">Velgance Agency</h3>
+                    <p className="text-gray-600 text-base">Model & Influencer Agency</p>
+                  </div>
+                  
+                  <div className="relative overflow-hidden transition-all duration-300 rounded-lg bg-white border-2 border-gray-200">
+                    {/* Browser Bar */}
+                    <div className="bg-white border-b border-gray-200 px-4 py-2.5 flex items-center justify-center relative">
+                      <div className="absolute left-4 flex items-center gap-1.5">
+                        <div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
+                        <div className="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
+                        <div className="w-2.5 h-2.5 rounded-full bg-green-400"></div>
+                      </div>
+                      <div className="bg-gray-100 rounded-md px-4 py-1 text-xs text-gray-600">
+                        https://velgance.com/
                       </div>
                     </div>
+                    <img 
+                      src="/cubent-project (1).png"
+                      alt="Velgance Agency - Model & Influencer Agency"
+                      className="w-full h-auto object-contain"
+                      style={{ maxHeight: '600px' }}
+                    />
                   </div>
-                </div>
-              </div>
-
-              {/* Sofia Evi Project - Seventh Project */}
-              <div className="flex-shrink-0 w-80">
-                <div 
-                  className="group cursor-pointer"
-                  onClick={() => setSelectedProject(projects[6])}
-                >
-                  <div className="relative overflow-hidden transition-all duration-300">
-                    {/* Default Image */}
-                    <img 
-                      src={projects[6].mainImage}
-                      alt={projects[6].title}
-                      className="w-full h-[400px] object-cover group-hover:opacity-0 transition-opacity duration-300"
-                    />
-                    {/* Hover Image */}
-                    <img 
-                      src={projects[6].hoverImage}
-                      alt={`${projects[6].title} - Hover`}
-                      className="absolute inset-0 w-full h-[400px] object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    />
+                  
+                  {/* Visit Button */}
+                  <a 
+                    href="https://velgance.com/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-black text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-800 transition-colors mt-4"
+                  >
+                    Visit Velgance
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                      <path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </a>
+                  
+                  <div className="mt-6">
+                    {/* Project Description */}
+                    <div className="space-y-4">
+                      <p className="text-gray-700 leading-relaxed text-sm">
+                        Europe's leading agency for models, influencers, and brand partnerships. Creating high-impact campaigns and exceptional industry opportunities.
+                      </p>
+                      
+                      {/* Expandable Tech Details */}
+                      <details className="group">
+                        <summary className="cursor-pointer text-black font-medium text-sm flex items-center gap-2 hover:text-gray-700 transition-colors">
+                          <svg className="w-4 h-4 transition-transform group-open:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                          Tech Stack & Details
+                        </summary>
+                        <div className="mt-3 ml-6 space-y-2 text-sm">
+                          <div className="flex items-start gap-2">
+                            <span className="text-black font-medium min-w-[90px]">Tech Stack:</span>
+                            <span className="text-gray-600">Next.js, React, PostgreSQL, Cloudinary</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <span className="text-black font-medium min-w-[90px]">Features:</span>
+                            <span className="text-gray-600">Model portfolios, Booking system, Editorial work</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <span className="text-black font-medium min-w-[90px]">Timeline:</span>
+                            <span className="text-gray-600">10 weeks</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <span className="text-black font-medium min-w-[90px]">Reach:</span>
+                            <span className="text-gray-600">500+ models, Global campaigns</span>
+                          </div>
                         </div>
-                  <div className="mt-4">
-                    <h3 className="text-lg font-medium text-black mb-1">{projects[6].title}</h3>
-                    <p className="text-gray-600 text-sm mb-3">{projects[6].credits.brand}</p>
-                    
-                    {/* Project Details */}
-                    <div className="p-2">
-                      <div className="space-y-1 text-xs text-gray-700">
-                        <p><strong>Brand:</strong> {projects[6].credits.brand}</p>
-                        <p><strong>Photographer:</strong> {projects[6].credits.photographer}</p>
-                        <p><strong>Stylist:</strong> {projects[6].credits.stylist}</p>
-                        <p><strong>Hair:</strong> {projects[6].credits.hair}</p>
-                        <p><strong>Makeup:</strong> {projects[6].credits.makeup}</p>
-                        <p><strong>Location:</strong> {projects[6].credits.location}</p>
-                        <p><strong>Agency:</strong> {projects[6].credits.agency}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* SIENNA Project - Eighth Project */}
-              <div className="flex-shrink-0 w-80">
-                <div 
-                  className="group cursor-pointer"
-                  onClick={() => setSelectedProject(projects[7])}
-                >
-                  <div className="relative overflow-hidden transition-all duration-300">
-                    {/* Default Image */}
-                    <img 
-                      src={projects[7].mainImage}
-                      alt={projects[7].title}
-                      className="w-full h-[400px] object-cover group-hover:opacity-0 transition-opacity duration-300"
-                    />
-                    {/* Hover Image */}
-                    <img 
-                      src={projects[7].hoverImage}
-                      alt={`${projects[7].title} - Hover`}
-                      className="absolute inset-0 w-full h-[400px] object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    />
-                        </div>
-                  <div className="mt-4">
-                    <h3 className="text-lg font-medium text-black mb-1">{projects[7].title}</h3>
-                    <p className="text-gray-600 text-sm mb-3">{projects[7].credits.magazine}</p>
-                    
-                    {/* Project Details */}
-                    <div className="p-2">
-                      <div className="space-y-1 text-xs text-gray-700">
-                        <p><strong>Magazine:</strong> {projects[7].credits.magazine}</p>
-                        <p><strong>Photographer:</strong> {projects[7].credits.photographer}</p>
-                        <p><strong>Stylist:</strong> {projects[7].credits.stylist}</p>
-                        <p><strong>Hair:</strong> {projects[7].credits.hair}</p>
-                        <p><strong>Makeup:</strong> {projects[7].credits.makeup}</p>
-                        <p><strong>Location:</strong> {projects[7].credits.location}</p>
-                        <p><strong>Agency:</strong> {projects[7].credits.agency}</p>
-                      </div>
+                      </details>
                     </div>
                   </div>
                 </div>
@@ -962,8 +1030,22 @@ const Home = ({ params }: HomeProps) => {
         </div>
       </div>
 
+      {/* Testimonials Section */}
+      <div className="bg-white py-20">
+        <Testimonial />
+      </div>
+
+      {/* Expertise Section */}
+      <ExpertiseSection />
+
+      {/* FAQ Section */}
+      <FAQSection />
+
+      {/* CTA Section */}
+      <CTASection />
+
       {/* Footer Section - Scrollable */}
-      <div className="homepage-footer">
+      <div className="homepage-footer bg-white">
         <div className="homepage-footer-content">
           <div className="homepage-footer-bottom">
             <div className="homepage-footer-row">
