@@ -4,8 +4,8 @@ import { z } from 'zod';
 export const env = createEnv({
   server: {},
   client: {
-    NEXT_PUBLIC_APP_URL: z.string().url().default('https://travira-web.vercel.app'),
-    NEXT_PUBLIC_WEB_URL: z.string().url().default('https://travira-web.vercel.app'),
+    NEXT_PUBLIC_APP_URL: z.string().url().default('https://pushtoprod.studio'),
+    NEXT_PUBLIC_WEB_URL: z.string().url().default('https://pushtoprod.studio'),
   },
   runtimeEnv: {
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
