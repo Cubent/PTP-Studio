@@ -12,7 +12,6 @@ interface ConditionalHeaderFooterProps {
 
 export function ConditionalHeaderFooter({ children, dictionary }: ConditionalHeaderFooterProps) {
   const pathname = usePathname();
-  const isAuthPage = pathname.includes('/sign-in') || pathname.includes('/sign-up');
   const isHomePage = pathname === '/' || pathname === '/en' || pathname === '/it';
   const isExpertisePage = pathname.includes('/expertise');
   const isContactPage = pathname.includes('/contact');
@@ -22,9 +21,9 @@ export function ConditionalHeaderFooter({ children, dictionary }: ConditionalHea
 
   return (
     <>
-      {!isAuthPage && !isHomePage && !isExpertisePage && !isContactPage && !isPrivacyPage && !isTermsPage && !isAboutPage && <Header dictionary={dictionary} />}
+      {!isHomePage && !isExpertisePage && !isContactPage && !isPrivacyPage && !isTermsPage && !isAboutPage && <Header dictionary={dictionary} />}
       {children}
-      {!isAuthPage && !isHomePage && !isExpertisePage && !isContactPage && !isPrivacyPage && !isTermsPage && !isAboutPage && <Footer />}
+      {!isHomePage && !isExpertisePage && !isContactPage && !isPrivacyPage && !isTermsPage && !isAboutPage && <Footer />}
     </>
   );
 }
