@@ -10,10 +10,10 @@ export const metadata: Metadata = {
   description: 'Academy Model Management - Connettiamo talenti unici con le migliori opportunità del settore della moda.',
   icons: {
     icon: [
-      { url: '/favicon.png', type: 'image/png' },
+      { url: '/faviconpushtoprod.png', type: 'image/png' },
       { url: '/favicon.ico', type: 'image/x-icon' }
     ],
-    shortcut: '/favicon.png',
+    shortcut: '/faviconpushtoprod.png',
     apple: '/apple-touch-icon.png',
   },
 };

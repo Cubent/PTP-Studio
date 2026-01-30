@@ -88,7 +88,7 @@ export const generateStructuredData = (type: 'Organization' | 'WebSite' | 'Artic
         name: 'Velgance Agency',
         description: 'Dal 1998 trasformiamo il talento in opportunità. Agenzia di modelli professionisti per sfilate, shooting, video commerciali e eventi aziendali.',
         url: 'https://velgance.com',
-        logo: 'https://velgance.com/favicon.svg',
+        logo: 'https://pushtoprod.studio/faviconpushtoprod.png',
         sameAs: [
           'https://instagram.com/velgance_agency',
           'https://facebook.com/velgance',
@@ -141,7 +141,7 @@ export const generateStructuredData = (type: 'Organization' | 'WebSite' | 'Artic
           name: 'Velgance Agency',
           logo: {
             '@type': 'ImageObject',
-            url: 'https://velgance.com/favicon.svg',
+            url: 'https://pushtoprod.studio/faviconpushtoprod.png',
           },
         },
         datePublished: data.publishedAt,

@@ -19,36 +19,36 @@ import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 
 export const metadata: Metadata = {
-  title: 'Velgance - Trasformiamo il talento in opportunità',
-  description: 'Velgance Model Management - Connettiamo talenti unici con le migliori opportunità del settore della moda.',
+  title: 'PushToProd Studio - Web Development & Digital Solutions',
+  description: 'We build custom web applications, mobile apps, and digital platforms that drive real business growth. Expert team of designers, engineers, and product leaders.',
   openGraph: {
-    title: 'Velgance - Trasformiamo il talento in opportunità',
-    description: 'Velgance Model Management - Connettiamo talenti unici con le migliori opportunità del settore della moda.',
-    url: 'https://velgance.com',
-    siteName: 'Velgance',
+    title: 'PushToProd Studio - Web Development & Digital Solutions',
+    description: 'We build custom web applications, mobile apps, and digital platforms that drive real business growth. Expert team of designers, engineers, and product leaders.',
+    url: 'https://pushtoprod.studio',
+    siteName: 'PushToProd Studio',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Velgance - Modeling Agency',
+        alt: 'PushToProd Studio - Web Development Agency',
       },
     ],
-    locale: 'it_IT',
+    locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Velgance - Trasformiamo il talento in opportunità',
-    description: 'Velgance Model Management - Connettiamo talenti unici con le migliori opportunità del settore della moda.',
+    title: 'PushToProd Studio - Web Development & Digital Solutions',
+    description: 'We build custom web applications, mobile apps, and digital platforms that drive real business growth. Expert team of designers, engineers, and product leaders.',
     images: ['/og-image.png'],
   },
   icons: {
     icon: [
-      { url: '/favicon.png', type: 'image/png' },
+      { url: '/faviconpushtoprod.png', type: 'image/png' },
       { url: '/favicon.ico', type: 'image/x-icon' }
     ],
-    shortcut: '/favicon.png',
+    shortcut: '/faviconpushtoprod.png',
     apple: '/apple-touch-icon.png',
   },
 };
@@ -77,32 +77,31 @@ const RootLayout = async ({ children, params }: RootLayoutProperties) => {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Organization",
-            "name": "Velgance Agency",
-            "description": "Since 1998 we transform talent into opportunities. Professional modeling agency for fashion shows, photo shoots, commercial videos and corporate events.",
-            "url": "https://velgance.com",
-            "logo": "https://velgance.com/favicon.svg",
+            "name": "PushToProd Studio",
+            "description": "Web development agency specializing in custom web applications, mobile apps, UI/UX design, and digital solutions. We build scalable products that drive business growth.",
+            "url": "https://pushtoprod.studio",
+            "logo": "https://pushtoprod.studio/faviconpushtoprod.png",
             "sameAs": [
-              "https://instagram.com/velgance_agency",
-              "https://facebook.com/velgance"
+              "https://www.linkedin.com/company/pushtoprod",
+              "https://twitter.com/pushtoprodstudio",
+              "https://www.instagram.com/pushtoprodstudio"
             ],
             "contactPoint": {
               "@type": "ContactPoint",
               "contactType": "customer service",
-              "url": "https://velgance.com/contact",
-              "email": "info@velgance.com"
+              "url": "https://pushtoprod.studio/contact",
+              "email": "hello@pushtoprod.studio"
             },
             "founder": {
               "@type": "Person",
-              "name": "Velgance Founder"
+              "name": "PushToProd Studio Founder"
             },
-            "foundingDate": "1998",
+            "foundingDate": "2020",
             "address": {
               "@type": "PostalAddress",
-              "addressCountry": "IT",
-              "addressLocality": "Milano",
-              "streetAddress": "Via Felice Bellotti, 12"
+              "addressCountry": "US"
             },
-            "keywords": "modeling agency, models, casting, fashion shows, photo shoots, commercial videos, events, hostess, steward, influencer marketing, fashion week, milan"
+            "keywords": "web development, mobile app development, UI/UX design, custom software, web applications, e-commerce, AI solutions, digital agency, software development"
           })
         }}
       />

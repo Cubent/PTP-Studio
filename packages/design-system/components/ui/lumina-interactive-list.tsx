@@ -372,7 +372,7 @@ void main() {
   }, []);
 
   return (
-    <main className="slider-wrapper" ref={containerRef}>
+    <main className="slider-wrapper" ref={containerRef} data-section="dark">
       <canvas className="webgl-canvas"></canvas>
       <div className="slide-content">
         <div className="slide-text-wrapper">
@@ -393,8 +393,8 @@ void main() {
           height: 100vh;
           overflow: hidden;
           background: #0a0a0a;
-          opacity: 0;
-          transition: opacity 0.8s ease;
+          opacity: 1;
+          transition: opacity 0.3s ease;
         }
         
         .slider-wrapper.loaded {

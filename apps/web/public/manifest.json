@@ -12,9 +12,9 @@
   "categories": ["productivity", "developer", "utilities"],
   "icons": [
     {
-      "src": "/favicon.svg",
+      "src": "/faviconpushtoprod.png",
       "sizes": "any",
-      "type": "image/svg+xml",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ],
@@ -26,9 +26,9 @@
       "url": "/pricing",
       "icons": [
         {
-          "src": "/favicon.svg",
+          "src": "/faviconpushtoprod.png",
           "sizes": "any",
-          "type": "image/svg+xml"
+          "type": "image/png"
         }
       ]
     },
@@ -39,9 +39,9 @@
       "url": "/blog",
       "icons": [
         {
-          "src": "/favicon.svg",
+          "src": "/faviconpushtoprod.png",
           "sizes": "any",
-          "type": "image/svg+xml"
+          "type": "image/png"
         }
       ]
     }
