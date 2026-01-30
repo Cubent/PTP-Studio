@@ -291,8 +291,19 @@ void main() {
       const safeStartTimer = (delay = 0) => { stopAutoSlideTimer(); if (sliderEnabled && texturesLoaded) { if (delay > 0) autoSlideTimer = setTimeout(startAutoSlideTimer, delay); else startAutoSlideTimer(); } };
 
       const loadImageTexture = (src: string) => new Promise<any>((resolve, reject) => {
-        const l = new THREE.TextureLoader();
-        l.load(src, (t: any) => { t.minFilter = t.magFilter = THREE.LinearFilter; t.userData = { size: new THREE.Vector2(t.image.width, t.image.height) }; resolve(t); }, undefined, reject);
+        // Preload the image first
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = () => {
+          const l = new THREE.TextureLoader();
+          l.load(src, (t: any) => { 
+            t.minFilter = t.magFilter = THREE.LinearFilter; 
+            t.userData = { size: new THREE.Vector2(t.image.width, t.image.height) }; 
+            resolve(t); 
+          }, undefined, reject);
+        };
+        img.onerror = reject;
+        img.src = src;
       });
 
       const initRenderer = async () => {
