@@ -321,6 +321,14 @@ export const Header = ({ dictionary }: HeaderProps) => {
               >
                 About Us
               </Link>
+              
+              <Link 
+                href="/blog" 
+                className="block text-lg font-light text-black hover:text-gray-600 transition-colors duration-300"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Blog
+              </Link>
             </nav>
             
             <div className="border-t border-gray-200 mt-8 pt-4">

@@ -1,43 +1,54 @@
 import { Metadata } from 'next';
+import { Header } from '@/components/header';
+import { FooterHomepage } from '@/components/footer-homepage';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | Velgance Agency',
-  description: 'Informativa sulla privacy di Velgance Agency: come raccogliamo, utilizziamo e proteggiamo i tuoi dati personali.',
+  title: 'Privacy Policy | PushToProd Studio',
+  description: 'Privacy policy for PushToProd Studio: how we collect, use, and protect your personal data.',
 };
 
 export default function PrivacyPolicyPage() {
   return (
-    <div className="min-h-screen bg-white">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <>
+      <Header />
+      <div className="min-h-screen bg-white">
+        {/* Dark section for header visibility */}
+        <div className="bg-[#1a1a1a] pt-32 pb-16" data-section="hero">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 className="text-5xl sm:text-5xl lg:text-6xl font-light text-white mb-4 italic" style={{ fontFamily: 'serif' }}>Privacy Policy</h1>
+            <p className="text-gray-400 text-lg">Last updated: {new Date().toLocaleDateString()}</p>
+          </div>
+        </div>
+        
+        {/* Content section */}
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="prose prose-lg max-w-none">
-          <h1 className="text-5xl sm:text-5xl lg:text-6xl font-light text-black mb-6 italic" style={{ fontFamily: 'serif' }}>Privacy Policy</h1>
-          <p className="text-gray-600 mb-8">Last updated: {new Date().toLocaleDateString()}</p>
-
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">1. Information We Collect</h2>
             <h3 className="text-lg font-semibold text-gray-800 mb-2">Personal Information</h3>
             <ul className="list-disc pl-6 text-gray-700 space-y-2 mb-4">
-              <li>Nome, cognome e indirizzo email (per comunicazioni e candidature)</li>
-              <li>Profilo e immagini fornite per candidature o portfolio</li>
-              <li>Informazioni di contatto per richieste commerciali</li>
+              <li>Name, email address, and contact information for project inquiries</li>
+              <li>Company information and project requirements</li>
+              <li>Payment and billing information for our services</li>
             </ul>
             
             <h3 className="text-lg font-semibold text-gray-800 mb-2">Usage Information</h3>
             <ul className="list-disc pl-6 text-gray-700 space-y-2">
-              <li>Analytics di utilizzo del sito</li>
-              <li>Metriche di interazione con le email</li>
-              <li>Dati di interazione con i servizi</li>
+              <li>Website analytics and usage patterns</li>
+              <li>Email interaction metrics</li>
+              <li>Service interaction data</li>
             </ul>
           </section>
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">2. How We Use Your Information</h2>
             <ul className="list-disc pl-6 text-gray-700 space-y-2">
-              <li>Offrire opportunità professionali e servizi di talent management</li>
-              <li>Gestire candidature, richieste di booking e comunicazioni</li>
-              <li>Migliorare i nostri servizi e la qualità del sito</li>
-              <li>Inviare comunicazioni importanti relative ai servizi</li>
-              <li>Fornire assistenza ai clienti</li>
+              <li>Provide web development, design, and consulting services</li>
+              <li>Manage project communications and deliverables</li>
+              <li>Process payments and maintain billing records</li>
+              <li>Improve our services and website experience</li>
+              <li>Send important service-related communications</li>
+              <li>Provide customer support and technical assistance</li>
             </ul>
           </section>
 
@@ -48,7 +59,7 @@ export default function PrivacyPolicyPage() {
             </p>
             <ul className="list-disc pl-6 text-gray-700 space-y-2">
               <li>With your explicit consent</li>
-              <li>Ai nostri fornitori di servizi (ad es. sistemi di pagamento, strumenti di autenticazione)</li>
+              <li>With trusted service providers (e.g., payment processors, hosting services)</li>
               <li>When required by law or to protect our rights</li>
               <li>In connection with a business transfer or acquisition</li>
             </ul>
@@ -73,7 +84,7 @@ export default function PrivacyPolicyPage() {
             <ul className="list-disc pl-6 text-gray-700 space-y-2">
               <li>Access your personal information</li>
               <li>Correct inaccurate information</li>
-              <li>Delete your account and associated data</li>
+              <li>Request deletion of your data</li>
               <li>Opt-out of marketing communications</li>
               <li>Data portability</li>
             </ul>
@@ -89,7 +100,7 @@ export default function PrivacyPolicyPage() {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">7. Data Retention</h2>
             <p className="text-gray-700 mb-4">
-              We retain your personal information for as long as necessary to provide our services and comply with legal obligations. Account data is deleted within 30 days of account closure.
+              We retain your personal information for as long as necessary to provide our services and comply with legal obligations. Project data is retained for 7 years for accounting purposes.
             </p>
           </section>
 
@@ -112,11 +123,14 @@ export default function PrivacyPolicyPage() {
             <p className="text-gray-700 mb-4">
               If you have any questions about this Privacy Policy, please contact us at:
               <br />
-              Email: info@velgance.com
+              Email: hello@pushtoprod.studio
             </p>
           </section>
         </div>
       </div>
     </div>
+    
+    <FooterHomepage />
+    </>
   );
 }

@@ -19,7 +19,7 @@ export function Header() {
 
       // Check if we're on a dark or light background
       const sections = document.querySelectorAll('[data-section]')
-      let isDark = scrollPosition < viewportHeight * 0.8
+      let isDark = true // Default to dark
       
       // Check if we're at specific sections
       sections.forEach((section) => {
@@ -29,11 +29,13 @@ export function Header() {
         
         // If header is within this section (checking top 100px of viewport)
         if (sectionTop <= 100 && sectionBottom >= 100) {
+          const sectionDataAttr = section.getAttribute('data-section')
           const bgColor = window.getComputedStyle(section).backgroundColor
-          // Check if background is dark (#1a1a1a or similar dark colors)
-          if (bgColor.includes('26, 26, 26') || bgColor.includes('22, 22, 22') || bgColor.includes('16, 16, 16')) {
+          
+          // Check if data-section explicitly says "dark" or if background is dark
+          if (sectionDataAttr === 'dark' || bgColor.includes('26, 26, 26') || bgColor.includes('22, 22, 22') || bgColor.includes('16, 16, 16') || bgColor.includes('0, 0, 0') || bgColor === 'rgb(0, 0, 0)') {
             isDark = true
-          } else {
+          } else if (sectionDataAttr === 'light' || bgColor.includes('255, 255, 255')) {
             // Light background
             isDark = false
           }
@@ -94,7 +96,13 @@ export function Header() {
               }}
               transition={{ duration: 0.3 }}
             >
-              PushToProd Studio
+              <span className="font-bold">Push</span>
+              <span className="font-light">To</span>
+              <span className="font-bold">Prod</span>
+              {" "}
+              <span className="font-bold">Stu</span>
+              <span className="font-light">di</span>
+              <span className="font-bold">o</span>
             </motion.span>
           </Link>
 
@@ -167,9 +175,9 @@ export function Header() {
                   >
                     {[
                       { label: "Work", href: "#latest-work" },
-                      { label: "Expertise", href: "#expertise" },
-                      { label: "About", href: "/about" },
-                      { label: "Blog", href: "/blog" }
+                      { label: "Expertise", href: "/expertise" },
+                      { label: "Contact", href: "/contact" },
+                      { label: "About", href: "/about" }
                     ].map((item, index) => (
                       <motion.div
                         key={index}
@@ -209,8 +217,8 @@ export function Header() {
                   <Link href="/contact" className="hover:text-white transition-colors">
                     Join Us
                   </Link>
-                  <Link href="/contact" className="hover:text-white transition-colors">
-                    Contact
+                  <Link href="/blog" className="hover:text-white transition-colors">
+                    Blog
                   </Link>
                 </div>
 

@@ -498,11 +498,11 @@ void main() {
           }
           
           .slide-prefix {
-            font-size: clamp(1.5rem, 5vw, 2rem);
+            font-size: clamp(2rem, 6vw, 2.5rem);
           }
           
           .slide-title {
-            font-size: clamp(1.5rem, 5vw, 2rem);
+            font-size: clamp(2rem, 6vw, 2.5rem);
           }
           
           .cta-button {

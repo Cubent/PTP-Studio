@@ -9,6 +9,7 @@ import { CTASection } from '@/components/cta-section';
 import { ExpertiseSection } from '@/components/expertise-section';
 import { FAQSection } from '@/components/faq-section';
 import { Header } from '@/components/header';
+import { FooterHomepage } from '@/components/footer-homepage';
 
 type HomeProps = {
   params: Promise<{
@@ -528,12 +529,12 @@ const Home = ({ params }: HomeProps) => {
         </div>
       </div>
 
-      {/* Our Latest Work Section */}
+      {/* Our Latest Featured Work Section */}
       <div className="bg-[#f5f5f5] py-16" id="latest-work" data-section="work">
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="mb-12">
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-sans font-bold text-black leading-tight">
-              Our Latest Work
+              Our Latest Featured Work
             </h2>
           </div>
           
@@ -1044,27 +1045,6 @@ const Home = ({ params }: HomeProps) => {
       {/* CTA Section */}
       <CTASection />
 
-      {/* Footer Section - Scrollable */}
-      <div className="homepage-footer bg-white">
-        <div className="homepage-footer-content">
-          <div className="homepage-footer-bottom">
-            <div className="homepage-footer-row">
-              <p className="text-sm text-gray-600">
-                © 2025 Velgance Agency. All rights reserved.
-              </p>
-              <div className="homepage-footer-links">
-                <Link href="/privacy-policy" className="text-sm text-gray-600 hover:text-black transition-colors">
-                  Privacy Policy
-                </Link>
-                <Link href="/terms-and-conditions" className="text-sm text-gray-600 hover:text-black transition-colors">
-                  Terms and Conditions
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Project Details Modal */}
       {selectedProject && (
         <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
@@ -1166,6 +1146,9 @@ const Home = ({ params }: HomeProps) => {
       )}
 
     </div>
+    
+    {/* Footer */}
+    <FooterHomepage />
     </>
   );
 };

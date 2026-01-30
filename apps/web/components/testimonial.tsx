@@ -7,24 +7,24 @@ import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motio
 const testimonials = [
   {
     quote: "We hired PushToProd Studio for a complete website redesign and they absolutely nailed it. The designer was professional, responsive, and really understood our vision. Our conversion rate increased by 40% in the first month. Couldn't be happier with the results.",
-    author: "Client",
+    author: "Sarah Mitchell",
     role: "Marketing Director",
-    company: "Tech Company",
-    avatar: "",
+    company: "TechFlow Inc",
+    avatar: "https://i.pravatar.cc/150?img=5",
   },
   {
     quote: "I've worked with several agencies before, but PushToProd Studio is on another level. They built our e-commerce platform from scratch and the attention to detail was incredible. Every feature works flawlessly, and our customers love the user experience. Worth every penny.",
-    author: "Client",
+    author: "Marcus Chen",
     role: "Founder & CEO",
-    company: "E-commerce Business",
-    avatar: "",
+    company: "ShopHub",
+    avatar: "https://i.pravatar.cc/150?img=12",
   },
   {
     quote: "PushToProd Studio transformed our outdated booking system into a modern, efficient platform. The project was delivered on time, within budget, and exceeded our expectations. Our team productivity has doubled since the launch. Highly recommend them for any serious web development project.",
-    author: "Client",
+    author: "Emily Rodriguez",
     role: "Operations Manager",
-    company: "Service Company",
-    avatar: "",
+    company: "BookEase",
+    avatar: "https://i.pravatar.cc/150?img=9",
   },
 ]
 
@@ -158,24 +158,16 @@ export function Testimonial() {
         {testimonials.map((t, i) => (
           <motion.div
             key={i}
-            className={`w-6 h-6 rounded-full border-2 border-white bg-gray-200 overflow-hidden transition-all duration-300 flex items-center justify-center ${
+            className={`w-6 h-6 rounded-full border-2 border-white bg-gray-200 overflow-hidden transition-all duration-300 ${
               i === activeIndex ? "ring-1 ring-black ring-offset-1 ring-offset-white" : "opacity-50"
             }`}
             whileHover={{ scale: 1.1, opacity: 1 }}
           >
-            <svg
-              className="w-3 h-3 text-gray-500"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-              />
-            </svg>
+            <img 
+              src={t.avatar} 
+              alt={t.author}
+              className="w-full h-full object-cover"
+            />
           </motion.div>
         ))}
       </motion.div>
@@ -208,26 +200,18 @@ export function Testimonial() {
               {testimonials.map((t, i) => (
                 <motion.div
                   key={i}
-                  className="absolute inset-0 w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center"
+                  className="absolute inset-0 w-12 h-12 rounded-full bg-gray-200 overflow-hidden"
                   animate={{
                     opacity: i === activeIndex ? 1 : 0,
                     zIndex: i === activeIndex ? 1 : 0,
                   }}
                   transition={{ duration: 0.4, ease: "easeInOut" }}
                 >
-                  <svg
-                    className="w-6 h-6 text-gray-500"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                    />
-                  </svg>
+                  <img 
+                    src={t.avatar} 
+                    alt={t.author}
+                    className="w-full h-full object-cover"
+                  />
                 </motion.div>
               ))}
             </div>
