@@ -4,7 +4,6 @@ import type { Dictionary } from '@repo/internationalization';
 import { ExternalLink, MoveRight, PhoneCall, Lock } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import LightRays from './LightRays';
 import TextType from './TextType';
 
 type HeroProps = {
