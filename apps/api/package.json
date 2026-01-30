@@ -14,7 +14,6 @@
   "dependencies": {
     "@repo/analytics": "workspace:*",
     "@repo/auth": "workspace:*",
-    "@repo/database": "workspace:*",
     "@repo/design-system": "workspace:*",
     "@repo/next-config": "workspace:*",
     "@repo/observability": "workspace:*",
@@ -25,7 +24,6 @@
     "next": "15.4.10",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "svix": "^1.66.0",
     "vitest": "^3.1.4",
     "zod": "^3.25.28"
   },
