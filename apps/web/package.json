@@ -19,7 +19,6 @@
     "@radix-ui/react-tabs": "^1.1.12",
     "@repo/auth": "workspace:*",
     "@repo/design-system": "workspace:*",
-    "@repo/email": "workspace:*",
     "@repo/feature-flags": "workspace:*",
     "@repo/internationalization": "workspace:*",
     "@repo/next-config": "workspace:*",
