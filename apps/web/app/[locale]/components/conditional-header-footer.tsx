@@ -18,12 +18,13 @@ export function ConditionalHeaderFooter({ children, dictionary }: ConditionalHea
   const isPrivacyPage = pathname.includes('/privacy-policy');
   const isTermsPage = pathname.includes('/terms-and-conditions');
   const isAboutPage = pathname.includes('/about');
+  const isBlogPage = pathname.includes('/blog');
 
   return (
     <>
-      {!isHomePage && !isExpertisePage && !isContactPage && !isPrivacyPage && !isTermsPage && !isAboutPage && <Header dictionary={dictionary} />}
+      {!isHomePage && !isExpertisePage && !isContactPage && !isPrivacyPage && !isTermsPage && !isAboutPage && !isBlogPage && <Header dictionary={dictionary} />}
       {children}
-      {!isHomePage && !isExpertisePage && !isContactPage && !isPrivacyPage && !isTermsPage && !isAboutPage && <Footer />}
+      {!isHomePage && !isExpertisePage && !isContactPage && !isPrivacyPage && !isTermsPage && !isAboutPage && !isBlogPage && <Footer />}
     </>
   );
 }

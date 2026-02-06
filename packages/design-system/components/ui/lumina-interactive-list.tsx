@@ -1,527 +1,111 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
-
-declare const gsap: any;
-declare const THREE: any;
+import React from 'react';
+import Link from 'next/link';
 
 export function LuminaInteractiveList() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // --- DYNAMIC SCRIPT LOADING ---
-    const loadScripts = async () => {
-      const loadScript = (src: string, globalName: string) => new Promise<void>((res, rej) => {
-        if ((window as any)[globalName]) { res(); return; }
-        if (document.querySelector(`script[src="${src}"]`)) {
-          const check = setInterval(() => {
-            if ((window as any)[globalName]) { clearInterval(check); res(); }
-          }, 50);
-          setTimeout(() => { clearInterval(check); rej(new Error(`Timeout waiting for ${globalName}`)); }, 10000);
-          return;
-        }
-        const s = document.createElement('script');
-        s.src = src;
-        s.onload = () => { setTimeout(() => res(), 100); };
-        s.onerror = () => rej(new Error(`Failed to load ${src}`));
-        document.head.appendChild(s);
-      });
-
-      try {
-        await loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js', 'gsap');
-        await loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', 'THREE');
-      } catch (e) {
-        console.error('Failed to load base scripts:', e);
-      }
-      initApplication();
-    };
-
-    const initApplication = async () => {
-      // --- MAIN LOGIC ---
-      const SLIDER_CONFIG: any = {
-        settings: {
-          transitionDuration: 2.5, autoSlideSpeed: 5000, currentEffect: "glass", currentEffectPreset: "Default",
-          globalIntensity: 1.0, speedMultiplier: 1.0, distortionStrength: 1.0, colorEnhancement: 1.0,
-          glassRefractionStrength: 1.0, glassChromaticAberration: 1.0, glassBubbleClarity: 1.0, glassEdgeGlow: 1.0, glassLiquidFlow: 1.0,
-          frostIntensity: 1.5, frostCrystalSize: 1.0, frostIceCoverage: 1.0, frostTemperature: 1.0, frostTexture: 1.0,
-          rippleFrequency: 25.0, rippleAmplitude: 0.08, rippleWaveSpeed: 1.0, rippleRippleCount: 1.0, rippleDecay: 1.0,
-          plasmaIntensity: 1.2, plasmaSpeed: 0.8, plasmaEnergyIntensity: 0.4, plasmaContrastBoost: 0.3, plasmaTurbulence: 1.0,
-          timeshiftDistortion: 1.6, timeshiftBlur: 1.5, timeshiftFlow: 1.4, timeshiftChromatic: 1.5, timeshiftTurbulence: 1.4
-        },
-        effectPresets: {
-          glass: { Subtle: { glassRefractionStrength: 0.6, glassChromaticAberration: 0.5, glassBubbleClarity: 1.3, glassEdgeGlow: 0.7, glassLiquidFlow: 0.8 }, Default: { glassRefractionStrength: 1.0, glassChromaticAberration: 1.0, glassBubbleClarity: 1.0, glassEdgeGlow: 1.0, glassLiquidFlow: 1.0 }, Crystal: { glassRefractionStrength: 1.5, glassChromaticAberration: 1.8, glassBubbleClarity: 0.7, glassEdgeGlow: 1.4, glassLiquidFlow: 0.5 }, Liquid: { glassRefractionStrength: 0.8, glassChromaticAberration: 0.4, glassBubbleClarity: 1.2, glassEdgeGlow: 0.8, glassLiquidFlow: 1.8 } },
-          frost: { Light: { frostIntensity: 0.8, frostCrystalSize: 1.3, frostIceCoverage: 0.6, frostTemperature: 0.7, frostTexture: 0.8 }, Default: { frostIntensity: 1.5, frostCrystalSize: 1.0, frostIceCoverage: 1.0, frostTemperature: 1.0, frostTexture: 1.0 }, Heavy: { frostIntensity: 2.2, frostCrystalSize: 0.7, frostIceCoverage: 1.4, frostTemperature: 1.5, frostTexture: 1.3 }, Arctic: { frostIntensity: 2.8, frostCrystalSize: 0.5, frostIceCoverage: 1.8, frostTemperature: 2.0, frostTexture: 1.6 } },
-          ripple: { Gentle: { rippleFrequency: 15.0, rippleAmplitude: 0.05, rippleWaveSpeed: 0.7, rippleRippleCount: 0.8, rippleDecay: 1.2 }, Default: { rippleFrequency: 25.0, rippleAmplitude: 0.08, rippleWaveSpeed: 1.0, rippleRippleCount: 1.0, rippleDecay: 1.0 }, Strong: { rippleFrequency: 35.0, rippleAmplitude: 0.12, rippleWaveSpeed: 1.4, rippleRippleCount: 1.3, rippleDecay: 0.8 }, Tsunami: { rippleFrequency: 45.0, rippleAmplitude: 0.18, rippleWaveSpeed: 1.8, rippleRippleCount: 1.6, rippleDecay: 0.6 } },
-          plasma: { Calm: { plasmaIntensity: 0.8, plasmaSpeed: 0.5, plasmaEnergyIntensity: 0.2, plasmaContrastBoost: 0.1, plasmaTurbulence: 0.6 }, Default: { plasmaIntensity: 1.2, plasmaSpeed: 0.8, plasmaEnergyIntensity: 0.4, plasmaContrastBoost: 0.3, plasmaTurbulence: 1.0 }, Storm: { plasmaIntensity: 1.8, plasmaSpeed: 1.3, plasmaEnergyIntensity: 0.7, plasmaContrastBoost: 0.5, plasmaTurbulence: 1.5 }, Nuclear: { plasmaIntensity: 2.5, plasmaSpeed: 1.8, plasmaEnergyIntensity: 1.0, plasmaContrastBoost: 0.8, plasmaTurbulence: 2.0 } },
-          timeshift: { Subtle: { timeshiftDistortion: 0.5, timeshiftBlur: 0.6, timeshiftFlow: 0.5, timeshiftChromatic: 0.4, timeshiftTurbulence: 0.6 }, Default: { timeshiftDistortion: 1.6, timeshiftBlur: 1.5, timeshiftFlow: 1.4, timeshiftChromatic: 1.5, timeshiftTurbulence: 1.4 }, Intense: { timeshiftDistortion: 2.2, timeshiftBlur: 2.0, timeshiftFlow: 2.0, timeshiftChromatic: 2.2, timeshiftTurbulence: 2.0 }, Dreamlike: { timeshiftDistortion: 2.8, timeshiftBlur: 2.5, timeshiftFlow: 2.5, timeshiftChromatic: 2.6, timeshiftTurbulence: 2.5 } }
-        }
-      };
-
-      // --- GLOBAL STATE ---
-      let currentSlideIndex = 0;
-      let isTransitioning = false;
-      let shaderMaterial: any, renderer: any, scene: any, camera: any;
-      let slideTextures: any[] = [];
-      let texturesLoaded = false;
-      let autoSlideTimer: any = null;
-      let progressAnimation: any = null;
-      let sliderEnabled = false;
-
-      const SLIDE_DURATION = () => SLIDER_CONFIG.settings.autoSlideSpeed;
-      const PROGRESS_UPDATE_INTERVAL = 50;
-      const TRANSITION_DURATION = () => SLIDER_CONFIG.settings.transitionDuration;
-
-      const slides = [
-        { title: "Full Stack Applications", description: "", media: "https://assets.codepen.io/7558/orange-portrait-001.jpg" },
-        { title: "Award Winning Websites", description: "", media: "https://assets.codepen.io/7558/orange-portrait-002.jpg" },
-        { title: "iOS & Android Applications", description: "", media: "https://images.unsplash.com/photo-1766117751602-2532cb12c1c9?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-        { title: "E-Commerce Solutions", description: "", media: "https://assets.codepen.io/7558/orange-portrait-004.jpg" },
-        { title: "Custom CMS Platforms", description: "", media: "https://assets.codepen.io/7558/orange-portrait-005.jpg" },
-        { title: "UI & UX Design Mockups", description: "", media: "https://assets.codepen.io/7558/orange-portrait-006.jpg" }
-      ];
-
-      // --- SHADERS ---
-      const vertexShader = `varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`;
-
-      const fragmentShader = `uniform sampler2D uTexture1, uTexture2;
-uniform float uProgress;
-uniform vec2 uResolution, uTexture1Size, uTexture2Size;
-uniform int uEffectType;
-uniform float uGlobalIntensity, uSpeedMultiplier, uDistortionStrength, uColorEnhancement;
-uniform float uGlassRefractionStrength, uGlassChromaticAberration, uGlassBubbleClarity, uGlassEdgeGlow, uGlassLiquidFlow;
-uniform float uFrostIntensity, uFrostCrystalSize, uFrostIceCoverage, uFrostTemperature, uFrostTexture;
-uniform float uRippleFrequency, uRippleAmplitude, uRippleWaveSpeed, uRippleRippleCount, uRippleDecay;
-uniform float uPlasmaIntensity, uPlasmaSpeed, uPlasmaEnergyIntensity, uPlasmaContrastBoost, uPlasmaTurbulence;
-uniform float uTimeshiftDistortion, uTimeshiftBlur, uTimeshiftFlow, uTimeshiftChromatic, uTimeshiftTurbulence;
-varying vec2 vUv;
-
-vec2 getCoverUV(vec2 uv, vec2 textureSize) {
-  vec2 s = uResolution / textureSize;
-  float scale = max(s.x, s.y);
-  vec2 scaledSize = textureSize * scale;
-  vec2 offset = (uResolution - scaledSize) * 0.5;
-  return (uv * uResolution - offset) / scaledSize;
-}
-
-float noise(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
-
-vec4 glassEffect(vec2 uv, float progress) {
-  float time = progress * 5.0 * uSpeedMultiplier;
-  vec2 uv1 = getCoverUV(uv, uTexture1Size); 
-  vec2 uv2 = getCoverUV(uv, uTexture2Size);
-  float maxR = length(uResolution) * 0.85; 
-  float br = progress * maxR;
-  vec2 p = uv * uResolution; 
-  vec2 c = uResolution * 0.5;
-  float d = length(p - c); 
-  float nd = d / max(br, 0.001);
-  float param = smoothstep(br + 3.0, br - 3.0, d);
-  vec4 img;
-  if (param > 0.0) {
-    float ro = 0.08 * uGlassRefractionStrength * uDistortionStrength * uGlobalIntensity * pow(smoothstep(0.3 * uGlassBubbleClarity, 1.0, nd), 1.5);
-    vec2 dir = (d > 0.0) ? (p - c) / d : vec2(0.0);
-    vec2 distUV = uv2 - dir * ro;
-    distUV += vec2(sin(time + nd * 10.0), cos(time * 0.8 + nd * 8.0)) * 0.015 * uGlassLiquidFlow * uSpeedMultiplier * nd * param;
-    float ca = 0.02 * uGlassChromaticAberration * uGlobalIntensity * pow(smoothstep(0.3, 1.0, nd), 1.2);
-    img = vec4(texture2D(uTexture2, distUV + dir * ca * 1.2).r, texture2D(uTexture2, distUV + dir * ca * 0.2).g, texture2D(uTexture2, distUV - dir * ca * 0.8).b, 1.0);
-    if (uGlassEdgeGlow > 0.0) {
-      float rim = smoothstep(0.95, 1.0, nd) * (1.0 - smoothstep(1.0, 1.01, nd));
-      img.rgb += rim * 0.08 * uGlassEdgeGlow * uGlobalIntensity;
-    }
-  } else { 
-    img = texture2D(uTexture2, uv2); 
-  }
-  vec4 oldImg = texture2D(uTexture1, uv1);
-  if (progress > 0.95) img = mix(img, texture2D(uTexture2, uv2), (progress - 0.95) / 0.05);
-  return mix(oldImg, img, param);
-}
-
-vec4 frostEffect(vec2 uv, float progress) { return mix(texture2D(uTexture1, getCoverUV(uv, uTexture1Size)), texture2D(uTexture2, getCoverUV(uv, uTexture2Size)), progress); }
-vec4 rippleEffect(vec2 uv, float progress) { return mix(texture2D(uTexture1, getCoverUV(uv, uTexture1Size)), texture2D(uTexture2, getCoverUV(uv, uTexture2Size)), progress); }
-vec4 plasmaEffect(vec2 uv, float progress) { return mix(texture2D(uTexture1, getCoverUV(uv, uTexture1Size)), texture2D(uTexture2, getCoverUV(uv, uTexture2Size)), progress); }
-vec4 timeshiftEffect(vec2 uv, float progress) { return mix(texture2D(uTexture1, getCoverUV(uv, uTexture1Size)), texture2D(uTexture2, getCoverUV(uv, uTexture2Size)), progress); }
-
-void main() {
-  if (uEffectType == 0) gl_FragColor = glassEffect(vUv, uProgress);
-  else if (uEffectType == 1) gl_FragColor = frostEffect(vUv, uProgress);
-  else if (uEffectType == 2) gl_FragColor = rippleEffect(vUv, uProgress);
-  else if (uEffectType == 3) gl_FragColor = plasmaEffect(vUv, uProgress);
-  else gl_FragColor = timeshiftEffect(vUv, uProgress);
-}`;
-
-      // --- CORE FUNCTIONS ---
-      const getEffectIndex = (n: string) => ({ glass: 0, frost: 1, ripple: 2, plasma: 3, timeshift: 4 } as any)[n] || 0;
-
-      const updateShaderUniforms = () => {
-        if (!shaderMaterial) return;
-        const s = SLIDER_CONFIG.settings, u = shaderMaterial.uniforms;
-        for (const key in s) {
-          const uName = 'u' + key.charAt(0).toUpperCase() + key.slice(1);
-          if (u[uName]) u[uName].value = s[key];
-        }
-        u.uEffectType.value = getEffectIndex(s.currentEffect);
-      };
-
-      const splitText = (text: string) => {
-        return text.split('').map(char => `<span style="display: inline-block; opacity: 0;">${char === ' ' ? '&nbsp;' : char}</span>`).join('');
-      };
-
-      const updateContent = (idx: number) => {
-        const titleEl = document.getElementById('mainTitle');
-        if (titleEl) {
-          gsap.to(titleEl.children, { y: -20, opacity: 0, duration: 0.5, stagger: 0.02, ease: "power2.in" });
-          setTimeout(() => {
-            titleEl.innerHTML = splitText(slides[idx].title);
-            gsap.set(titleEl.children, { opacity: 0 });
-            const children = titleEl.children;
-            switch(idx) {
-              case 0:
-                gsap.set(children, { y: 20 });
-                gsap.to(children, { y: 0, opacity: 1, duration: 0.8, stagger: 0.03, ease: "power3.out" });
-                break;
-              case 1:
-                gsap.set(children, { y: -20 });
-                gsap.to(children, { y: 0, opacity: 1, duration: 0.8, stagger: 0.03, ease: "back.out(1.7)" });
-                break;
-              case 2:
-                gsap.set(children, { filter: "blur(10px)", scale: 1.5, y: 0 });
-                gsap.to(children, { filter: "blur(0px)", scale: 1, opacity: 1, duration: 1, stagger: { amount: 0.5, from: "random" }, ease: "power2.out" });
-                break;
-              case 3:
-                gsap.set(children, { scale: 0, y: 0 });
-                gsap.to(children, { scale: 1, opacity: 1, duration: 0.6, stagger: 0.05, ease: "back.out(1.5)" });
-                break;
-              case 4:
-                gsap.set(children, { rotationX: 90, y: 0, transformOrigin: "50% 50%" });
-                gsap.to(children, { rotationX: 0, opacity: 1, duration: 0.8, stagger: 0.04, ease: "power2.out" });
-                break;
-              case 5:
-                gsap.set(children, { x: 30, y: 0 });
-                gsap.to(children, { x: 0, opacity: 1, duration: 0.8, stagger: 0.03, ease: "power3.out" });
-                break;
-              default:
-                gsap.set(children, { y: 20 });
-                gsap.to(children, { y: 0, opacity: 1, duration: 0.8, stagger: 0.03, ease: "power3.out" });
-            }
-          }, 500);
-        }
-      };
-
-      const navigateToSlide = (targetIndex: number) => {
-        if (isTransitioning || targetIndex === currentSlideIndex) return;
-        stopAutoSlideTimer();
-        quickResetProgress(currentSlideIndex);
-        const currentTexture = slideTextures[currentSlideIndex];
-        const targetTexture = slideTextures[targetIndex];
-        if (!currentTexture || !targetTexture) return;
-        isTransitioning = true;
-        shaderMaterial.uniforms.uTexture1.value = currentTexture;
-        shaderMaterial.uniforms.uTexture2.value = targetTexture;
-        shaderMaterial.uniforms.uTexture1Size.value = currentTexture.userData.size;
-        shaderMaterial.uniforms.uTexture2Size.value = targetTexture.userData.size;
-        updateContent(targetIndex);
-        currentSlideIndex = targetIndex;
-        updateCounter(currentSlideIndex);
-        updateNavigationState(currentSlideIndex);
-        gsap.fromTo(shaderMaterial.uniforms.uProgress, { value: 0 }, {
-          value: 1,
-          duration: TRANSITION_DURATION(),
-          ease: "power2.inOut",
-          onComplete: () => {
-            shaderMaterial.uniforms.uProgress.value = 0;
-            shaderMaterial.uniforms.uTexture1.value = targetTexture;
-            shaderMaterial.uniforms.uTexture1Size.value = targetTexture.userData.size;
-            isTransitioning = false;
-            safeStartTimer(100);
-          }
-        });
-      };
-
-      const handleSlideChange = () => {
-        if (isTransitioning || !texturesLoaded || !sliderEnabled) return;
-        navigateToSlide((currentSlideIndex + 1) % slides.length);
-      };
-
-      const createSlidesNavigation = () => {
-        const nav = document.getElementById("slidesNav");
-        if (!nav) return;
-        nav.innerHTML = "";
-        slides.forEach((slide, i) => {
-          const item = document.createElement("div");
-          item.className = `slide-nav-item${i === 0 ? " active" : ""}`;
-          item.dataset.slideIndex = String(i);
-          item.innerHTML = `<div class="slide-progress-line"><div class="slide-progress-fill"></div></div><div class="slide-nav-title">${slide.title}</div>`;
-          item.addEventListener("click", (e) => {
-            e.stopPropagation();
-            if (!isTransitioning && i !== currentSlideIndex) {
-              stopAutoSlideTimer();
-              quickResetProgress(currentSlideIndex);
-              navigateToSlide(i);
-            }
-          });
-          nav.appendChild(item);
-        });
-      };
-
-      const updateNavigationState = (idx: number) => document.querySelectorAll(".slide-nav-item").forEach((el, i) => el.classList.toggle("active", i === idx));
-      const updateSlideProgress = (idx: number, prog: number) => { const el = document.querySelectorAll(".slide-nav-item")[idx]?.querySelector(".slide-progress-fill") as HTMLElement; if (el) { el.style.width = `${prog}%`; el.style.opacity = '1'; } };
-      const fadeSlideProgress = (idx: number) => { const el = document.querySelectorAll(".slide-nav-item")[idx]?.querySelector(".slide-progress-fill") as HTMLElement; if (el) { el.style.opacity = '0'; setTimeout(() => el.style.width = "0%", 300); } };
-      const quickResetProgress = (idx: number) => { const el = document.querySelectorAll(".slide-nav-item")[idx]?.querySelector(".slide-progress-fill") as HTMLElement; if (el) { el.style.transition = "width 0.2s ease-out"; el.style.width = "0%"; setTimeout(() => el.style.transition = "width 0.1s ease, opacity 0.3s ease", 200); } };
-      const updateCounter = (idx: number) => { const sn = document.getElementById("slideNumber"); if (sn) sn.textContent = String(idx + 1).padStart(2, "0"); const st = document.getElementById("slideTotal"); if (st) st.textContent = String(slides.length).padStart(2, "0"); };
-
-      const startAutoSlideTimer = () => {
-        if (!texturesLoaded || !sliderEnabled) return;
-        stopAutoSlideTimer();
-        let progress = 0;
-        const increment = (100 / SLIDE_DURATION()) * PROGRESS_UPDATE_INTERVAL;
-        progressAnimation = setInterval(() => {
-          if (!sliderEnabled) { stopAutoSlideTimer(); return; }
-          progress += increment;
-          updateSlideProgress(currentSlideIndex, progress);
-          if (progress >= 100) {
-            clearInterval(progressAnimation);
-            progressAnimation = null;
-            fadeSlideProgress(currentSlideIndex);
-            if (!isTransitioning) handleSlideChange();
-          }
-        }, PROGRESS_UPDATE_INTERVAL);
-      };
-
-      const stopAutoSlideTimer = () => { if (progressAnimation) clearInterval(progressAnimation); if (autoSlideTimer) clearTimeout(autoSlideTimer); progressAnimation = null; autoSlideTimer = null; };
-      const safeStartTimer = (delay = 0) => { stopAutoSlideTimer(); if (sliderEnabled && texturesLoaded) { if (delay > 0) autoSlideTimer = setTimeout(startAutoSlideTimer, delay); else startAutoSlideTimer(); } };
-
-      const loadImageTexture = (src: string) => new Promise<any>((resolve, reject) => {
-        // Preload the image first
-        const img = new Image();
-        img.crossOrigin = 'anonymous';
-        img.onload = () => {
-          const l = new THREE.TextureLoader();
-          l.load(src, (t: any) => { 
-            t.minFilter = t.magFilter = THREE.LinearFilter; 
-            t.userData = { size: new THREE.Vector2(t.image.width, t.image.height) }; 
-            resolve(t); 
-          }, undefined, reject);
-        };
-        img.onerror = reject;
-        img.src = src;
-      });
-
-      const initRenderer = async () => {
-        const canvas = document.querySelector(".webgl-canvas") as HTMLCanvasElement;
-        if (!canvas) return;
-        scene = new THREE.Scene();
-        camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-        renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: false });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-        shaderMaterial = new THREE.ShaderMaterial({
-          uniforms: {
-            uTexture1: { value: null }, uTexture2: { value: null }, uProgress: { value: 0 },
-            uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
-            uTexture1Size: { value: new THREE.Vector2(1, 1) }, uTexture2Size: { value: new THREE.Vector2(1, 1) },
-            uEffectType: { value: 0 },
-            uGlobalIntensity: { value: 1.0 }, uSpeedMultiplier: { value: 1.0 }, uDistortionStrength: { value: 1.0 }, uColorEnhancement: { value: 1.0 },
-            uGlassRefractionStrength: { value: 1.0 }, uGlassChromaticAberration: { value: 1.0 }, uGlassBubbleClarity: { value: 1.0 }, uGlassEdgeGlow: { value: 1.0 }, uGlassLiquidFlow: { value: 1.0 },
-            uFrostIntensity: { value: 1.0 }, uFrostCrystalSize: { value: 1.0 }, uFrostIceCoverage: { value: 1.0 }, uFrostTemperature: { value: 1.0 }, uFrostTexture: { value: 1.0 },
-            uRippleFrequency: { value: 25.0 }, uRippleAmplitude: { value: 0.08 }, uRippleWaveSpeed: { value: 1.0 }, uRippleRippleCount: { value: 1.0 }, uRippleDecay: { value: 1.0 },
-            uPlasmaIntensity: { value: 1.2 }, uPlasmaSpeed: { value: 0.8 }, uPlasmaEnergyIntensity: { value: 0.4 }, uPlasmaContrastBoost: { value: 0.3 }, uPlasmaTurbulence: { value: 1.0 },
-            uTimeshiftDistortion: { value: 1.6 }, uTimeshiftBlur: { value: 1.5 }, uTimeshiftFlow: { value: 1.4 }, uTimeshiftChromatic: { value: 1.5 }, uTimeshiftTurbulence: { value: 1.4 }
-          },
-          vertexShader,
-          fragmentShader
-        });
-
-        scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), shaderMaterial));
-
-        for (const s of slides) {
-          try {
-            slideTextures.push(await loadImageTexture(s.media));
-          } catch {
-            console.warn("Failed texture");
-          }
-        }
-
-        if (slideTextures.length >= 2) {
-          shaderMaterial.uniforms.uTexture1.value = slideTextures[0];
-          shaderMaterial.uniforms.uTexture2.value = slideTextures[1];
-          shaderMaterial.uniforms.uTexture1Size.value = slideTextures[0].userData.size;
-          shaderMaterial.uniforms.uTexture2Size.value = slideTextures[1].userData.size;
-          texturesLoaded = true;
-          sliderEnabled = true;
-          updateShaderUniforms();
-          document.querySelector(".slider-wrapper")?.classList.add("loaded");
-          safeStartTimer(500);
-        }
-
-        const render = () => { requestAnimationFrame(render); renderer.render(scene, camera); };
-        render();
-      };
-
-      createSlidesNavigation();
-      updateCounter(0);
-
-      const tEl = document.getElementById('mainTitle');
-      if (tEl) {
-        tEl.innerHTML = splitText(slides[0].title);
-        gsap.fromTo(tEl.children, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1, stagger: 0.03, ease: "power3.out", delay: 0.5 });
-      }
-
-      initRenderer();
-
-      document.addEventListener("visibilitychange", () => document.hidden ? stopAutoSlideTimer() : (!isTransitioning && safeStartTimer()));
-      window.addEventListener("resize", () => {
-        if (renderer) {
-          renderer.setSize(window.innerWidth, window.innerHeight);
-          shaderMaterial.uniforms.uResolution.value.set(window.innerWidth, window.innerHeight);
-        }
-      });
-    };
-
-    loadScripts();
-    return () => {};
-  }, []);
-
   return (
-    <main className="slider-wrapper" ref={containerRef} data-section="dark">
-      <canvas className="webgl-canvas"></canvas>
-      <div className="slide-content">
-        <div className="slide-text-wrapper">
-          <span className="slide-prefix">We focus on building</span>
-          <h1 className="slide-title" id="mainTitle"></h1>
-        </div>
-        <a href="#latest-work" className="cta-button">
-          Our latest work
-          <svg className="arrow-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M10 4L10 16M10 16L16 10M10 16L4 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </a>
+    <div className="h-[70vh] lg:h-[80vh] bg-[#f5f5f5] flex flex-col relative pt-16 lg:pt-0 overflow-hidden">
+      {/* Gradient Blobs Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Orange blob - left side */}
+        <div 
+          className="absolute w-[500px] h-[500px] rounded-full opacity-40 blur-3xl"
+          style={{
+            background: 'radial-gradient(circle, rgba(255, 165, 0, 0.6) 0%, rgba(255, 200, 100, 0.3) 50%, transparent 70%)',
+            top: '20%',
+            left: '15%',
+          }}
+        ></div>
+        
+        {/* Purple blob - right side */}
+        <div 
+          className="absolute w-[600px] h-[600px] rounded-full opacity-30 blur-3xl"
+          style={{
+            background: 'radial-gradient(circle, rgba(147, 112, 219, 0.5) 0%, rgba(180, 150, 230, 0.3) 50%, transparent 70%)',
+            top: '10%',
+            right: '10%',
+          }}
+        ></div>
+        
+        {/* Blue blob - bottom right */}
+        <div 
+          className="absolute w-[450px] h-[450px] rounded-full opacity-25 blur-3xl"
+          style={{
+            background: 'radial-gradient(circle, rgba(100, 149, 237, 0.4) 0%, rgba(135, 206, 250, 0.2) 50%, transparent 70%)',
+            bottom: '5%',
+            right: '20%',
+          }}
+        ></div>
+        
+        {/* Yellow/Peach blob - center */}
+        <div 
+          className="absolute w-[400px] h-[400px] rounded-full opacity-35 blur-3xl"
+          style={{
+            background: 'radial-gradient(circle, rgba(255, 218, 185, 0.5) 0%, rgba(255, 228, 196, 0.3) 50%, transparent 70%)',
+            top: '40%',
+            left: '40%',
+          }}
+        ></div>
       </div>
-      <style jsx>{`
-        .slider-wrapper {
-          position: relative;
-          width: 100%;
-          height: 100vh;
-          overflow: hidden;
-          background: #0a0a0a;
-          opacity: 1;
-          transition: opacity 0.3s ease;
-        }
-        
-        .slider-wrapper.loaded {
-          opacity: 1;
-        }
-        
-        .webgl-canvas {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-        }
-        
-        .slide-number,
-        .slide-total {
-          display: none;
-        }
-        
-        .slide-content {
-          position: absolute;
-          top: 50%;
-          left: 4rem;
-          transform: translateY(-50%);
-          z-index: 10;
-          color: #ffffff;
-          text-align: left;
-          max-width: 800px;
-        }
-        
-        .slide-text-wrapper {
-          display: flex;
-          flex-direction: row;
-          align-items: baseline;
-          gap: 0.5rem;
-          flex-wrap: wrap;
-          margin-bottom: 2rem;
-        }
-        
-        .slide-prefix {
-          font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, sans-serif);
-          font-size: clamp(2rem, 4vw, 3.5rem);
-          font-weight: 400;
-          color: rgba(255, 255, 255, 0.9);
-          line-height: 1.2;
-        }
-        
-        .slide-title {
-          font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, sans-serif);
-          font-size: clamp(2rem, 4vw, 3.5rem);
-          font-weight: 700;
-          line-height: 1.2;
-          margin: 0;
-        }
-        
-        .cta-button {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.75rem;
-          padding: 1rem 2rem;
-          background: #ffffff;
-          color: #000000;
-          border-radius: 50px;
-          font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, sans-serif);
-          font-size: 1rem;
-          font-weight: 500;
-          text-decoration: none;
-          transition: transform 0.3s ease;
-        }
-        
-        .cta-button:hover {
-          transform: translateY(-2px);
-        }
-        
-        .arrow-icon {
-          animation: arrowBounce 1.5s ease-in-out infinite;
-        }
-        
-        @keyframes arrowBounce {
-          0%, 100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(3px);
-          }
-        }
-        
-        .slide-description {
-          display: none;
-        }
-        
-        .slides-navigation {
-          display: none;
-        }
-        
-        @media (max-width: 768px) {
-          .slide-content {
-            left: 2rem;
-            right: 2rem;
-            max-width: none;
-          }
+
+      {/* Main Hero Content */}
+      <div className="flex-1 flex flex-col lg:flex-row items-start lg:items-center justify-center lg:justify-between px-6 lg:px-16 py-0 lg:py-8 relative z-10">
+        {/* Mobile Layout: Vertical Stack */}
+        <div className="w-full lg:hidden flex flex-col justify-center gap-10">
+          {/* Title */}
+          <div className="w-full">
+            <h1 className="text-[100px] sm:text-[120px] font-bold leading-none tracking-tight text-black">
+              Creative Agency
+            </h1>
+          </div>
+
+          {/* Tagline and Button */}
+          <div className="w-full flex items-center justify-between gap-4">
+            <p className="text-base font-normal text-black leading-tight flex-1">
+              We design & develop<br />
+              digital experiences that<br />
+              drive real results.
+            </p>
+            
+            <Link
+              href="/contact"
+              className="bg-black hover:bg-gray-800 text-white font-medium px-4 py-3 rounded-lg text-xs transition-all duration-200 inline-flex items-center gap-2 flex-shrink-0"
+            >
+              <span className="w-6 h-6 rounded-md bg-[#f4c430] flex items-center justify-center">
+                <svg className="w-3 h-3 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </span>
+              START PROJECT
+            </Link>
+          </div>
+        </div>
+
+        {/* Desktop Layout: Side by Side */}
+        <div className="hidden lg:flex lg:flex-1 lg:items-center">
+          <h1 className="text-[160px] xl:text-[200px] font-bold leading-none tracking-tight text-black">
+            Creative Agency
+          </h1>
+        </div>
+
+        <div className="hidden lg:flex lg:flex-col items-end gap-8">
+          <div className="text-right max-w-md">
+            <p className="text-xl lg:text-2xl font-normal text-black leading-tight">
+              We design & develop<br />
+              digital experiences that<br />
+              drive real results.
+            </p>
+          </div>
           
-          .slide-prefix {
-            font-size: clamp(2rem, 6vw, 2.5rem);
-          }
-          
-          .slide-title {
-            font-size: clamp(2rem, 6vw, 2.5rem);
-          }
-          
-          .cta-button {
-            padding: 0.875rem 1.5rem;
-            font-size: 0.9rem;
-          }
-        }
-      `}</style>
-    </main>
+          <Link
+            href="/contact"
+            className="bg-[#f4c430] hover:bg-[#e5b520] text-black font-semibold px-8 py-6 rounded-lg text-base transition-all duration-200 inline-block"
+          >
+            START A PROJECT
+          </Link>
+        </div>
+      </div>
+    </div>
   );
 }

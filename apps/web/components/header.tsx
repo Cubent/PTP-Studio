@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion"
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [isDarkBackground, setIsDarkBackground] = useState(true)
+  const [isDarkBackground, setIsDarkBackground] = useState(false) // Changed default to false (light background)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,36 +19,41 @@ export function Header() {
 
       // Check if we're on a dark or light background
       const sections = document.querySelectorAll('[data-section]')
-      let isDark = true // Default to dark
+      let isDark = false // Default to light (dark text) for hero
       
-      // Check if we're at specific sections
-      sections.forEach((section) => {
-        const rect = section.getBoundingClientRect()
-        const sectionTop = rect.top
-        const sectionBottom = rect.bottom
-        
-        // If header is within this section (checking top 100px of viewport)
-        if (sectionTop <= 100 && sectionBottom >= 100) {
-          const sectionDataAttr = section.getAttribute('data-section')
-          const bgColor = window.getComputedStyle(section).backgroundColor
+      // If we're at the very top (hero section), use dark text
+      if (scrollPosition < viewportHeight * 0.7) {
+        isDark = false // Light background, dark text
+      } else {
+        // Check if we're at specific sections
+        sections.forEach((section) => {
+          const rect = section.getBoundingClientRect()
+          const sectionTop = rect.top
+          const sectionBottom = rect.bottom
           
-          // Check if data-section explicitly says "dark" or if background is dark
-          if (sectionDataAttr === 'dark' || bgColor.includes('26, 26, 26') || bgColor.includes('22, 22, 22') || bgColor.includes('16, 16, 16') || bgColor.includes('0, 0, 0') || bgColor === 'rgb(0, 0, 0)') {
-            isDark = true
-          } else if (sectionDataAttr === 'light' || bgColor.includes('255, 255, 255')) {
-            // Light background
+          // If header is within this section (checking top 100px of viewport)
+          if (sectionTop <= 100 && sectionBottom >= 100) {
+            const sectionDataAttr = section.getAttribute('data-section')
+            const bgColor = window.getComputedStyle(section).backgroundColor
+            
+            // Check if data-section explicitly says "dark" or if background is dark
+            if (sectionDataAttr === 'dark' || bgColor.includes('26, 26, 26') || bgColor.includes('22, 22, 22') || bgColor.includes('16, 16, 16') || bgColor.includes('0, 0, 0') || bgColor === 'rgb(0, 0, 0)') {
+              isDark = true
+            } else if (sectionDataAttr === 'light' || bgColor.includes('255, 255, 255')) {
+              // Light background
+              isDark = false
+            }
+          }
+        })
+        
+        // Also check if we're past the services section (after the dark section)
+        const servicesSection = document.querySelector('[data-section="services"]')
+        if (servicesSection) {
+          const servicesRect = servicesSection.getBoundingClientRect()
+          // If we've scrolled past the services section
+          if (servicesRect.bottom < 100) {
             isDark = false
           }
-        }
-      })
-      
-      // Also check if we're past the services section (after the dark section)
-      const servicesSection = document.querySelector('[data-section="services"]')
-      if (servicesSection) {
-        const servicesRect = servicesSection.getBoundingClientRect()
-        // If we've scrolled past the services section
-        if (servicesRect.bottom < 100) {
-          isDark = false
         }
       }
       
@@ -68,34 +73,22 @@ export function Header() {
     <>
       {/* Header */}
       <motion.header
-        className="fixed top-0 left-0 right-0 z-50 px-8 py-6"
+        className="absolute top-0 left-0 right-0 z-50 px-8 py-6"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
         <div className="flex items-center justify-between">
-          {/* Logo */}
+          {/* Logo - Not Fixed */}
           <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-            <motion.div
-              animate={{
-                scale: scrolled ? 1.4 : 1,
-              }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-            >
+            <div>
               <img
                 src={isDarkBackground ? "/Agency Logo.svg" : "/Agency Logo Black.svg"}
                 alt="PushToProd Studio Logo"
                 className="h-10 w-auto transition-all duration-300"
               />
-            </motion.div>
-            <motion.span
-              className={`text-xl font-medium transition-colors duration-300 ${textColor}`}
-              animate={{
-                opacity: scrolled ? 0 : 1,
-                x: scrolled ? -20 : 0,
-              }}
-              transition={{ duration: 0.3 }}
-            >
+            </div>
+            <span className={`text-xl font-medium transition-colors duration-300 ${textColor}`}>
               <span className="font-bold">Push</span>
               <span className="font-light">To</span>
               <span className="font-bold">Prod</span>
@@ -103,21 +96,23 @@ export function Header() {
               <span className="font-bold">Stu</span>
               <span className="font-light">di</span>
               <span className="font-bold">o</span>
-            </motion.span>
+            </span>
           </Link>
 
-          {/* Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(true)}
-            className={`group relative transition-colors duration-300 ${textColor}`}
-          >
-            <div className={`w-20 h-20 rounded-full border ${borderColor} flex items-center justify-center transition-all duration-300 hover:scale-110`}>
-              <div className="flex flex-col gap-2">
-                <div className={`w-8 h-0.5 ${isDarkBackground ? 'bg-white' : 'bg-black'} transition-all duration-300`}></div>
-                <div className={`w-8 h-0.5 ${isDarkBackground ? 'bg-white' : 'bg-black'} transition-all duration-300`}></div>
+          {/* Menu Button - Fixed */}
+          <div className="fixed top-6 right-8 z-50">
+            <button
+              onClick={() => setIsMenuOpen(true)}
+              className={`group relative transition-colors duration-300 ${textColor}`}
+            >
+              <div className={`w-20 h-20 rounded-full border ${borderColor} flex items-center justify-center transition-all duration-300 hover:scale-110`}>
+                <div className="flex flex-col gap-2">
+                  <div className={`w-8 h-0.5 ${isDarkBackground ? 'bg-white' : 'bg-black'} transition-all duration-300`}></div>
+                  <div className={`w-8 h-0.5 ${isDarkBackground ? 'bg-white' : 'bg-black'} transition-all duration-300`}></div>
+                </div>
               </div>
-            </div>
-          </button>
+            </button>
+          </div>
         </div>
       </motion.header>
 
@@ -176,6 +171,7 @@ export function Header() {
                     {[
                       { label: "Work", href: "#latest-work" },
                       { label: "Expertise", href: "/expertise" },
+                      { label: "Blog", href: "/blog" },
                       { label: "Contact", href: "/contact" },
                       { label: "About", href: "/about" }
                     ].map((item, index) => (
