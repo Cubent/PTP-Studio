@@ -54,7 +54,7 @@ export function LuminaInteractiveList() {
         <div className="w-full lg:hidden flex flex-col justify-center gap-10">
           {/* Title */}
           <div className="w-full">
-            <h1 className="text-[100px] sm:text-[120px] font-bold leading-none tracking-tight text-black">
+            <h1 className="text-[80px] sm:text-[100px] font-bold leading-none tracking-tight text-black">
               Creative Agency
             </h1>
           </div>
