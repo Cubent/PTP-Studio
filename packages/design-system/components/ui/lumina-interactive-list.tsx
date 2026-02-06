@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 
 export function LuminaInteractiveList() {
   return (
@@ -68,7 +67,7 @@ export function LuminaInteractiveList() {
               drive real results.
             </p>
             
-            <Link
+            <a
               href="/contact"
               className="bg-black hover:bg-gray-800 text-white font-medium px-4 py-3 rounded-lg text-xs transition-all duration-200 inline-flex items-center gap-2 flex-shrink-0"
             >
@@ -78,7 +77,7 @@ export function LuminaInteractiveList() {
                 </svg>
               </span>
               START PROJECT
-            </Link>
+            </a>
           </div>
         </div>
 
@@ -98,12 +97,12 @@ export function LuminaInteractiveList() {
             </p>
           </div>
           
-          <Link
+          <a
             href="/contact"
             className="bg-[#f4c430] hover:bg-[#e5b520] text-black font-semibold px-8 py-6 rounded-lg text-base transition-all duration-200 inline-block"
           >
             START A PROJECT
-          </Link>
+          </a>
         </div>
       </div>
     </div>
